@@ -1,0 +1,31 @@
+/* Efeito hover moderno */
+.nav-link {
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #0d6efd;
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Link ativo */
+  .nav-link.active {
+    color: #0d6efd !important;
+    font-weight: bold;
+  }
+  
+  /* Ajuste para tema escuro do Bootstrap */
+  [data-bs-theme="dark"] .nav-link.active {
+    color: #85b6ff !important;
+  }

@@ -6,9 +6,9 @@ import { RankComponent } from './pages/rank/rank.component';
 import { AdminComponent } from './pages/admin/admin.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'info', component: InfoGameComponent },
-  { path: 'rank', component: RankComponent },
-  { path: 'perfil', component: PerfilComponent },
-  { path: 'admin', component: AdminComponent }
+  { path: '', component: HomeComponent, title:'Home'},
+  { path: 'info', component: InfoGameComponent, title:'Informações'},
+  { path: 'rank', component: RankComponent, title:'Rankear'},
+  { path: 'perfil', component: PerfilComponent, title:'Perfil'},
+  { path: 'admin', component: AdminComponent, title:'Administração'}
 ];
