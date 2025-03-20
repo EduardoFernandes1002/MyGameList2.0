@@ -4,7 +4,7 @@
       MYGAMELIST
     </a>
     
-    <!-- Botão para mobile -->
+    <!-- Botão para mobile (ajustar perfil) -->
     <button 
       class="navbar-toggler" 
       type="button" 
@@ -15,7 +15,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Itens do Navbar -->
+    <!-- Itens do Navbar (inicial) -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
         @for (item of navItems; track item.path) {
@@ -32,7 +32,7 @@
         }
       </ul>
 
-      <!-- Dropdown de Perfil (exemplo) -->
+      <!-- Dropdown de Perfil (inicial)-->
       <div class="d-flex">
         <div class="dropdown">
           <button 
@@ -43,11 +43,9 @@
             <i class="bi bi-person-circle"></i> Perfil
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">Configurações</a></li>
+            <li><a class="dropdown-item" href="/config-perfil">Configurações</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item">Categorias</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-danger" href="#">Sair</a></li>
+            <li><button class="dropdown-item text-danger" >Sair</button></li>
           </ul>
         </div>
       </div>
