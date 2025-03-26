@@ -1,73 +1,80 @@
-<!-- rank.component.html -->
 <div class="container-fluid vh-100 p-0">
-    <div class="row g-0 justify-content-center">
-      <!-- Coluna Central (conteúdo principal) -->
-      <div class="col-12 col-lg-8 p-4">
-        <!-- Área de Pesquisa -->
-        <div class="input-group mb-4 shadow-sm" style="max-width: 500px; margin: 0 auto;">
-          <input type="text" 
-                 class="form-control border-primary" 
-                 placeholder="Pesquisar jogos..."
-                 [(ngModel)]="searchQuery">
-          <button class="btn btn-primary">
-            <i class="bi bi-search"></i>
-          </button>
-        </div>
-  
-        <!-- Abas -->
-        <ul class="nav nav-pills justify-content-center gap-3 mb-4">
-          <li class="nav-item">
-            <button class="nav-link" 
-                    [class.active]="selectedTab === 0"
-                    (click)="selectedTab = 0">All Time</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link" 
-                    [class.active]="selectedTab === 1"
-                    (click)="selectedTab = 1">Last Month</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link" 
-                    [class.active]="selectedTab === 2"
-                    (click)="selectedTab = 2">Last Week</button>
-          </li>
-        </ul>
-  
-        <!-- Lista de Rankings -->
-        <div class="row g-3 justify-content-center">
-          <div *ngFor="let item of currentRanking" class="col-12">
-            <div class="card shadow-sm hover-effect">
-              <div class="row g-0 align-items-center">
-                <!-- Posição -->
-                <div class="col-1 text-center">
-                  <span class="badge bg-primary fs-5">#{{ item.position }}</span>
+  <div class="row g-0 justify-content-center">
+    <div class="col-12 col-lg-8 p-4">
+      <!-- Área de Pesquisa -->
+      <div class="input-group mb-4 shadow-sm" style="max-width: 500px; margin: 0 auto;">
+        <input type="text" 
+              class="form-control border-primary" 
+              placeholder="Pesquisar jogos..."
+              [(ngModel)]="searchQuery"
+              (input)="applySearch()">
+        <button class="btn btn-primary">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+
+      <!-- Abas -->
+      <ul class="nav nav-pills justify-content-center gap-3 mb-4">
+        <li class="nav-item">
+          <button class="nav-link" 
+                  [class.active]="selectedTab === 0"
+                  (click)="onTabChange(0)">All Time</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" 
+                  [class.active]="selectedTab === 1"
+                  (click)="onTabChange(1)">Last Month</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" 
+                  [class.active]="selectedTab === 2"
+                  (click)="onTabChange(2)">Last Week</button>
+        </li>
+      </ul>
+
+      <!-- Lista de Rankings -->
+      <div class="row g-3 justify-content-center">
+        <div *ngFor="let item of currentRanking" class="col-12">
+          <div class="card shadow-sm hover-effect">
+            <div class="row g-0 align-items-center">
+              <div class="col-1 text-center">
+                <span class="badge bg-primary fs-5">#{{ item.position }}</span>
+              </div>
+              <div class="col-2">
+                <img [src]="item.image" 
+                    class="img-fluid rounded-start" 
+                    alt="Capa do jogo"
+                    style="height: 80px; object-fit: cover;">
+              </div>
+              <div class="col-7 ps-3">
+                <h5 class="card-title mb-1">{{ item.name }}</h5>
+                <div class="d-flex gap-2">
+                  <span class="badge bg-success">{{ item.genre }}</span>
+                  <span class="badge bg-info">{{ item.platform }}</span>
                 </div>
-  
-                <!-- Imagem do Jogo -->
-                <div class="col-2">
-                  <img [src]="item.image" 
-                       class="img-fluid rounded-start" 
-                       alt="Capa do jogo"
-                       style="height: 80px; object-fit: cover;">
-                </div>
-  
-                <!-- Detalhes -->
-                <div class="col-7 ps-3">
-                  <h5 class="card-title mb-1">{{ item.name }}</h5>
-                  <div class="d-flex gap-2">
-                    <span class="badge bg-success">{{ item.genre }}</span>
-                    <span class="badge bg-info">{{ item.platform }}</span>
-                  </div>
-                </div>
-  
-                <!-- Pontuação -->
-                <div class="col-2 text-end pe-3">
-                  <span class="text-primary fw-bold fs-5">{{ item.score }} pts</span>
-                </div>
+              </div>
+              <div class="col-2 text-end pe-3">
+                <span class="text-primary fw-bold fs-5">{{ item.score }} pts</span>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- Paginação -->
+      <nav *ngIf="totalPages > 1" class="mt-4">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <button class="page-link" (click)="goToPage(currentPage - 1)">Anterior</button>
+          </li>
+          <li *ngFor="let page of pages" class="page-item" [class.active]="page === currentPage">
+            <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <button class="page-link" (click)="goToPage(currentPage + 1)">Próxima</button>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
+</div>
