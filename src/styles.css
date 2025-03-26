@@ -1,11 +1,12 @@
-html {
-    min-height: 100vh;
+/* styles.css */
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
-body{
-    min-height: 100vh;
-}
-
-app-root {
-    min-height: 100vh;
+.main-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
