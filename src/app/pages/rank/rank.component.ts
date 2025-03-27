@@ -10,6 +10,7 @@ interface Game {
   genre: string;
   platform: string;
   position: number;
+  date: Date;
 }
 
 @Component({
@@ -20,40 +21,58 @@ interface Game {
   styleUrls: ['./rank.component.css']
 })
 export class RankComponent implements OnInit {
-  rankings: { [key: number]: Game[] } = { 0: [], 1: [], 2: [] };
+  allGames: Game[] = [];
   filteredGames: Game[] = [];
   currentPage = 1;
   itemsPerPage = 20;
   searchQuery = '';
   selectedTab = 0;
 
+  private readonly timeFilters = [
+    { days: Infinity },   // All Time
+    { days: 30 },         // Last Month
+    { days: 7 }           // Last Week
+  ];
+
   ngOnInit(): void {
     this.generateMockData();
-    this.loadTabData();
+    this.applyFilters();
   }
 
   private generateMockData(): void {
-    [0, 1, 2].forEach(tab => {
-      this.rankings[tab] = Array.from({ length: 50 }, (_, i) => ({
-        id: `game-${tab}-${i}`,
-        name: `Jogo ${i + 1} (Aba ${tab})`,
+    const platforms = ['PC', 'PS5', 'XBOX'];
+    const genres = ['Ação', 'Aventura', 'RPG'];
+    
+    this.allGames = Array.from({ length: 200 }, (_, i) => {
+      const randomDays = Math.floor(Math.random() * 365);
+      return {
+        id: `game-${i}`,
+        name: `Jogo ${i + 1}`,
         score: Math.floor(Math.random() * 1000),
-        image: 'C:\Users\LAB INFO CEDUP 08\Documents\Eduardo-info24\MyGameList2.0\public\favicon.ico',
-        genre: ['Ação', 'Aventura', 'RPG'][Math.floor(Math.random() * 3)],
-        platform: ['PC', 'PS5', 'XBOX'][Math.floor(Math.random() * 3)],
-        position: i + 1
-      }));
+        image: 'https://via.placeholder.com/80',
+        genre: genres[Math.floor(Math.random() * genres.length)],
+        platform: platforms[Math.floor(Math.random() * platforms.length)],
+        position: i + 1,
+        date: new Date(Date.now() - randomDays * 24 * 60 * 60 * 1000)
+      };
     });
   }
 
-  loadTabData(): void {
-    this.filteredGames = [...this.rankings[this.selectedTab]];
-    this.currentPage = 1;
+  applyFilters(): void {
+    const filter = this.timeFilters[this.selectedTab];
+    const cutoffDate = new Date();
+    cutoffDate.setDate(cutoffDate.getDate() - filter.days);
+
+    this.filteredGames = this.allGames
+      .filter(game => filter.days === Infinity || game.date >= cutoffDate)
+      .sort((a, b) => b.score - a.score)
+      .map((game, index) => ({ ...game, position: index + 1 }));
+
     this.applySearch();
   }
 
   applySearch(): void {
-    this.filteredGames = this.rankings[this.selectedTab].filter(game =>
+    this.filteredGames = this.filteredGames.filter(game =>
       game.name.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
     this.currentPage = 1;
@@ -81,6 +100,6 @@ export class RankComponent implements OnInit {
 
   onTabChange(tab: number): void {
     this.selectedTab = tab;
-    this.loadTabData();
+    this.applyFilters();
   }
 }
