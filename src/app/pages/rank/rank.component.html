@@ -80,13 +80,18 @@
       <nav *ngIf="totalPages > 1" class="mt-4">
         <ul class="pagination justify-content-center">
           <li class="page-item" [class.disabled]="currentPage === 1">
-            <button class="page-link" (click)="goToPage(currentPage - 1)">Anterior</button>
+            <button class="page-link" (click)="goToPage(currentPage - 1)">&laquo;</button>
           </li>
-          <li *ngFor="let page of pages" class="page-item" [class.active]="page === currentPage">
-            <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+          
+          <li *ngFor="let page of pages" class="page-item" 
+              [class.active]="page === currentPage" 
+              [class.disabled]="page === '...'">
+            <button *ngIf="page !== '...'" class="page-link" (click)="goToPage(page)">{{ page }}</button>
+            <span *ngIf="page === '...'" class="page-link">...</span>
           </li>
+      
           <li class="page-item" [class.disabled]="currentPage === totalPages">
-            <button class="page-link" (click)="goToPage(currentPage + 1)">Próxima</button>
+            <button class="page-link" (click)="goToPage(currentPage + 1)">&raquo;</button>
           </li>
         </ul>
       </nav>

@@ -43,7 +43,7 @@ export class RankComponent implements OnInit {
     const platforms = ['PC', 'PS5', 'XBOX'];
     const genres = ['Ação', 'Aventura', 'RPG'];
     
-    this.allGames = Array.from({ length: 200 }, (_, i) => {
+    this.allGames = Array.from({ length: 2000 }, (_, i) => {
       const randomDays = Math.floor(Math.random() * 365);
       return {
         id: `game-${i}`,
@@ -88,14 +88,48 @@ export class RankComponent implements OnInit {
     return Math.ceil(this.filteredGames.length / this.itemsPerPage);
   }
 
-  goToPage(page: number): void {
+  goToPage(page: number | string): void {
+    if (typeof page !== 'number') return;
+    
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
     }
   }
 
-  get pages(): number[] {
-    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  get pages(): (number | string)[] {
+    const total = this.totalPages;
+    const current = this.currentPage;
+    const delta = 2;
+    const range: (number | string)[] = [];
+
+    if (total <= 7) {
+      return Array.from({ length: total }, (_, i) => i + 1);
+    }
+
+    range.push(1);
+
+    let start = Math.max(2, current - delta);
+    let end = Math.min(total - 1, current + delta);
+
+    if (current - 1 <= delta) {
+      end = 1 + (delta * 2);
+    }
+
+    if ((total - current) <= delta) {
+      start = total - (delta * 2);
+    }
+
+    if (start > 2) range.push('...');
+    
+    for (let i = start; i <= end; i++) {
+      if (i > 1 && i < total) range.push(i);
+    }
+
+    if (end < total - 1) range.push('...');
+    
+    range.push(total);
+
+    return range;
   }
 
   onTabChange(tab: number): void {
