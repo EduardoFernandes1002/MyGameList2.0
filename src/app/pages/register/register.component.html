@@ -1,0 +1,45 @@
+<div class="d-flex flex-column" style="min-height: 100vh;">
+    <div class="container flex-grow-1 d-flex justify-content-center align-items-center">
+        <div class="card p-4" style="width: 100%; max-width: 400px;">
+            <h2 class="text-center mb-4">REGISTRAR</h2>
+            <form>
+                <!-- Campo Usuário -->
+                <div class="mb-3">
+                    <label class="form-label">Usuário*</label>
+                    <input type="text" class="form-control" placeholder="Digite seu usuário principal" required>
+                </div>
+                
+                <!-- Campo Apelido -->
+                <div class="mb-3">
+                    <label class="form-label">Apelido (Opcional)</label>
+                    <input type="text" class="form-control" placeholder="Como quer ser chamado?">
+                    <div class="form-text">Máx. 15 caracteres</div>
+                </div>
+                
+                <!-- Campo Senha -->
+                <div class="mb-3">
+                    <label class="form-label">Senha*</label>
+                    <input type="password" class="form-control" maxlength="10" placeholder="Crie uma senha forte" required>
+                </div>
+                
+                <!-- Campo Data Nascimento -->
+                <div class="mb-3">
+                    <label class="form-label">Data de Nascimento*</label>
+                    <input type="date" class="form-control" max="<?= date('Y-m-d') ?>" required>
+                    <div class="form-text">Selecione no calendário</div>
+                </div>
+                
+                <!-- Checkbox Lembrar Informações -->
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="lembrarUsuario">
+                    <label class="form-check-label" for="lembrarUsuario">Lembrar minhas informações</label>
+                </div>
+                
+                <!-- Botão -->
+                <div class="d-grid gap-2 mt-2">
+                    <button type="submit" class="btn btn-primary py-2">Criar Conta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

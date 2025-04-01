@@ -15,7 +15,8 @@ export class NavbarComponent {
     { label: 'Recomendações', path: '/recomendado' },
     { label: 'Categorias', path: '/categoria' },
     { label: 'Descoberta', path: '/descoberta' },
-    { label: 'Ajuda/FAQ', path: '/ajuda' }
+    { label: 'Login', path: '/Login' },
+    { label: 'Register', path: '/Register' }
   ];
 
   constructor(public router: Router) {}

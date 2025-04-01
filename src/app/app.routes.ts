@@ -9,6 +9,8 @@ import { CategoryComponent } from './pages/category/category.component';
 import { HelpComponent } from './pages/help/help.component';
 import { DiscoverComponent } from './pages/discover/discover.component';
 import { ConfigProfileComponent } from './pages/config-profile/config-profile.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title:'Home' },
@@ -20,5 +22,7 @@ export const routes: Routes = [
   { path: 'categoria', component: CategoryComponent, title:'Categoria' },
   { path: 'recomendado', component: RecomendedComponent, title:'Recomendação' },
   { path: 'descoberta', component: DiscoverComponent, title:'Descoberta'},
-  { path: 'config-perfil', component: ConfigProfileComponent, title:'ConfiguraçãoPerfil'}
+  { path: 'config-perfil', component: ConfigProfileComponent, title:'ConfiguraçãoPerfil'},
+  { path: 'Login', component: LoginComponent, title: 'Login' },
+  { path: 'Register', component: RegisterComponent, title: 'Register' }
 ];
