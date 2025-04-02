@@ -22,18 +22,18 @@ interface Game {
   styleUrls: ['./rank.component.css'],
 })
 export class RankComponent implements OnInit {
-  allGames: Game[] = []; // Lista de todos os jogos (dados brutos)
-  filteredGames: Game[] = []; // Lista de jogos filtrados com base nos critérios de tempo e pesquisa
-  currentPage = 1; // Página atual para paginação
-  itemsPerPage = 20; // Número de itens exibidos por página
-  searchQuery = ''; // String de busca para filtrar jogos pelo nome
-  selectedTab = 0; // Aba selecionada para aplicar filtros de tempo
+  allGames: Game[] = []; // Lista de todos os jogos (dados brutos).
+  filteredGames: Game[] = []; // Lista de jogos filtrados com base nos critérios de tempo e pesquisa.
+  currentPage = 1; // Página atual para paginação.
+  itemsPerPage = 20; // Número de itens exibidos por página.
+  searchQuery = ''; // String de busca para filtrar jogos pelo nome.
+  selectedTab = 0; // Aba selecionada para aplicar filtros de tempo.
 
   // Filtros de tempo disponíveis
   private readonly timeFilters = [
-    { days: Infinity }, // Todos os tempos
-    { days: 30 }, // Ultimos 30 dias
-    { days: 7 }, // Ultimos 7 dias
+    { days: Infinity }, // Todos os tempos.
+    { days: 30 }, // Ultimos 30 dias.
+    { days: 7 }, // Ultimos 7 dias.
   ];
 
   /**
@@ -60,7 +60,7 @@ export class RankComponent implements OnInit {
         id: `game-${i}`,
         name: `Jogo ${i + 1}`,
         score: Math.floor(Math.random() * 1000),
-        image: 'https://via.placeholder.com/80',
+        image: '',
         genre: genres[Math.floor(Math.random() * genres.length)],
         platform: platforms[Math.floor(Math.random() * platforms.length)],
         position: i + 1,
