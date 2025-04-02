@@ -1,30 +1,57 @@
 <div class="container mt-4">
-  <!-- Título da Página -->
-  <h1 class="text-center text-dark mb-5">Bem-vindo ao MyGameList</h1>
+  <h1 class="text-center text-primary mb-5">Bem-vindo ao MyGameList</h1>
 
   <!-- Carrossel de Recomendações -->
   <section class="mb-5">
-    <h2 class="text-dark text-center mb-4">Recomendações</h2>
-    <div id="recommendationsCarousel" class="carousel slide bg-light rounded-3 p-3 border m-1" data-bs-ride="carousel">
+    <h2 class="text-primary text-center mb-4">Recomendações</h2>
+    <div
+      id="recommendationsCarousel"
+      class="carousel slide bg-body-tertiary rounded-3 p-3 border m-1"
+      data-bs-ride="carousel"
+    >
       <div class="carousel-inner">
-        <div *ngFor="let chunk of chunkedRecommendedGames; let i = index" class="carousel-item" [class.active]="i === 0">
-          <div class="d-flex justify-content-center gap-3">
-            <div *ngFor="let game of chunk" class="card bg-dark text-light shadow-sm position-relative" style="flex: 1; max-width: 30%;">
-              <img [src]="game.image" class="card-img-top" alt="{{ game.name }}" style="object-fit: cover; height: 300px;">
-              <div class="card-img-overlay d-flex flex-column justify-content-end p-3" style="background-image: linear-gradient(transparent, rgba(22, 22, 22, 0.8) 70%);">
-                <h5 class="card-title text-center">{{ game.name }}</h5>
-                <p class="card-text text-center my-0">Gênero: {{ game.genre }}</p>
-                <p class="card-text text-center">Plataforma: {{ game.platform }}</p>
+        <div
+          *ngFor="let group of chunkedRecommendedGames; let i = index"
+          class="carousel-item"
+          [class.active]="i === 0"
+        >
+          <div class="row">
+            <div *ngFor="let game of group" class="col-md-4">
+              <div
+                class="card bg-body-tertiary text-dark shadow-sm h-100 rounded-3"
+              >
+                <img
+                  [src]="game.image"
+                  class="card-img-top rounded-top"
+                  alt="{{ game.name }}"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">{{ game.name }}</h5>
+                  <p class="card-text">Gênero: {{ game.genre }}</p>
+                  <p class="card-text">Plataforma: {{ game.platform }}</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#recommendationsCarousel" data-bs-slide="prev" style="z-index: 10;">
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#recommendationsCarousel"
+        data-bs-slide="prev"
+      >
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#recommendationsCarousel" data-bs-slide="next" style="z-index: 10;">
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#recommendationsCarousel"
+        data-bs-slide="next"
+      >
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Próximo</span>
       </button>
     </div>
   </section>
@@ -32,19 +59,29 @@
   <!-- Ranking (Top 5) -->
   <section class="mb-5">
     <h2 class="text-dark text-center mb-4">Ranking - Top 5</h2>
-    <div class="row g-3 m-1 bg-light rounded-3 p-3 border justify-content-center">
+    <div
+      class="row g-3 m-1 bg-light rounded-3 p-3 border justify-content-center"
+    >
       <div *ngFor="let game of topRankedGames" class="col-12 col-md-6 col-lg-4">
         <div class="card bg-dark text-light shadow-sm">
           <div class="row g-0 align-items-center">
             <div class="col-4">
-              <img [src]="game.image" class="img-fluid rounded-start" alt="{{ game.name }}">
+              <img
+                [src]="game.image"
+                class="img-fluid rounded-start"
+                alt="{{ game.name }}"
+              />
             </div>
             <div class="col-8">
               <div class="card-body">
                 <h5 class="card-title text-center">{{ game.name }}</h5>
-                <p class="card-text text-center">Pontuação: {{ game.score }} pts</p>
                 <p class="card-text text-center">
-                  <small class="text-light">Plataforma: {{ game.platform }}</small>
+                  Pontuação: {{ game.score }} pts
+                </p>
+                <p class="card-text text-center">
+                  <small class="text-light"
+                    >Plataforma: {{ game.platform }}</small
+                  >
                 </p>
               </div>
             </div>
@@ -57,11 +94,29 @@
   <!-- Seção Bônus: Jogos Mais Bem Avaliados -->
   <section class="mb-5">
     <h2 class="text-dark text-center mb-4">Jogos Mais Bem Avaliados</h2>
-    <div class="row g-3 bg-light rounded-3 p-3 border m-1 justify-content-center">
-      <div *ngFor="let game of highestRatedGames" class="col-12 col-md-6 col-lg-3">
+    <div
+      class="row g-3 bg-light rounded-3 p-3 border m-1 justify-content-center"
+    >
+      <div
+        *ngFor="let game of highestRatedGames"
+        class="col-12 col-md-6 col-lg-3"
+      >
         <div class="card bg-dark text-light shadow-sm position-relative">
-          <img [src]="game.image" class="card-img-top" alt="{{ game.name }}" style="object-fit: cover; height: 300px;">
-          <div class="card-img-overlay d-flex flex-column justify-content-end p-3" style="background-image: linear-gradient(transparent, rgba(22, 22, 22, 0.8) 70%);">
+          <img
+            [src]="game.image"
+            class="card-img-top"
+            alt="{{ game.name }}"
+            style="object-fit: cover; height: 300px"
+          />
+          <div
+            class="card-img-overlay d-flex flex-column justify-content-end p-3"
+            style="
+              background-image: linear-gradient(
+                transparent,
+                rgba(22, 22, 22, 0.8) 70%
+              );
+            "
+          >
             <h5 class="card-title text-center">{{ game.name }}</h5>
             <p class="card-text text-center">Pontuação: {{ game.score }} pts</p>
             <p class="card-text text-center">Gênero: {{ game.genre }}</p>

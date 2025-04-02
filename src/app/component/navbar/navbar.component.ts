@@ -6,7 +6,7 @@ import { Router, RouterModule } from '@angular/router';
   selector: 'app-navbar',
   imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
   navItems = [
@@ -15,9 +15,8 @@ export class NavbarComponent {
     { label: 'Recomendações', path: '/recomendado' },
     { label: 'Categorias', path: '/categoria' },
     { label: 'Descoberta', path: '/descoberta' },
-    { label: 'Ajuda/FAQ', path: '/ajuda' }
+    { label: 'Ajuda/FAQ', path: '/ajuda' },
   ];
 
   constructor(public router: Router) {}
-  
 }

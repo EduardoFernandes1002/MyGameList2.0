@@ -11,12 +11,12 @@ import { Component, OnInit } from '@angular/core';
 
 export class HomeComponent implements OnInit {
   recommendedGames = [
-    { name: 'Jogo 1', image: 'https://via.placeholder.com/300x200', genre: 'Ação', platform: 'PC' },
-    { name: 'Jogo 2', image: 'https://via.placeholder.com/300x200', genre: 'RPG', platform: 'PS5' },
-    { name: 'Jogo 3', image: 'https://via.placeholder.com/300x200', genre: 'Aventura', platform: 'XBOX' },
-    { name: 'Jogo 4', image: 'https://via.placeholder.com/300x200', genre: 'Ação', platform: 'PC' },
-    { name: 'Jogo 5', image: 'https://via.placeholder.com/300x200', genre: 'RPG', platform: 'PS5' },
-    { name: 'Jogo 6', image: 'https://via.placeholder.com/300x200', genre: 'Aventura', platform: 'XBOX' },
+    { name: 'Jogo 1', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', genre: 'Ação', platform: 'PC' },
+    { name: 'Jogo 2', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', genre: 'RPG', platform: 'PS5' },
+    { name: 'Jogo 3', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', genre: 'Aventura', platform: 'XBOX' },
+    { name: 'Jogo 4', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', genre: 'Ação', platform: 'PC' },
+    { name: 'Jogo 5', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', genre: 'RPG', platform: 'PS5' },
+    { name: 'Jogo 6', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', genre: 'Aventura', platform: 'XBOX' },
   ];
 
   chunkedRecommendedGames: any[] = [];

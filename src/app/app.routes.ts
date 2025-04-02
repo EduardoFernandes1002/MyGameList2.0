@@ -20,5 +20,5 @@ export const routes: Routes = [
   { path: 'categoria', component: CategoryComponent, title:'Categoria' },
   { path: 'recomendado', component: RecomendedComponent, title:'Recomendação' },
   { path: 'descoberta', component: DiscoverComponent, title:'Descoberta'},
-  { path: 'config-perfil', component: ConfigProfileComponent, title:'ConfiguraçãoPerfil'}
+  { path: 'config-perfil', component: ConfigProfileComponent, title:'ConfiguraçãoPerfil' }
 ];

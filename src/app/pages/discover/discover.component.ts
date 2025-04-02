@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-discover',
   imports: [CommonModule],
   templateUrl: './discover.component.html',
-  styleUrl: './discover.component.css'
+  styleUrl: './discover.component.css',
 })
 export class DiscoverComponent implements OnInit {
   allGames = Array.from({ length: 100 }, (_, i) => ({

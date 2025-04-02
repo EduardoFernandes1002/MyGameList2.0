@@ -18,5 +18,20 @@
 
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Fundo mais claro ao passar o mouse */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Fundo mais claro ao passar o mouse */
+}
+
+.carousel-inner .card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.carousel-inner .card:hover {
+  transform: scale(0.99);
+  transition: transform 0.3s ease;
 }
