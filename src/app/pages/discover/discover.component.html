@@ -1,1 +1,71 @@
-<p>discover works!</p>
+<div class="container mt-4">
+  <h1 class="text-center text-dark mb-5">Descubra Novos Jogos</h1>
+  <section class="mb-5">
+    <h2 class="text-dark text-center mb-4">Recomendações da Semana</h2>
+    <nav *ngIf="totalPages > 1" class="mt-4">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button
+            class="page-link text-dark"
+            (click)="goToPage(currentPage - 1)"
+          >
+            Anterior
+          </button>
+        </li>
+        <li
+          *ngFor="let page of pages"
+          class="page-item"
+          [class.active]="page === currentPage"
+        >
+          <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <button
+            class="page-link text-dark"
+            (click)="goToPage(currentPage + 1)"
+          >
+            Próximo
+          </button>
+        </li>
+      </ul>
+    </nav>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div *ngFor="let game of currentPageGames" class="col">
+        <div class="card bg-body-tertiary text-dark shadow-sm h-100 rounded-3">
+          <img
+            [src]="game.image"
+            class="card-img-top rounded-top"
+            alt="{{ game.name }}"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ game.name }}</h5>
+            <p class="card-text">Gênero: {{ game.genre }}</p>
+            <p class="card-text">Plataforma: {{ game.platform }}</p>
+            <p class="card-text">Votos: {{ game.votes }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <nav *ngIf="totalPages > 1" class="mt-4">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link text-dark" (click)="goToPage(currentPage - 1)">
+          Anterior
+        </button>
+      </li>
+      <li
+        *ngFor="let page of pages"
+        class="page-item"
+        [class.active]="page === currentPage"
+      >
+        <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <button class="page-link text-dark" (click)="goToPage(currentPage + 1)">
+          Próximo
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -1,0 +1,37 @@
+/* Estilo para os botões do carrossel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1); /* Torna os ícones brancos */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  border: 2px solid white; /* Adiciona uma borda branca */
+  border-radius: 50%; /* Torna os botões circulares */
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Fundo mais claro ao passar o mouse */
+}
+
+.carousel-inner .card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.carousel-inner .card:hover {
+  transform: scale(0.99);
+  transition: transform 0.3s ease;
+}
