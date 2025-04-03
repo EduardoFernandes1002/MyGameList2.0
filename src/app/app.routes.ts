@@ -11,14 +11,14 @@ import { DiscoverComponent } from './pages/discover/discover.component';
 import { ConfigProfileComponent } from './pages/config-profile/config-profile.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, title:'Home' },
-  { path: 'info', component: InfoGameComponent, title:'Informações' },
-  { path: 'rank', component: RankComponent, title:'Ranking' },
-  { path: 'perfil', component: PerfilComponent, title:'Perfil' },
-  { path: 'admin', component: AdminComponent, title:'Administração' },
-  { path: 'ajuda', component: HelpComponent, title:'Ajuda/FAQ' },
-  { path: 'categoria', component: CategoryComponent, title:'Categoria' },
-  { path: 'recomendado', component: RecomendedComponent, title:'Recomendação' },
-  { path: 'descoberta', component: DiscoverComponent, title:'Descoberta'},
-  { path: 'config-perfil', component: ConfigProfileComponent, title:'ConfiguraçãoPerfil' }
+  { path: '', component: HomeComponent, title: 'Home' },
+  { path: 'perfil/:username', component: PerfilComponent, title: 'Perfil' },
+  { path: 'info/:nomeJogo', component: InfoGameComponent, title: 'Informações' },
+  { path: 'rank', component: RankComponent, title: 'Ranking' },
+  { path: 'admin', component: AdminComponent, title: 'Administração' },
+  { path: 'recomendado', component: RecomendedComponent, title: 'Recomendação' },
+  { path: 'categoria', component: CategoryComponent, title: 'Categoria' },
+  { path: 'ajuda', component: HelpComponent, title: 'Ajuda/FAQ' },
+  { path: 'descoberta', component: DiscoverComponent, title: 'Descoberta' },
+  { path: 'config-perfil', component: ConfigProfileComponent, title: 'Configuração do Perfil' }
 ];
