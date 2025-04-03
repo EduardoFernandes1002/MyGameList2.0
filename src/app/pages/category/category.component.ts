@@ -8,5 +8,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './category.component.css'
 })
 export class CategoryComponent {
-
+  categorias = [
+    { nome: 'Ação', descricao: 'Jogos de ação e aventura' },
+    { nome: 'RPG', descricao: 'Jogos de RPG e fantasia' },
+    { nome: 'Esportes', descricao: 'Jogos de esportes e simulação' }
+  ];
 }
