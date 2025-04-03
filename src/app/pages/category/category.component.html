@@ -1,1 +1,14 @@
-<p>category works!</p>
+<div class="container mt-4">
+    <h1 class="text-center text-dark mb-5">Categorias</h1>
+  
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div *ngFor="let categoria of categorias" class="col">
+        <div class="card bg-body-tertiary text-dark shadow-sm h-100 rounded-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ categoria.nome }}</h5>
+            <p class="card-text">Descrição: {{ categoria.descricao }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

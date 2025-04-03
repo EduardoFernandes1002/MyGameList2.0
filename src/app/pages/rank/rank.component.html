@@ -4,11 +4,11 @@
       <!-- Área de Pesquisa -->
       <div class="input-group mb-4 shadow-sm" style="max-width: 500px; margin: 0 auto;">
         <input type="text" 
-              class="form-control border-primary" 
+              class="form-control border-dark" 
               placeholder="Pesquisar jogos..."
               [(ngModel)]="searchQuery"
               (input)="applySearch()">
-        <button class="btn btn-primary">
+        <button class="btn btn-tertiary border-dark">
           <i class="bi bi-search"></i>
         </button>
       </div>
@@ -18,17 +18,17 @@
         <li class="nav-item">
           <button class="nav-link" 
                   [class.active]="selectedTab === 0"
-                  (click)="onTabChange(0)">All Time</button>
+                  (click)="onTabChange(0)">Todos</button>
         </li>
         <li class="nav-item">
           <button class="nav-link" 
                   [class.active]="selectedTab === 1"
-                  (click)="onTabChange(1)">Last Month</button>
+                  (click)="onTabChange(1)">30 Dias</button>
         </li>
         <li class="nav-item">
           <button class="nav-link" 
                   [class.active]="selectedTab === 2"
-                  (click)="onTabChange(2)">Last Week</button>
+                  (click)="onTabChange(2)">7 Dias</button>
         </li>
       </ul>
 
@@ -53,7 +53,7 @@
           <div class="card shadow-sm hover-effect">
             <div class="row g-0 align-items-center">
               <div class="col-1 text-center">
-                <span class="badge bg-primary fs-5">#{{ item.position }}</span>
+                <span class="badge bg-dark fs-5">#{{ item.position }}</span>
               </div>
               <div class="col-2">
                 <img [src]="item.image" 
@@ -69,7 +69,7 @@
                 </div>
               </div>
               <div class="col-2 text-end pe-3">
-                <span class="text-primary fw-bold fs-5">{{ item.score }} pts</span>
+                <span class="text-dark fw-bold fs-5">{{ item.score }} pts</span>
               </div>
             </div>
           </div>

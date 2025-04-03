@@ -1,1 +1,19 @@
-<p>config-profile works!</p>
+<div class="container mt-4">
+    <h1 class="text-center text-dark mb-5">Configuração do Perfil</h1>
+  
+    <form>
+      <div class="mb-3">
+        <label for="apelido" class="form-label">Apelido</label>
+        <input type="text" class="form-control" id="apelido" [(ngModel)]="perfil.apelido" />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="perfil.email" />
+      </div>
+      <div class="mb-3">
+        <label for="senha" class="form-label">Senha</label>
+        <input type="password" class="form-control" id="senha" [(ngModel)]="perfil.senha" />
+      </div>
+      <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+    </form>
+  </div>

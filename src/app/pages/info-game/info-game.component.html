@@ -1,1 +1,15 @@
-<p>info-game works!</p>
+<div class="container mt-4">
+    <h1 class="text-center text-dark mb-5">{{ jogo.nome }}</h1>
+  
+    <div class="row">
+      <div class="col-md-4">
+        <img [src]="jogo.imagem" class="img-fluid rounded" alt="{{ jogo.nome }}" />
+      </div>
+      <div class="col-md-8">
+        <p><strong>Gênero:</strong> {{ jogo.genero }}</p>
+        <p><strong>Plataforma:</strong> {{ jogo.plataforma }}</p>
+        <p><strong>Sinopse:</strong> {{ jogo.sinopse }}</p>
+        <p><strong>Data de Lançamento:</strong> {{ jogo.dataLancamento | date }}</p>
+      </div>
+    </div>
+  </div>
