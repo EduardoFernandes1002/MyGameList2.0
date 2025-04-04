@@ -8,7 +8,7 @@ import { RecomendedComponent } from './pages/recomended/recomended.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { HelpComponent } from './pages/help/help.component';
 import { DiscoverComponent } from './pages/discover/discover.component';
-import { ConfigProfileComponent } from './pages/config-profile/config-profile.component';
+import { ConfigComponent } from './pages/config/config.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
@@ -23,8 +23,7 @@ export const routes: Routes = [
   { path: 'categoria', component: CategoryComponent, title: 'Categoria' },
   { path: 'ajuda', component: HelpComponent, title: 'Ajuda/FAQ' },
   { path: 'descoberta', component: DiscoverComponent, title: 'Descoberta' },
-  { path: 'config-perfil', component: ConfigProfileComponent, title: 'Configuração do Perfil' },
+  { path: 'config', component: ConfigComponent, title: 'Configuração' },
   { path: 'login', component: LoginComponent, title: 'Login' },
-  { path: 'registrar', component: RegisterComponent, title: 'Registrar' },
-
+  { path: 'registro', component: RegisterComponent, title: 'Registro' }
 ];
