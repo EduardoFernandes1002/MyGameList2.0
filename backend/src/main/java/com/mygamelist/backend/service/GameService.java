@@ -1,27 +1,23 @@
 package com.mygamelist.backend.service;
 
-import com.mygamelist.backend.model.Game;
-import com.mygamelist.backend.repository.GameRepository;
+import com.mygamelist.backend.model.Jogo;
+import com.mygamelist.backend.repository.JogoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
 public class GameService {
-    private final GameRepository gameRepository;
 
-    public GameService(GameRepository gameRepository) {
-        this.gameRepository = gameRepository;
-    }
+    @Autowired
+    private JogoRepository gameRepository;
 
-    public List<Game> getAllGames() {
+    public List<Jogo> getAllGames() {
         return gameRepository.findAll();
     }
 
-    public Game saveGame(Game game) {
+    public Jogo saveGame(Jogo game) {
         return gameRepository.save(game);
-    }
-
-    public void deleteGame(Long id) {
-        gameRepository.deleteById(id);
     }
 }
