@@ -15,7 +15,7 @@ import { RegisterComponent } from './pages/register/register.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Home' },
-  { path: 'perfil/:username', component: PerfilComponent, title: 'Perfil' },
+  { path: 'perfil', component: PerfilComponent, title: 'Perfil' },
   { path: 'info/:nomeJogo', component: InfoGameComponent, title: 'Informações' },
   { path: 'rank', component: RankComponent, title: 'Ranking' },
   { path: 'admin', component: AdminComponent, title: 'Administração' },
