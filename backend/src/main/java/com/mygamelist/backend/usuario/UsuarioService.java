@@ -3,7 +3,6 @@ package com.mygamelist.backend.usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -12,14 +11,9 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    // Retorna todos os usuários
-    public List<Usuario> getAllUsuarios() {
-        return usuarioRepository.findAll();
-    }
-
-    // Retorna um usuário por ID
-    public Optional<Usuario> getUsuarioById(Long id) {
-        return usuarioRepository.findById(id);
+    // Retorna um usuário pelo nome de login (nm_usuario)
+    public Optional<Usuario> getUsuarioByNomeUsuario(String nomeUsuario) {
+        return usuarioRepository.findByNomeUsuario(nomeUsuario);
     }
 
     // Salva ou atualiza um usuário

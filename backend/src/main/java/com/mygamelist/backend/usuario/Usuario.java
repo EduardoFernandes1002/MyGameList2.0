@@ -18,6 +18,9 @@ public class Usuario {
     @JoinColumn(name = "id_permissao", nullable = false)
     private Permissao permissao;
 
+    @Column(name = "nm_usuario", nullable = false, unique = true, length = 45)
+    private String usuario;
+
     @Column(name = "nm_apelido", nullable = false, unique = true, length = 30)
     private String apelido;
 
@@ -35,4 +38,67 @@ public class Usuario {
     private Date dataNascimento;
 
     // Getters e Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Permissao getPermissao() {
+        return permissao;
+    }
+
+    public void setPermissao(Permissao permissao) {
+        this.permissao = permissao;
+    }
+
+    public String getNomeUsuario() {
+        return usuario;
+    }
+
+    public void setNomeUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getApelido() {
+        return apelido;
+    }
+
+    public void setApelido(String apelido) {
+        this.apelido = apelido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Integer getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(Integer telefone) {
+        this.telefone = telefone;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
 }

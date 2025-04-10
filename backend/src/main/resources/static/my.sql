@@ -41,6 +41,7 @@ DROP TABLE IF EXISTS `gamelistTEST`.`t_usuario` ;
 CREATE TABLE IF NOT EXISTS `gamelistTEST`.`t_usuario` (
   `id_usuario` INT(11) NOT NULL AUTO_INCREMENT,
   `id_permissao` INT(11) NOT NULL,
+  `nm_usuario` VARCHAR(45) NOT NULL,
   `nm_apelido` VARCHAR(30) NOT NULL,
   `ds_email` VARCHAR(200) NOT NULL,
   `ds_senha` VARCHAR(40) NOT NULL,
