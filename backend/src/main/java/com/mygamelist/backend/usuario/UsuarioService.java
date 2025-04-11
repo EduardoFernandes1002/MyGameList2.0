@@ -11,9 +11,9 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    // Retorna um usuário pelo nome de login (nm_usuario)
-    public Optional<Usuario> getUsuarioByNomeUsuario(String nomeUsuario) {
-        return usuarioRepository.findByNomeUsuario(nomeUsuario);
+    // Retorna um usuário pelo nome de login (nm_username)
+    public Optional<Usuario> getUsuarioByUsername(String username) {
+        return usuarioRepository.findByUsername(username);
     }
 
     // Salva ou atualiza um usuário

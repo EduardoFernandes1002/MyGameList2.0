@@ -6,7 +6,7 @@ import java.util.Date;
 import com.mygamelist.backend.permissao.Permissao;
 
 @Entity
-@Table(name = "t_usuario")
+@Table(name = "usuario")
 public class Usuario {
 
     @Id
@@ -18,8 +18,8 @@ public class Usuario {
     @JoinColumn(name = "id_permissao", nullable = false)
     private Permissao permissao;
 
-    @Column(name = "nm_usuario", nullable = false, unique = true, length = 45)
-    private String usuario;
+    @Column(name = "nm_username", nullable = false, unique = true, length = 45)
+    private String username;
 
     @Column(name = "nm_apelido", nullable = false, unique = true, length = 30)
     private String apelido;
@@ -54,12 +54,12 @@ public class Usuario {
         this.permissao = permissao;
     }
 
-    public String getNomeUsuario() {
-        return usuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNomeUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getApelido() {

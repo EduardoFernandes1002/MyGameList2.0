@@ -15,8 +15,8 @@ public class UsuarioController {
 
     // Retorna um usuário pelo nome de login (nm_usuario)
     @GetMapping("/{usuario}")
-    public ResponseEntity<Usuario> getUsuarioByNomeUsuario(@PathVariable String nmUsuario) {
-        Optional<Usuario> usuario = usuarioService.getUsuarioByNomeUsuario(nmUsuario);
+    public ResponseEntity<Usuario> getUsuarioByUsername(@PathVariable String username) {
+        Optional<Usuario> usuario = usuarioService.getUsuarioByUsername(username);
         return usuario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
