@@ -1,9 +1,9 @@
-package com.mygamelist.backend.usuario;
+package com.mygamelist.backend.Usuario;
+
+import com.mygamelist.backend.Permissao.Permissao;
 
 import jakarta.persistence.*;
-import java.util.Date;
 
-import com.mygamelist.backend.permissao.Permissao;
 
 @Entity
 @Table(name = "usuario")
@@ -14,30 +14,25 @@ public class Usuario {
     @Column(name = "id_usuario")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_permissao", nullable = false)
-    private Permissao permissao;
+    @Column(name = "nm_username")
+    private String nome;
 
-    @Column(name = "nm_username", nullable = false, unique = true, length = 45)
-    private String username;
-
-    @Column(name = "nm_apelido", nullable = false, unique = true, length = 30)
+    @Column(name = "nm_apelido")
     private String apelido;
 
-    @Column(name = "ds_email", nullable = false, unique = true, length = 200)
+    @Column(name = "ds_email")
     private String email;
 
-    @Column(name = "ds_senha", nullable = false, length = 40)
+    @Column(name = "ds_senha")
     private String senha;
 
     @Column(name = "nr_telefone")
-    private Integer telefone;
+    private String telefone;
 
-    @Column(name = "dt_nascimento")
-    @Temporal(TemporalType.DATE)
-    private Date dataNascimento;
+    @ManyToOne
+    @JoinColumn(name = "id_permissao")
+    private Permissao permissao;
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -46,27 +41,19 @@ public class Usuario {
         this.id = id;
     }
 
-    public Permissao getPermissao() {
-        return permissao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setPermissao(Permissao permissao) {
-        this.permissao = permissao;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getApelido() {
+    public String getApelido()  {
         return apelido;
     }
 
-    public void setApelido(String apelido) {
+    public void setApelido(String apelido)  {
         this.apelido = apelido;
     }
 
@@ -86,19 +73,13 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Integer getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(Integer telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+    
 }
