@@ -1,6 +1,6 @@
-package com.mygamelist.backend.Usuario;
+package com.mygamelist.backend.usuario;
 
-import com.mygamelist.backend.Permissao.Permissao;
+import com.mygamelist.backend.permissao.Permissao;
 
 import jakarta.persistence.*;
 

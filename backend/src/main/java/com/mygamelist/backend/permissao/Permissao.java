@@ -1,7 +1,7 @@
-package com.mygamelist.backend.Permissao;
+package com.mygamelist.backend.permissao;
 
 
-import com.mygamelist.backend.Usuario.Usuario;
+import com.mygamelist.backend.usuario.Usuario;
 import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

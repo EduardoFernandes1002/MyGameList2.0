@@ -1,4 +1,4 @@
-package com.mygamelist.backend.Permissao;
+package com.mygamelist.backend.permissao;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,4 +1,4 @@
-package com.mygamelist.backend.Usuario;
+package com.mygamelist.backend.usuario;
 
 import java.util.List;
 

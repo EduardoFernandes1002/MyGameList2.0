@@ -1,4 +1,4 @@
-package com.mygamelist.backend.Usuario;
+package com.mygamelist.backend.usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
