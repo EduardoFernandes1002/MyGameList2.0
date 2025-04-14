@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: gamelisttest
 -- ------------------------------------------------------
@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `avaliacao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `avaliacao` (
   `id_avaliacao` int(11) NOT NULL AUTO_INCREMENT,
   `id_jogo` int(11) NOT NULL,
@@ -53,7 +53,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `desenvolvedora`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `desenvolvedora` (
   `id_desenvolvedora` int(11) NOT NULL AUTO_INCREMENT,
   `nm_desenvolvedora` varchar(100) NOT NULL,
@@ -77,7 +77,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `distribuidora`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `distribuidora` (
   `id_distribuidora` int(11) NOT NULL AUTO_INCREMENT,
   `nm_distribuidora` varchar(100) NOT NULL,
@@ -101,7 +101,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genero`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `genero` (
   `id_genero` int(11) NOT NULL AUTO_INCREMENT,
   `nm_genero` varchar(100) NOT NULL,
@@ -125,7 +125,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genero_do_jogo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `genero_do_jogo` (
   `id_jogo` int(11) NOT NULL,
   `id_genero` int(11) NOT NULL,
@@ -152,7 +152,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `jogo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `jogo` (
   `id_jogo` int(11) NOT NULL AUTO_INCREMENT,
   `id_distribuidora` int(11) NOT NULL,
@@ -186,7 +186,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `jogo_adicionado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `jogo_adicionado` (
   `id_lista` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -215,7 +215,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `lista`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lista` (
   `id_lista` int(11) NOT NULL AUTO_INCREMENT,
   `nm_lista` varchar(45) NOT NULL,
@@ -238,7 +238,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `modo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `modo` (
   `id_modo` int(11) NOT NULL AUTO_INCREMENT,
   `nm_modo` varchar(100) NOT NULL,
@@ -262,7 +262,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `modo_de_jogo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `modo_de_jogo` (
   `id_jogo` int(11) NOT NULL,
   `id_modo` int(11) NOT NULL,
@@ -289,10 +289,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `permissao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `permissao` (
   `id_permissao` int(11) NOT NULL AUTO_INCREMENT,
-  `nm_permissao` varchar(45) NOT NULL,
+  `nm_permissao` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_permissao`),
   UNIQUE KEY `nmPermissao_UNIQUE` (`nm_permissao`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -314,7 +314,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `plataforma`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `plataforma` (
   `id_plataforma` int(11) NOT NULL AUTO_INCREMENT,
   `nm_plataforma` varchar(100) NOT NULL,
@@ -338,7 +338,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `plataformas_jogaveis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `plataformas_jogaveis` (
   `id_plataforma` int(11) NOT NULL,
   `id_jogo` int(11) NOT NULL,
@@ -365,15 +365,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `id_permissao` int(11) NOT NULL,
-  `nm_username` varchar(45) NOT NULL,
-  `nm_apelido` varchar(30) NOT NULL,
-  `ds_email` varchar(200) NOT NULL,
-  `ds_senha` varchar(40) NOT NULL,
-  `nr_telefone` int(11) DEFAULT NULL,
+  `nm_username` varchar(255) DEFAULT NULL,
+  `nm_apelido` varchar(255) DEFAULT NULL,
+  `ds_email` varchar(255) DEFAULT NULL,
+  `ds_senha` varchar(255) DEFAULT NULL,
+  `nr_telefone` varchar(20) DEFAULT NULL,
   `dt_nascimento` date DEFAULT NULL,
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `ds_email_UNIQUE` (`ds_email`),
@@ -391,7 +391,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,1,'AokiFernandes','Aoki','duduzebas@gmail.com','123456789',NULL,NULL);
+INSERT INTO `usuario` VALUES (1,1,'AokiFernandes','Aoki','duduzebas@gmail.com','123456789',NULL,NULL),(2,1,'ThiagoDosSantos','Sr_Xurineio','ThiagoDosSantos','987654321',NULL,NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -404,4 +404,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-10 20:16:56
+-- Dump completed on 2025-04-14 17:39:35
