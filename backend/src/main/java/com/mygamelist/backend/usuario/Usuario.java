@@ -1,6 +1,5 @@
 package com.mygamelist.backend.usuario;
 
-import com.mygamelist.backend.permissao.Permissao;
 
 import jakarta.persistence.*;
 
@@ -12,73 +11,69 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    private Long id;
+    private Long idUsuario;
 
     @Column(name = "nm_username")
-    private String nome;
+    private String nomeUsuario;
 
     @Column(name = "nm_apelido")
-    private String apelido;
+    private String apelidoUsuario;
 
     @Column(name = "ds_email")
-    private String email;
+    private String emailUsuario;
 
     @Column(name = "ds_senha")
-    private String senha;
+    private String senhaUsuario;
 
     @Column(name = "nr_telefone")
-    private String telefone;
+    private String telefoneUsuario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_permissao")
-    private Permissao permissao;
-
-    public Long getId() {
-        return id;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeUsuario() {
+        return nomeUsuario;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
     }
 
-    public String getApelido()  {
-        return apelido;
+    public String getApelidoUsuario()  {
+        return apelidoUsuario;
     }
 
-    public void setApelido(String apelido)  {
-        this.apelido = apelido;
+    public void setApelidoUsuario(String apelidoUsuario)  {
+        this.apelidoUsuario = apelidoUsuario;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailUsuario() {
+        return emailUsuario;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailUsuario(String emailUsuario) {
+        this.emailUsuario = emailUsuario;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getSenhaUsuario() {
+        return senhaUsuario;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setSenhaUsuario(String senhaUsuario) {
+        this.senhaUsuario = senhaUsuario;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getTelefoneUsuario() {
+        return telefoneUsuario;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefoneUsuario(String telefoneUsuario) {
+        this.telefoneUsuario = telefoneUsuario;
     }
 
     

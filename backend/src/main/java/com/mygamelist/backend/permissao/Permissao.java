@@ -1,15 +1,7 @@
 package com.mygamelist.backend.permissao;
 
 
-import com.mygamelist.backend.usuario.Usuario;
-import java.util.List;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "permissao")
@@ -23,9 +15,6 @@ public class Permissao {
 
     @Column(name = "nm_permissao")
     private String permissao;
-
-    @OneToMany(mappedBy = "permissao")
-    private List<Usuario> usuarios;
 
     public Long getId() {
         return id;

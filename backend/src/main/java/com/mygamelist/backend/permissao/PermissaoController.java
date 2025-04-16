@@ -1,21 +1,27 @@
 package com.mygamelist.backend.permissao;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/permissao")
 public class PermissaoController {
 
     @Autowired
-    private PermissaoRepository permissionRepository;
+    private PermissaoService permissaoService;
 
-    @GetMapping("/permissions")
-    public List<Permissao> getPermissions() {
-        return permissionRepository.findAll();
+    @GetMapping
+    public List<Permissao> getPermissoes() {
+        return permissaoService.getPermissoes();
     }
+
+    @GetMapping("{id}")
+    public Permissao getPermissaoById(@PathVariable Long id) {
+        return permissaoService.getPermissaoById(id);
+    }
+    
 }
