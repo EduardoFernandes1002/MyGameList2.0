@@ -11,25 +11,26 @@ public class Permissao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_permissao")
-    private Long id;
+    private Long idPermissao;
 
     @Column(name = "nm_permissao")
-    private String permissao;
+    private String nomePermissao;
+
 
     public Long getId() {
-        return id;
+        return idPermissao;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long idPermissao) {
+        this.idPermissao = idPermissao;
         
     }
 
     public String getName() {
-        return permissao;
+        return nomePermissao;
     }
 
-    public void setName(String name) {
-        this.permissao = name;
+    public void setName(String nomePermissao) {
+        this.nomePermissao = nomePermissao;
     }
 }

@@ -1,6 +1,8 @@
 package com.mygamelist.backend.usuario;
 
 
+import com.mygamelist.backend.permissao.Permissao;
+
 import jakarta.persistence.*;
 
 
@@ -27,6 +29,10 @@ public class Usuario {
 
     @Column(name = "nr_telefone")
     private String telefoneUsuario;
+
+    @ManyToOne
+    @JoinColumn(name = "id_permissao", referencedColumnName = "id_permissao", nullable = false)
+    private Permissao permissao;
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -76,5 +82,12 @@ public class Usuario {
         this.telefoneUsuario = telefoneUsuario;
     }
 
+    public Permissao getPermissao() {
+        return permissao;
+    }
+
+    public void setPermissao(Permissao permissao) {
+        this.permissao = permissao;
+    }
     
 }

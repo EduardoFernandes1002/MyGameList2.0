@@ -19,4 +19,8 @@ public class UsuarioService {
         return usuarioRepository.findById(idUsuario).orElseThrow();
     }
 
+    public List<Usuario> getAdministrators() {
+        return usuarioRepository.findByAdministrator();
+    }
+
 }
