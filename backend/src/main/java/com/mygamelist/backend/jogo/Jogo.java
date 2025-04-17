@@ -1,5 +1,7 @@
 package com.mygamelist.backend.jogo;
 
+import java.time.LocalDate;
+
 import com.mygamelist.backend.desenvolvedora.Desenvolvedora;
 import com.mygamelist.backend.distribuidora.Distribuidora;
 
@@ -8,6 +10,9 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "jogo")
 public class Jogo {
+
+    // Dados do jogo:
+        // Atributos exclusivos do jogo:
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idJogo;
@@ -18,12 +23,12 @@ public class Jogo {
     @Column(name = "ds_imagem")
     private String imagemJogo;
     @Column(name = "dt_lancamento")
-    private String dataLancamentoJogo;
+    private LocalDate dataLancamentoJogo;
 
+        // Chaves estrangeiras de outras tabelas:
     @ManyToOne
     @JoinColumn(name = "id_desenvolvedora", referencedColumnName = "id_desenvolvedora", nullable = false)
     private Desenvolvedora desenvolvedora;
-
     @ManyToOne
     @JoinColumn(name = "id_distribuidora", referencedColumnName = "id_distribuidora", nullable = false)
     private Distribuidora distribuidora;
@@ -60,13 +65,28 @@ public class Jogo {
         this.imagemJogo = imagemJogo;
     }
 
-    public String getDataLancamentoJogo() {
+    public LocalDate getDataLancamentoJogo() {
         return dataLancamentoJogo;
     }
 
-    public void setDataLancamentoJogo(String dataLancamentoJogo) {
+    public void setDataLancamentoJogo(LocalDate dataLancamentoJogo) {
         this.dataLancamentoJogo = dataLancamentoJogo;
     }
 
+    public Desenvolvedora getDesenvolvedora() {
+        return desenvolvedora;
+    }
+
+    public void setDesenvolvedora(Desenvolvedora desenvolvedora) {
+        this.desenvolvedora = desenvolvedora;
+    }
+
+    public Distribuidora getDistribuidora() {
+        return distribuidora;
+    }
+
+    public void setDistribuidora(Distribuidora distribuidora) {
+        this.distribuidora = distribuidora;
+    }
 
 }
