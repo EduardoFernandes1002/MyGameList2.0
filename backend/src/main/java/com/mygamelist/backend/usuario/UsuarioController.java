@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -24,7 +23,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/administradores")
-    public List<Usuario> getAdministrators() {
+    public List<Object[]> getAdministrators() {
         return usuarioService.getAdministrators();
     }
     

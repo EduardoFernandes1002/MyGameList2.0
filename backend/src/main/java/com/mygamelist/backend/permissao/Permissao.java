@@ -17,20 +17,20 @@ public class Permissao {
     private String nomePermissao;
 
 
-    public Long getId() {
+    public Long getIdPermissao() {
         return idPermissao;
     }
 
-    public void setId(Long idPermissao) {
+    public void setIdPermissao(Long idPermissao) {
         this.idPermissao = idPermissao;
         
     }
 
-    public String getName() {
+    public String getNomePermissao() {
         return nomePermissao;
     }
 
-    public void setName(String nomePermissao) {
+    public void setNomePermissao(String nomePermissao) {
         this.nomePermissao = nomePermissao;
     }
 }

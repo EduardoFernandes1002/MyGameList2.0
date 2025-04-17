@@ -1,6 +1,9 @@
 package com.mygamelist.backend.usuario;
 
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.mygamelist.backend.permissao.Permissao;
 
 import jakarta.persistence.*;
@@ -32,6 +35,7 @@ public class Usuario {
 
     @ManyToOne
     @JoinColumn(name = "id_permissao", referencedColumnName = "id_permissao", nullable = false)
+    @Fetch(FetchMode.JOIN)
     private Permissao permissao;
 
     public Long getIdUsuario() {
@@ -89,5 +93,5 @@ public class Usuario {
     public void setPermissao(Permissao permissao) {
         this.permissao = permissao;
     }
-    
+
 }

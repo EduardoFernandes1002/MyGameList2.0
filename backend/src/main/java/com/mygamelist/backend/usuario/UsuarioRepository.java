@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    @Query("SELECT u FROM Usuario u JOIN u.permissao p Where p.idPermissao = 1")
-    List<Usuario> findByAdministrator();
+    @Query(value = "Select u.nm_username, u.nm_apelido, p.nm_permissao From Usuario as u " + 
+                "INNER Join permissao as p" + 
+                "On p.id_permissao = u.id_permissao" + 
+                "Where p.id_permissao = 1;", nativeQuery = true)
+    List<Object[]> findByAdministrator();
 }

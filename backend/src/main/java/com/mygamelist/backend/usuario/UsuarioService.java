@@ -19,7 +19,7 @@ public class UsuarioService {
         return usuarioRepository.findById(idUsuario).orElseThrow();
     }
 
-    public List<Usuario> getAdministrators() {
+    public List<Object[]> getAdministrators() {
         return usuarioRepository.findByAdministrator();
     }
 
