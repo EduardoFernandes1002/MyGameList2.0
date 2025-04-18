@@ -6,6 +6,7 @@ import java.util.List;
 import com.mygamelist.backend.desenvolvedora.Desenvolvedora;
 import com.mygamelist.backend.distribuidora.Distribuidora;
 import com.mygamelist.backend.intermediarias.generojogo.GeneroDoJogo;
+import com.mygamelist.backend.intermediarias.modojogo.ModoDoJogo;
 
 import jakarta.persistence.*;
 
@@ -35,8 +36,14 @@ public class Jogo {
     @JoinColumn(name = "id_distribuidora", referencedColumnName = "id_distribuidora", nullable = false)
     private Distribuidora distribuidora;
 
-    @OneToMany(mappedBy = "jogo")
+    @OneToMany(mappedBy = "idJogo")
     private List<GeneroDoJogo> generosDoJogo;
+
+    @OneToMany(mappedBy = "idJogo")
+    private List<PlataformaDoJogo> plataformasDoJogo;
+
+    @OneToMany(mappedBy = "idJogo")
+    private List<ModoDoJogo> modosDeJogo;
 
     public Long getIdJogo() {
         return idJogo;
@@ -92,6 +99,10 @@ public class Jogo {
 
     public void setDistribuidora(Distribuidora distribuidora) {
         this.distribuidora = distribuidora;
+    }
+
+    public List<GeneroDoJogo> getGenerosDoJogo() {
+        return generosDoJogo;
     }
 
 }

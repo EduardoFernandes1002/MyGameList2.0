@@ -16,6 +16,9 @@ public interface JogoRepository extends JpaRepository<Jogo, Long> {
                 j.dataLancamentoJogo, 
                 d.nomeDesenvolvedora, 
                 di.nomeDistribuidora
+
+
+                
             )
             FROM Jogo j
                 INNER JOIN j.desenvolvedora d

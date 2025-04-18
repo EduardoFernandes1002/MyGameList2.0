@@ -10,4 +10,5 @@ public record JogoDetalhesDTO(
     LocalDate dataLancamentoJogo,
     String nomeDesenvolvedora,
     String nomeDistribuidora
+    
 ) {}
