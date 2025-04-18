@@ -1,9 +1,11 @@
 package com.mygamelist.backend.jogo;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.mygamelist.backend.desenvolvedora.Desenvolvedora;
 import com.mygamelist.backend.distribuidora.Distribuidora;
+import com.mygamelist.backend.intermediarias.generojogo.GeneroDoJogo;
 
 import jakarta.persistence.*;
 
@@ -32,6 +34,9 @@ public class Jogo {
     @ManyToOne
     @JoinColumn(name = "id_distribuidora", referencedColumnName = "id_distribuidora", nullable = false)
     private Distribuidora distribuidora;
+
+    @OneToMany(mappedBy = "jogo")
+    private List<GeneroDoJogo> generosDoJogo;
 
     public Long getIdJogo() {
         return idJogo;

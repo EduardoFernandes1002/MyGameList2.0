@@ -23,5 +23,5 @@ public interface JogoRepository extends JpaRepository<Jogo, Long> {
             WHERE j.idJogo = :idJogo
         """)
     JogoDetalhesDTO findJogoDetalhes(@Param("idJogo") Long idJogo);
-    
+
 }
