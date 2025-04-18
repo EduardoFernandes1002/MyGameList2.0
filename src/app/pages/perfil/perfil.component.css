@@ -1,0 +1,64 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-container {
+    min-height: 100vh;
+}
+
+.profile-sidebar {
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.profile-picture {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border: 5px solid #6c757d;
+}
+
+.main-content {
+    background-color: #f8f9fa;
+}
+
+.game-card, .stat-card {
+    transition: all 0.3s ease;
+    border-left: 4px solid #6c757d;
+}
+
+.game-card:hover, .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.empty-info {
+    color: #adb5bd;
+    font-style: italic;
+}
+
+.progress {
+    height: 6px;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #6c757d, #495057);
+}
+
+.section-title {
+    border-bottom: 2px solid #6c757d;
+    padding-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+    .profile-sidebar {
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .profile-picture {
+        width: 120px;
+        height: 120px;
+    }
+}

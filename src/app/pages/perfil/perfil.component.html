@@ -1,12 +1,163 @@
-<p>perfil works!</p>
-<div class="Perfil">
-    <h2>Bem vindo "Nome do Usuario"</h2>
-    <img src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur.png" alt="">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Gamer - Bootstrap 5</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid profile-container p-0">
+        <div class="row g-0">
+            <!-- Sidebar -->
+            <div class="col-lg-3 profile-sidebar p-4">
+                <div class="d-flex flex-column align-items-center text-center">
+                    <img src="https://th.bing.com/th/id/R.5d9cd68cd30fe47d4b9db5efad1d879f?rik=Ckskjjv9dzY3%2bA&pid=ImgRaw&r=0" alt="Foto do usuário" class="profile-picture rounded-circle mb-3 shadow">
+                    <h2 class="mb-1">Carlos Gamer</h2>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between py-2 border-bottom">
+                        <span class="fw-bold">Desde</span>
+                        <span>2010</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Conteúdo principal -->
+            <div class="col-lg-9 main-content p-4">
+                <!-- Biblioteca de Jogos -->
+                <h3 class="section-title mb-4">Biblioteca de Jogos</h3>
+                <div class="row g-4 mb-5">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="game-card card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Cyberpunk 2077</h5>
+                                <p class="card-text text-muted mb-1">Gênero: RPG/Ação</p>
+                                <div class="progress mt-3">
+                                    <div class="progress-bar" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="game-card card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">The Witcher 3</h5>
+                                <p class="card-text text-muted mb-1">Gênero: RPG</p>
+                                <div class="progress mt-3">
+                                    <div class="progress-bar" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="game-card card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Elden Ring</h5>
+                                <p class="card-text text-muted mb-1">Gênero: RPG/Ação</p>
+                                <div class="progress mt-3">
+                                    <div class="progress-bar" style="width: 78%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Estatísticas (campos vazios) -->
+                <h3 class="section-title mb-4">Estatísticas</h3>
+                <div class="row g-4 mb-5">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="stat-card card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title empty-info">Nome da Estatística</h5>
+                                <p class="card-text text-muted mb-1 empty-info">Valor: não informado</p>
+                                <p class="card-text text-muted mb-2 empty-info">Detalhes: não informado</p>
+                                <div class="progress mt-3">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="stat-card card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title empty-info">Nome da Estatística</h5>
+                                <p class="card-text text-muted mb-1 empty-info">Valor: não informado</p>
+                                <p class="card-text text-muted mb-2 empty-info">Detalhes: não informado</p>
+                                <div class="progress mt-3">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="stat-card card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title empty-info">Nome da Estatística</h5>
+                                <p class="card-text text-muted mb-1 empty-info">Valor: não informado</p>
+                                <p class="card-text text-muted mb-2 empty-info">Detalhes: não informado</p>
+                                <div class="progress mt-3">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="stat-card card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title empty-info">Nome da Estatística</h5>
+                                <p class="card-text text-muted mb-1 empty-info">Valor: não informado</p>
+                                <p class="card-text text-muted mb-2 empty-info">Detalhes: não informado</p>
+                                <div class="progress mt-3">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Próximos Lançamentos -->
+                <h3 class="section-title mb-4">Próximos Lançamentos</h3>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="game-card card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Starfield</h5>
+                                <p class="card-text text-muted mb-1">Plataforma: PC/Xbox</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="game-card card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Spider-Man 2</h5>
+                                <p class="card-text text-muted mb-1">Plataforma: PS5</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="game-card card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Final Fantasy XVI</h5>
+                                <p class="card-text text-muted mb-1">Plataforma: PS5</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-
-
-
-
-</div>
-  
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
