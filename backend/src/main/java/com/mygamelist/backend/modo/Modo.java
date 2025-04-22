@@ -3,6 +3,7 @@ package com.mygamelist.backend.modo;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "modo")
 public class Modo {
 
     @Id
@@ -12,6 +13,8 @@ public class Modo {
 
     @Column(name = "nm_modo")
     private String nomeModo;
+
+        // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
 
 
     public Long getIdModo() {
@@ -28,4 +31,5 @@ public class Modo {
     public void setNomeModo(String nomeModo) {
         this.nomeModo = nomeModo;
     }
+    
 }

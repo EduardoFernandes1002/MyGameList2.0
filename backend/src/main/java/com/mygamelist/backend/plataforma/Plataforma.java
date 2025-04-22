@@ -3,6 +3,7 @@ package com.mygamelist.backend.plataforma;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "plataforma")
 public class Plataforma {
     
     @Id
@@ -12,6 +13,8 @@ public class Plataforma {
 
     @Column(name = "nm_plataforma")
     private String nomePlataforma;
+
+    // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
 
     public Long getIdPlataforma() {
         return idPlataforma;

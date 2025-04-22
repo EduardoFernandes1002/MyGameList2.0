@@ -5,8 +5,7 @@ import java.util.List;
 
 import com.mygamelist.backend.desenvolvedora.Desenvolvedora;
 import com.mygamelist.backend.distribuidora.Distribuidora;
-import com.mygamelist.backend.intermediarias.generojogo.GeneroDoJogo;
-import com.mygamelist.backend.intermediarias.modojogo.ModoDoJogo;
+import com.mygamelist.backend.genero.Genero;
 
 import jakarta.persistence.*;
 
@@ -36,15 +35,16 @@ public class Jogo {
     @JoinColumn(name = "id_distribuidora", referencedColumnName = "id_distribuidora", nullable = false)
     private Distribuidora distribuidora;
 
-    @OneToMany(mappedBy = "idJogo")
-    private List<GeneroDoJogo> generosDoJogo;
+        // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
+    @ManyToMany
+    @JoinTable(
+        name = "genero_do_jogo",
+        joinColumns = @JoinColumn(name = "id_jogo"),
+        inverseJoinColumns = @JoinColumn(name = "id_genero")
+    )
+    private List<Genero> generos;
 
-    @OneToMany(mappedBy = "idJogo")
-    private List<PlataformaDoJogo> plataformasDoJogo;
-
-    @OneToMany(mappedBy = "idJogo")
-    private List<ModoDoJogo> modosDeJogo;
-
+    // Getters e Setters:
     public Long getIdJogo() {
         return idJogo;
     }
@@ -100,9 +100,11 @@ public class Jogo {
     public void setDistribuidora(Distribuidora distribuidora) {
         this.distribuidora = distribuidora;
     }
-
-    public List<GeneroDoJogo> getGenerosDoJogo() {
-        return generosDoJogo;
+    public List<Genero> getGeneros() {
+        return generos;
     }
 
+    public void setGeneros(List<Genero> generos) {
+        this.generos = generos;
+    }
 }

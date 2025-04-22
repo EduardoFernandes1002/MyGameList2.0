@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class GeneroService {
     
@@ -18,5 +19,10 @@ public class GeneroService {
     public Genero getGeneroById(Long idGenero) {
         return generoRepository.findById(idGenero).orElse(null);
     }
+
+    public List<?> findJogosByGenero(Long idGenero) {
+        return generoRepository.findJogosByGeneros(idGenero);
+    }
+
 
 }

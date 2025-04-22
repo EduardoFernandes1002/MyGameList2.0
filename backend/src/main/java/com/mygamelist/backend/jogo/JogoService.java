@@ -18,9 +18,4 @@ public class JogoService {
     public Jogo getJogoById(Long idJogo) {
         return jogoRepository.findById(idJogo).orElseThrow(() -> new RuntimeException("Jogo não encontrado"));
     }
-
-    public JogoDetalhesDTO buscarDetalhesJogo(Long idJogo) {
-        return jogoRepository.findJogoDetalhes(idJogo);
-    }
-    
 }

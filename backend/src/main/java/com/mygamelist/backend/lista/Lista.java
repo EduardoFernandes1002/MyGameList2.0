@@ -3,6 +3,7 @@ package com.mygamelist.backend.lista;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "lista")
 public class Lista {
     
 
