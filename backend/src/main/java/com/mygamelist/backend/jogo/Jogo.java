@@ -14,7 +14,7 @@ import jakarta.persistence.*;
 public class Jogo {
 
     // Dados do jogo:
-        // Atributos exclusivos do jogo:
+    // Atributos exclusivos do jogo:
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idJogo;
@@ -27,7 +27,7 @@ public class Jogo {
     @Column(name = "dt_lancamento")
     private LocalDate dataLancamentoJogo;
 
-        // Chaves estrangeiras de outras tabelas:
+    // Chaves estrangeiras de outras tabelas:
     @ManyToOne
     @JoinColumn(name = "id_desenvolvedora", referencedColumnName = "id_desenvolvedora", nullable = false)
     private Desenvolvedora desenvolvedora;
@@ -35,13 +35,10 @@ public class Jogo {
     @JoinColumn(name = "id_distribuidora", referencedColumnName = "id_distribuidora", nullable = false)
     private Distribuidora distribuidora;
 
-        // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
+    // Atributos que representam o relacionamento com outras tabelas Muitos para
+    // Muitos:
     @ManyToMany
-    @JoinTable(
-        name = "genero_do_jogo",
-        joinColumns = @JoinColumn(name = "id_jogo"),
-        inverseJoinColumns = @JoinColumn(name = "id_genero")
-    )
+    @JoinTable(name = "genero_do_jogo", joinColumns = @JoinColumn(name = "id_jogo"), inverseJoinColumns = @JoinColumn(name = "id_genero"))
     private List<Genero> generos;
 
     // Getters e Setters:
@@ -59,7 +56,7 @@ public class Jogo {
 
     public void setNomeJogo(String nomeJogo) {
         this.nomeJogo = nomeJogo;
-    }  
+    }
 
     public String getSinopseJogo() {
         return sinopseJogo;
@@ -100,6 +97,7 @@ public class Jogo {
     public void setDistribuidora(Distribuidora distribuidora) {
         this.distribuidora = distribuidora;
     }
+
     public List<Genero> getGeneros() {
         return generos;
     }
@@ -107,4 +105,5 @@ public class Jogo {
     public void setGeneros(List<Genero> generos) {
         this.generos = generos;
     }
+
 }

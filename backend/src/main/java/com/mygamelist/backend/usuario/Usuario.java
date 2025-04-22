@@ -1,13 +1,11 @@
 package com.mygamelist.backend.usuario;
 
-
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.mygamelist.backend.permissao.Permissao;
 
 import jakarta.persistence.*;
-
 
 @Entity
 @Table(name = "usuario")
@@ -54,11 +52,11 @@ public class Usuario {
         this.nomeUsuario = nomeUsuario;
     }
 
-    public String getApelidoUsuario()  {
+    public String getApelidoUsuario() {
         return apelidoUsuario;
     }
 
-    public void setApelidoUsuario(String apelidoUsuario)  {
+    public void setApelidoUsuario(String apelidoUsuario) {
         this.apelidoUsuario = apelidoUsuario;
     }
 

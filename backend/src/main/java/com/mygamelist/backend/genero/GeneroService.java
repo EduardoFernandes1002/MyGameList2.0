@@ -5,10 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class GeneroService {
-    
+
     @Autowired
     private GeneroRepository generoRepository;
 
@@ -20,9 +19,11 @@ public class GeneroService {
         return generoRepository.findById(idGenero).orElse(null);
     }
 
+    /*
+     * Todos jogos de um unico Genero pelo id do Genero,
+     */
     public List<?> findJogosByGenero(Long idGenero) {
         return generoRepository.findJogosByGeneros(idGenero);
     }
-
 
 }

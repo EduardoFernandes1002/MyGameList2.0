@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/lista")
 public class ListaController {
-    
+
     @Autowired
     private ListaService listaService;
 

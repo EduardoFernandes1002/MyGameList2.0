@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ListaService {
-    
+
     @Autowired
     private ListaRepository listaRepository;
 

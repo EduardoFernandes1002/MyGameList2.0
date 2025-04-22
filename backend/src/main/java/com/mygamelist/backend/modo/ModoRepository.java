@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ModoRepository extends JpaRepository<Modo, Long> {
 
-    
-
 }

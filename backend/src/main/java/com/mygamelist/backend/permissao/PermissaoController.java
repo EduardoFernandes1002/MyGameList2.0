@@ -23,5 +23,5 @@ public class PermissaoController {
     public Permissao getPermissaoById(@PathVariable Long id) {
         return permissaoService.getPermissaoById(id);
     }
-    
+
 }

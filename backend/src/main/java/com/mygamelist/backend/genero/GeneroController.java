@@ -5,12 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-
 @RestController
 @RequestMapping("/api/generos")
 public class GeneroController {
-    
+
     @Autowired
     private GeneroService generoService;
 
@@ -24,11 +22,14 @@ public class GeneroController {
         return generoService.getGeneroById(idGenero);
     }
 
-
+    /*
+     * Todos jogos de um unico Genero pelo id do Genero,
+     * Retornando um Json para o frontend, nao um Objeto Genero.
+     * pela rota de "api/generos/{id}/jogos", onde {id} é o id do Genero.
+     */
     @GetMapping("{id}/jogos")
     public List<?> getJogosByGenero(@PathVariable("id") Long idGenero) {
         return generoService.findJogosByGenero(idGenero);
     }
 
-    
 }

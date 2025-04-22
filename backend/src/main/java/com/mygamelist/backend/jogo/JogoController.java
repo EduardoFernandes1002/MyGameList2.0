@@ -16,6 +16,7 @@ public class JogoController {
     public List<Jogo> getJogos() {
         return jogoService.getJogos();
     }
+
     @GetMapping("/{idJogo}")
     public Jogo getJogoById(@PathVariable Long idJogo) {
         return jogoService.getJogoById(idJogo);

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/plataformas")
 public class PlataformaController {
-    
+
     @Autowired
     private PlataformaService plataformaService;
 

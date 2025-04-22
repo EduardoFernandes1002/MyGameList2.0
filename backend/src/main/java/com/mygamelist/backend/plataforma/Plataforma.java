@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "plataforma")
 public class Plataforma {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_plataforma")
@@ -14,7 +14,8 @@ public class Plataforma {
     @Column(name = "nm_plataforma")
     private String nomePlataforma;
 
-    // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
+    // Atributos que representam o relacionamento com outras tabelas Muitos para
+    // Muitos:
 
     public Long getIdPlataforma() {
         return idPlataforma;

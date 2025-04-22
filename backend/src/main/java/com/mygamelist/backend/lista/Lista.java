@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "lista")
 public class Lista {
-    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,14 +18,14 @@ public class Lista {
         return idLista;
     }
 
-    public void setIdLista(Long idLista) {  
+    public void setIdLista(Long idLista) {
         this.idLista = idLista;
     }
 
     public String getNomeLista() {
         return nomeLista;
     }
-    
+
     public void setNomeLista(String nomeLista) {
         this.nomeLista = nomeLista;
     }

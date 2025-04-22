@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "distribuidora")
 public class Distribuidora {
-    
+
+
+    // Atributos da tabela:
     @Id
     @Column(name = "id_distribuidora")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

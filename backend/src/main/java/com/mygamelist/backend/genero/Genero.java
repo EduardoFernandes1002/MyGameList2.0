@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 public class Genero {
 
     // Dados da tabela:
-        // Atributos que representam o mapeamento da tabela:
+    // Atributos que representam o mapeamento da tabela:
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idGenero;
@@ -19,7 +19,7 @@ public class Genero {
     @Column(name = "nm_genero")
     private String nomeGenero;
 
-        // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
+    // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
     @ManyToMany(mappedBy = "generos")
     private List<Jogo> jogos;
 

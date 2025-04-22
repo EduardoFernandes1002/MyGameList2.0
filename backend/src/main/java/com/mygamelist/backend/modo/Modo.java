@@ -14,8 +14,7 @@ public class Modo {
     @Column(name = "nm_modo")
     private String nomeModo;
 
-        // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
-
+    // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
 
     public Long getIdModo() {
         return idModo;
@@ -28,8 +27,9 @@ public class Modo {
     public String getNomeModo() {
         return nomeModo;
     }
+
     public void setNomeModo(String nomeModo) {
         this.nomeModo = nomeModo;
     }
-    
+
 }
