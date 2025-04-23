@@ -49,7 +49,7 @@ public class Jogo {
 
     @ManyToMany
     @JoinTable(
-        name = "modo_do_jogo", 
+        name = "modo_de_jogo", 
             joinColumns = @JoinColumn(name = "id_jogo"), 
             inverseJoinColumns = @JoinColumn(name = "id_modo")
     )
@@ -58,8 +58,8 @@ public class Jogo {
     @ManyToMany
     @JoinTable(
         name = "plataforma_de_jogo", 
-            joinColumns = @JoinColumn(name = "id_jogo"), 
-            inverseJoinColumns = @JoinColumn(name = "id_plataforma")
+            joinColumns = @JoinColumn(name = "id_plataforma"), 
+            inverseJoinColumns = @JoinColumn(name = "id_jogo")
     )
     private List<Plataforma> plataformas;
 
