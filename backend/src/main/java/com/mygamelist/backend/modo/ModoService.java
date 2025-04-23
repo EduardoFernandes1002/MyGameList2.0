@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ModoService {
-    
+
     @Autowired
     private ModoRepository modoRepository;
 
@@ -18,6 +18,5 @@ public class ModoService {
     public Modo getModoById(Long idModo) {
         return modoRepository.findById(idModo).orElse(null);
     }
-    
 
 }

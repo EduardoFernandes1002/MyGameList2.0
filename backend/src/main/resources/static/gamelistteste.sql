@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: gamelisttest
 -- ------------------------------------------------------
@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `avaliacao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `avaliacao` (
   `id_avaliacao` int(11) NOT NULL AUTO_INCREMENT,
   `id_jogo` int(11) NOT NULL,
@@ -53,7 +53,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `desenvolvedora`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `desenvolvedora` (
   `id_desenvolvedora` int(11) NOT NULL AUTO_INCREMENT,
   `nm_desenvolvedora` varchar(100) NOT NULL,
@@ -68,6 +68,7 @@ CREATE TABLE `desenvolvedora` (
 
 LOCK TABLES `desenvolvedora` WRITE;
 /*!40000 ALTER TABLE `desenvolvedora` DISABLE KEYS */;
+INSERT INTO `desenvolvedora` VALUES (2,' Afterthought LLC'),(1,'TesteDesenvolvedora');
 /*!40000 ALTER TABLE `desenvolvedora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,7 +78,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `distribuidora`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `distribuidora` (
   `id_distribuidora` int(11) NOT NULL AUTO_INCREMENT,
   `nm_distribuidora` varchar(100) NOT NULL,
@@ -92,6 +93,7 @@ CREATE TABLE `distribuidora` (
 
 LOCK TABLES `distribuidora` WRITE;
 /*!40000 ALTER TABLE `distribuidora` DISABLE KEYS */;
+INSERT INTO `distribuidora` VALUES (2,'Afterthought LLC'),(1,'TesteDistribuidora');
 /*!40000 ALTER TABLE `distribuidora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +103,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genero`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genero` (
   `id_genero` int(11) NOT NULL AUTO_INCREMENT,
   `nm_genero` varchar(100) NOT NULL,
@@ -116,6 +118,7 @@ CREATE TABLE `genero` (
 
 LOCK TABLES `genero` WRITE;
 /*!40000 ALTER TABLE `genero` DISABLE KEYS */;
+INSERT INTO `genero` VALUES (1,'Ação'),(3,'Aventura'),(2,'Sobrevivencia');
 /*!40000 ALTER TABLE `genero` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +128,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genero_do_jogo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genero_do_jogo` (
   `id_jogo` int(11) NOT NULL,
   `id_genero` int(11) NOT NULL,
@@ -143,6 +146,7 @@ CREATE TABLE `genero_do_jogo` (
 
 LOCK TABLES `genero_do_jogo` WRITE;
 /*!40000 ALTER TABLE `genero_do_jogo` DISABLE KEYS */;
+INSERT INTO `genero_do_jogo` VALUES (1,1),(1,2),(2,2),(2,3);
 /*!40000 ALTER TABLE `genero_do_jogo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +156,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `jogo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `jogo` (
   `id_jogo` int(11) NOT NULL AUTO_INCREMENT,
   `id_distribuidora` int(11) NOT NULL,
@@ -177,6 +181,7 @@ CREATE TABLE `jogo` (
 
 LOCK TABLES `jogo` WRITE;
 /*!40000 ALTER TABLE `jogo` DISABLE KEYS */;
+INSERT INTO `jogo` VALUES (1,1,1,'TesteJogo','TesteSinopse','2000-01-01','https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Test.svg/1200px-Test.svg.png'),(2,2,2,'The Isle','Jogo de dino legal','2015-11-01','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/376210/capsule_616x353.jpg?t=1653237914');
 /*!40000 ALTER TABLE `jogo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +191,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `jogo_adicionado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `jogo_adicionado` (
   `id_lista` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -215,7 +220,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `lista`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lista` (
   `id_lista` int(11) NOT NULL AUTO_INCREMENT,
   `nm_lista` varchar(45) NOT NULL,
@@ -238,13 +243,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `modo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `modo` (
   `id_modo` int(11) NOT NULL AUTO_INCREMENT,
   `nm_modo` varchar(100) NOT NULL,
   PRIMARY KEY (`id_modo`),
   UNIQUE KEY `nm_modo_UNIQUE` (`nm_modo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,6 +258,7 @@ CREATE TABLE `modo` (
 
 LOCK TABLES `modo` WRITE;
 /*!40000 ALTER TABLE `modo` DISABLE KEYS */;
+INSERT INTO `modo` VALUES (2,'Cooperativo'),(5,'Cooperativo Local'),(3,'Multijogador'),(6,'Multijogador Local'),(4,'Online'),(1,'Um Jogador');
 /*!40000 ALTER TABLE `modo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,7 +268,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `modo_de_jogo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `modo_de_jogo` (
   `id_jogo` int(11) NOT NULL,
   `id_modo` int(11) NOT NULL,
@@ -280,6 +286,7 @@ CREATE TABLE `modo_de_jogo` (
 
 LOCK TABLES `modo_de_jogo` WRITE;
 /*!40000 ALTER TABLE `modo_de_jogo` DISABLE KEYS */;
+INSERT INTO `modo_de_jogo` VALUES (1,1),(1,3),(1,4),(2,2),(2,4),(2,5);
 /*!40000 ALTER TABLE `modo_de_jogo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,7 +296,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `permissao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `permissao` (
   `id_permissao` int(11) NOT NULL AUTO_INCREMENT,
   `nm_permissao` varchar(255) DEFAULT NULL,
@@ -304,7 +311,7 @@ CREATE TABLE `permissao` (
 
 LOCK TABLES `permissao` WRITE;
 /*!40000 ALTER TABLE `permissao` DISABLE KEYS */;
-INSERT INTO `permissao` VALUES (1,'Administrador');
+INSERT INTO `permissao` VALUES (1,'Administrador'),(2,'teste');
 /*!40000 ALTER TABLE `permissao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -314,7 +321,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `plataforma`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `plataforma` (
   `id_plataforma` int(11) NOT NULL AUTO_INCREMENT,
   `nm_plataforma` varchar(100) NOT NULL,
@@ -329,17 +336,18 @@ CREATE TABLE `plataforma` (
 
 LOCK TABLES `plataforma` WRITE;
 /*!40000 ALTER TABLE `plataforma` DISABLE KEYS */;
+INSERT INTO `plataforma` VALUES (2,'Console'),(1,'PC');
 /*!40000 ALTER TABLE `plataforma` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `plataformas_jogaveis`
+-- Table structure for table `plataforma_de_jogo`
 --
 
-DROP TABLE IF EXISTS `plataformas_jogaveis`;
+DROP TABLE IF EXISTS `plataforma_de_jogo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `plataformas_jogaveis` (
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `plataforma_de_jogo` (
   `id_plataforma` int(11) NOT NULL,
   `id_jogo` int(11) NOT NULL,
   PRIMARY KEY (`id_plataforma`,`id_jogo`),
@@ -351,12 +359,13 @@ CREATE TABLE `plataformas_jogaveis` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `plataformas_jogaveis`
+-- Dumping data for table `plataforma_de_jogo`
 --
 
-LOCK TABLES `plataformas_jogaveis` WRITE;
-/*!40000 ALTER TABLE `plataformas_jogaveis` DISABLE KEYS */;
-/*!40000 ALTER TABLE `plataformas_jogaveis` ENABLE KEYS */;
+LOCK TABLES `plataforma_de_jogo` WRITE;
+/*!40000 ALTER TABLE `plataforma_de_jogo` DISABLE KEYS */;
+INSERT INTO `plataforma_de_jogo` VALUES (1,1),(1,2),(2,1);
+/*!40000 ALTER TABLE `plataforma_de_jogo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -365,7 +374,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `id_permissao` int(11) NOT NULL,
@@ -391,7 +400,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,1,'AokiFernandes','Aoki','duduzebas@gmail.com','123456789',NULL,NULL),(2,1,'ThiagoDosSantos','Sr_Xurineio','ThiagoDosSantos','987654321',NULL,NULL);
+INSERT INTO `usuario` VALUES (1,1,'AokiFernandes','Aoki','duduzebas@gmail.com','123456789',NULL,NULL),(2,1,'ThiagoDosSantos','Sr_Xurineio','ThiagoDosSantos','987654321',NULL,NULL),(3,2,'Teste','Teste','Teste@gmail.com','1231',NULL,NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -404,4 +413,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-14 17:39:35
+-- Dump completed on 2025-04-23 19:34:27

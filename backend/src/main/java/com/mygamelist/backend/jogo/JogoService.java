@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JogoService {
-    
+
     @Autowired
     private JogoRepository jogoRepository;
 
@@ -15,12 +15,7 @@ public class JogoService {
         return jogoRepository.findAll();
     }
 
-    public Jogo getJogoById(Long idJogo) {
-        return jogoRepository.findById(idJogo).orElseThrow(() -> new RuntimeException("Jogo não encontrado"));
+    public Jogo findJogoByNome(String nomeJogo) {
+        return jogoRepository.findByNomeJogo(nomeJogo);
     }
-
-    public JogoDetalhesDTO buscarDetalhesJogo(Long idJogo) {
-        return jogoRepository.findJogoDetalhes(idJogo);
-    }
-    
 }

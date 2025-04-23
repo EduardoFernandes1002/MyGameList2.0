@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/modo")
 public class ModoController {
-    
+
     @Autowired
     private ModoService modoService;
 
     @GetMapping
     public List<Modo> getModos() {
         return modoService.getModos();
-    }  
+    }
 
     @GetMapping("/{id}")
     public Modo getModoById(@PathVariable Long idModo) {

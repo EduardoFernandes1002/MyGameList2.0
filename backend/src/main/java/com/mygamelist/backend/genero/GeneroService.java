@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GeneroService {
-    
+
     @Autowired
     private GeneroRepository generoRepository;
 
@@ -17,6 +17,13 @@ public class GeneroService {
 
     public Genero getGeneroById(Long idGenero) {
         return generoRepository.findById(idGenero).orElse(null);
+    }
+
+    /*
+     * Todos jogos de um unico Genero pelo id do Genero,
+     */
+    public List<?> findJogosByGenero(String nomeGenero) {
+        return generoRepository.findJogosByGeneros(nomeGenero);
     }
 
 }

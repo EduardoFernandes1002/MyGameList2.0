@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/generos")
 public class GeneroController {
-    
+
     @Autowired
     private GeneroService generoService;
 
@@ -18,8 +18,18 @@ public class GeneroController {
     }
 
     @GetMapping("/{id}")
-    public Genero getGeneroById(@PathVariable Long idGenero) {
+    public Genero getGeneroById(@PathVariable("id") Long idGenero) {
         return generoService.getGeneroById(idGenero);
+    }
+
+    /*
+     * Todos jogos de um unico Genero pelo id do Genero,
+     * Retornando um Json para o frontend, nao um Objeto Genero.
+     * pela rota de "api/generos/{id}/jogos", onde {id} é o id do Genero.
+     */
+    @GetMapping("{genero}/jogos")
+    public List<?> getJogosByGenero(@PathVariable("genero") String nomeGenero) {
+        return generoService.findJogosByGenero(nomeGenero);
     }
 
 }
