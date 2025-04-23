@@ -18,9 +18,4 @@ public class UsuarioService {
     public Usuario getUsuarioById(Long idUsuario) {
         return usuarioRepository.findById(idUsuario).orElseThrow();
     }
-
-    public List<Object[]> getAdministrators() {
-        return usuarioRepository.findByAdministrator();
-    }
-
 }

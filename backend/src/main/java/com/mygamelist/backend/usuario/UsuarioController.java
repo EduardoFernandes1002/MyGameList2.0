@@ -22,10 +22,4 @@ public class UsuarioController {
         return usuarioService.getUsuarioById(idUsuario);
     }
 
-    @GetMapping("/administradores")
-    public List<Object[]> getAdministrators() {
-        return usuarioService.getAdministrators();
-    }
-    
-
 }
