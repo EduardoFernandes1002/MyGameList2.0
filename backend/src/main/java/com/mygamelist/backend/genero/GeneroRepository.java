@@ -17,7 +17,7 @@ public interface GeneroRepository extends JpaRepository<Genero, Long> {
      * sendo equivalente ao Select nativo abaixo:
      * SELECT g.jogos FROM genero g WHERE g.id_genero = gj.id_genero
      */
-    @Query("SELECT j FROM Genero g JOIN g.jogos j WHERE g.idGenero = :idGenero")
-    List<Jogo> findJogosByGeneros(@Param("idGenero") Long idGenero);
+    @Query("SELECT j FROM Genero g JOIN g.jogos j WHERE g.nomeGenero = :nomeGenero")
+    List<Jogo> findJogosByGeneros(@Param("nomeGenero") String nomeGenero);
 
 }

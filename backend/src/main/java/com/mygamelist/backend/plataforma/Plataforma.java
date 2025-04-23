@@ -1,5 +1,9 @@
 package com.mygamelist.backend.plataforma;
 
+import java.util.List;
+
+import com.mygamelist.backend.jogo.Jogo;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -14,8 +18,10 @@ public class Plataforma {
     @Column(name = "nm_plataforma")
     private String nomePlataforma;
 
-    // Atributos que representam o relacionamento com outras tabelas Muitos para
-    // Muitos:
+    // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
+    @ManyToMany(mappedBy = "plataformas")
+    private List<Jogo> jogos;
+
 
     public Long getIdPlataforma() {
         return idPlataforma;

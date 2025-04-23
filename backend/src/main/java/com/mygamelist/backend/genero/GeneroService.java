@@ -22,8 +22,8 @@ public class GeneroService {
     /*
      * Todos jogos de um unico Genero pelo id do Genero,
      */
-    public List<?> findJogosByGenero(Long idGenero) {
-        return generoRepository.findJogosByGeneros(idGenero);
+    public List<?> findJogosByGenero(String nomeGenero) {
+        return generoRepository.findJogosByGeneros(nomeGenero);
     }
 
 }

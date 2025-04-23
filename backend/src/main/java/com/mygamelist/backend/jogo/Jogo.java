@@ -6,6 +6,8 @@ import java.util.List;
 import com.mygamelist.backend.desenvolvedora.Desenvolvedora;
 import com.mygamelist.backend.distribuidora.Distribuidora;
 import com.mygamelist.backend.genero.Genero;
+import com.mygamelist.backend.modo.Modo;
+import com.mygamelist.backend.plataforma.Plataforma;
 
 import jakarta.persistence.*;
 
@@ -38,8 +40,28 @@ public class Jogo {
     // Atributos que representam o relacionamento com outras tabelas Muitos para
     // Muitos:
     @ManyToMany
-    @JoinTable(name = "genero_do_jogo", joinColumns = @JoinColumn(name = "id_jogo"), inverseJoinColumns = @JoinColumn(name = "id_genero"))
+    @JoinTable(
+        name = "genero_do_jogo", 
+            joinColumns = @JoinColumn(name = "id_jogo"), 
+            inverseJoinColumns = @JoinColumn(name = "id_genero")
+        )
     private List<Genero> generos;
+
+    @ManyToMany
+    @JoinTable(
+        name = "modo_do_jogo", 
+            joinColumns = @JoinColumn(name = "id_jogo"), 
+            inverseJoinColumns = @JoinColumn(name = "id_modo")
+    )
+    private List<Modo> modos;
+
+    @ManyToMany
+    @JoinTable(
+        name = "plataforma_de_jogo", 
+            joinColumns = @JoinColumn(name = "id_jogo"), 
+            inverseJoinColumns = @JoinColumn(name = "id_plataforma")
+    )
+    private List<Plataforma> plataformas;
 
     // Getters e Setters:
     public Long getIdJogo() {
@@ -104,6 +126,22 @@ public class Jogo {
 
     public void setGeneros(List<Genero> generos) {
         this.generos = generos;
+    }
+
+    public List<Modo> getModos() {
+        return modos;
+    }
+
+    public void setModos(List<Modo> modos) {
+        this.modos = modos;
+    }
+
+    public List<Plataforma> getPlataformas() {
+        return plataformas;
+    }
+
+    public void setPlataformas(List<Plataforma> plataformas) {
+        this.plataformas = plataformas;
     }
 
 }

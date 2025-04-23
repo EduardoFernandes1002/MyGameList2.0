@@ -15,7 +15,7 @@ public class JogoService {
         return jogoRepository.findAll();
     }
 
-    public Jogo getJogoById(Long idJogo) {
-        return jogoRepository.findById(idJogo).orElseThrow(() -> new RuntimeException("Jogo não encontrado"));
+    public Jogo findJogoByNome(String nomeJogo) {
+        return jogoRepository.findByNomeJogo(nomeJogo);
     }
 }

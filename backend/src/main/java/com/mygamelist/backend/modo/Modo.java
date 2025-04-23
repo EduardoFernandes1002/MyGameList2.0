@@ -1,5 +1,9 @@
 package com.mygamelist.backend.modo;
 
+import java.util.List;
+
+import com.mygamelist.backend.jogo.Jogo;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +19,9 @@ public class Modo {
     private String nomeModo;
 
     // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
+    @ManyToMany(mappedBy = "modos")
+    private List<Jogo> jogos;
+
 
     public Long getIdModo() {
         return idModo;

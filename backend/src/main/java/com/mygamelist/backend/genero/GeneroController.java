@@ -27,9 +27,9 @@ public class GeneroController {
      * Retornando um Json para o frontend, nao um Objeto Genero.
      * pela rota de "api/generos/{id}/jogos", onde {id} é o id do Genero.
      */
-    @GetMapping("{id}/jogos")
-    public List<?> getJogosByGenero(@PathVariable("id") Long idGenero) {
-        return generoService.findJogosByGenero(idGenero);
+    @GetMapping("{genero}/jogos")
+    public List<?> getJogosByGenero(@PathVariable("genero") String nomeGenero) {
+        return generoService.findJogosByGenero(nomeGenero);
     }
 
 }
