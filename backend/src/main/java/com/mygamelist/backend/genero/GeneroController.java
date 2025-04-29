@@ -17,11 +17,6 @@ public class GeneroController {
         return generoService.getGeneros();
     }
 
-    @GetMapping("/{id}")
-    public Genero getGeneroById(@PathVariable("id") Long idGenero) {
-        return generoService.getGeneroById(idGenero);
-    }
-
     /*
      * Todos jogos de um unico Genero pelo id do Genero,
      * Retornando um Json para o frontend, nao um Objeto Genero.

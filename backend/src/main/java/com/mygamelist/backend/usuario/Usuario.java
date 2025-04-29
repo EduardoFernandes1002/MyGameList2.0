@@ -1,7 +1,6 @@
 package com.mygamelist.backend.usuario;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import java.time.LocalDate;
 
 import com.mygamelist.backend.permissao.Permissao;
 
@@ -31,9 +30,11 @@ public class Usuario {
     @Column(name = "nr_telefone")
     private String telefoneUsuario;
 
+    @Column(name = "dt_nascimento")
+    private LocalDate dataNascimentoUsuario;
+
     @ManyToOne
     @JoinColumn(name = "id_permissao", referencedColumnName = "id_permissao", nullable = false)
-    @Fetch(FetchMode.JOIN)
     private Permissao permissao;
 
     public Long getIdUsuario() {
@@ -82,6 +83,14 @@ public class Usuario {
 
     public void setTelefoneUsuario(String telefoneUsuario) {
         this.telefoneUsuario = telefoneUsuario;
+    }
+
+    public LocalDate getDataNascimentoUsuario() {
+        return dataNascimentoUsuario;
+    }
+
+    public void setDataNascimentoUsuario(LocalDate dataNascimentoUsuario) {
+        this.dataNascimentoUsuario = dataNascimentoUsuario;
     }
 
 }

@@ -15,10 +15,6 @@ public class GeneroService {
         return generoRepository.findAll();
     }
 
-    public Genero getGeneroById(Long idGenero) {
-        return generoRepository.findById(idGenero).orElse(null);
-    }
-
     /*
      * Todos jogos de um unico Genero pelo id do Genero,
      */
