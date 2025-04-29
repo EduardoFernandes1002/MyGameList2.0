@@ -62,3 +62,11 @@ body {
         height: 120px;
     }
 }
+
+a{
+    color: rgb(78, 78, 78);
+    text-decoration: none;
+}
+a:hover{
+    color: #85b6ff
+}
