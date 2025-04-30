@@ -15,7 +15,9 @@ public class PlataformaService {
         return plataformaRepository.findAll();
     }
 
-    public Plataforma getPlataformaById(Long idPlataforma) {
-        return plataformaRepository.findById(idPlataforma).orElse(null);
+    public List<?> getJogosPlataformaByNome(String nomePlataforma) {
+        return plataformaRepository.findJogosByPlataforma(nomePlataforma);
     }
+
+    
 }

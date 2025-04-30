@@ -1,5 +1,7 @@
 package com.mygamelist.backend.lista;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +15,9 @@ public class Lista {
 
     @Column(name = "nm_lista")
     private String nomeLista;
+
+    @OneToMany(mappedBy = "listas")
+    private List<JogoAdicionado> jogosAdicionados;
 
     public Long getIdLista() {
         return idLista;

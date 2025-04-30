@@ -17,8 +17,8 @@ public class PlataformaController {
         return plataformaService.getPlataformas();
     }
 
-    @GetMapping("/{id}")
-    public Plataforma getPlataformaById(@PathVariable Long idPlataforma) {
-        return plataformaService.getPlataformaById(idPlataforma);
+    @GetMapping("/{plataforma}/jogos")
+    public List<?> getJogosPlataformaByNome(@PathVariable("plataforma") String nomePlataforma) {
+        return plataformaService.getJogosPlataformaByNome(nomePlataforma);
     }
 }

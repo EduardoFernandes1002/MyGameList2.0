@@ -6,6 +6,7 @@ import java.util.List;
 import com.mygamelist.backend.desenvolvedora.Desenvolvedora;
 import com.mygamelist.backend.distribuidora.Distribuidora;
 import com.mygamelist.backend.genero.Genero;
+import com.mygamelist.backend.lista.JogoAdicionado;
 import com.mygamelist.backend.modo.Modo;
 import com.mygamelist.backend.plataforma.Plataforma;
 
@@ -36,6 +37,9 @@ public class Jogo {
     @ManyToOne
     @JoinColumn(name = "id_distribuidora", referencedColumnName = "id_distribuidora", nullable = false)
     private Distribuidora distribuidora;
+
+    @OneToMany(mappedBy = "jogos")
+    private List<JogoAdicionado> jogosAdicionados;
 
     // Atributos que representam o relacionamento com outras tabelas Muitos para
     // Muitos:

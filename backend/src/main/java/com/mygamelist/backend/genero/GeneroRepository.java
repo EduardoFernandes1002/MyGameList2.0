@@ -12,12 +12,7 @@ import com.mygamelist.backend.jogo.Jogo;
 @Repository
 public interface GeneroRepository extends JpaRepository<Genero, Long> {
 
-    /*
-     * Todos jogos de um unico Genero pelo id do Genero,
-     * sendo equivalente ao Select nativo abaixo:
-     * SELECT g.jogos FROM genero g WHERE g.id_genero = gj.id_genero
-     */
-    @Query("SELECT j FROM Genero g JOIN g.jogos j WHERE g.nomeGenero = :nomeGenero")
+    @Query("SELECT j FROM Genero g INNER JOIN g.jogos j WHERE g.nomeGenero = :nomeGenero")
     List<Jogo> findJogosByGeneros(@Param("nomeGenero") String nomeGenero);
 
 }
