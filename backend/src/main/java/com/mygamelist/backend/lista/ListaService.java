@@ -18,4 +18,8 @@ public class ListaService {
     public Lista getListaById(Long idLista) {
         return listaRepository.findById(idLista).orElse(null);
     }
+
+    public List<?> getJogosAdicionados(Long idLista, Long idUsuario) {
+        return listaRepository.findJogosAdicionados(idLista, idUsuario);
+    }
 }

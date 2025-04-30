@@ -15,4 +15,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     @Query("SELECT new map( u as usuario, u.permissao.nomePermissao as PermissaoDoUsuario) FROM Usuario u")
     List<Map<String, Usuario>> findAllUsuariosByPermissao();
+
+    Usuario findByNomeUsuario(String nomeUsuario);
+
+    Usuario findByEmailUsuario(String emailUsuario);
 }

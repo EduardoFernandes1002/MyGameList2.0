@@ -1,7 +1,9 @@
 package com.mygamelist.backend.usuario;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import com.mygamelist.backend.lista.JogoAdicionado;
 import com.mygamelist.backend.permissao.Permissao;
 
 import jakarta.persistence.*;
@@ -27,15 +29,18 @@ public class Usuario {
     @Column(name = "ds_senha")
     private String senhaUsuario;
 
-    @Column(name = "nr_telefone")
+    @Column(name = "nr_telefone", nullable = true)
     private String telefoneUsuario;
 
-    @Column(name = "dt_nascimento")
+    @Column(name = "dt_nascimento", nullable = true)
     private LocalDate dataNascimentoUsuario;
 
     @ManyToOne
     @JoinColumn(name = "id_permissao", referencedColumnName = "id_permissao", nullable = false)
     private Permissao permissao;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<JogoAdicionado> jogosAdicionados;
 
     public Long getIdUsuario() {
         return idUsuario;
