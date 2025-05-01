@@ -5,13 +5,16 @@
   >
     <div class="card p-4" style="width: 100%; max-width: 400px">
       <h2 class="text-center mb-4">LOGIN</h2>
-      <form>
+      <form (ngSubmit)="autenticarLogin()">
         <div class="mb-3">
           <label class="form-label">Usuário</label>
           <input
             type="text"
             class="form-control"
-            placeholder="Digite seu usuário"
+            placeholder="Digite seu usuário ou email"
+            name="username"
+            [(ngModel)]="username"
+            required="true"
           />
         </div>
         <div class="mb-3">
@@ -21,6 +24,9 @@
             class="form-control"
             maxlength="10"
             placeholder="Digite sua senha"
+            name="password"
+            [(ngModel)]="password"
+            required="true"
           />
         </div>
         <div class="d-grid">
