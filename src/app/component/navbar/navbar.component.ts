@@ -10,24 +10,18 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
 logout() {
-  // Remove the JWT token from local storage or session storage
+  // Remove o JWT token do local storage.
   localStorage.removeItem('token');
-  // Redirect the user to the login page
-  this.router.navigate(['/login']);
+  this.router.navigate(['/']);
 }
 
 isAuthenticated(): boolean {
-  // Check if a valid JWT token exists in local storage or session storage
   const token = localStorage.getItem('token');
-  if (!token) {
-    return false;
+    if (!token) {
+      return false;
+    }
+    return true;
   }
-
-  // Optionally, you can decode and validate the token's expiration
-  const payload = JSON.parse(atob(token.split('.')[1]));
-  const isTokenExpired = payload.exp * 1000 < Date.now();
-  return !isTokenExpired;
-}
   navItems = [
     { label: 'Home', path: '/' },
     { label: 'Rank', path: '/rank' },

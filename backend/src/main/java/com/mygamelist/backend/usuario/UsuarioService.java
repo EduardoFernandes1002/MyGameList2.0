@@ -3,6 +3,7 @@ package com.mygamelist.backend.usuario;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,11 +33,11 @@ public class UsuarioService {
     public Usuario autenticarUsuario(String login, String senhaUsuario) {
         if (login.contains("@")) {
             return Optional.ofNullable(usuarioRepository.findByEmailUsuario(login))
-                .filter(usuario -> usuario.getSenhaUsuario().equals(senhaUsuario))
+                    .filter(usuario -> usuario.getSenhaUsuario().equals(senhaUsuario))
                     .orElseThrow(() -> new RuntimeException("Email ou senha inválidos"));
         } else {
             return Optional.ofNullable(usuarioRepository.findByNomeUsuario(login))
-                .filter(usuario -> usuario.getSenhaUsuario().equals(senhaUsuario))
+                    .filter(usuario -> usuario.getSenhaUsuario().equals(senhaUsuario))
                     .orElseThrow(() -> new RuntimeException("Usuário ou senha inválidos"));
         }
     }
@@ -55,5 +56,10 @@ public class UsuarioService {
         } else {
             return usuarioRepository.save(usuario);
         }
+    }
+
+    public String gerarToken(Usuario usuario) {
+        String token = UUID.randomUUID().toString();
+        return token;
     }
 }

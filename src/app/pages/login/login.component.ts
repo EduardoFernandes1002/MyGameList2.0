@@ -32,7 +32,11 @@ export class LoginComponent {
     }).subscribe({
       next: (response) => {
         console.debug('Resposta técnica:', response); // Log dev
-        // Lógica de sucesso
+        const parsedResponse = JSON.parse(response); // Parse the response string into a JSON object
+        const token = parsedResponse.token; // Extrai o token da resposta
+        const usuario = parsedResponse.usuario; // Extrai o usuário da resposta
+        localStorage.setItem('token', token); // Armazena o token no local storage
+        localStorage.setItem('usuario', usuario); // Armazena o usuário no local storage
       },
       error: (error) => {
         console.error('Erro técnico completo:', error); // Log detalhado
