@@ -2,17 +2,20 @@ package com.mygamelist.backend.usuario;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.mygamelist.backend.security.JwtUtil;
+import com.mygamelist.backend.usuario.dto.LoginResponse;
 
 @Service
 public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     public List<Usuario> getUsuarios() {
         return usuarioRepository.findAll();
@@ -28,18 +31,6 @@ public class UsuarioService {
 
     public List<Map<String, Usuario>> getAllUsuariosByPermissao() {
         return usuarioRepository.findAllUsuariosByPermissao();
-    }
-
-    public Usuario autenticarUsuario(String login, String senhaUsuario) {
-        if (login.contains("@")) {
-            return Optional.ofNullable(usuarioRepository.findByEmailUsuario(login))
-                    .filter(usuario -> usuario.getSenhaUsuario().equals(senhaUsuario))
-                    .orElseThrow(() -> new RuntimeException("Email ou senha inválidos"));
-        } else {
-            return Optional.ofNullable(usuarioRepository.findByNomeUsuario(login))
-                    .filter(usuario -> usuario.getSenhaUsuario().equals(senhaUsuario))
-                    .orElseThrow(() -> new RuntimeException("Usuário ou senha inválidos"));
-        }
     }
 
     public Usuario registrarUsuario(Usuario usuario) {
@@ -58,8 +49,11 @@ public class UsuarioService {
         }
     }
 
-    public String gerarToken(Usuario usuario) {
-        String token = UUID.randomUUID().toString();
-        return token;
+    public LoginResponse autenticar(String login, String senhaUsuario) {
+        Usuario usuario = usuarioRepository.findByEmailUsuarioOrNomeUsuario(login, login)
+            .filter(u -> u.getSenhaUsuario().equals(senhaUsuario))
+            .orElseThrow(() -> new RuntimeException("Credenciais inválidas"));
+        String token = jwtUtil.generateToken(login);
+        return new LoginResponse(usuario, token);
     }
 }

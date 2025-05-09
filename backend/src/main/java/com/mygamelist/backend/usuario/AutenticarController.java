@@ -1,11 +1,11 @@
 package com.mygamelist.backend.usuario;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.mygamelist.backend.usuario.dto.LoginResponse;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
@@ -16,13 +16,8 @@ public class AutenticarController {
     private UsuarioService usuarioService;
 
     @PostMapping("/login")
-    public Map<String, Object> autenticarLogin(String login, String senhaUsuario) {
-        Usuario usuario = usuarioService.autenticarUsuario(login, senhaUsuario);
-        String token = usuarioService.gerarToken(usuario);
-        Map<String, Object> response = new HashMap<>();
-        response.put("usuario", usuario);
-        response.put("token", token);
-        return response;
+    public LoginResponse autenticarLogin(String login, String senhaUsuario) {
+        return usuarioService.autenticar(login, senhaUsuario);
     }
 
     @PostMapping("/Registrar")

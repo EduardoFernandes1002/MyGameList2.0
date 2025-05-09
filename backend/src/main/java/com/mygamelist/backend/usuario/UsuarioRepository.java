@@ -2,6 +2,7 @@ package com.mygamelist.backend.usuario;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     Usuario findByNomeUsuario(String nomeUsuario);
 
     Usuario findByEmailUsuario(String emailUsuario);
+
+
+    Optional<Usuario> findByEmailUsuarioOrNomeUsuario(String emailUsuario, String nomeUsuario);
+
 }
