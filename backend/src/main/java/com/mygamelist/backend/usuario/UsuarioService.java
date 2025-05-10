@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.mygamelist.backend.security.JwtUtil;
-import com.mygamelist.backend.usuario.dto.LoginResponse;
 
 @Service
 public class UsuarioService {
@@ -49,11 +49,19 @@ public class UsuarioService {
         }
     }
 
-    public LoginResponse autenticar(String login, String senhaUsuario) {
-        Usuario usuario = usuarioRepository.findByEmailUsuarioOrNomeUsuario(login, login)
-            .filter(u -> u.getSenhaUsuario().equals(senhaUsuario))
-            .orElseThrow(() -> new RuntimeException("Credenciais inválidas"));
-        String token = jwtUtil.generateToken(login);
-        return new LoginResponse(usuario, token);
+    public String autenticar(Usuario usuario) {
+         Usuario user;
+    if (usuario.getEmailUsuario() != null) {
+        user = usuarioRepository.findByEmailUsuario(usuario.getEmailUsuario());
+    } else {
+        user = usuarioRepository.findByNomeUsuario(usuario.getNomeUsuario());
     }
+    if (user != null && user.getSenhaUsuario().equals(usuario.getSenhaUsuario())) {
+        return jwtUtil.generateToken(user.getNomeUsuario());
+    } else {
+        return null;
+    }
+    }
+
+
 }

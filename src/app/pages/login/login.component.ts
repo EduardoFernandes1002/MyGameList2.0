@@ -12,16 +12,27 @@ import { AuthService } from '../../servico/auth/auth.service';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  login = '';
-  password = '';
-  erro = '';
+  login: string = '';
+  senhaUsuario: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
+
   onSubmit(): void {
-    this.authService.login(this.login, this.password).subscribe({
-      next: () => this.router.navigate(['/']), // Ajuste a rota conforme necessário
-      error: err => this.erro = 'Login inválido. Verifique suas credenciais.'
-    });
+    this.authService.login(this.login, this.senhaUsuario).subscribe({
+    next: (response: any) => {
+      // Supondo que o token seja retornado no campo "token" da resposta
+      const token = response.token;
+      if (token) {
+        localStorage.setItem('token', token);
+        this.router.navigate(['/']); // Ajuste a rota conforme necessário
+      } else {
+        console.error('Token não encontrado na resposta.');
+      }
+    },
+    error: (error) => {
+      console.error('Erro ao fazer login:', error);
+    },
+  });
   }
 }

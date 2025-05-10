@@ -1,10 +1,11 @@
 package com.mygamelist.backend.usuario;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.mygamelist.backend.usuario.dto.LoginResponse;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +18,13 @@ public class AutenticarController {
     private UsuarioService usuarioService;
 
     @PostMapping("/login")
-    public LoginResponse autenticarLogin(@RequestBody String login, String senhaUsuario) {
-        return usuarioService.autenticar(request.getLogin(), senhaUsuario);
+    public ResponseEntity<?> login(@RequestBody Usuario usuario) {
+        String token = usuarioService.autenticar(usuario);
+        if (token != null) {
+            return ResponseEntity.ok(Map.of("token", token));
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PostMapping("/Registrar")

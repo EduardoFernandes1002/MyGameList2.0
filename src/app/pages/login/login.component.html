@@ -13,7 +13,7 @@
             class="form-control"
             placeholder="Digite seu usuário ou email"
             name="login"
-            [ngModel] = "login"
+            [(ngModel)] = "login"
             required="true"
           />
         </div>
@@ -24,17 +24,10 @@
             class="form-control"
             maxlength="10"
             placeholder="Digite sua senha"
-            name="password"
-            [ngModel] = "password"
+            name="senhaUsuario"
+            [(ngModel)] = "senhaUsuario"
             required="true"
           />
-        </div>
-
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="lembrarUsuario" />
-          <label class="form-check-label" for="lembrarUsuario"
-            >Lembrar minhas informações</label
-          >
         </div>
 
         <div class="d-grid">
