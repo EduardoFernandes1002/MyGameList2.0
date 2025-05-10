@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mygamelist.backend.usuario.dto.LoginResponse;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/autenticar")
@@ -16,8 +17,8 @@ public class AutenticarController {
     private UsuarioService usuarioService;
 
     @PostMapping("/login")
-    public LoginResponse autenticarLogin(String login, String senhaUsuario) {
-        return usuarioService.autenticar(login, senhaUsuario);
+    public LoginResponse autenticarLogin(@RequestBody String login, String senhaUsuario) {
+        return usuarioService.autenticar(request.getLogin(), senhaUsuario);
     }
 
     @PostMapping("/Registrar")
