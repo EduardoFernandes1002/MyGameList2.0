@@ -16,7 +16,7 @@ import { authGuard } from './guard/auth/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Home' },
-  { path: 'perfil/:nomeUsuario', component: PerfilComponent, title: 'Perfil', canActivate: [authGuard] },
+  { path: 'perfil/:nomeUsuario', component: PerfilComponent, title: 'Perfil', canActivate: [authGuard]},
   { path: 'info/:nomeJogo', component: InfoGameComponent, title: 'Informações' },
   { path: 'rank', component: RankComponent, title: 'Ranking' },
   { path: 'admin', component: AdminComponent, title: 'Administração' },
@@ -26,5 +26,5 @@ export const routes: Routes = [
   { path: 'descoberta', component: DiscoverComponent, title: 'Descoberta' },
   { path: 'config/:nomeUsuario', component: ConfigComponent, title: 'Configuração', canActivate: [authGuard] },
   { path: 'login', component: LoginComponent, title: 'Login' },
-  { path: 'registro', component: RegisterComponent, title: 'Registro', canActivate: [!authGuard] },
+  { path: 'registro', component: RegisterComponent, title: 'Registro' },
 ];

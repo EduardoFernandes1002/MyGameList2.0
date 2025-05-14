@@ -1,0 +1,20 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class JogoService {
+  private apiUrl = 'http://localhost:8080/api/jogo';
+
+  constructor(private http: HttpClient) {}
+
+  getJogos(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
+  getJogoByNome(nome: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${nome}`);
+  }
+}

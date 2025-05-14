@@ -1,18 +1,36 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { JogoService } from '../../../service/jogo/jogo.service';
+import { CommentsComponent } from '../../../component/comments/comments.component';
+
 @Component({
   selector: 'app-info-game',
-  imports: [CommonModule],
+  imports: [CommonModule, CommentsComponent],
   templateUrl: './info-game.component.html',
   styleUrl: './info-game.component.css'
 })
-export class InfoGameComponent {
-  jogo = {
-    nome: 'Nome do Jogo',
-    imagem: 'path/to/image.jpg',
-    genero: 'Ação',
-    plataforma: 'PC',
-    sinopse: 'Descrição do jogo.',
-    dataLancamento: new Date()
-  };
+export class InfoGameComponent implements OnInit {
+  jogo: any = {};
+
+  constructor(private jogoService: JogoService, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      const nomeJogo = params.get('nomeJogo');
+      if (nomeJogo) {
+        this.jogoService.getJogoByNome(nomeJogo).subscribe({
+          next: (data: any) => {
+            this.jogo = data;
+          },
+          error: (error: any) => {
+            console.error('Erro ao buscar o jogo:', error);
+          },
+          complete: () => {
+            console.log('Requisição concluída.');
+          }
+        });
+      }
+    });
+  }
 }

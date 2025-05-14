@@ -1,15 +1,26 @@
 <div class="container mt-4">
-    <h1 class="text-center text-dark mb-5">{{ jogo.nome }}</h1>
-  
-    <div class="row">
-      <div class="col-md-4">
-        <img [src]="jogo.imagem" class="img-fluid rounded" alt="{{ jogo.nome }}" />
-      </div>
-      <div class="col-md-8">
-        <p><strong>Gênero:</strong> {{ jogo.genero }}</p>
-        <p><strong>Plataforma:</strong> {{ jogo.plataforma }}</p>
-        <p><strong>Sinopse:</strong> {{ jogo.sinopse }}</p>
-        <p><strong>Data de Lançamento:</strong> {{ jogo.dataLancamento | date }}</p>
+  <h1 class="text-center text-dark mb-5">{{ jogo.nomeJogo }}</h1>
+
+  <div class="row container align-items-center justify-content-center">
+    <div class="col-md-4">
+      <img [src]="jogo.imagemJogo" class="img-fluid rounded shadow" alt="{{ jogo.nomeJogo }}" />
+    </div>
+    <div class="col-md-8">
+      <div class="card shadow-sm p-3 mb-4">
+        <p><strong>Gênero(s):</strong> <span *ngFor="let genero of jogo.generos; let last = last">{{ genero.nomeGenero }}<span *ngIf="!last">, </span></span></p>
+        <p><strong>Plataforma(s):</strong> <span *ngFor="let plataforma of jogo.plataformas; let last = last">{{ plataforma.nomePlataforma }}<span *ngIf="!last">, </span></span></p>
+        <p><strong>Sinopse:</strong> {{ jogo.sinopseJogo }}</p>
+        <p><strong>Data de Lançamento:</strong> {{ jogo.dataLancamentoJogo | date }}</p>
+        <p><strong>Desenvolvedora:</strong> {{ jogo.desenvolvedora.nomeDesenvolvedora }}</p>
+        <p><strong>Distribuidora:</strong> {{ jogo.distribuidora.nomeDistribuidora }}</p>
       </div>
     </div>
   </div>
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <h3 class="text-center text-secondary">Comentários</h3>
+      <app-comments></app-comments>
+    </div>
+  </div>
+</div>

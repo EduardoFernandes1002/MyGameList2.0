@@ -13,6 +13,4 @@ public interface JogoRepository extends JpaRepository<Jogo, Long> {
         )
     Jogo findByNomeJogo(String nomeJogo);
 
-
-
 }

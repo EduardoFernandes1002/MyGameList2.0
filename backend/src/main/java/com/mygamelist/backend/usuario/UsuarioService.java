@@ -49,6 +49,8 @@ public class UsuarioService {
         }
     }
 
+    // Método para autenticar o usuário
+    // Verifica se o usuário existe e se a senha está correta
     public String autenticar(Usuario usuario) {
          Usuario user;
     if (usuario.getEmailUsuario() != null) {
@@ -58,10 +60,7 @@ public class UsuarioService {
     }
     if (user != null && user.getSenhaUsuario().equals(usuario.getSenhaUsuario())) {
         return jwtUtil.generateToken(user.getNomeUsuario());
-    } else {
+    }
         return null;
     }
-    }
-
-
 }

@@ -1,1 +1,17 @@
-<p>comments works!</p>
+<div class="comments-section">
+  <hr />
+
+  <div *ngIf="comments && comments.length > 0; else noComments">
+    <ul class="list-group">
+      <li *ngFor="let comment of comments" class="list-group-item">
+        {{ comment }}
+      </li>
+    </ul>
+    <p class="text-center text-muted mt-3">Fim dos comentários.</p>
+  </div>
+
+  <ng-template #noComments>
+    <p class="text-center text-danger">Não existem comentários para este jogo.</p>
+  </ng-template>
+</div>
+

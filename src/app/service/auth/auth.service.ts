@@ -7,7 +7,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080'; // URL da API de autenticação
+  private apiUrl = 'http://localhost:8080/autenticar'; // URL da API de autenticação
   private isLogedInSubject = new BehaviorSubject<boolean>(this.hasToken());
 
   constructor(private http: HttpClient) {}
@@ -18,7 +18,7 @@ export class AuthService {
     emailUsuario: login.includes('@') ? login : undefined,
     nomeUsuario: !login.includes('@') ? login : undefined,
   };
-    return this.http.post(`${this.apiUrl}/autenticar/login`, usuario)
+    return this.http.post(`${this.apiUrl}/login`, usuario)
   }
 
   logout(): void {
