@@ -17,8 +17,10 @@ public class AvaliacaoController {
         return avaliacaoService.saveAvaliacao(avaliacao);
     }
 
-    @GetMapping("/jogo/comment/{nomeJogo}")
-    public Page<Avaliacao> getAvaliacoesByJogo(@PathVariable String nomeJogo, Pageable pageable) {
+    @GetMapping("/jogo/comment/{slug}")
+    public Page<Avaliacao> getAvaliacoesByJogo(@PathVariable("slug") String slug, Pageable pageable) {
+        // Converte slug (the-isle) para nome real (The Isle)
+        String nomeJogo = slug.replace("-", " ");
         return avaliacaoService.getAvaliacoesByJogo(nomeJogo, pageable);
     }
 }
