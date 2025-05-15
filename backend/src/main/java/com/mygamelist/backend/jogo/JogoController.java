@@ -16,8 +16,9 @@ public class JogoController {
         return jogoService.getJogos();
     }
 
-    @GetMapping("/{jogo}")
-    public Jogo getJogoByNome(@PathVariable("jogo") String nomeJogo) {
+    @GetMapping("/{slug}")
+    public Jogo getJogoBySlug(@PathVariable("slug") String slug) {
+        String nomeJogo = slug.replace("-", " ");
         return jogoService.findJogoByNome(nomeJogo);
     }
 

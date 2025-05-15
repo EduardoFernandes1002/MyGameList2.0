@@ -8,14 +8,14 @@
   <div *ngIf="comments && comments.length > 0; else noComments">
     <ul class="list-group">
       <li *ngFor="let comment of comments" class="list-group-item">
-        {{ comment.txComentario }}
         <div class="small text-muted mt-1">
-          Nota: {{ comment.nrUsuarioNota }} | Usuário: {{ comment.usuario?.nomeUsuario || 'Anônimo' }}
+          () {{ comment.usuario?.nomeUsuario }} | Nota: {{ comment.notaUsuario }} | {{ comment.dataComentario | date }}
         </div>
+        {{ comment.comentarioUsuario }}
       </li>
     </ul>
-    <button class="btn btn-outline-primary w-100 mt-3" (click)="loadMore()">Carregar mais</button>
-    <p class="text-center text-muted mt-3">Fim dos comentários.</p>
+      <button *ngIf="hasMore" class="btn btn-outline-primary w-100 mt-3" (click)="loadMore()">Carregar mais</button>
+    <p *ngIf="!hasMore" class="text-center text-muted mt-3">Fim dos comentários.</p>
   </div>
   <ng-template #noComments>
     <p class="text-center text-danger">Não existem comentários para este jogo.</p>
