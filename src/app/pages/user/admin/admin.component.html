@@ -2,10 +2,19 @@
   <h1 class="text-center text-dark mb-5">Administração</h1>
 
   <div class="AlternarOp">
-      <select name="" class="Selecionar">
-          <option value="">Gerenciar Usuários</option>
-          <option value="">Gerenciar Jogos</option>
-      </select>
+
+    <div class="Legal">
+        <select name="" class="Selecionar ">
+            <option value="">Gerenciar Usuários</option>
+            <option value="">Gerenciar Jogos</option>
+        </select>
+       </div>
+
+    <div class="ButoesAd">
+        <button class="AdicionarJogo" data-bs-toggle="modal" data-bs-target="#modalAdicionar">Adicionar Jogo</button>
+        <button class="DeletarJogo"> Deletar Jogo</button>
+       </div>
+
   </div>
   
   <table class="table mt-4 table-striped table-bordered">
@@ -30,6 +39,59 @@
           </tr>
       </tbody>
   </table>
+
+
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="modalAdicionar" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Adicionar Novo Jogo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="nomeJogo" class="form-label">Distribuidora do Jogo</label>
+            <select name="" class="DistribuidoraJogo ">
+                <option value="">Gerenciar Usuários</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="nomeJogo" class="form-label">Desenvolvedora do Jogo</label>
+            <select name="" class="DesenvolvedoraJogo ">
+                <option value="">Gerenciar Usuários</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="nomeJogo" class="form-label">Nome do Jogo</label>
+            <input type="text" class="form-control" id="nomeJogo" required>
+          </div>
+          <div class="mb-3">
+            <label for="nomeJogo" class="form-label">Sinopse do Jogo</label>
+            <input type="text" class="form-control" id="nomeJogo" required>
+          </div>
+          <div class="mb-3">
+            <label for="nomeJogo" class="form-label">Data de Lançamento</label>
+            <input type="text" class="form-control" id="nomeJogo" required>
+          </div>
+          <div class="mb-3">
+            <label for="nomeJogo" class="form-label">Genero do Jogo</label>
+            <input type="text" class="form-control" id="nomeJogo" required>
+          </div>
+          <div class="mb-3">
+            <label for="nomeJogo" class="form-label">Modo do Jogo</label>
+            <input type="text" class="form-control" id="nomeJogo" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Adicionar</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
       
