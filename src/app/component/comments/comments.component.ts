@@ -15,6 +15,7 @@ export class CommentsComponent implements OnChanges {
   currentPage: number = 0;
   pageSize: number = 20;
   loading: boolean = false;
+  hasMore: boolean = true;
 
   constructor(private commentsService: CommentsService) {}
 
@@ -26,15 +27,22 @@ export class CommentsComponent implements OnChanges {
     }
   }
 
+  private toSlug(nome: string): string {
+    return nome ? nome.trim().toLowerCase().replace(/\s+/g, '-') : '';
+  }
+
   loadComments(): void {
     this.loading = true;
-    this.commentsService.getCommentsByGame(this.nomeJogo, this.currentPage, this.pageSize).subscribe({
+    const slug = this.toSlug(this.nomeJogo);
+    this.commentsService.getCommentsByGame(slug, this.currentPage, this.pageSize).subscribe({
       next: (data: any) => {
         this.comments = data.content;
+        this.hasMore = !data.last;
         this.loading = false;
       },
       error: (error: any) => {
         this.loading = false;
+        this.hasMore = false;
         console.error('Erro ao carregar comentários:', error);
       }
     });
@@ -43,13 +51,16 @@ export class CommentsComponent implements OnChanges {
   loadMore(): void {
     this.currentPage++;
     this.loading = true;
-    this.commentsService.getCommentsByGame(this.nomeJogo, this.currentPage, this.pageSize).subscribe({
+    const slug = this.toSlug(this.nomeJogo);
+    this.commentsService.getCommentsByGame(slug, this.currentPage, this.pageSize).subscribe({
       next: (data: any) => {
         this.comments = [...this.comments, ...data.content];
+        this.hasMore = !data.last;
         this.loading = false;
       },
       error: (error: any) => {
         this.loading = false;
+        this.hasMore = false;
         console.error('Erro ao carregar mais comentários:', error);
       }
     });

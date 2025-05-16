@@ -2,6 +2,9 @@ package com.mygamelist.backend.avaliacao;
 
 import com.mygamelist.backend.jogo.Jogo;
 import com.mygamelist.backend.jogo.JogoRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
@@ -20,11 +23,21 @@ public class AvaliacaoService {
         return avaliacaoRepository.save(avaliacao);
     }
 
-    public Page<Avaliacao> getAvaliacoesByJogo(String nomeJogo, Pageable pageable) {
-        Jogo jogo = jogoRepository.findByNomeJogo(nomeJogo);
-        if (jogo == null) {
-            throw new IllegalArgumentException("Jogo não encontrado: " + nomeJogo);
+    public List<Avaliacao> getAvaliacoesByJogo(String nomeJogo) {
+        for (Jogo j : jogoRepository.findAll()) {
+            if (j.getNomeJogo().trim().equalsIgnoreCase(nomeJogo.trim())) {
+                return avaliacaoRepository.findByJogoId(j.getIdJogo());
+            }
         }
-        return avaliacaoRepository.findByJogoNome(nomeJogo, pageable);
+        throw new IllegalArgumentException("Jogo não encontrado: " + nomeJogo);
+    }
+
+    public Page<Avaliacao> getAvaliacoesByJogo(String nomeJogo, Pageable pageable) {
+        for (Jogo j : jogoRepository.findAll()) {
+            if (j.getNomeJogo().trim().equalsIgnoreCase(nomeJogo.trim())) {
+                return avaliacaoRepository.findByJogoId(j.getIdJogo(), pageable);
+            }
+        }
+        throw new IllegalArgumentException("Jogo não encontrado: " + nomeJogo);
     }
 }

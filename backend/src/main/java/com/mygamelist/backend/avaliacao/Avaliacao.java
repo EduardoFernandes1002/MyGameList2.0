@@ -2,6 +2,8 @@ package com.mygamelist.backend.avaliacao;
 
 import com.mygamelist.backend.jogo.Jogo;
 import com.mygamelist.backend.usuario.Usuario;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.*;
@@ -22,17 +24,17 @@ public class Avaliacao {
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @Column(name = "tx_comentario", length = 500, nullable = true)
-    private String txComentario;
+    @Column(name = "tx_comentario", nullable = true)
+    private String comentarioUsuario;
 
     @Column(name = "nr_usuario_nota", nullable = false)
-    private int nrUsuarioNota;
+    private BigDecimal notaUsuario;
 
     @Column(name = "dt_comentario", nullable = true)
-    private LocalDate dtComentario;
+    private LocalDate dataEnvioComentario;
 
     @Column(name = "dt_envio", nullable = false)
-    private LocalDate dtEnvio;
+    private LocalDate dataEnvioNota;
 
     // Getters e Setters
     public Long getIdAvaliacao() {
@@ -60,34 +62,34 @@ public class Avaliacao {
     }
 
     public String getComentarioUsuario() {
-        return txComentario;
+        return comentarioUsuario;
     }
 
-    public void setComentarioUsuario(String txComentario) {
-        this.txComentario = txComentario;
+    public void setComentarioUsuario(String comentarioUsuario) {
+        this.comentarioUsuario = comentarioUsuario;
     }
 
-    public int getNotaUsuario() {
-        return nrUsuarioNota;
+    public BigDecimal getNotaUsuario() {
+        return notaUsuario;
     }
 
-    public void setNotaUsuario(int nrUsuarioNota) {
-        this.nrUsuarioNota = nrUsuarioNota;
+    public void setNotaUsuario(BigDecimal notaUsuario) {
+        this.notaUsuario = notaUsuario;
     }
 
     public LocalDate getDataComentario() {
-        return dtComentario;
+        return dataEnvioComentario;
     }
 
-    public void setDataComentario(LocalDate dtComentario) {
-        this.dtComentario = dtComentario;
+    public void setDataComentario(LocalDate dataEnvioComentario) {
+        this.dataEnvioComentario = dataEnvioComentario;
     }
 
     public LocalDate getDataEnvio() {
-        return dtEnvio;
+        return dataEnvioNota;
     }
 
-    public void setDataEnvio(LocalDate dtEnvio) {
-        this.dtEnvio = dtEnvio;
+    public void setDataEnvio(LocalDate dataEnvioNota) {
+        this.dataEnvioNota = dataEnvioNota;
     }
 }

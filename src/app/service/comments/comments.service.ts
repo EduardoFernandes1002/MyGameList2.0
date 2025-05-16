@@ -11,7 +11,7 @@ export class CommentsService {
   constructor(private http: HttpClient) {}
 
   getCommentsByGame(slug: string, page: number, size: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/jogo/comment/${slug}?page=${page}`);
+    return this.http.get<any>(`${this.apiUrl}/jogo/comment/${slug}?page=${page}&size=${size}`);
   }
 
   checkComment(comment: string): boolean {
