@@ -9,19 +9,26 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
-logout() {
-  // Remove o JWT token do local storage.
-  localStorage.removeItem('token');
-  this.router.navigate(['/']);
-}
+  nomeUsuario: string | null = null;
 
-isAuthenticated(): boolean {
-  const token = localStorage.getItem('token');
+  constructor(public router: Router) {
+    this.nomeUsuario = this.getNomeUsuarioFromToken();
+  }
+
+  logout() {
+    // Remove o JWT token do local storage.
+    localStorage.removeItem('token');
+    this.router.navigate(['/']);
+  }
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
     if (!token) {
       return false;
     }
     return true;
   }
+
   navItems = [
     { label: 'Home', path: '/' },
     { label: 'Rank', path: '/rank' },
@@ -31,5 +38,14 @@ isAuthenticated(): boolean {
     { label: 'Ajuda/FAQ', path: '/ajuda' },
   ];
 
-  constructor(public router: Router) {}
+  getNomeUsuarioFromToken(): string | null {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.sub || null;
+    } catch (e) {
+      return null;
+    }
+  }
 }
