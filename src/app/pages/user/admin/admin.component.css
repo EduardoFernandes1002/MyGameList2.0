@@ -55,7 +55,7 @@
   option {
     padding: 10px;
     background: #fff;
-    color: #333;
+    color: #000000;
   }
   
   /* Estilo quando o select está desabilitado */
@@ -84,7 +84,6 @@
     }
 
 
-    /* Estilo básico para as opções do select */
 .Selecionar option {
     padding: 10px 15px;
     background: #fff;
@@ -92,12 +91,10 @@
     font-size: 14px;
   }
   
-  /* Efeito hover básico (funciona no Firefox) */
   .Selecionar option:hover {
     background-color: #f0f7ff;
   }
   
-  /* Opção selecionada (funciona no Firefox) */
   .Selecionar option:checked {
     background-color: #e0f0ff;
   }
@@ -114,28 +111,103 @@
   justify-self: end;
 }
 
-.AdicionarJogo{
+.AdicionarJogo {
   display: flex;
-  padding: 10px 15px;
-  background: #fff;
-  color: #333;
+  padding: 12px 20px;
+  background: #ffffff;
+  color: #000000;
   font-size: 14px;
-   border-radius: 2vw;
-}
-
-.AdicionarJogo:hover{
-  background-color: rgb(195, 247, 117);
-}
-
-.DeletarJogo{
-  display: flex;
-  padding: 10px 15px;
-  background: #fff;
-  color: #333;
-  font-size: 14px;
+  font-weight: 600;
   border-radius: 2vw;
+  border: 2px solid #1e90ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.DeletarJogo:hover{
-  background-color: rgb(250, 115, 115);
+.AdicionarJogo:hover {
+  background-color: #76b7f8;
+  color: rgb(0, 0, 0);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(30, 144, 255, 0.3);
+}
+
+.DeletarJogo {
+  display: flex;
+  padding: 12px 20px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 2vw;
+  border: 2px solid #1e90ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.DeletarJogo:hover {
+  background-color: #ff8f8b;
+  color: rgb(0, 0, 0);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(30, 144, 255, 0.3);
+}
+
+select {
+  padding: 12px 16px;
+  width: 100%;
+  max-width: 300px;
+  background-color: #fff;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  border: 2px solid #000;
+  border-radius: 8px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: 
+    linear-gradient(45deg, transparent 50%, #000509 50%),
+    linear-gradient(135deg, #000000 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) 50%,
+    calc(100% - 15px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+select:hover {
+  border-color: #1e90ff;
+  box-shadow: 0 4px 8px rgba(30, 144, 255, 0.2);
+}
+
+select:focus {
+  outline: none;
+  border-color: #1e90ff;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+select option{
+  padding: 10px;
+  background: #010101;
+  color: #000;
+}
+
+select:disabled {
+  background-color: #000000;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+label{
+  color: black;
+  font-weight: bold;  
+  
+}
+
+input{
+  border: solid 0.1vw #000;
 }
