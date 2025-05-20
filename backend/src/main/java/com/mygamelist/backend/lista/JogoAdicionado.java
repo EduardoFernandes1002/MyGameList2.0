@@ -26,4 +26,30 @@ public class JogoAdicionado {
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Lista getListas() {
+        return listas;
+    }
+
+    public void setListas(Lista listas) {
+        this.listas = listas;
+    }
+
+    public Jogo getJogos() {
+        return jogos;
+    }
+
+    public void setJogos(Jogo jogos) {
+        this.jogos = jogos;
+    }
+
+    
 }

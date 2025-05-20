@@ -63,4 +63,12 @@ public class UsuarioService {
     }
         return null;
     }
+
+    public Usuario getUsuarioByNomeUsuario(String nomeUsuario) {
+        Usuario usuario = usuarioRepository.findByNomeUsuario(nomeUsuario);
+        if (usuario == null) {
+            throw new RuntimeException("Usuário não encontrado: " + nomeUsuario);
+        }
+        return usuario;
+    }
 }
