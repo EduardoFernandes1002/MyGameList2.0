@@ -21,5 +21,6 @@ public class JogoController {
         String nomeJogo = slug.replace("-", " ");
         return jogoService.findJogoByNome(nomeJogo);
     }
+    
 
 }

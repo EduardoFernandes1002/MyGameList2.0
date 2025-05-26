@@ -15,6 +15,7 @@ public class JogoService {
         return jogoRepository.findAll();
     }
 
+
     public Jogo findJogoByNome(String nomeJogo) {
         return jogoRepository.findByNomeJogo(nomeJogo);
     }
