@@ -23,6 +23,11 @@ public class UsuarioController {
         return usuarioService.getUsuarioById(idUsuario);
     }
 
+    @GetMapping("/username/{nomeUsuario}")
+    public Usuario getUsuarioByNomeUsuario(@PathVariable String nomeUsuario) {
+    return usuarioService.getUsuarioByNomeUsuario(nomeUsuario);
+}
+
     @GetMapping("/permissao/{nomePermissao}")
     public List<Map<String, Usuario>> getPermissaoByNome(@PathVariable String nomePermissao) {
         return usuarioService.getPermissaoByNome(nomePermissao);

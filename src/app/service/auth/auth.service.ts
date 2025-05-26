@@ -21,20 +21,38 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, usuario)
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
-    this.isLogedInSubject.next(false);
-  }
 
   isLoggedIn(): Observable<boolean> {
     return this.isLogedInSubject.asObservable();
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  getNomeUsuarioFromToken(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.sub;
+    } catch (e) {
+      return null;
+    }
   }
 
   private hasToken(): boolean {
     return !!localStorage.getItem('token');
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('token');
+  logout(): void {
+    localStorage.removeItem('token');
+    this.isLogedInSubject.next(false);
   }
+
+  
 }

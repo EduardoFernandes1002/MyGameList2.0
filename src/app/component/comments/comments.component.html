@@ -7,11 +7,16 @@
   </div>
   <div *ngIf="comments && comments.length > 0; else noComments">
     <ul class="list-group">
-      <li *ngFor="let comment of comments" class="list-group-item">
-        <div class="small text-muted mt-1">
-          () {{ comment.usuario?.nomeUsuario }} | Nota: {{ comment.notaUsuario }} | {{ comment.dataComentario | date }}
+      <li *ngFor="let comment of comments" class="list-group-item mb-3 shadow-sm rounded-2 border border-dark">
+        <div class="comment-user-info rounded-top-3 px-2 py-1 d-flex align-items-center gap-1">
+          <i class="bi bi-person-circle me-1"></i>
+          <span class="fw-semibold">{{ comment.usuario?.nomeUsuario }}</span>
+          <span class="badge bg-primary ms-2">Nota: {{ comment.notaUsuario }}</span>
+          <span class="ms-auto">{{ comment.dataComentario | date }}</span>
         </div>
-        {{ comment.comentarioUsuario }}
+        <div class="comment-text px-3 py-2 rounded-bottom-3">
+          {{ comment.comentarioUsuario }}
+        </div>
       </li>
     </ul>
       <button *ngIf="hasMore" class="btn btn-outline-primary w-100 mt-3" (click)="loadMore()">Carregar mais</button>
