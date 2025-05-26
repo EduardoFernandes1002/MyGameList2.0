@@ -75,7 +75,7 @@
           </div>
           <div class="mb-3">
             <label for="nomeJogo" class="form-label">Data de Lançamento</label>
-            <input type="text" class="form-control" id="dataJogo" required>
+            <input type="date" min="1900-01-01" max="2030-12-31" class="form-control" id="dataJogo" required>
           </div>
           <div class="mb-3">
             <label for="nomeJogo" class="form-label">Modo do Jogo</label>
@@ -84,12 +84,34 @@
                 <option value="">Gerenciar Usuários</option>
             </select>
           </div>
-          <div class="mb-3">
-            <label for="nomeJogo" class="form-label">Genero do Jogo</label>
-            <br>
-            <select name="" class="DesenvolvedoraJogo ">
-                <option value="">Gerenciar Usuários</option>
-            </select>
+          <label for="nomeJogo" class="form-label">Genero do Jogo</label>
+          <div class="tag-autocomplete-container">
+            <!-- Tags selecionadas -->
+            <div class="selected-tags">
+              <span class="tag" *ngFor="let tag of selectedTags">
+                {{ tag }}
+                <span class="tag-remove" (click)="removeTag(tag)">×</span>
+              </span>
+            </div>
+            
+            <!-- Input com autocomplete -->
+            <div class="tag-input-container">
+              <input type="text" 
+                     [(ngModel)]="tagInput" 
+                     (input)="searchTags()"
+                     (keydown.enter)="addTagFromInput()"
+                     (blur)="addTagFromInput()"
+                     placeholder="Digite para buscar tags...">
+              
+              <!-- Lista de sugestões -->
+              <div class="suggestions-dropdown" *ngIf="showSuggestions && filteredTags.length > 0">
+                <div class="suggestion-item" 
+                     *ngFor="let tag of filteredTags"
+                     (click)="addTag(tag)">
+                  {{ tag }}
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>
