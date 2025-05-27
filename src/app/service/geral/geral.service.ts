@@ -7,15 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class GeralService {
 
-  private apiUrl = 'http://localhost:8080/api/';
+  private apiUrl = 'http://localhost:8080/api/jogo';
 
   constructor(private http: HttpClient) { }
 
   getJogos(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/jogo/resumido`);
+    return this.http.get<any[]>(`${this.apiUrl}/resumido`);
   }
 
   getTop5Jogos(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/jogo/top5`);
+    return this.http.get<any[]>(`${this.apiUrl}/top-cinco`);
   }
 }

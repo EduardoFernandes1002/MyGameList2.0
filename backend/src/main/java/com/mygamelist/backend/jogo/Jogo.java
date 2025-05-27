@@ -30,7 +30,7 @@ public class Jogo {
     private String imagemJogo;
     @Column(name = "dt_lancamento")
     private LocalDate dataLancamentoJogo;
-    @Column(name = "total_nota_jogo")
+    @Column(name = "nr_total_nota")
     private BigDecimal totalNotaJogo;
 
     // Chaves estrangeiras de outras tabelas:

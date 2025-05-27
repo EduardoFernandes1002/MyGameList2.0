@@ -16,10 +16,9 @@ public interface JogoRepository extends JpaRepository<Jogo, Long> {
     @Query("SELECT new map(" +
         "j.nomeJogo as NomeJogo, " +
         "j.generos as Generos, " +
-        "j.totalNotaJogo, "+
+        "j.totalNotaJogo as Nota, "+
         "j.plataformas as Plataformas) "+
-    "FROM Jogo j WHERE j.totalNotaJogo IS NOT NULL "+
-        "ORDER BY j.totalNotaJogo DESC LIMIT 5"
+    "FROM Jogo j ORDER BY j.totalNotaJogo DESC LIMIT 5"
     )
     List<Map<String, Jogo>> findJogoResumidoByTopCinco();
 

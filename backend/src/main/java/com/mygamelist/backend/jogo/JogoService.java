@@ -19,4 +19,8 @@ public class JogoService {
     public Jogo findJogoByNome(String nomeJogo) {
         return jogoRepository.findByNomeJogo(nomeJogo);
     }
+
+    public List<?> findJogosByTopCinco() {
+        return jogoRepository.findJogoResumidoByTopCinco();
+    }   
 }

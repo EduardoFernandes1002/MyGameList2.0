@@ -22,5 +22,9 @@ public class JogoController {
         return jogoService.findJogoByNome(nomeJogo);
     }
     
+    @GetMapping("/top-cinco")
+    public List<?> getJogosByTopCinco() {
+        return jogoService.findJogosByTopCinco();
+    }
 
 }
