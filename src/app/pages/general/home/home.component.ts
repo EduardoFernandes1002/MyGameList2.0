@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { GeralService } from '../../../service/geral/geral.service';
+import { JogoService } from '../../../service/jogo/jogo.service';
 
 @Component({
   selector: 'app-home',
@@ -13,44 +13,52 @@ import { GeralService } from '../../../service/geral/geral.service';
 
 export class HomeComponent implements OnInit {
 
-    jogos: any[] = [];
+  jogos: any[] = [];
+  recommendedGames: any[] = [];
+  highestRatedGames: any[] = [];
 
+  constructor(private jogoService: JogoService) {}
 
-  constructor(private geralService: GeralService) {}
-
-  recommendedGames = [
-    { nomeJogo: 'Jogo 1', imagemJogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', generos: 'Ação', plataformas: 'PC' },
-    { nomeJogo: 'Jogo 2', imagemJogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', generos: 'RPG', plataformas: 'PS5' },
-    { nomeJogo: 'Jogo 3', imagemJogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', generos: 'Aventura', plataformas: 'XBOX' },
-    { nomeJogo: 'Jogo 4', imagemJogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', generos: 'Ação', plataformas: 'PC' },
-    { nomeJogo: 'Jogo 5', imagemJogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', generos: 'RPG', plataformas: 'PS5' },
-    { nomeJogo: 'Jogo 6', imagemJogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', generos: 'Aventura', plataformas: 'XBOX' },
-  ];
-
-  chunkedRecommendedGames: any[] = [];
+  ngOnInit(): void {
+    this.loadTopFive();
+    this.loadRecommendedGames();
+    this.loadHighestRatedGames();
+  }
 
   loadTopFive(): void {
-    this.geralService.getTop5Jogos().subscribe({
+    this.jogoService.getJogoResumidoByTopCinco().subscribe({
       next: (data: any) => {
-        this.jogos = data.content;
+        this.jogos = data.content || data;
       },
       error: (error: any) => {
-        console.error('Erro ao carregar comentários:', error);
+        console.error('Erro ao carregar top 5:', error);
       }
     });
   }
 
-  highestRatedGames = [
-    { nomeJogo: 'Jogo 1', imagemJogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', totalNotaJogo: 1000, generos: 'Ação' },
-    { nomeJogo: 'Jogo 2', imagemJogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', totalNotaJogo: 980, generos: 'RPG' },
-    { nomeJogo: 'Jogo 3', imagemJogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', totalNotaJogo: 970, generos: 'Aventura' },
-    { nomeJogo: 'Jogo 4', imagemJogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s', totalNotaJogo: 960, generos: 'Ação' },
-  ];
-  ngOnInit(): void {
-    this.loadTopFive();
+  loadRecommendedGames(): void {
+    this.jogoService.getJogoRecomendados().subscribe({
+      next: (data: any) => {
+        this.recommendedGames = data.content || data;
+      },
+      error: (error: any) => {
+        console.error('Erro ao carregar recomendados:', error);
+      }
+    });
   }
 
-  private chunkArray(array: any[], chunkSize: number): any[] {
+  loadHighestRatedGames(): void {
+    this.jogoService.getJogoMaisBemAvaliados().subscribe({
+      next: (data: any) => {
+        this.highestRatedGames = data.content || data;
+      },
+      error: (error: any) => {
+        console.error('Erro ao carregar mais bem avaliados:', error);
+      }
+    });
+  }
+
+  public chunkArray(array: any[], chunkSize: number): any[] {
     const chunks = [];
     for (let i = 0; i < array.length; i += chunkSize) {
       chunks.push(array.slice(i, i + chunkSize));

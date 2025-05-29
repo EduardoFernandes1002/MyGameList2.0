@@ -12,28 +12,32 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  // Consulta na api pelo nome ou email, verificando se a senha está correta.retornando o usuario co token logado
   login(login: string, senhaUsuario: string){
     const usuario = {
     senhaUsuario,
     emailUsuario: login.includes('@') ? login : undefined,
     nomeUsuario: !login.includes('@') ? login : undefined,
   };
-    return this.http.post(`${this.apiUrl}/login`, usuario)
+    return this.http.post(`${this.apiUrl}/login`, usuario) // enviar usuario porem retorna o token
   }
 
-
+  // verifica se está logado
   isLoggedIn(): Observable<boolean> {
     return this.isLogedInSubject.asObservable();
-  }
+  } 
 
+  // Verifica se o token ainda existe
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
 
+  // busca token no localhost
   getToken(): string | null {
     return localStorage.getItem('token');
   }
 
+  // Pega nome do usuario pelo token para criação do link do perfil
   getNomeUsuarioFromToken(): string | null {
     const token = this.getToken();
     if (!token) return null;
@@ -45,10 +49,12 @@ export class AuthService {
     }
   }
 
+  // Verifica se existe o token
   private hasToken(): boolean {
     return !!localStorage.getItem('token');
   }
 
+  // remove token caso clicar em Sair
   logout(): void {
     localStorage.removeItem('token');
     this.isLogedInSubject.next(false);

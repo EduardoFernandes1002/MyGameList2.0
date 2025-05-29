@@ -4,62 +4,70 @@
   <!-- Carrossel de Recomendações -->
   <section class="mb-5">
     <h2 class="text-dark text-center mb-4">Recomendações</h2>
-    <div
-      id="recommendationsCarousel"
-      class="carousel slide bg-body-tertiary rounded-3 p-3 border m-1"
-      data-bs-ride="carousel"
-    >
-      <div class="carousel-inner">
-        <div
-          *ngFor="let group of chunkedRecommendedGames; let i = index"
-          class="carousel-item"
-          [class.active]="i === 0"
-        >
-          <div class="row">
-            <div *ngFor="let jogo of group" class="col-md-4">
-              <div
-                class="card bg-body-tertiary text-dark shadow-sm h-100 rounded-3"
-              >
-                <img
-                  [src]="jogo.image"
-                  class="card-img-top rounded-top"
-                  alt="{{ jogo.nomeJogo }}"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">{{ jogo.nomeJogo }}</h5>
-                  <p class="card-text">Gênero: {{ jogo.genre }}</p>
-                  <p class="card-text">Plataforma: {{ jogo.plataformas }}</p>
+    <div *ngIf="recommendedGames.length > 0; else noRecomendados">
+      <div
+        id="recommendationsCarousel"
+        class="carousel slide bg-body-tertiary rounded-3 p-3 border m-1"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div
+            *ngFor="let group of chunkArray(recommendedGames, 3); let i = index"
+            class="carousel-item"
+            [class.active]="i === 0"
+          >
+            <div class="row">
+              <div *ngFor="let jogo of group" class="col-md-4">
+                <div
+                  class="card bg-body-tertiary text-dark shadow-sm h-100 rounded-3"
+                >
+                  <img
+                    [src]="jogo.imagemJogo"
+                    class="card-img-top rounded-top"
+                    alt="{{ jogo.nomeJogo }}"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">{{ jogo.nomeJogo }}</h5>
+                    <p class="card-text">Gênero: {{ jogo.generos }}</p>
+                    <p class="card-text">Plataforma: {{ jogo.plataformas }}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#recommendationsCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#recommendationsCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Próximo</span>
+        </button>
       </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#recommendationsCarousel"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Anterior</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#recommendationsCarousel"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Próximo</span>
-      </button>
     </div>
+    <ng-template #noRecomendados>
+      <p class="text-center text-muted">
+        Nenhuma recomendação disponível no momento.
+      </p>
+    </ng-template>
   </section>
 
   <!-- Ranking (Top 5) -->
   <section class="mb-5">
     <h2 class="text-dark text-center mb-4">Ranking - Top 5</h2>
     <div
+      *ngIf="jogos.length > 0; else noTopCinco"
       class="row g-3 m-1 bg-light rounded-3 p-3 border justify-content-center"
     >
       <div *ngFor="let jogo of jogos" class="col-12 col-md-6 col-lg-4">
@@ -89,18 +97,19 @@
         </div>
       </div>
     </div>
+    <ng-template #noTopCinco>
+      <p class="text-center text-muted">Nenhum jogo no ranking ainda.</p>
+    </ng-template>
   </section>
 
-  <!-- Seção Bônus: Jogos Mais Bem Avaliados -->
+  <!-- Jogos Mais Bem Avaliados -->
   <section class="mb-5">
     <h2 class="text-dark text-center mb-4">Jogos Mais Bem Avaliados</h2>
     <div
+      *ngIf="highestRatedGames.length > 0; else noMaisBemAvaliados"
       class="row g-3 bg-light rounded-3 p-3 border m-1 justify-content-center"
     >
-      <div
-        *ngFor="let jogo of highestRatedGames"
-        class="col-12 col-md-6 col-lg-3"
-      >
+      <div *ngFor="let jogo of highestRatedGames" class="col-12 col-md-6 col-lg-3">
         <div class="card bg-dark text-light shadow-sm position-relative">
           <img
             [src]="jogo.imagemJogo"
@@ -118,11 +127,14 @@
             "
           >
             <h5 class="card-title text-center">{{ jogo.nomeJogo }}</h5>
-            <p class="card-text text-center">Pontuação: {{ jogo.totalNotaJogo }} pts</p>
+            <p class="card-text text-center">Nota: {{ jogo.totalNotaJogo }} pts</p>
             <p class="card-text text-center">Gênero: {{ jogo.generos }}</p>
           </div>
         </div>
       </div>
     </div>
+    <ng-template #noMaisBemAvaliados>
+      <p class="text-center text-muted">Nenhum jogo avaliado ainda.</p>
+    </ng-template>
   </section>
 </div>
