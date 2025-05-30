@@ -22,7 +22,7 @@ public class JogoController {
         return jogoService.findJogoByNome(nomeJogo);
     }
     
-    @GetMapping("/top-cinco")
+    @GetMapping("/rank/cinco")
     public List<?> getJogosByTopCinco() {
         return jogoService.findJogosByTopCinco();
     }
