@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
     this.jogoService.getJogoResumidoByTopCinco().subscribe({
       next: (data: any) => {
         this.jogos = data.content || data;
+        
       },
       error: (error: any) => {
         console.error('Erro ao carregar top 5:', error);
