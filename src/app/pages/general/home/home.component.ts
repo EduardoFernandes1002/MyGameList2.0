@@ -2,17 +2,16 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { JogoService } from '../../../service/jogo/jogo.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ CommonModule,FormsModule ],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
-
 export class HomeComponent implements OnInit {
-
   jogos: any[] = [];
   recommendedGames: any[] = [];
   highestRatedGames: any[] = [];
@@ -29,11 +28,10 @@ export class HomeComponent implements OnInit {
     this.jogoService.getJogoResumidoByTopCinco().subscribe({
       next: (data: any) => {
         this.jogos = data.content || data;
-        
       },
       error: (error: any) => {
         console.error('Erro ao carregar top 5:', error);
-      }
+      },
     });
   }
 
@@ -44,7 +42,7 @@ export class HomeComponent implements OnInit {
       },
       error: (error: any) => {
         console.error('Erro ao carregar recomendados:', error);
-      }
+      },
     });
   }
 
@@ -55,7 +53,7 @@ export class HomeComponent implements OnInit {
       },
       error: (error: any) => {
         console.error('Erro ao carregar mais bem avaliados:', error);
-      }
+      },
     });
   }
 
@@ -66,5 +64,12 @@ export class HomeComponent implements OnInit {
     }
     return chunks;
   }
-}
 
+  public toSlug(nomeJogo: string): string {
+    return nomeJogo
+      .toLowerCase()
+      .replace(/\s+/g, '-') // troca espaços por hífen
+      .replace(/[^a-z0-9-]/g, '') // remove caracteres especiais, exceto hífen
+      .replace(/(^-|-$)+/g, ''); // remove hífens do início/fim
+  }
+}

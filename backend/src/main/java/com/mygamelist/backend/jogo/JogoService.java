@@ -35,6 +35,7 @@ public class JogoService {
             map.put("totalNotaJogo", jogo.getTotalNotaJogo());
             map.put("generos", jogo.getGeneros());
             map.put("plataformas", jogo.getPlataformas());
+            map.put("imagemJogo", jogo.getImagemJogo());
             return map;
         }).toList();
     }

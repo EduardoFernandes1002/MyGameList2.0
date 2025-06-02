@@ -70,33 +70,45 @@
       *ngIf="jogos.length > 0; else noTopCinco"
       class="row g-3 m-1 bg-light rounded-3 p-3 border justify-content-center"
     >
-      <div *ngFor="let jogo of jogos" class="col-12 col-md-6 col-lg-4 d-flex justify-content-center">
+      <div
+        *ngFor="let jogo of jogos"
+        class="col-12 col-md-6 col-lg-4 d-flex justify-content-center"
+      >
         <div class="card bg-dark text-light shadow-sm h-100 w-100">
-          <img
-            [src]="jogo.imagemJogo"
-            class="card-img-top rounded-top mx-auto d-block"
-            alt="{{ jogo.nomeJogo }}"
-          />
-          <div class="row g-0 align-items-center justify-content-center">
-            <div class="col-12">
-              <div class="card-body text-center">
-                <h5 class="card-title">{{ jogo.nomeJogo }}</h5>
-                <p class="card-text">
-                  Pontuação: {{ jogo.totalNotaJogo }} pts
-                </p>
-                <p class="card-text">
-                  <span *ngFor="let genero of jogo.generos; let last = last">
-                    {{ genero.nomeGenero || genero }}<span *ngIf="!last">, </span>
-                  </span>
-                </p>
-                <p class="card-text">
-                  <span *ngFor="let plataforma of jogo.plataformas; let last = last">
-                    {{ plataforma.nomePlataforma || plataforma }}<span *ngIf="!last">, </span>
-                  </span>
-                </p>
+          <a [routerLink]="['/info', toSlug(jogo.nomeJogo)]">
+            <img
+              [src]="jogo.imagemJogo"
+              class="card-img-top rounded-top mx-auto d-block"
+              alt="{{ jogo.nomeJogo }}"
+            />
+            <div class="row g-0 align-items-center justify-content-center">
+              <div class="col-12">
+                <div class="card-body text-center">
+                  <h5 class="card-title">{{ jogo.nomeJogo }}</h5>
+                  <p class="card-text">
+                    Pontuação: {{ jogo.totalNotaJogo }} pts
+                  </p>
+                  <p class="card-text">
+                    <span *ngFor="let genero of jogo.generos; let last = last">
+                      {{ genero.nomeGenero || genero
+                      }}<span *ngIf="!last">, </span>
+                    </span>
+                  </p>
+                  <p class="card-text">
+                    <span
+                      *ngFor="
+                        let plataforma of jogo.plataformas;
+                        let last = last
+                      "
+                    >
+                      {{ plataforma.nomePlataforma || plataforma
+                      }}<span *ngIf="!last">, </span>
+                    </span>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -111,33 +123,35 @@
     <div
       *ngIf="highestRatedGames.length > 0; else noMaisBemAvaliados"
       class="row g-3 bg-light rounded-3 p-3 border m-1 justify-content-center"
-    >
+    > 
       <div
         *ngFor="let jogo of highestRatedGames"
         class="col-12 col-md-6 col-lg-3"
       >
         <div class="card bg-dark text-light shadow-sm position-relative">
-          <img
-            [src]="jogo.imagemJogo"
-            class="card-img-top"
-            alt="{{ jogo.nomeJogo }}"
-            style="object-fit: cover; height: 300px"
-          />
-          <div
-            class="card-img-overlay d-flex flex-column justify-content-end p-3"
-            style="
-              background-image: linear-gradient(
-                transparent,
-                rgba(22, 22, 22, 0.8) 70%
-              );
-            "
-          >
-            <h5 class="card-title text-center">{{ jogo.nomeJogo }}</h5>
-            <p class="card-text text-center">
-              Nota: {{ jogo.totalNotaJogo }} pts
-            </p>
-            <p class="card-text text-center">Gênero: {{ jogo.generos }}</p>
-          </div>
+          <a [routerLink]="['/info', toSlug(jogo.nomeJogo)]">
+            <img
+              [src]="jogo.imagemJogo"
+              class="card-img-top"
+              alt="{{ jogo.nomeJogo }}"
+              style="object-fit: cover; height: 300px"
+            />
+            <div
+              class="card-img-overlay d-flex flex-column justify-content-end p-3"
+              style="
+                background-image: linear-gradient(
+                  transparent,
+                  rgba(22, 22, 22, 0.8) 70%
+                );
+              "
+            >
+              <h5 class="card-title text-center">{{ jogo.nomeJogo }}</h5>
+              <p class="card-text text-center">
+                Nota: {{ jogo.totalNotaJogo }}
+              </p>
+              <p class="card-text text-center">Gênero: {{ jogo.generos }}</p>
+            </div>
+          </a>
         </div>
       </div>
     </div>
