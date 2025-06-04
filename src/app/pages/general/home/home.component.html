@@ -1,68 +1,6 @@
 <div class="container mt-4">
   <h1 class="text-center text-dark mb-5">Bem-vindo ao MyGameList</h1>
 
-  <!-- Carrossel de Recomendações -->
-  <section class="mb-5">
-    <h2 class="text-dark text-center mb-4">Recomendações</h2>
-    <div *ngIf="recommendedGames.length > 0; else noRecomendados">
-      <div
-        id="recommendationsCarousel"
-        class="carousel slide bg-body-tertiary rounded-3 p-3 border m-1"
-        data-bs-ride="carousel"
-      >
-        <div class="carousel-inner">
-          <div
-            *ngFor="let group of chunkArray(recommendedGames, 3); let i = index"
-            class="carousel-item"
-            [class.active]="i === 0"
-          >
-            <div class="row">
-              <div *ngFor="let jogo of group" class="col-md-4">
-                <div
-                  class="card bg-body-tertiary text-dark shadow-sm h-100 rounded-3"
-                >
-                  <img
-                    [src]="jogo.imagemJogo"
-                    class="card-img-top rounded-top"
-                    alt="{{ jogo.nomeJogo }}"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">{{ jogo.nomeJogo }}</h5>
-                    <p class="card-text">Gênero: {{ jogo.generos }}</p>
-                    <p class="card-text">Plataforma: {{ jogo.plataformas }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#recommendationsCarousel"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Anterior</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#recommendationsCarousel"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Próximo</span>
-        </button>
-      </div>
-    </div>
-    <ng-template #noRecomendados>
-      <p class="text-center text-muted">
-        Nenhuma recomendação disponível no momento.
-      </p>
-    </ng-template>
-  </section>
-
   <!-- Ranking (Top 5) -->
   <section class="mb-5">
     <h2 class="text-dark text-center mb-4">Ranking - Top 5</h2>
@@ -75,7 +13,7 @@
         class="col-12 col-md-6 col-lg-4 d-flex justify-content-center"
       >
         <div class="card bg-dark text-light shadow-sm h-100 w-100">
-          <a [routerLink]="['/info', toSlug(jogo.nomeJogo)]">
+          <a [routerLink]="['/info', toSlug(jogo.nomeJogo)]" class="jogo-link">
             <img
               [src]="jogo.imagemJogo"
               class="card-img-top rounded-top mx-auto d-block"
@@ -86,7 +24,7 @@
                 <div class="card-body text-center">
                   <h5 class="card-title">{{ jogo.nomeJogo }}</h5>
                   <p class="card-text">
-                    Pontuação: {{ jogo.totalNotaJogo }} pts
+                    Nota: {{ jogo.totalNotaJogo }}
                   </p>
                   <p class="card-text">
                     <span *ngFor="let genero of jogo.generos; let last = last">

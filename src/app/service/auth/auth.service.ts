@@ -14,12 +14,27 @@ export class AuthService {
 
   // Consulta na api pelo nome ou email, verificando se a senha está correta.retornando o usuario co token logado
   login(login: string, senhaUsuario: string){
+
     const usuario = {
     senhaUsuario,
-    emailUsuario: login.includes('@') ? login : undefined,
+    emailUsuario: (login.includes('@') && login.includes('.')) ? login : undefined,
     nomeUsuario: !login.includes('@') ? login : undefined,
   };
     return this.http.post(`${this.apiUrl}/login`, usuario) // enviar usuario porem retorna o token
+  }
+
+  register(login: string, senhaUsuario: string, confirmarSenha: string, apelidoUsuario: string){
+
+    const usuario = {
+      senhaUsuario, 
+      confirmarSenha,
+      apelidoUsuario: (apelidoUsuario.length >= 4 && apelidoUsuario.length <= 15) ? apelidoUsuario : undefined, 
+      emailUsuario: (login.includes('@') && login.includes('.')) ? login : undefined,
+      nomeUsuario: !(login.includes('@') && login.includes('.')) ? login : undefined,
+    }
+
+    // return this.http.post(`${this.apiUrl}/register`, )
+
   }
 
   // verifica se está logado
