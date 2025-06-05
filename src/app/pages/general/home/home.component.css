@@ -4,6 +4,27 @@
   filter: invert(1); /* Torna os ícones brancos */
 }
 
+.carousel-control-prev,
+.carousel-control-next {
+  border: 2px solid white; /* Adiciona uma borda branca */
+  border-radius: 50%; /* Torna os botões circulares */
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Fundo mais claro ao passar o mouse */
+}
 
 .carousel-inner .card {
   border-radius: 10px;
@@ -13,15 +34,4 @@
 .carousel-inner .card:hover {
   transform: scale(0.99);
   transition: transform 0.3s ease;
-}
-
-.jogo-link {
-  text-decoration: none; /* Remove o sublinhado do link */
-  color: white; /* Mantém a cor do texto do card */
-}
-
-.card-img-top {
-  max-height: 30vh;
-  object-fit: cover;
-  border-radius: 20vh 20vh 0 0; /* Arredonda os cantos superiores do card */
 }
