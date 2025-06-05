@@ -2,96 +2,119 @@
   <h1 class="text-center text-dark mb-5">Administração</h1>
 
   <div class="AlternarOp">
-
     <div class="Legal">
-        <select name="" class="Selecionar ">
-            <option value="">Gerenciar Usuários</option>
-            <option value="">Gerenciar Jogos</option>
-        </select>
-       </div>
+      <select name="" class="Selecionar">
+        <option value="">Gerenciar Usuários</option>
+        <option value="">Gerenciar Jogos</option>
+      </select>
+    </div>
 
-    <div class="ButoesAd">
-        <button class="AdicionarJogo" data-bs-toggle="modal" data-bs-target="#modalAdicionar">Adicionar Jogo</button>
-        <button class="DeletarJogo"> Deletar Jogo</button>
-       </div>
-
+    <div class="ButoesAd gap-4"> 
+      <button class="AdicionarJogo" data-bs-toggle="modal" data-bs-target="#modalAdicionar">Adicionar Jogo</button>
+      <button class="DeletarJogo" data-bs-toggle="modal" data-bs-target="#modalDeletar">Deletar Jogo</button>
+    </div>
   </div>
   
   <table class="table mt-4 table-striped table-bordered">
-      <thead>
-          <tr>
-              <th class="col-md-1">Nome</th>
-              <th class="col-md-2">Descrição</th>
-              <th class="col-md-1">Data</th>
-              <th class="col-md-1">Modo</th>
-              <th class="col-md-1">Genero</th>
-              <th class="col-md-2">Plataforma</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr>
-              <td>Nome</td>
-              <td>desc</td>
-              <td>data</td>
-              <td>modo</td>
-              <td>genero</td>
-              <td>plataformaf</td>
-          </tr>
-      </tbody>
+    <thead>
+      <tr>
+        <th class="col-md-1">Nome</th>
+        <th class="col-md-2">Descrição</th>
+        <th class="col-md-1">Data</th>
+        <th class="col-md-1">Modo</th>
+        <th class="col-md-1">Genero</th>
+        <th class="col-md-2">Plataforma</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let jogo of jogos">
+        <td>{{ jogo.nome }}</td>
+        <td>{{ jogo.descricao }}</td>
+        <td>{{ jogo.data | date }}</td>
+        <td>{{ jogo.modo }}</td>
+        <td>{{ jogo.generos.join(', ') }}</td>
+        <td>{{ jogo.plataforma }}</td>
+      </tr>
+    </tbody>
   </table>
 
-
-<!-- Modal Bootstrap -->
-<div class="modal fade" id="modalAdicionar" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Adicionar Novo Jogo</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="nomeJogo" class="form-label">Distribuidora do Jogo</label>
-            <select name="" class="DistribuidoraJogo ">
-                <option value="">Gerenciar Usuários</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="nomeJogo" class="form-label">Desenvolvedora do Jogo</label>
-            <select name="" class="DesenvolvedoraJogo ">
-                <option value="">Gerenciar Usuários</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="nomeJogo" class="form-label">Nome do Jogo</label>
-            <input type="text" class="form-control" id="nomeJogo" required>
-          </div>
-          <div class="mb-3">
-            <label for="nomeJogo" class="form-label">Sinopse do Jogo</label>
-            <input type="text" class="form-control" id="nomeJogo" required>
-          </div>
-          <div class="mb-3">
-            <label for="nomeJogo" class="form-label">Data de Lançamento</label>
-            <input type="text" class="form-control" id="nomeJogo" required>
-          </div>
-          <div class="mb-3">
-            <label for="nomeJogo" class="form-label">Genero do Jogo</label>
-            <input type="text" class="form-control" id="nomeJogo" required>
-          </div>
-          <div class="mb-3">
-            <label for="nomeJogo" class="form-label">Modo do Jogo</label>
-            <input type="text" class="form-control" id="nomeJogo" required>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Adicionar</button>
+ <!-- Modal Adicionar Jogo -->
+  <div class="modal fade" id="modalAdicionar" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Adicionar Novo Jogo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <form>
+            <div class="mb-3">
+              <label class="form-label">Distribuidora do Jogo</label>
+              <select class="DistribuidoraJogo" formControlName="distribuidora">
+                <option value="">Selecione uma distribuidora</option>
+                <!-- Opções seriam carregadas dinamicamente -->
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Desenvolvedora do Jogo</label>
+              <select class="DesenvolvedoraJogo" formControlName="desenvolvedora">
+                <option value="">Selecione uma desenvolvedora</option>
+                <!-- Opções seriam carregadas dinamicamente -->
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Nome do Jogo</label>
+              <input type="text" class="form-control" formControlName="nomeJogo" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Sinopse do Jogo</label>
+              <input type="text" class="form-control" formControlName="sinopse" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Data de Lançamento</label>
+              <input type="date" class="form-control" formControlName="dataLancamento" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Modo do Jogo</label>
+              <select class="DesenvolvedoraJogo" formControlName="modoJogo">
+                <option value="">Selecione um modo</option>
+                <!-- Opções seriam carregadas dinamicamente -->
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Gênero do Jogo</label>
+              <div class="tag-autocomplete-container">
+                <div class="selected-tags">
+                  <span class="tag" *ngFor="let tag of selectedTags">
+                    {{ tag }}
+                    <span class="tag-remove" (click)="removeTag(tag)">×</span>
+                  </span>
+                </div>
+                <div class="tag-input-container">
+                  <input type="text" 
+                         [(ngModel)]="tagInput" 
+                         [ngModelOptions]="{standalone: true}"
+                         (input)="searchTags()"
+                         (keydown.enter)="addTagFromInput()"
+                         (blur)="addTagFromInput()"
+                         placeholder="Digite para buscar gêneros...">
+                  <div class="suggestions-dropdown" *ngIf="showSuggestions && filteredGeneros.length > 0">
+                    <div class="suggestion-item" 
+                         *ngFor="let genero of filteredGeneros"
+                         (click)="addTag(genero)">
+                      {{ genero }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="submitForm()">Adicionar</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
-
-      
