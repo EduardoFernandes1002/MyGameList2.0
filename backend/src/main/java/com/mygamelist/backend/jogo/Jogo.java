@@ -1,6 +1,5 @@
 package com.mygamelist.backend.jogo;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,8 +29,6 @@ public class Jogo {
     private String imagemJogo;
     @Column(name = "dt_lancamento")
     private LocalDate dataLancamentoJogo;
-    @Column(name = "nr_total_nota")
-    private BigDecimal totalNotaJogo;
 
     // Chaves estrangeiras de outras tabelas:
     @ManyToOne
@@ -44,7 +41,8 @@ public class Jogo {
     @OneToMany(mappedBy = "jogos")
     private List<JogoAdicionado> jogosAdicionados;
 
-    // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
+    // Atributos que representam o relacionamento com outras tabelas Muitos para
+    // Muitos:
     @ManyToMany
     @JoinTable(
         name = "genero_do_jogo", 
@@ -63,14 +61,13 @@ public class Jogo {
 
     @ManyToMany
     @JoinTable(
-        name = "plataformas_jogaveis", 
+        name = "plataforma_de_jogo", 
             joinColumns = @JoinColumn(name = "id_plataforma"), 
             inverseJoinColumns = @JoinColumn(name = "id_jogo")
     )
     private List<Plataforma> plataformas;
 
     // Getters e Setters:
-
     public Long getIdJogo() {
         return idJogo;
     }
@@ -149,14 +146,6 @@ public class Jogo {
 
     public void setPlataformas(List<Plataforma> plataformas) {
         this.plataformas = plataformas;
-    }
-
-    public BigDecimal getTotalNotaJogo() {
-        return totalNotaJogo;
-    }
-
-    public void setTotalNotaJogo(BigDecimal totalNotaJogo) {
-        this.totalNotaJogo = totalNotaJogo;
     }
 
 }
