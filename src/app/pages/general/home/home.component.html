@@ -1,128 +1,100 @@
 <div class="container mt-4">
   <h1 class="text-center text-dark mb-5">Bem-vindo ao MyGameList</h1>
 
-  <!-- Carrossel de Recomendações -->
-  <section class="mb-5">
-    <h2 class="text-dark text-center mb-4">Recomendações</h2>
-    <div
-      id="recommendationsCarousel"
-      class="carousel slide bg-body-tertiary rounded-3 p-3 border m-1"
-      data-bs-ride="carousel"
-    >
-      <div class="carousel-inner">
-        <div
-          *ngFor="let group of chunkedRecommendedGames; let i = index"
-          class="carousel-item"
-          [class.active]="i === 0"
-        >
-          <div class="row">
-            <div *ngFor="let game of group" class="col-md-4">
-              <div
-                class="card bg-body-tertiary text-dark shadow-sm h-100 rounded-3"
-              >
-                <img
-                  [src]="game.image"
-                  class="card-img-top rounded-top"
-                  alt="{{ game.name }}"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">{{ game.name }}</h5>
-                  <p class="card-text">Gênero: {{ game.genre }}</p>
-                  <p class="card-text">Plataforma: {{ game.platform }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#recommendationsCarousel"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Anterior</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#recommendationsCarousel"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Próximo</span>
-      </button>
-    </div>
-  </section>
-
   <!-- Ranking (Top 5) -->
   <section class="mb-5">
     <h2 class="text-dark text-center mb-4">Ranking - Top 5</h2>
     <div
+      *ngIf="jogos.length > 0; else noTopCinco"
       class="row g-3 m-1 bg-light rounded-3 p-3 border justify-content-center"
     >
-      <div *ngFor="let game of topRankedGames" class="col-12 col-md-6 col-lg-4">
-        <div class="card bg-dark text-light shadow-sm">
-          <div class="row g-0 align-items-center">
-            <div class="col-4">
-              <img
-                [src]="game.image"
-                class="img-fluid rounded-start"
-                alt="{{ game.name }}"
-              />
-            </div>
-            <div class="col-8">
-              <div class="card-body">
-                <h5 class="card-title text-center">{{ game.name }}</h5>
-                <p class="card-text text-center">
-                  Pontuação: {{ game.score }} pts
-                </p>
-                <p class="card-text text-center">
-                  <small class="text-light"
-                    >Plataforma: {{ game.platform }}</small
-                  >
-                </p>
+      <div
+        *ngFor="let jogo of jogos"
+        class="col-12 col-md-6 col-lg-4 d-flex justify-content-center"
+      >
+        <div class="card bg-dark text-light shadow-sm h-100 w-100">
+          <a [routerLink]="['/info', toSlug(jogo.nomeJogo)]" class="jogo-link">
+            <img
+              [src]="jogo.imagemJogo"
+              class="card-img-top rounded-top mx-auto d-block"
+              alt="{{ jogo.nomeJogo }}"
+            />
+            <div class="row g-0 align-items-center justify-content-center">
+              <div class="col-12">
+                <div class="card-body text-center">
+                  <h5 class="card-title">{{ jogo.nomeJogo }}</h5>
+                  <p class="card-text">
+                    Nota: {{ jogo.totalNotaJogo }}
+                  </p>
+                  <p class="card-text">
+                    <span *ngFor="let genero of jogo.generos; let last = last">
+                      {{ genero.nomeGenero || genero
+                      }}<span *ngIf="!last">, </span>
+                    </span>
+                  </p>
+                  <p class="card-text">
+                    <span
+                      *ngFor="
+                        let plataforma of jogo.plataformas;
+                        let last = last
+                      "
+                    >
+                      {{ plataforma.nomePlataforma || plataforma
+                      }}<span *ngIf="!last">, </span>
+                    </span>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
+    <ng-template #noTopCinco>
+      <p class="text-center text-muted">Nenhum jogo no ranking ainda.</p>
+    </ng-template>
   </section>
 
-  <!-- Seção Bônus: Jogos Mais Bem Avaliados -->
+  <!-- Jogos Mais Bem Avaliados -->
   <section class="mb-5">
     <h2 class="text-dark text-center mb-4">Jogos Mais Bem Avaliados</h2>
     <div
+      *ngIf="highestRatedGames.length > 0; else noMaisBemAvaliados"
       class="row g-3 bg-light rounded-3 p-3 border m-1 justify-content-center"
-    >
+    > 
       <div
-        *ngFor="let game of highestRatedGames"
+        *ngFor="let jogo of highestRatedGames"
         class="col-12 col-md-6 col-lg-3"
       >
         <div class="card bg-dark text-light shadow-sm position-relative">
-          <img
-            [src]="game.image"
-            class="card-img-top"
-            alt="{{ game.name }}"
-            style="object-fit: cover; height: 300px"
-          />
-          <div
-            class="card-img-overlay d-flex flex-column justify-content-end p-3"
-            style="
-              background-image: linear-gradient(
-                transparent,
-                rgba(22, 22, 22, 0.8) 70%
-              );
-            "
-          >
-            <h5 class="card-title text-center">{{ game.name }}</h5>
-            <p class="card-text text-center">Pontuação: {{ game.score }} pts</p>
-            <p class="card-text text-center">Gênero: {{ game.genre }}</p>
-          </div>
+          <a [routerLink]="['/info', toSlug(jogo.nomeJogo)]">
+            <img
+              [src]="jogo.imagemJogo"
+              class="card-img-top"
+              alt="{{ jogo.nomeJogo }}"
+              style="object-fit: cover; height: 300px"
+            />
+            <div
+              class="card-img-overlay d-flex flex-column justify-content-end p-3"
+              style="
+                background-image: linear-gradient(
+                  transparent,
+                  rgba(22, 22, 22, 0.8) 70%
+                );
+              "
+            >
+              <h5 class="card-title text-center">{{ jogo.nomeJogo }}</h5>
+              <p class="card-text text-center">
+                Nota: {{ jogo.totalNotaJogo }}
+              </p>
+              <p class="card-text text-center">Gênero: {{ jogo.generos }}</p>
+            </div>
+          </a>
         </div>
       </div>
     </div>
+    <ng-template #noMaisBemAvaliados>
+      <p class="text-center text-muted">Nenhum jogo avaliado ainda.</p>
+    </ng-template>
   </section>
 </div>
