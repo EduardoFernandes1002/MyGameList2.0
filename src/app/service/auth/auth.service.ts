@@ -23,17 +23,16 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, usuario) // enviar usuario porem retorna o token
   }
 
-  register(login: string, senhaUsuario: string, confirmarSenha: string, apelidoUsuario: string){
+  register(emailUsuario: string, nomeUsuario: string,apelidoUsuario: string,  senhaUsuario: string){
 
     const usuario = {
+      emailUsuario: (emailUsuario.includes('@') && emailUsuario.includes('.')) ? emailUsuario : undefined,
+      nomeUsuario: (nomeUsuario.length >= 4 && nomeUsuario.length <= 15) ? nomeUsuario : undefined,
+      apelidoUsuario: (apelidoUsuario.length >= 4 && apelidoUsuario.length <= 15) ? apelidoUsuario : undefined,
       senhaUsuario, 
-      confirmarSenha,
-      apelidoUsuario: (apelidoUsuario.length >= 4 && apelidoUsuario.length <= 15) ? apelidoUsuario : undefined, 
-      emailUsuario: (login.includes('@') && login.includes('.')) ? login : undefined,
-      nomeUsuario: !(login.includes('@') && login.includes('.')) ? login : undefined,
     }
 
-    // return this.http.post(`${this.apiUrl}/register`, )
+    return this.http.post(`${this.apiUrl}/register`, usuario)
 
   }
 

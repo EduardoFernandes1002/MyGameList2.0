@@ -13,11 +13,17 @@ import { AuthService } from '../../../service/auth/auth.service';
 })
 export class RegisterComponent {
 
+  emailUsuario: string = '';
+  nomeUsuario: string = '';
+  apelidoUsuario: string = '';
+  senhaUsuario: string = '';
+  comfirmarSenha: string = '';
+
   constructor(private authService: AuthService, private router: Router) {}
 
-  /*OnSubmit(form: any): void {
-    if (form.valid) {
-      this.authService.register(form.value).subscribe({
+  OnSubmit(): void {
+    if (this.senhaUsuario === this.comfirmarSenha) {
+      this.authService.register(this.emailUsuario, this.nomeUsuario, this.apelidoUsuario, this.senhaUsuario).subscribe({
         next: (response) => {
           console.log('Registro bem-sucedido:', response);
           this.router.navigate(['/login']);
@@ -27,8 +33,8 @@ export class RegisterComponent {
         }
       });
     } else {
-      console.error('Formulário inválido');
+      console.error('Senhas não coincidem.');
     }
-  } */
+  }
 
 }
