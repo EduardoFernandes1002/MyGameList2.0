@@ -7,15 +7,19 @@ import { Observable } from 'rxjs';
 })
 export class TagService {
 
-  private apiUrl = 'https://sua-api.com/tags'; // Substitua pela sua URL
+  private apiUrl = 'localhost:8080/api/generos';
 
   constructor(private http: HttpClient) { }
 
-  getAllTags(): Observable<string[]> {
-    return this.http.get<string[]>(this.apiUrl);
+  getGeneros(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
 
-  searchTags(term: string): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiUrl}/search?term=${term}`);
+  searchGeneros(term: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/search?term=${term}`);
+  }
+
+  getJogosByGenero(nomeGenero: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${nomeGenero}/jogos`);
   }
 }
