@@ -8,7 +8,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class AuthService {
 
   private apiUrl = 'http://localhost:8080/autenticar'; // URL da API de autenticação
-  private isLogedInSubject = new BehaviorSubject<boolean>(this.hasToken());
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
 
   constructor(private http: HttpClient) {}
 
@@ -32,13 +32,12 @@ export class AuthService {
       senhaUsuario, 
     }
 
-    return this.http.post(`${this.apiUrl}/register`, usuario)
-
+    return this.http.post(`${this.apiUrl}/registrar`, usuario)
   }
 
   // verifica se está logado
   isLoggedIn(): Observable<boolean> {
-    return this.isLogedInSubject.asObservable();
+    return this.isLoggedInSubject.asObservable();
   } 
 
   // Verifica se o token ainda existe
@@ -71,8 +70,7 @@ export class AuthService {
   // remove token caso clicar em Sair
   logout(): void {
     localStorage.removeItem('token');
-    this.isLogedInSubject.next(false);
+    this.isLoggedInSubject.next(false);
   }
 
-  
 }

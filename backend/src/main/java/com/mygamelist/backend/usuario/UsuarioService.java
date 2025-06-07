@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mygamelist.backend.permissao.Permissao;
 import com.mygamelist.backend.security.JwtUtil;
 
 @Service
@@ -33,20 +34,21 @@ public class UsuarioService {
         return usuarioRepository.findAllUsuariosByPermissao();
     }
 
-    public Usuario registrarUsuario(Usuario usuario) {
-        if (usuario.getSenhaUsuario() == null) {
-            throw new RuntimeException("Senha é obrigatória");
-        }
-        if (usuario.getApelidoUsuario() == null) {
-            throw new RuntimeException("Apelido é obrigatório");
-        }
-        if (usuarioRepository.findByNomeUsuario(usuario.getNomeUsuario()) != null) {
-            throw new RuntimeException("Usuário já cadastrado");
-        } else if (usuarioRepository.findByEmailUsuario(usuario.getEmailUsuario()) != null) {
-            throw new RuntimeException("Email já cadastrado");
-        } else {
-            return usuarioRepository.save(usuario);
-        }
+    public Usuario registrarUsuario(String emailUsuario, String nomeUsuario, String apelidoUsuario,
+            String senhaUsuario) {
+        
+        Usuario usuario = new Usuario();
+        Permissao permissao = new Permissao();
+
+        
+        permissao.setIdPermissao(1L);
+        usuario.setPermissao(permissao);
+        usuario.setNomeUsuario(nomeUsuario);
+        usuario.setApelidoUsuario(apelidoUsuario);
+        usuario.setEmailUsuario(emailUsuario);
+        usuario.setSenhaUsuario(senhaUsuario);
+        return usuarioRepository.save(usuario);
+
     }
 
     // Método para autenticar o usuário

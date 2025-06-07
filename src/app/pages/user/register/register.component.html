@@ -4,7 +4,7 @@
   >
     <div class="card p-4" style="width: 100%; max-width: 400px">
       <h2 class="text-center mb-4">REGISTRAR</h2>
-      <form>
+      <form (ngSubmit)="OnSubmit()">
         <!-- Campo Email -->
         <div class="mb-3">
           <label class="form-label">Email*</label>
@@ -29,13 +29,13 @@
 
         <!-- Campo Apelido -->
         <div class="mb-3">
-          <label class="form-label">Apelido (Opcional)</label>
+          <label class="form-label">Apelido*</label>
           <input
             type="text"
             class="form-control"
             placeholder="Como quer ser chamado?"
           />
-          <div class="form-text">Máx. 15 caracteres</div>
+          <div class="form-text font-italic">Máx. 15 caracteres</div>
         </div>
 
         <!-- Campo Senha -->
@@ -46,6 +46,18 @@
             class="form-control"
             maxlength="10"
             placeholder="Crie uma senha forte"
+            required
+          />
+        </div>
+
+        <!-- Campo confirmar senha -->
+        <div class="mb-3">
+          <label class="form-label">Confirmar Senha*</label>
+          <input
+            type="password"
+            class="form-control"
+            maxlength="10"
+            placeholder="Confirme a senha"
             required
           />
         </div>

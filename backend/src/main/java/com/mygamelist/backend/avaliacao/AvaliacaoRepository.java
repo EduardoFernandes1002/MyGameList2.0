@@ -13,7 +13,4 @@ public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long> {
     // Método para buscar comentários de um jogo específico.
     @Query("SELECT a FROM Avaliacao a WHERE a.jogo.idJogo = :idJogo")
     Page<Avaliacao> findByJogoId(@Param("idJogo") Long idJogo, Pageable pageable);
-
-    // Método para inserir um comentario sem nota.
-    
 }

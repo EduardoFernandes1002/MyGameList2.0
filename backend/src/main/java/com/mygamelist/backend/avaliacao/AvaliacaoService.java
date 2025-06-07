@@ -40,19 +40,21 @@ public class AvaliacaoService {
         throw new IllegalArgumentException("Jogo não encontrado: " + nomeJogo);
     }
 
-    public Avaliacao saveComentarioSemNota(Long idJogo, Long idUsuario, String comentarioUsuario, BigDecimal notaUsuario, LocalDate dataEnvioComentario, LocalDate dataEnvioNota) {
+    public Avaliacao saveComentarioSemNota(Long idJogo, Long idUsuario, String comentarioUsuario,
+            BigDecimal notaUsuario, LocalDate dataEnvioComentario, LocalDate dataEnvioNota) {
 
-            Avaliacao avaliacao = new Avaliacao();
-            avaliacao.setJogo(jogoRepository.findById(idJogo).orElseThrow());
-            avaliacao.setUsuario(usuarioRepository.findById(idUsuario).orElseThrow());
-            avaliacao.setComentarioUsuario(comentarioUsuario);
-            avaliacao.setNotaUsuario(notaUsuario);
-            avaliacao.setDataComentario(dataEnvioComentario);
-            avaliacao.setDataEnvio(dataEnvioNota);
-            return avaliacaoRepository.save(avaliacao);
+        Avaliacao avaliacao = new Avaliacao();
+        avaliacao.setJogo(jogoRepository.findById(idJogo).orElseThrow());
+        avaliacao.setUsuario(usuarioRepository.findById(idUsuario).orElseThrow());
+        avaliacao.setComentarioUsuario(comentarioUsuario);
+        avaliacao.setNotaUsuario(notaUsuario);
+        avaliacao.setDataComentario(dataEnvioComentario);
+        avaliacao.setDataEnvio(dataEnvioNota);
+        return avaliacaoRepository.save(avaliacao);
     }
 
-    public Avaliacao saveComentarioComNota(Long idJogo, Long idUsuario, String comentarioUsuario, BigDecimal notaUsuario, LocalDate dataEnvioComentario) {
+    public Avaliacao saveComentarioComNota(Long idJogo, Long idUsuario, String comentarioUsuario,
+            BigDecimal notaUsuario, LocalDate dataEnvioComentario) {
 
         Avaliacao avaliacao = new Avaliacao();
         avaliacao.setJogo(jogoRepository.findById(idJogo).orElseThrow());

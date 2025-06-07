@@ -94,4 +94,8 @@ public class Usuario {
         this.dataNascimentoUsuario = dataNascimentoUsuario;
     }
 
+    public void setPermissao(Permissao permissao) {
+        this.permissao = permissao;
+    }
+
 }

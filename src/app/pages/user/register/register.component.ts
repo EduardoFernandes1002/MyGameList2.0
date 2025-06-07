@@ -17,14 +17,14 @@ export class RegisterComponent {
   nomeUsuario: string = '';
   apelidoUsuario: string = '';
   senhaUsuario: string = '';
-  comfirmarSenha: string = '';
+  confirmarSenha: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   OnSubmit(): void {
-    if (this.senhaUsuario === this.comfirmarSenha) {
+    if (this.senhaUsuario === this.confirmarSenha) {
       this.authService.register(this.emailUsuario, this.nomeUsuario, this.apelidoUsuario, this.senhaUsuario).subscribe({
-        next: (response) => {
+        next: (response: any) => {
           console.log('Registro bem-sucedido:', response);
           this.router.navigate(['/login']);
         },

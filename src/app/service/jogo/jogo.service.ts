@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class JogoService {
+
+  
   private apiUrl = 'http://localhost:8080/api/jogo';
 
   constructor(private http: HttpClient) {}
@@ -34,5 +36,10 @@ export class JogoService {
   // Jogos mais bem avaliados (endpoint a ser implementado no backend)
   getJogoMaisBemAvaliados(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/mais-bem-avaliados`);
+  }
+
+  // Busca jogos do ranking
+  getRankingJogos(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/rank`);
   }
 }

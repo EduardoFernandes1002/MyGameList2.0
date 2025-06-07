@@ -26,7 +26,7 @@ public class BackendApplication {
             public void addCorsMappings(@NonNull CorsRegistry registry) {
                 registry.addMapping("/**") // Permite o acesso a todos os endpoints
                         .allowedOrigins("http://localhost:4200") // Permite o acesso apenas do frontend
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Permite os métodos HTTP necessários
+                        .allowedMethods("GET", "POST", "PUT", "DELETE") // Permite os métodos HTTP necessários
 						.allowedHeaders("*") // Permite todos os headers
 						.exposedHeaders("Authorization") // Expose apenas headers necessários
                         .allowCredentials(true) // Permite credenciais (cookies, autenticação HTTP, etc.)

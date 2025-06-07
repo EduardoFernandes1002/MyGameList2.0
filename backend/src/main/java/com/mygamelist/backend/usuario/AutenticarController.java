@@ -27,8 +27,10 @@ public class AutenticarController {
         }
     }
 
-    @PostMapping("/Registrar")
-    public Usuario registrarUsuario(Usuario usuario) {
-        return usuarioService.registrarUsuario(usuario);
+    @PostMapping("/registrar")
+    public ResponseEntity<?> registrarUsuario(@RequestBody String nomeUsuario, String apelidoUsuario,
+            String emailUsuario, String senhaUsuario) {
+        usuarioService.registrarUsuario(nomeUsuario, apelidoUsuario, emailUsuario, senhaUsuario); // 1L é o ID da permissão padrão
+        return ResponseEntity.ok(Map.of("message", "Usuário registrado com sucesso!"));
     }
 }
