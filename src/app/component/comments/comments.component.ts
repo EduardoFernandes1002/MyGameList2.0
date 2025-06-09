@@ -36,8 +36,9 @@ export class CommentsComponent implements OnChanges {
     const slug = this.toSlug(this.nomeJogo);
     this.commentsService.getCommentsByGame(slug, this.currentPage, this.pageSize).subscribe({
       next: (data: any) => {
-        this.comments = data.content;
-        this.hasMore = !data.last;
+        // Novo formato: backend retorna lista direta, não mais paginada
+        this.comments = data;
+        this.hasMore = false; // Não há mais paginação
         this.loading = false;
       },
       error: (error: any) => {
@@ -49,20 +50,7 @@ export class CommentsComponent implements OnChanges {
   }
 
   loadMore(): void {
-    this.currentPage++;
-    this.loading = true;
-    const slug = this.toSlug(this.nomeJogo);
-    this.commentsService.getCommentsByGame(slug, this.currentPage, this.pageSize).subscribe({
-      next: (data: any) => {
-        this.comments = [...this.comments, ...data.content];
-        this.hasMore = !data.last;
-        this.loading = false;
-      },
-      error: (error: any) => {
-        this.loading = false;
-        this.hasMore = false;
-        console.error('Erro ao carregar mais comentários:', error);
-      }
-    });
+    // Apenas desabilita o botão
+    this.hasMore = false;
   }
 }

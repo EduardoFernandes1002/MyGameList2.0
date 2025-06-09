@@ -6,14 +6,14 @@
     <h2 class="text-dark text-center mb-4">Ranking - Top 5</h2>
     <div
       *ngIf="jogos.length > 0; else noTopCinco"
-      class="row g-3 m-1 bg-light rounded-3 p-3 border justify-content-center"
+      class="row row-cols-5 m-1 bg-light rounded-3 p-3 border justify-content-center"
     >
       <div
         *ngFor="let jogo of jogos"
-        class="col-12 col-md-6 col-lg-4 d-flex justify-content-center"
+        class="container d-flex justify-content-center g-1"
       >
-        <div class="card bg-dark text-light shadow-sm h-100 w-100">
-          <a [routerLink]="['/info', toSlug(jogo.nomeJogo)]" class="jogo-link">
+        <div class="card bg-dark text-light shadow-sm">
+          <a [routerLink]="['/info', toSlug(jogo.nomeJogo)]" class="jogo-link text-decoration-none h-100">
             <img
               [src]="jogo.imagemJogo"
               class="card-img-top rounded-top mx-auto d-block"

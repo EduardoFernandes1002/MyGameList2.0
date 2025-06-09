@@ -1,33 +1,50 @@
 package com.mygamelist.backend.avaliacao;
 
+import com.mygamelist.backend.jogo.Jogo;
+import com.mygamelist.backend.jogo.JogoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Controller responsável pelos endpoints de avaliações de jogos.
+ * Permite buscar avaliações por jogo (via slug) e outras operações futuras.
+ */
 @RestController
 @RequestMapping("/api/avaliacao")
 public class AvaliacaoController {
-
+    /**
+     * Serviço de avaliações.
+     */
     @Autowired
     private AvaliacaoService avaliacaoService;
 
-    @PostMapping
-    public Avaliacao createAvaliacao(@RequestBody Avaliacao avaliacao) {
-        return avaliacaoService.saveAvaliacao(avaliacao);
-    }
+    /**
+     * Repositório de jogos.
+     */
+    @Autowired
+    private JogoRepository jogoRepository;
 
+    /**
+     * Busca avaliações de um jogo a partir do slug (nome formatado).
+     * @param slug slug do nome do jogo
+     * @param pageable informações de paginação
+     * @return lista de avaliações do jogo
+     */
     @GetMapping("/jogo/comment/{slug}")
-    public PageResponse<Avaliacao> getAvaliacoesByJogo(@PathVariable("slug") String slug, Pageable pageable) {
+    public List<Map<String, Object>> getAvaliacoesByJogo(@PathVariable("slug") String slug, Pageable pageable) {
         String nomeJogo = slug.replace("-", " ");
-        Page<Avaliacao> page = avaliacaoService.getAvaliacoesByJogo(nomeJogo, pageable);
-        PageResponse<Avaliacao> response = new PageResponse<>();
-        response.setContent(page.getContent());
-        response.setPageNumber(page.getNumber());
-        response.setPageSize(page.getSize());
-        response.setTotalElements(page.getTotalElements());
-        response.setTotalPages(page.getTotalPages());
-        response.setLast(page.isLast());
-        return response;
+        // Buscar o jogo pelo nome
+        Jogo jogo = jogoRepository.findByNomeJogo(nomeJogo);
+        if (jogo == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Jogo não encontrado");
+        }
+        // Buscar avaliações pelo id do jogo
+        return avaliacaoService.getAvaliacoesByJogo(jogo.getIdJogo(), pageable);
     }
 }

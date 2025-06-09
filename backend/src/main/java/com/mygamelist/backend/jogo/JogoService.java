@@ -41,7 +41,7 @@ public class JogoService {
     }
 
      public List<Map<String, Object>> findRankJogos() {
-        List<Jogo> jogos = jogoRepository.findAll(PageRequest.of(0, 5, Sort.by("totalNotaJogo").descending()))
+        List<Jogo> jogos = jogoRepository.findAll(PageRequest.of(0, 10, Sort.by("totalNotaJogo").descending()))
                 .getContent();
 
         // Monta um map para cada jogo com nome, nota, generos e plataformas (listas completas)

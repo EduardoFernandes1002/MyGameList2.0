@@ -39,7 +39,6 @@ public class UsuarioService {
         
         Usuario usuario = new Usuario();
         Permissao permissao = new Permissao();
-
         
         permissao.setIdPermissao(1L);
         usuario.setPermissao(permissao);
