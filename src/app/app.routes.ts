@@ -16,11 +16,11 @@ import { authGuard } from './guard/auth/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Home' },
-  { path: 'perfil/:nomeUsuario', component: PerfilComponent, title: 'Perfil', canActivate: [authGuard]},
+  { path: 'perfil/:nomeUsuario', component: PerfilComponent, title: 'Perfil', canActivate: [authGuard] },
   { path: 'info/:nomeJogo', component: InfoGameComponent, title: 'Informações' },
   { path: 'rank', component: RankComponent, title: 'Ranking' },
   { path: 'admin', component: AdminComponent, title: 'Administração' },
-  { path: 'recomendado', component: RecomendedComponent, title: 'Recomendação' },
+  { path: 'recomendado', component: RecomendedComponent, title: 'Recomendação', canActivate: [authGuard] },
   { path: 'categoria', component: CategoryComponent, title: 'Categoria' },
   { path: 'ajuda', component: HelpComponent, title: 'Ajuda/FAQ' },
   { path: 'descoberta', component: DiscoverComponent, title: 'Descoberta' },

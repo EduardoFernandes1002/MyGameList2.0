@@ -38,7 +38,7 @@ export class NavbarComponent {
   navItems = [
     { label: 'Home', path: '/' },
     { label: 'Rank', path: '/rank' },
-    { label: 'Recomendações', path: '/recomendado' },
+    { label: 'Recomendações', path: '/recomendado'},
     { label: 'Categorias', path: '/categoria' },
     { label: 'Descoberta', path: '/descoberta' },
     { label: 'Ajuda/FAQ', path: '/ajuda' },

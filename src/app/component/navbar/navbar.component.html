@@ -16,8 +16,7 @@
     <!-- Itens do Navbar (inicial) -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
-        @for (item of navItems; track item.path) {
-        <li class="nav-item">
+        <li class="nav-item" *ngFor="let item of navItems" [hidden]="item.label === 'Recomendações' && !isAuthenticated()">
           <a
             class="nav-link"
             [routerLink]="item.path"
@@ -27,7 +26,6 @@
             {{ item.label }}
           </a>
         </li>
-        }
       </ul>
 
       <!-- Links de Perfil -->
