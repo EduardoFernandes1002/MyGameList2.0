@@ -1,24 +1,36 @@
 <div class="container mt-4 mb-5">
-  <h1 class="text-center text-dark mb-5">Ajuda / FAQ</h1>
+  <h1 class="text-center mb-5">Ajuda / FAQ</h1>
 
-  <div class="accordion" id="faqAccordion">
-    <div class="accordion-item" *ngFor="let item of items">
-      <h2 class="accordion-header" id="headingOne">
+  <div class="mb-4 d-flex justify-content-center">
+    <input
+      type="text"
+      class="form-control w-50"
+      placeholder="Pesquisar pergunta..."
+      [(ngModel)]="pesquisarPergunta"
+      (ngModelChange)="paginaAtual = 1"
+    />
+  </div>
+
+  <div class="accordion help-accordion" id="faqAccordion">
+    <div class="accordion-item help-accordion-item" *ngFor="let item of filteredItems; let i = index">
+      <h2 class="accordion-header help-accordion-header" [id]="'heading' + i ">
         <button
-          class="accordion-button"
+          class="accordion-button help-accordion-btn"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#collapseOne"
-          aria-expanded="true"
-          aria-controls="collapseOne"
+          [attr.data-bs-target]="'#collapse' + i"
+          [class.collapsed]="i !== 0"
+          [attr.aria-expanded]="i === 0 ? 'true' : 'false'"
+          [attr.aria-controls]="'collapse' + i"
         >
           {{ item.pergunta }}
         </button>
       </h2>
       <div
-        id="collapseOne"
-        class="accordion-collapse collapse show"
-        aria-labelledby="headingOne"
+        [id]="'collapse' + i"
+        class="accordion-collapse collapse"
+        [class.show]="i === 0"
+        [attr.aria-labelledby]="'heading' + i"
         data-bs-parent="#faqAccordion"
       >
         <div class="accordion-body">
@@ -27,4 +39,34 @@
       </div>
     </div>
   </div>
+
+  <nav *ngIf="totalPages > 1" class="mt-4 d-flex justify-content-center">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="paginaAtual === 1">
+        <button
+          class="page-link"
+          (click)="goToPage(paginaAtual - 1)"
+          [disabled]="paginaAtual === 1"
+        >
+          Anterior
+        </button>
+      </li>
+      <li
+        class="page-item"
+        *ngFor="let page of [].constructor(totalPages); let p = index"
+        [class.active]="paginaAtual === p + 1"
+      >
+        <button class="page-link" (click)="goToPage(p + 1)">{{ p + 1 }}</button>
+      </li>
+      <li class="page-item" [class.disabled]="paginaAtual === totalPages">
+        <button
+          class="page-link"
+          (click)="goToPage(paginaAtual + 1)"
+          [disabled]="paginaAtual === totalPages"
+        >
+          Próxima
+        </button>
+      </li>
+    </ul>
+  </nav>
 </div>
