@@ -1,43 +1,109 @@
 package com.mygamelist.backend.avaliacao;
 
-import com.mygamelist.backend.jogo.Jogo;
 import com.mygamelist.backend.jogo.JogoRepository;
+import com.mygamelist.backend.usuario.UsuarioRepository;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import org.springframework.stereotype.Service;
+
+/**
+ * Serviço responsável pelas regras de negócio relacionadas às avaliações de jogos.
+ * Permite buscar avaliações por jogo, salvar comentários e notas.
+ */
 @Service
 public class AvaliacaoService {
+    /**
+     * Repositório de usuários.
+     */
+    private final UsuarioRepository usuarioRepository;
 
+    /**
+     * Repositório de avaliações.
+     */
     @Autowired
     private AvaliacaoRepository avaliacaoRepository;
 
+    /**
+     * Repositório de jogos.
+     */
     @Autowired
     private JogoRepository jogoRepository;
 
-    public Avaliacao saveAvaliacao(Avaliacao avaliacao) {
+    /**
+     * Construtor para injeção de dependência do repositório de usuários.
+     */
+    AvaliacaoService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
+
+    /**
+     * Busca todas as avaliações de um jogo específico, com suporte a paginação.
+     * @param idJogo id do jogo
+     * @param pageable informações de paginação
+     * @return lista de avaliações em formato de mapa (id, usuário, comentário, nota, data do comentário)
+     */
+    public List<Map<String, Object>> getAvaliacoesByJogo(Long idJogo, Pageable pageable) {
+        List<Avaliacao> avaliacoes = avaliacaoRepository.findByJogo_IdJogo(
+                idJogo, pageable);
+        return avaliacoes.stream().map(avaliacao -> {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("idAvaliacao", avaliacao.getIdAvaliacao());
+            map.put("usuario", avaliacao.getUsuario().getNomeUsuario());
+            map.put("comentarioUsuario", avaliacao.getComentarioUsuario());
+            map.put("notaUsuario", avaliacao.getNotaUsuario());
+            map.put("dataComentario", avaliacao.getDataComentario());
+            return map;
+        }).toList();
+    }
+
+    /**
+     * Salva um comentário de avaliação sem nota.
+     * @param idJogo id do jogo
+     * @param idUsuario id do usuário
+     * @param comentarioUsuario texto do comentário
+     * @param notaUsuario nota atribuída
+     * @param dataEnvioComentario data do comentário
+     * @param dataEnvioNota data da nota
+     * @return avaliação salva juntamente com a nota
+     */
+    public Avaliacao saveComentarioSemNota(Long idJogo, Long idUsuario, String comentarioUsuario,
+            BigDecimal notaUsuario, LocalDate dataEnvioComentario, LocalDate dataEnvioNota) {
+
+        Avaliacao avaliacao = new Avaliacao();
+        avaliacao.setJogo(jogoRepository.findById(idJogo).orElseThrow());
+        avaliacao.setUsuario(usuarioRepository.findById(idUsuario).orElseThrow());
+        avaliacao.setComentarioUsuario(comentarioUsuario);
+        avaliacao.setNotaUsuario(notaUsuario);
+        avaliacao.setDataComentario(dataEnvioComentario);
+        avaliacao.setDataEnvio(dataEnvioNota);
         return avaliacaoRepository.save(avaliacao);
     }
 
-    public List<Avaliacao> getAvaliacoesByJogo(String nomeJogo) {
-        for (Jogo j : jogoRepository.findAll()) {
-            if (j.getNomeJogo().trim().equalsIgnoreCase(nomeJogo.trim())) {
-                return avaliacaoRepository.findByJogoId(j.getIdJogo());
-            }
-        }
-        throw new IllegalArgumentException("Jogo não encontrado: " + nomeJogo);
-    }
+    /**
+     * Salva um comentário de avaliação com nota.
+     * @param idJogo id do jogo
+     * @param idUsuario id do usuário
+     * @param comentarioUsuario texto do comentário
+     * @param notaUsuario nota atribuída
+     * @param dataEnvioComentario data do comentário
+     * @return avaliação salva
+     */
+    public Avaliacao saveComentarioComNota(Long idJogo, Long idUsuario, String comentarioUsuario,
+            BigDecimal notaUsuario, LocalDate dataEnvioComentario) {
 
-    public Page<Avaliacao> getAvaliacoesByJogo(String nomeJogo, Pageable pageable) {
-        for (Jogo j : jogoRepository.findAll()) {
-            if (j.getNomeJogo().trim().equalsIgnoreCase(nomeJogo.trim())) {
-                return avaliacaoRepository.findByJogoId(j.getIdJogo(), pageable);
-            }
-        }
-        throw new IllegalArgumentException("Jogo não encontrado: " + nomeJogo);
+        Avaliacao avaliacao = new Avaliacao();
+        avaliacao.setJogo(jogoRepository.findById(idJogo).orElseThrow());
+        avaliacao.setUsuario(usuarioRepository.findById(idUsuario).orElseThrow());
+        avaliacao.setComentarioUsuario(comentarioUsuario);
+        avaliacao.setDataComentario(dataEnvioComentario);
+        return avaliacaoRepository.save(avaliacao);
     }
 }

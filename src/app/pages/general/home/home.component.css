@@ -1,27 +1,19 @@
-/* Estilo para os botões do carrossel */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  filter: invert(1); /* Torna os ícones brancos */
-}
-
-
-.carousel-inner .card {
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.carousel-inner .card:hover {
-  transform: scale(0.99);
-  transition: transform 0.3s ease;
-}
-
 .jogo-link {
   text-decoration: none; /* Remove o sublinhado do link */
   color: white; /* Mantém a cor do texto do card */
 }
 
+
+
 .card-img-top {
-  max-height: 30vh;
+  height: 200px;
   object-fit: cover;
-  border-radius: 20vh 20vh 0 0; /* Arredonda os cantos superiores do card */
+  background: #222;
+  border-radius: 20px 20px 0 0;
+  display: block;
+  box-shadow: none;
+}
+
+.card {
+  width: 300px;
 }

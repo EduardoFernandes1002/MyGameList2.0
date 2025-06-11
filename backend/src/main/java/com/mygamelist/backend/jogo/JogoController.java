@@ -3,6 +3,8 @@ package com.mygamelist.backend.jogo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
 @RequestMapping("/api/jogo")
@@ -27,4 +29,8 @@ public class JogoController {
         return jogoService.findJogosByTopCinco();
     }
 
+    @GetMapping("/rank")
+    public List<?> getRank() {
+        return jogoService.findRankJogos();
+    }
 }

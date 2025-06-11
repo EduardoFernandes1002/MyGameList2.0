@@ -15,14 +15,12 @@ import { RouterModule } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   jogos: any[] = [];
-  recommendedGames: any[] = [];
   highestRatedGames: any[] = [];
 
   constructor(private jogoService: JogoService) {}
 
   ngOnInit(): void {
     this.loadTopFive();
-    this.loadRecommendedGames();
     this.loadHighestRatedGames();
   }
 
@@ -34,17 +32,6 @@ export class HomeComponent implements OnInit {
       },
       error: (error: any) => {
         console.error('Erro ao carregar top 5:', error);
-      }
-    });
-  }
-
-  loadRecommendedGames(): void {
-    this.jogoService.getJogoRecomendados().subscribe({
-      next: (data: any) => {
-        this.recommendedGames = data.content || data;
-      },
-      error: (error: any) => {
-        console.error('Erro ao carregar recomendados:', error);
       }
     });
   }

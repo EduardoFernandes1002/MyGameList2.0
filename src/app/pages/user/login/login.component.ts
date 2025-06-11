@@ -25,7 +25,7 @@ export class LoginComponent {
       const token = response.token;
       if (token) {
         localStorage.setItem('token', token);
-        this.authService['isLogedInSubject'].next(true); // <-- Notifica o AuthService
+        this.authService['isLoggedInSubject'].next(true); // <-- Notifica o AuthService
         this.router.navigate(['/']); // Ajuste a rota conforme necessário
       } else {
         console.error('Token não encontrado na resposta.');
