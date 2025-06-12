@@ -1,11 +1,12 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommentsService } from '../../service/comments/comments.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-comments',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.css'
 })
@@ -53,4 +54,10 @@ export class CommentsComponent implements OnChanges {
     // Apenas desabilita o botão
     this.hasMore = false;
   }
+
+  onSubmit(): void {
+    //text
 }
+}
+
+

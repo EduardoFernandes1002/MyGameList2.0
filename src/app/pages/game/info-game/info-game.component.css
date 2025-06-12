@@ -1,0 +1,9 @@
+.NotaDoUsuario{
+    display: flex;
+    border-radius: 1vh;
+    cursor: pointer;
+
+}
+.NotaDoUsuario:hover{
+    background-color: rgb(249, 252, 226);
+}

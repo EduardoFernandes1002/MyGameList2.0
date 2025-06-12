@@ -28,6 +28,32 @@
           <div class="col-12 col-md-6">
             <p class="mb-2"><strong>Desenvolvedora: </strong> <span class="text-secondary">{{ jogo.desenvolvedora?.nomeDesenvolvedora }}</span></p>
             <p class="mb-2"><strong>Distribuidora: </strong> <span class="text-secondary">{{ jogo.distribuidora?.nomeDistribuidora }}</span></p>
+            <button class="NotaDoUsuario"data-bs-toggle="modal" data-bs-target="#modalAdicionarComentario">Deixar minha nota</button>
+
+            <div class="modal fade" id="modalAdicionarComentario" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Adicionar Nota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Nota para o Jogo</label>
+                    <input  type="range" id="rating" name="rating" min="0" max="10" step="0.1" value="5" oninput="output.value = rating.value">
+                    <output name="output" id="output">5</output>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Nota para Ambientação</label>
+                    <input  type="range" id="rating2" name="rating2" min="0" max="10" step="0.1" value="5" oninput="output2.value = rating2.value">
+                    <output name="output2" id="output2">5</output>
+                  </div>
+                  <div class="modal-body">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
           </div>
           <div class="col-12 col-md-6 d-flex align-items-start justify-content-md-end">
             <p class="mb-2"><strong>Data de Lançamento: </strong> <span class="text-secondary">{{ jogo.dataLancamentoJogo | date }}</span></p>

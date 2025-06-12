@@ -1,8 +1,12 @@
 <div class="comments-section">
 
-
-  <textarea class = "ComentarioUsuario" type="text" placeholder="Digite seu comentario"></textarea>
-  <hr />
+<div>
+  <form (ngSubmit)="onSubmit()">
+    <textarea class = "ComentarioUsuario" type="text" placeholder="Digite seu comentario"></textarea>
+    <button class="BotaoComentario d-flex flex-end" >Enviar Comentario</button>
+  </form>
+</div>
+  <hr/>
   <div *ngIf="loading" class="text-center my-3">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Carregando...</span>

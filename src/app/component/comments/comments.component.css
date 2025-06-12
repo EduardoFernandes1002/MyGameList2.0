@@ -46,4 +46,19 @@
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
+  padding-left: 1rem;
+  padding-top: 1rem;
 }
+.BotaoComentario{
+  display: flex;
+  justify-self: flex-end;
+  margin: 1rem;
+  height: 4vh;
+  border-radius: 1rem;
+  text-align: start;
+  cursor: pointer;
+
+}
+.BotaoComentario:hover{
+  background-color: rgb(210, 250, 253);
+} 
