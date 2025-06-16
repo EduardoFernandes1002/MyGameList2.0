@@ -4,7 +4,7 @@ import { PerfilComponent } from './pages/usuario/perfil/perfil.component';
 import { InfoGameComponent } from './pages/jogo/info-game/info-game.component';
 import { RankComponent } from './pages/jogo/rank/rank.component';
 import { AdminComponent } from './pages/usuario/admin/admin.component';
-import { RecomendedComponent } from './pages/jogo/recomended/recomendado.component';
+import { RecomendadoComponent } from './pages/jogo/recomended/recomendado.component';
 import { CategoryComponent } from './pages/geral/categoria/category.component';
 import { AjudaComponent } from './pages/geral/ajuda/ajuda.component';
 import { DiscoverComponent } from './pages/jogo/discover/discover.component';
@@ -20,7 +20,7 @@ export const routes: Routes = [
   { path: 'info/:nomeJogo', component: InfoGameComponent, title: 'Informações' },
   { path: 'rank', component: RankComponent, title: 'Ranking' },
   { path: 'admin', component: AdminComponent, title: 'Administração' },
-  { path: 'recomendado', component: RecomendedComponent, title: 'Recomendação', canActivate: [authGuard] },
+  { path: 'recomendado', component: RecomendadoComponent, title: 'Recomendação', canActivate: [authGuard] },
   { path: 'categoria', component: CategoryComponent, title: 'Categoria' },
   { path: 'ajuda', component: AjudaComponent, title: 'Ajuda/FAQ' },
   { path: 'descoberta', component: DiscoverComponent, title: 'Descoberta' },
