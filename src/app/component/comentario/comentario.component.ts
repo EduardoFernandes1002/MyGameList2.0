@@ -1,15 +1,15 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CommentsService } from '../../service/comments/comments.service';
+import { ComentarioService } from  '../../service/comentario-service/comentario.service';
 
 @Component({
-  selector: 'app-comments',
+  selector: 'app-comentario',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './comments.component.html',
-  styleUrl: './comments.component.css'
+  templateUrl: './comentario.component.html',
+  styleUrl: './comentario.component.css'
 })
-export class CommentsComponent implements OnChanges {
+export class ComentarioComponent implements OnChanges {
   @Input() nomeJogo: string = '';
   comments: any[] = [];
   currentPage: number = 0;
@@ -17,7 +17,7 @@ export class CommentsComponent implements OnChanges {
   loading: boolean = false;
   hasMore: boolean = true;
 
-  constructor(private commentsService: CommentsService) {}
+  constructor(private comentarioService: ComentarioService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['nomeJogo'] && this.nomeJogo) {
@@ -34,7 +34,7 @@ export class CommentsComponent implements OnChanges {
   loadComments(): void {
     this.loading = true;
     const slug = this.toSlug(this.nomeJogo);
-    this.commentsService.getCommentsByGame(slug, this.currentPage, this.pageSize).subscribe({
+    this.comentarioService.getCommentsByGame(slug, this.currentPage, this.pageSize).subscribe({
       next: (data: any) => {
         // Novo formato: backend retorna lista direta, não mais paginada
         this.comments = data;

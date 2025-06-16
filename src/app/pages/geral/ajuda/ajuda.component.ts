@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-help',
+  selector: 'app-ajuda',
   imports: [CommonModule, FormsModule],
-  templateUrl: './help.component.html',
-  styleUrl: './help.component.css',
+  templateUrl: './ajuda.component.html',
+  styleUrl: './ajuda.component.css',
 })
-export class HelpComponent {
+export class AjudaComponent {
   items = [
     {
       pergunta: 'Como criar uma conta?',

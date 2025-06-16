@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { JogoService } from '../../../service/jogo/jogo.service';
-import { CommentsComponent } from '../../../component/comments/comments.component';
+import { JogoService } from '../../../service/jogo-service/jogo.service';
+import { ComentarioComponent } from '../../../component/comentario/comentario.component';
 
 @Component({
   selector: 'app-info-game',
-  imports: [CommonModule, CommentsComponent],
+  imports: [CommonModule, ComentarioComponent],
   templateUrl: './info-game.component.html',
   styleUrl: './info-game.component.css'
 })

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CommentsService {
+export class ComentarioService {
   private apiUrl = 'http://localhost:8080/api/avaliacao';
 
   constructor(private http: HttpClient) {}

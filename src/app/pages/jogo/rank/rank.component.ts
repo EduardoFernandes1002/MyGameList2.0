@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { JogoService } from '../../../service/jogo/jogo.service';
+import { JogoService } from '../../../service/jogo-service/jogo.service';
 
 @Component({
   selector: 'app-rank',
