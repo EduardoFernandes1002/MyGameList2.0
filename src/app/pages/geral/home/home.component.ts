@@ -3,17 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { JogoService } from '../../../service/jogo-service/jogo.service';
 import { RouterModule } from '@angular/router';
-
+import { GameCardComponent } from '../../../component/game-card/game-card.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ CommonModule, FormsModule, RouterModule ],
+  imports: [CommonModule, FormsModule, RouterModule, GameCardComponent],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
-
 export class HomeComponent implements OnInit {
-
   jogos: any[] = [];
   highestRatedGames: any[] = [];
 
@@ -27,23 +25,22 @@ export class HomeComponent implements OnInit {
   loadTopFive(): void {
     this.jogoService.getJogoResumidoByTopCinco().subscribe({
       next: (data: any) => {
-        this.jogos = data.content || data;
-        
+        this.jogos = (data && data.content) ? data.content : (data || []);
       },
       error: (error: any) => {
         console.error('Erro ao carregar top 5:', error);
-      }
+      },
     });
   }
 
   loadHighestRatedGames(): void {
     this.jogoService.getJogoMaisBemAvaliados().subscribe({
       next: (data: any) => {
-        this.highestRatedGames = data.content || data;
+        this.highestRatedGames = (data && data.content) ? data.content : (data || []);
       },
       error: (error: any) => {
         console.error('Erro ao carregar mais bem avaliados:', error);
-      }
+      },
     });
   }
 
@@ -55,10 +52,11 @@ export class HomeComponent implements OnInit {
     return chunks;
   }
 
-  public toSlug(nomeJogo: string): string {
-    return nomeJogo
-      .toLowerCase()
-      .replace(/\s+/g, '-') // troca espaços por hífen
-    }
-}
+  public toSlug = (nomeJogo: string): string => {
+    return nomeJogo ? nomeJogo.toLowerCase().replace(/\s+/g, '-') : '';
+  };
 
+  public trackBySlug = (index: number, jogo: any): string => {
+    return this.toSlug(jogo?.nomeJogo);
+  };
+}

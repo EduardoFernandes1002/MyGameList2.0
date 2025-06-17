@@ -1,0 +1,29 @@
+<div class="card bg-dark text-light shadow-sm game-card">
+  <a [routerLink]="routerLink" class="jogo-link text-decoration-none h-100">
+    <img
+      [src]="jogo.imagemJogo"
+      class="card-img-top rounded-top mx-auto d-block"
+      alt="{{ jogo.nomeJogo }}"
+    />
+    <div class="row g-0 align-items-center justify-content-center">
+      <div class="col-12">
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ jogo.nomeJogo }}</h5>
+          <p class="card-text">
+            Nota: {{ jogo.totalNotaJogo }}
+          </p>
+          <p class="card-text">
+            <span *ngFor="let genero of jogo.generos; let last = last">
+              {{ genero.nomeGenero || genero }}<span *ngIf="!last">, </span>
+            </span>
+          </p>
+          <p class="card-text">
+            <span *ngFor="let plataforma of jogo.plataformas; let last = last">
+              {{ plataforma.nomePlataforma || plataforma }}<span *ngIf="!last">, </span>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
