@@ -5,21 +5,33 @@
 
       <!-- Lista de Rankings -->
       <div class="row g-3 justify-content-center">
-        <div class="col-12">
+        <div  class="col-12">
           <div class="card shadow-sm hover-effect">
-            <div class="row g-0 align-items-center" *ngIf="jogos.length > 0; else noRank">
-              <div class="col-12 mb-2" *ngFor="let jogo of jogos; trackBy: trackBySlug">
-                <app-game-card [jogo]="jogo" tipo="rank" [routerLink]="['/info', toSlug(jogo.nomeJogo)]"></app-game-card>
+            <div class="row g-0 align-items-center" *ngFor="let jogo of jogos">
+              <div class="col-1 text-center">
+                <span class="badge bg-dark fs-5"> posicao </span>
               </div>
-            </div>
-            <ng-template #noRank>
-              <div class="row g-0 align-items-center">
-                <div class="col-12 mb-2" *ngFor="let i of [1,2,3,4,5]">
-                  <div class="card bg-dark text-light shadow-sm" style="min-width:220px;max-width:260px;height:100%;opacity:0.3;"></div>
+              <div class="col-2">
+                <img [src]="jogo.imagemJogo" 
+                    class="img-fluid rounded-start" 
+                    alt="Capa do jogo"
+                    style="height: 80px; object-fit: cover;">
+              </div>
+              <div class="col-7 ps-3">
+                <h5 class="card-title mb-1">{{ jogo.nomeJogo }}</h5>
+                <div class="d-flex gap-2">
+                  <span class="badge bg-success" *ngFor="let genero of jogo.generos; let last = last">
+                    {{ genero.nomeGenero }}
+                  </span>
+                  <span class="badge bg-info" *ngFor="let plataformas of jogo.plataformas; let last = last">
+                    {{ plataformas.nomePlataforma }}
+                  </span>
                 </div>
               </div>
-              <p class="text-center text-muted">Nenhum jogo no ranking ainda.</p>
-            </ng-template>
+              <div class="col-2 text-end pe-3">
+                <span class="text-dark fw-bold fs-5">{{ jogo.totalNotaJogo }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -30,11 +42,13 @@
           <li class="page-jogo">
             <button class="page-link">&laquo;</button>
           </li>
+          
           <li class="page-jogo">
-            <button class="page-link"></button>
-            <span class="page-link">...</span>
+            <button  class="page-link" ></button>
+            <span  class="page-link">...</span>
           </li>
-          <li class="page-jogo">
+      
+          <li class="page-jogo" >
             <button class="page-link"></button>
           </li>
         </ul>
