@@ -36,10 +36,10 @@ public class UsuarioService {
 
     public Usuario registrarUsuario(String emailUsuario, String nomeUsuario, String apelidoUsuario,
             String senhaUsuario) {
-        
+
         Usuario usuario = new Usuario();
         Permissao permissao = new Permissao();
-        
+
         permissao.setIdPermissao(1L);
         usuario.setPermissao(permissao);
         usuario.setNomeUsuario(nomeUsuario);
@@ -53,15 +53,15 @@ public class UsuarioService {
     // Método para autenticar o usuário
     // Verifica se o usuário existe e se a senha está correta
     public String autenticar(Usuario usuario) {
-         Usuario user;
-    if (usuario.getEmailUsuario() != null) {
-        user = usuarioRepository.findByEmailUsuario(usuario.getEmailUsuario());
-    } else {
-        user = usuarioRepository.findByNomeUsuario(usuario.getNomeUsuario());
-    }
-    if (user != null && user.getSenhaUsuario().equals(usuario.getSenhaUsuario())) {
-        return jwtUtil.generateToken(user.getNomeUsuario());
-    }
+        Usuario user;
+        if (usuario.getEmailUsuario() != null) {
+            user = usuarioRepository.findByEmailUsuario(usuario.getEmailUsuario());
+        } else {
+            user = usuarioRepository.findByNomeUsuario(usuario.getNomeUsuario());
+        }
+        if (user != null && user.getSenhaUsuario().equals(usuario.getSenhaUsuario())) {
+            return jwtUtil.generateToken(user.getNomeUsuario());
+        }
         return null;
     }
 

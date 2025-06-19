@@ -12,6 +12,7 @@ import { ConfigComponent } from './pages/usuario/config/config.component';
 import { LoginComponent } from './pages/usuario/login/login.component';
 import { RegisterComponent } from './pages/usuario/register/register.component';
 import { authGuard } from './guard/auth/auth.guard';
+import { TestComponentsComponent } from './test/test-components/test-components.component';
 
 
 export const routes: Routes = [
@@ -27,4 +28,5 @@ export const routes: Routes = [
   { path: 'config/:nomeUsuario', component: ConfigComponent, title: 'Configuração', canActivate: [authGuard] },
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'registro', component: RegisterComponent, title: 'Registro' },
+  { path: 't3st3s', component: TestComponentsComponent, title: 'Testes'}
 ];

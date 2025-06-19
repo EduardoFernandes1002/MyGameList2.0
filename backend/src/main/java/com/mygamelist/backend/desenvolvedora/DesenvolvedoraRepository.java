@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DesenvolvedoraRepository extends JpaRepository<Desenvolvedora, Long> {
-    
+
 }

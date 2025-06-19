@@ -40,11 +40,12 @@ public class JogoService {
         }).toList();
     }
 
-     public List<Map<String, Object>> findRankJogos() {
+    public List<Map<String, Object>> findRankJogos() {
         List<Jogo> jogos = jogoRepository.findAll(PageRequest.of(0, 10, Sort.by("totalNotaJogo").descending()))
                 .getContent();
 
-        // Monta um map para cada jogo com nome, nota, generos e plataformas (listas completas)
+        // Monta um map para cada jogo com nome, nota, generos e plataformas (listas
+        // completas)
         return jogos.stream().map(jogo -> {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("nomeJogo", jogo.getNomeJogo());

@@ -19,5 +19,4 @@ public class PlataformaService {
         return plataformaRepository.findJogosByPlataforma(nomePlataforma);
     }
 
-    
 }

@@ -10,7 +10,8 @@ import jakarta.persistence.*;
 
 /**
  * Entidade que representa uma avaliação de um jogo feita por um usuário.
- * Cada avaliação pode conter nota, comentário, data de envio e está associada a um jogo e um usuário.
+ * Cada avaliação pode conter nota, comentário, data de envio e está associada a
+ * um jogo e um usuário.
  */
 @Entity
 @Table(name = "avaliacao")
