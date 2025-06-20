@@ -3,17 +3,20 @@
 
   <!-- Ranking (Top 5) -->
   <section class="home-section">
-  <h2 class="topfive-title">Ranking - Top 5</h2>
-  <div *ngIf="jogos.length > 0" class="topfive-row">
-    <div *ngFor="let jogo of jogos; trackBy: trackBySlug" class="home-card-container">
-      <app-game-card
-        [jogo]="jogo"
-        [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
-        tipo="default"
-      ></app-game-card>
+    <h2 class="topfive-title">Ranking - Top 5</h2>
+    <div *ngIf="jogos.length > 0" class="topfive-row">
+      <div
+        *ngFor="let jogo of jogos; trackBy: trackBySlug"
+        class="home-card-container"
+      >
+        <app-game-card
+          [jogo]="jogo"
+          [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
+          tipo="default"
+        ></app-game-card>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- Jogos Mais Bem Avaliados -->
   <section class="mb-5">
@@ -21,7 +24,7 @@
     <div
       *ngIf="highestRatedGames.length > 0; else noMaisBemAvaliados"
       class="row g-3 bg-light rounded-3 p-3 border m-1 justify-content-center"
-    > 
+    >
       <div
         *ngFor="let jogo of highestRatedGames"
         class="col-12 col-md-6 col-lg-3"

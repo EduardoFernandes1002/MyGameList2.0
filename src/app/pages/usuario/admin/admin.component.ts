@@ -14,15 +14,12 @@ export class AdminComponent implements OnInit {
   selectedTags: string[] = [];
   allGeneros: any[] = [];
   filteredGeneros: any[] = [];
-  tagInput = '';
-  showSuggestions = false;
 
   // Formulário do jogo
   jogoForm: FormGroup;
 jogos: any;
 
   constructor(
-    private TagService: TagService,
     private fb: FormBuilder
   ) {
     this.jogoForm = this.fb.group({
@@ -35,58 +32,9 @@ jogos: any;
       generos: [[]]
     });
   }
-
   ngOnInit(): void {
-    this.carregarGeneros();
   }
 
-  carregarGeneros(): void {
-    this.TagService.getGeneros().subscribe({
-      next: (generos) => {
-        this.allGeneros = generos;
-      },
-      error: (err) => {
-        console.error('Erro ao carregar gêneros:', err);
-      }
-    });
-  }
-
-  searchTags(): void {
-    if (this.tagInput.length > 0) {
-      this.TagService.searchGeneros(this.tagInput).subscribe({
-        next: (generos) => {
-          this.filteredGeneros = generos
-            .map(g => g.nomeGenero)
-            .filter(g => !this.selectedTags.includes(g));
-          this.showSuggestions = true;
-        },
-        error: (err) => {
-          console.error('Erro na busca:', err);
-        }
-      });
-    } else {
-      this.filteredGeneros = [];
-      this.showSuggestions = false;
-    }
-  }
-
-  addTag(tag: string): void {
-    if (!this.selectedTags.includes(tag)) {
-      this.selectedTags.push(tag);
-      this.jogoForm.get('generos')?.setValue(this.selectedTags);
-      this.tagInput = '';
-      this.showSuggestions = false;
-    }
-  }
-
-  addTagFromInput(): void {
-    if (this.tagInput.trim() && !this.selectedTags.includes(this.tagInput.trim())) {
-      this.selectedTags.push(this.tagInput.trim());
-      this.jogoForm.get('generos')?.setValue(this.selectedTags);
-      this.tagInput = '';
-    }
-    this.showSuggestions = false;
-  }
 
   removeTag(tag: string): void {
     this.selectedTags = this.selectedTags.filter(t => t !== tag);

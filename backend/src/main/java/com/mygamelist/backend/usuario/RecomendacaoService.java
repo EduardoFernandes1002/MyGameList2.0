@@ -1,4 +1,4 @@
-package com.mygamelist.backend.usuario;
+/* package com.mygamelist.backend.usuario;
 
 import com.mygamelist.backend.jogo.JogoRepository;
 import com.mygamelist.backend.lista.ListaRepository;
@@ -38,9 +38,11 @@ public class RecomendacaoService {
          *    - Considerar nota de jogos que o usuário já jogou
          *    - Retornar uma lista de jogos recomendados para o usuário
          * 
-        **/
+         **/
         
 
-        return null;
+       /** return null;
     }
 }
+*/
+

@@ -40,18 +40,18 @@ public class JogoService {
         }).toList();
     }
 
+    // Coleta uma lista com todos os jogos rankeados com paginação
     public List<Map<String, Object>> findRankJogos() {
-        List<Jogo> jogos = jogoRepository.findAll(PageRequest.of(0, 10, Sort.by("totalNotaJogo").descending()))
+        List<Jogo> jogos = jogoRepository.
+                findAll(PageRequest.of(0, 10, Sort.by("totalNotaJogo").descending()))
                 .getContent();
 
-        // Monta um map para cada jogo com nome, nota, generos e plataformas (listas
-        // completas)
+        // Monta um map para cada jogo com nome, nota, generos e a sua imagem
         return jogos.stream().map(jogo -> {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("nomeJogo", jogo.getNomeJogo());
             map.put("totalNotaJogo", jogo.getTotalNotaJogo());
             map.put("generos", jogo.getGeneros());
-            map.put("plataformas", jogo.getPlataformas());
             map.put("imagemJogo", jogo.getImagemJogo());
             return map;
         }).toList();

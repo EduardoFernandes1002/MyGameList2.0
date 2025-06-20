@@ -34,12 +34,12 @@ public class UsuarioService {
         return usuarioRepository.findAllUsuariosByPermissao();
     }
 
-    public Usuario registrarUsuario(String emailUsuario, String nomeUsuario, String apelidoUsuario,
-            String senhaUsuario) {
+    // Registra o usuario adicionando todas suas informações obrigatorias ao banco de dados
+    public Usuario registrarUsuario(String emailUsuario, String nomeUsuario, String apelidoUsuario,String senhaUsuario) {
 
         Usuario usuario = new Usuario();
         Permissao permissao = new Permissao();
-
+        
         permissao.setIdPermissao(1L);
         usuario.setPermissao(permissao);
         usuario.setNomeUsuario(nomeUsuario);
@@ -47,7 +47,6 @@ public class UsuarioService {
         usuario.setEmailUsuario(emailUsuario);
         usuario.setSenhaUsuario(senhaUsuario);
         return usuarioRepository.save(usuario);
-
     }
 
     // Método para autenticar o usuário

@@ -16,10 +16,11 @@ public class GeneroService {
     }
 
     /*
-     * Todos jogos de um unico Genero pelo id do Genero,
+     * Todos jogos de um unico Genero pelo nome do Genero,
      */
     public List<?> findJogosByGenero(String nomeGenero) {
         return generoRepository.findJogosByGeneros(nomeGenero);
     }
+
 
 }

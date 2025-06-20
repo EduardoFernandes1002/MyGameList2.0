@@ -90,22 +90,6 @@
                     <span class="tag-remove" (click)="removeTag(tag)">×</span>
                   </span>
                 </div>
-                <div class="tag-input-container">
-                  <input type="text" 
-                         [(ngModel)]="tagInput" 
-                         [ngModelOptions]="{standalone: true}"
-                         (input)="searchTags()"
-                         (keydown.enter)="addTagFromInput()"
-                         (blur)="addTagFromInput()"
-                         placeholder="Digite para buscar gêneros...">
-                  <div class="suggestions-dropdown" *ngIf="showSuggestions && filteredGeneros.length > 0">
-                    <div class="suggestion-item" 
-                         *ngFor="let genero of filteredGeneros"
-                         (click)="addTag(genero)">
-                      {{ genero }}
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </form>

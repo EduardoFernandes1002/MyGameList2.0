@@ -58,4 +58,6 @@ export class TestComponentsComponent implements OnInit {
   constructor(private jogoService: JogoService, private comentarioService: ComentarioService, private categoriaService: CategoriaService) {}
 
   ngOnInit(): void {}
+
+  
 }
