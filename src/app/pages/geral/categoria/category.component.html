@@ -4,7 +4,7 @@
   <div class="category-section">
     <h2>Gêneros</h2>
     <div class="category-card-row">
-      <div class="category-card" *ngFor="let genero of generos" (click)="verJogosPorCategoria(genero.nomeGenero)">
+      <div class="category-card" *ngFor="let genero of generos" (click)="verJogosPorCategoria('generos',genero.nomeGenero)">
         <h3>{{ genero.nomeGenero }}</h3>
       </div>
     </div>
@@ -13,7 +13,7 @@
   <div class="category-section">
     <h2>Modos de Jogo</h2>
     <div class="category-card-row">
-      <div class="category-card" *ngFor="let modo of modos" (click)="verJogosPorCategoria(modo.nomeModo)">
+      <div class="category-card" *ngFor="let modo of modos" (click)="verJogosPorCategoria('modos', modo.nomeModo)">
         <h3>{{ modo.nomeModo }}</h3>
       </div>
     </div>
@@ -22,7 +22,7 @@
   <div class="category-section">
     <h2>Plataformas</h2>
     <div class="category-card-row">
-      <div class="category-card" *ngFor="let plataforma of plataformas" (click)="verJogosPorCategoria(plataforma.nomePlataforma)">
+      <div class="category-card" *ngFor="let plataforma of plataformas" (click)="verJogosPorCategoria('plataformas', plataforma.nomePlataforma)">
         <h3>{{ plataforma.nomePlataforma }}</h3>
       </div>
     </div>

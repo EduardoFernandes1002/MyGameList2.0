@@ -20,6 +20,6 @@ export class DescobertaService {
   }
 
   getJogosPorModoDeJogo(slugModo: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/modo/${slugModo}/jogos`);
+    return this.http.get<any[]>(`${this.apiUrl}/modos/${slugModo}/jogos`);
   }
 }

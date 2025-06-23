@@ -19,6 +19,6 @@ export class CategoriaService {
   }
 
   getModosDeJogo(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/modo`);
+    return this.http.get<any[]>(`${this.apiUrl}/modos`);
   }
 }

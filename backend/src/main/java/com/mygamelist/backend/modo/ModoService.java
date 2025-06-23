@@ -15,8 +15,8 @@ public class ModoService {
         return modoRepository.findAll();
     }
 
-    public Modo getModoById(Long idModo) {
-        return modoRepository.findById(idModo).orElse(null);
+    public List<?> findJogosByModo(String nomeModo) {
+        return modoRepository.findJogosByModo(nomeModo);
     }
 
 }

@@ -24,8 +24,8 @@ export class CategoryComponent {
 
 
 
-  verJogosPorCategoria(nome: string) {
+  verJogosPorCategoria(tipo: string, nome: string) {
     nome = nome ? nome.toLowerCase().replace(/\s+/g, '-') : '';
-    this.router.navigate(['/descoberta', nome]);
+    this.router.navigate(['/descoberta', tipo, nome]);
   }
 } 

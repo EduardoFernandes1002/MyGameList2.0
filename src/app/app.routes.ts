@@ -24,7 +24,7 @@ export const routes: Routes = [
   { path: 'categoria', component: CategoryComponent, title: 'Categoria' },
   { path: 'ajuda', component: AjudaComponent, title: 'Ajuda/FAQ' },
   { path: 'descoberta/:nomeJogo', component: DiscoverComponent, title: 'Descoberta' },
-  { path: 'descoberta/:nomeCategoria', component: DiscoverComponent, title: 'Descoberta' },
+  { path: 'descoberta/:tipo/:nomeCategoria', component: DiscoverComponent, title: 'Descoberta' },
   { path: 'config/:nomeUsuario', component: ConfigComponent, title: ' ', canActivate: [authGuard] },
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'registro', component: RegisterComponent, title: 'Registro' },
