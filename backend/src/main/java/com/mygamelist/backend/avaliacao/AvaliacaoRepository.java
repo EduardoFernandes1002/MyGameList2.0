@@ -21,4 +21,6 @@ public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long> {
      * @return lista de avaliações
      */
     List<Avaliacao> findByJogo_IdJogo(Long idJogo, Pageable pageable);
+
+    Avaliacao findByUsuario_IdUsuarioAndJogo_IdJogo(Long idUsuario, Long idJogo);
 }

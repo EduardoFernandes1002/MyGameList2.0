@@ -59,7 +59,7 @@ public class AvaliacaoService {
         return avaliacoes.stream().map(avaliacao -> {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("idAvaliacao", avaliacao.getIdAvaliacao());
-            map.put("usuario", avaliacao.getUsuario().getNomeUsuario());
+            map.put("nomeUsuario", avaliacao.getUsuario().getNomeUsuario());
             map.put("comentarioUsuario", avaliacao.getComentarioUsuario());
             map.put("notaUsuario", avaliacao.getNotaUsuario());
             map.put("dataComentario", avaliacao.getDataComentario());

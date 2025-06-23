@@ -42,8 +42,8 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private List<JogoAdicionado> jogosAdicionados;
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
     public String getNomeUsuario() {
