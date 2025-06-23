@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
 @RequestMapping("/api/generos")
@@ -22,9 +24,11 @@ public class GeneroController {
      * Retornando um Json para o frontend, nao um Objeto Genero.
      * pela rota de "api/generos/{id}/jogos", onde {id} é o id do Genero.
      */
-    @GetMapping("{genero}/jogos")
-    public List<?> getJogosByGenero(@PathVariable("genero") String nomeGenero) {
+    @GetMapping("/{slugGemero}/jogos")
+    public List<?> getJogosByGenero(@PathVariable("slugGemero") String slugGemero) {
+        String nomeGenero = slugGemero.replace("-", " ");
         return generoService.findJogosByGenero(nomeGenero);
     }
+    
 
 }

@@ -37,7 +37,7 @@ export class ComentarioComponent implements OnChanges {
     this.comentarioService.getCommentsByGame(slug, this.currentPage, this.pageSize).subscribe({
       next: (data: any) => {
         // Novo formato: backend retorna lista direta, não mais paginada
-        this.comments = data;
+        this.comments = data.content || data;
         this.hasMore = false; // Não há mais paginação
         this.loading = false;
       },

@@ -18,10 +18,10 @@ public class Modo {
     @Column(name = "nm_modo")
     private String nomeModo;
 
-    // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
+    // Atributos que representam o relacionamento com outras tabelas Muitos para
+    // Muitos:
     @ManyToMany(mappedBy = "modos")
     private List<Jogo> jogos;
-
 
     public Long getIdModo() {
         return idModo;

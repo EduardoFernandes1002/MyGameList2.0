@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 @RestController
 @RequestMapping("/api/jogo")
 public class JogoController {
@@ -23,7 +22,7 @@ public class JogoController {
         String nomeJogo = slug.replace("-", " ");
         return jogoService.findJogoByNome(nomeJogo);
     }
-    
+
     @GetMapping("/rank/cinco")
     public List<?> getJogosByTopCinco() {
         return jogoService.findJogosByTopCinco();

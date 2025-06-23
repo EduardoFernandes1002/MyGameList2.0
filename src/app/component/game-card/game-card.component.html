@@ -1,0 +1,20 @@
+<div class="card-game">
+  <a [routerLink]="routerLink" class="jogo-link">
+    <img [src]="jogo.imagemJogo" class="card-img" alt="{{ jogo.nomeJogo }}" />
+    <div class="card-body">
+      <h5 class="card-title">{{ jogo.nomeJogo }}</h5>
+      <p class="card-text">Nota: {{ jogo.totalNotaJogo }}</p>
+      <p class="card-text">
+        <span *ngFor="let genero of jogo.generos; let last = last">
+          {{ genero.nomeGenero || genero }}<span *ngIf="!last">, </span>
+        </span>
+      </p>
+      <p class="card-text">
+        <span *ngFor="let plataforma of jogo.plataformas; let last = last">
+          {{ plataforma.nomePlataforma || plataforma
+          }}<span *ngIf="!last">, </span>
+        </span>
+      </p>
+    </div>
+  </a>
+</div>

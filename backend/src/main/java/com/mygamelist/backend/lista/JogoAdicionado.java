@@ -1,7 +1,5 @@
 package com.mygamelist.backend.lista;
 
-
-
 import com.mygamelist.backend.jogo.Jogo;
 import com.mygamelist.backend.usuario.Usuario;
 
@@ -51,5 +49,4 @@ public class JogoAdicionado {
         this.jogos = jogos;
     }
 
-    
 }

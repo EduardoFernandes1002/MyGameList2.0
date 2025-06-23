@@ -15,5 +15,4 @@ public interface PlataformaRepository extends JpaRepository<Plataforma, Long> {
     @Query("SELECT j FROM Plataforma p JOIN p.jogos j WHERE p.nomePlataforma = :nomePlataforma")
     List<Jogo> findJogosByPlataforma(@Param("nomePlataforma") String nomePlataforma);
 
-    
 }

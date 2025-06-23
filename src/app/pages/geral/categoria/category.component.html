@@ -1,14 +1,30 @@
-<div class="container mt-4">
-    <h1 class="text-center text-dark mb-5">Categorias</h1>
-  
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div *ngFor="let categoria of categorias" class="col">
-        <div class="card bg-body-tertiary text-dark shadow-sm h-100 rounded-3">
-          <div class="card-body">
-            <h5 class="card-title">{{ categoria.nome }}</h5>
-            <p class="card-text">Descrição: {{ categoria.descricao }}</p>
-          </div>
-        </div>
+<div class="category-container">
+  <h1 class="category-title">Categorias</h1>
+
+  <div class="category-section">
+    <h2>Gêneros</h2>
+    <div class="category-card-row">
+      <div class="category-card" *ngFor="let genero of generos" (click)="verJogosPorCategoria('generos',genero.nomeGenero)">
+        <h3>{{ genero.nomeGenero }}</h3>
       </div>
     </div>
   </div>
+
+  <div class="category-section">
+    <h2>Modos de Jogo</h2>
+    <div class="category-card-row">
+      <div class="category-card" *ngFor="let modo of modos" (click)="verJogosPorCategoria('modos', modo.nomeModo)">
+        <h3>{{ modo.nomeModo }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-section">
+    <h2>Plataformas</h2>
+    <div class="category-card-row">
+      <div class="category-card" *ngFor="let plataforma of plataformas" (click)="verJogosPorCategoria('plataformas', plataforma.nomePlataforma)">
+        <h3>{{ plataforma.nomePlataforma }}</h3>
+      </div>
+    </div>
+  </div>
+</div>  

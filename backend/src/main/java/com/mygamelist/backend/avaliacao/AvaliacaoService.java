@@ -15,7 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
- * Serviço responsável pelas regras de negócio relacionadas às avaliações de jogos.
+ * Serviço responsável pelas regras de negócio relacionadas às avaliações de
+ * jogos.
  * Permite buscar avaliações por jogo, salvar comentários e notas.
  */
 @Service
@@ -46,9 +47,11 @@ public class AvaliacaoService {
 
     /**
      * Busca todas as avaliações de um jogo específico, com suporte a paginação.
-     * @param idJogo id do jogo
+     * 
+     * @param idJogo   id do jogo
      * @param pageable informações de paginação
-     * @return lista de avaliações em formato de mapa (id, usuário, comentário, nota, data do comentário)
+     * @return lista de avaliações em formato de mapa (id, usuário, comentário,
+     *         nota, data do comentário)
      */
     public List<Map<String, Object>> getAvaliacoesByJogo(Long idJogo, Pageable pageable) {
         List<Avaliacao> avaliacoes = avaliacaoRepository.findByJogo_IdJogo(
@@ -56,7 +59,7 @@ public class AvaliacaoService {
         return avaliacoes.stream().map(avaliacao -> {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("idAvaliacao", avaliacao.getIdAvaliacao());
-            map.put("usuario", avaliacao.getUsuario().getNomeUsuario());
+            map.put("nomeUsuario", avaliacao.getUsuario().getNomeUsuario());
             map.put("comentarioUsuario", avaliacao.getComentarioUsuario());
             map.put("notaUsuario", avaliacao.getNotaUsuario());
             map.put("dataComentario", avaliacao.getDataComentario());
@@ -66,12 +69,13 @@ public class AvaliacaoService {
 
     /**
      * Salva um comentário de avaliação sem nota.
-     * @param idJogo id do jogo
-     * @param idUsuario id do usuário
-     * @param comentarioUsuario texto do comentário
-     * @param notaUsuario nota atribuída
+     * 
+     * @param idJogo              id do jogo
+     * @param idUsuario           id do usuário
+     * @param comentarioUsuario   texto do comentário
+     * @param notaUsuario         nota atribuída
      * @param dataEnvioComentario data do comentário
-     * @param dataEnvioNota data da nota
+     * @param dataEnvioNota       data da nota
      * @return avaliação salva juntamente com a nota
      */
     public Avaliacao saveComentarioSemNota(Long idJogo, Long idUsuario, String comentarioUsuario,
@@ -89,10 +93,11 @@ public class AvaliacaoService {
 
     /**
      * Salva um comentário de avaliação com nota.
-     * @param idJogo id do jogo
-     * @param idUsuario id do usuário
-     * @param comentarioUsuario texto do comentário
-     * @param notaUsuario nota atribuída
+     * 
+     * @param idJogo              id do jogo
+     * @param idUsuario           id do usuário
+     * @param comentarioUsuario   texto do comentário
+     * @param notaUsuario         nota atribuída
      * @param dataEnvioComentario data do comentário
      * @return avaliação salva
      */

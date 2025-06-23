@@ -17,8 +17,9 @@ public class ModoController {
         return modoService.getModos();
     }
 
-    @GetMapping("/{id}")
-    public Modo getModoById(@PathVariable Long idModo) {
-        return modoService.getModoById(idModo);
+    @GetMapping("/{slugModo}/jogos")
+    public List<?> getJogosByGenero(@PathVariable("slugModo") String slugModo) {
+        String nomeModo = slugModo.replace("-", " ");
+        return modoService.findJogosByModo(nomeModo);
     }
 }

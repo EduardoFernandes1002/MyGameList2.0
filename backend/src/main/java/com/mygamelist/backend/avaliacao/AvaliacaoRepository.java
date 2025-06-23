@@ -15,9 +15,12 @@ public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long> {
 
     /**
      * Busca avaliações pelo id do jogo, com suporte a paginação.
-     * @param idJogo id do jogo
+     * 
+     * @param idJogo   id do jogo
      * @param pageable informações de paginação
      * @return lista de avaliações
      */
     List<Avaliacao> findByJogo_IdJogo(Long idJogo, Pageable pageable);
+
+    Avaliacao findByUsuario_IdUsuarioAndJogo_IdJogo(Long idUsuario, Long idJogo);
 }

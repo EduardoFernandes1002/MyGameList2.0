@@ -1,12 +1,10 @@
 package com.mygamelist.backend.usuario;
 
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -30,7 +28,8 @@ public class AutenticarController {
     @PostMapping("/registrar")
     public ResponseEntity<?> registrarUsuario(@RequestBody String nomeUsuario, String apelidoUsuario,
             String emailUsuario, String senhaUsuario) {
-        usuarioService.registrarUsuario(nomeUsuario, apelidoUsuario, emailUsuario, senhaUsuario); // 1L é o ID da permissão padrão
+        usuarioService.registrarUsuario(nomeUsuario, apelidoUsuario, emailUsuario, senhaUsuario); // 1L é o ID da
+                                                                                                  // permissão padrão
         return ResponseEntity.ok(Map.of("message", "Usuário registrado com sucesso!"));
     }
 }

@@ -2,57 +2,20 @@
   <h1 class="text-center text-dark mb-5">Bem-vindo ao MyGameList</h1>
 
   <!-- Ranking (Top 5) -->
-  <section class="mb-5">
-    <h2 class="text-dark text-center mb-4">Ranking - Top 5</h2>
-    <div
-      *ngIf="jogos.length > 0; else noTopCinco"
-      class="row row-cols-5 m-1 bg-light rounded-3 p-3 border justify-content-center"
-    >
+  <section class="home-section">
+    <h2 class="topfive-title">Ranking - Top 5</h2>
+    <div *ngIf="jogos.length > 0" class="topfive-row">
       <div
-        *ngFor="let jogo of jogos"
-        class="container d-flex justify-content-center g-1"
+        *ngFor="let jogo of jogos; trackBy: trackBySlug"
+        class="home-card-container"
       >
-        <div class="card bg-dark text-light shadow-sm">
-          <a [routerLink]="['/info', toSlug(jogo.nomeJogo)]" class="jogo-link text-decoration-none h-100">
-            <img
-              [src]="jogo.imagemJogo"
-              class="card-img-top rounded-top mx-auto d-block"
-              alt="{{ jogo.nomeJogo }}"
-            />
-            <div class="row g-0 align-items-center justify-content-center">
-              <div class="col-12">
-                <div class="card-body text-center">
-                  <h5 class="card-title">{{ jogo.nomeJogo }}</h5>
-                  <p class="card-text">
-                    Nota: {{ jogo.totalNotaJogo }}
-                  </p>
-                  <p class="card-text">
-                    <span *ngFor="let genero of jogo.generos; let last = last">
-                      {{ genero.nomeGenero || genero
-                      }}<span *ngIf="!last">, </span>
-                    </span>
-                  </p>
-                  <p class="card-text">
-                    <span
-                      *ngFor="
-                        let plataforma of jogo.plataformas;
-                        let last = last
-                      "
-                    >
-                      {{ plataforma.nomePlataforma || plataforma
-                      }}<span *ngIf="!last">, </span>
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
+        <app-game-card
+          [jogo]="jogo"
+          [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
+          tipo="default"
+        ></app-game-card>
       </div>
     </div>
-    <ng-template #noTopCinco>
-      <p class="text-center text-muted">Nenhum jogo no ranking ainda.</p>
-    </ng-template>
   </section>
 
   <!-- Jogos Mais Bem Avaliados -->
@@ -61,7 +24,7 @@
     <div
       *ngIf="highestRatedGames.length > 0; else noMaisBemAvaliados"
       class="row g-3 bg-light rounded-3 p-3 border m-1 justify-content-center"
-    > 
+    >
       <div
         *ngFor="let jogo of highestRatedGames"
         class="col-12 col-md-6 col-lg-3"

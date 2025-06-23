@@ -19,7 +19,8 @@ public class Genero {
     @Column(name = "nm_genero")
     private String nomeGenero;
 
-    // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
+    // Atributos que representam o relacionamento com outras tabelas Muitos para
+    // Muitos:
     @ManyToMany(mappedBy = "generos")
     private List<Jogo> jogos;
 
@@ -38,7 +39,5 @@ public class Genero {
     public void setNomeGenero(String nomeGenero) {
         this.nomeGenero = nomeGenero;
     }
-
-    
 
 }

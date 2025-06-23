@@ -22,8 +22,8 @@ public class ListaController {
         return listaService.getListaById(id);
     }
 
-    @GetMapping("/{usuario}/{lista}/jogos")
-    public List<?> getJogosAdicionados(@PathVariable("lista") Long idLista, @PathVariable("usuario") Long idUsuario) {
-        return listaService.getJogosAdicionados(idLista, idUsuario);
+    @GetMapping("/{nomeUsuario}/{lista}/jogos")
+    public List<?> getJogosAdicionados(@PathVariable("lista") Long idLista, @PathVariable("nomeUsuario") String nomeUsuario) {
+        return listaService.findJogosPerfilUsuario(idLista, nomeUsuario);
     }
 }

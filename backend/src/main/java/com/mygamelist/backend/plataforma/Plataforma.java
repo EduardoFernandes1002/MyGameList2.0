@@ -18,10 +18,10 @@ public class Plataforma {
     @Column(name = "nm_plataforma")
     private String nomePlataforma;
 
-    // Atributos que representam o relacionamento com outras tabelas Muitos para Muitos:
+    // Atributos que representam o relacionamento com outras tabelas Muitos para
+    // Muitos:
     @ManyToMany(mappedBy = "plataformas")
     private List<Jogo> jogos;
-
 
     public Long getIdPlataforma() {
         return idPlataforma;

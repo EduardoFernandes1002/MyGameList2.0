@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 @Table(name = "distribuidora")
 public class Distribuidora {
 
-
     // Atributos da tabela:
     @Id
     @Column(name = "id_distribuidora")

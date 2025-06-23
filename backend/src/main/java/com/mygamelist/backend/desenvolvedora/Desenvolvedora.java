@@ -2,11 +2,10 @@ package com.mygamelist.backend.desenvolvedora;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "desenvolvedora")
 public class Desenvolvedora {
-    
+
     @Id
     @Column(name = "id_desenvolvedora")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

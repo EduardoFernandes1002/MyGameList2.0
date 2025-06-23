@@ -34,9 +34,9 @@ public class UsuarioService {
         return usuarioRepository.findAllUsuariosByPermissao();
     }
 
-    public Usuario registrarUsuario(String emailUsuario, String nomeUsuario, String apelidoUsuario,
-            String senhaUsuario) {
-        
+    // Registra o usuario adicionando todas suas informações obrigatorias ao banco de dados
+    public Usuario registrarUsuario(String emailUsuario, String nomeUsuario, String apelidoUsuario,String senhaUsuario) {
+
         Usuario usuario = new Usuario();
         Permissao permissao = new Permissao();
         
@@ -47,21 +47,20 @@ public class UsuarioService {
         usuario.setEmailUsuario(emailUsuario);
         usuario.setSenhaUsuario(senhaUsuario);
         return usuarioRepository.save(usuario);
-
     }
 
     // Método para autenticar o usuário
     // Verifica se o usuário existe e se a senha está correta
     public String autenticar(Usuario usuario) {
-         Usuario user;
-    if (usuario.getEmailUsuario() != null) {
-        user = usuarioRepository.findByEmailUsuario(usuario.getEmailUsuario());
-    } else {
-        user = usuarioRepository.findByNomeUsuario(usuario.getNomeUsuario());
-    }
-    if (user != null && user.getSenhaUsuario().equals(usuario.getSenhaUsuario())) {
-        return jwtUtil.generateToken(user.getNomeUsuario());
-    }
+        Usuario user;
+        if (usuario.getEmailUsuario() != null) {
+            user = usuarioRepository.findByEmailUsuario(usuario.getEmailUsuario());
+        } else {
+            user = usuarioRepository.findByNomeUsuario(usuario.getNomeUsuario());
+        }
+        if (user != null && user.getSenhaUsuario().equals(usuario.getSenhaUsuario())) {
+            return jwtUtil.generateToken(user.getNomeUsuario());
+        }
         return null;
     }
 
