@@ -32,14 +32,17 @@
   background: #f8f9fa;
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  padding: 24px 18px;
-  min-width: 220px;
-  max-width: 260px;
-  flex: 1 1 220px;
+  padding: 18px 10px;
+  min-width: 140px;
+  max-width: 170px;
+  flex: 1 1 140px;
   cursor: pointer;
   transition: box-shadow 0.2s, transform 0.2s;
   border: 1px solid #e0e0e0;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .category-card:hover {

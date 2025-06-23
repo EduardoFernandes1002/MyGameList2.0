@@ -26,9 +26,6 @@ export class InfoGameComponent implements OnInit {
           error: (error: any) => {
             console.error('Erro ao buscar o jogo:', error);
           },
-          complete: () => {
-            console.log('Requisição concluída.');
-          }
         });
       }
     });
