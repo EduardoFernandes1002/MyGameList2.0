@@ -14,5 +14,5 @@ public interface GeneroRepository extends JpaRepository<Genero, Long> {
 
     @Query("SELECT j FROM Genero g INNER JOIN g.jogos j WHERE g.nomeGenero = :nomeGenero")
     List<Jogo> findJogosByGeneros(@Param("nomeGenero") String nomeGenero);
-
+    
 }

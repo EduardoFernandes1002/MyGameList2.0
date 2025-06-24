@@ -1,8 +1,8 @@
-<div class="discover-container">
+<div class="discover">
   <h1>Descubra Jogos</h1>
   <div *ngIf="carregando">Carregando...</div>
   <div *ngIf="erro">{{ erro }}</div>
-  <div class="games-row" *ngIf="!carregando && !erro">
+  <div class="games" *ngIf="!carregando && !erro">
     <app-game-card
       *ngFor="let jogo of jogos; trackBy: trackBySlug"
       [jogo]="jogo"
