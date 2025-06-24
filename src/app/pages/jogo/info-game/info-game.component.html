@@ -3,34 +3,96 @@
 
   <div class="row g-4 align-items-start justify-content-center">
     <div class="col-lg-4 col-md-5 d-flex flex-column align-items-center">
-      <div class="bg-white rounded-4 shadow p-3 w-100 d-flex flex-column align-items-center">
-        <img [src]="jogo.imagemJogo" class="img-fluid rounded-4 shadow mb-3" alt="{{ jogo.nomeJogo }}" style="max-height: 320px; object-fit: cover; background: #f3f6fa; border: 1.5px solid #e3e6ed;" />
+      <div
+        class="img-container-info-game bg-white rounded-4 shadow p-3 w-100 d-flex flex-column align-items-center"
+      >
+        <img
+          [src]="jogo.imagemJogo"
+          class="img-fluid rounded-4 shadow mb-3"
+          alt="{{ jogo.nomeJogo }}"
+          style="
+            max-height: 320px;
+            object-fit: cover;
+            background: #f3f6fa;
+            border: 1.5px solid #e3e6ed;
+          "
+        />
+        <span class="nota-overlay" *ngIf="jogo.notaJogo">
+          {{ jogo.notaJogo}}
+        </span>
         <div class="w-100 text-center mt-2">
           <ng-container *ngIf="jogo.generos && jogo.generos.length > 0">
-            <span *ngFor="let genero of jogo.generos; let last = last" class="badge bg-primary-subtle text-dark fs-6 me-1">{{ genero.nomeGenero }}<span *ngIf="!last">,</span></span>
+            <span
+              *ngFor="let genero of jogo.generos; let last = last"
+              class="badge bg-primary-subtle text-dark fs-6 me-1"
+              >{{ genero.nomeGenero }}<span *ngIf="!last">,</span></span
+            >
           </ng-container>
         </div>
         <div class="w-100 text-center mt-2">
           <ng-container *ngIf="jogo.plataformas && jogo.plataformas.length > 0">
-            <span *ngFor="let plataforma of jogo.plataformas; let last = last" class="badge bg-info-subtle text-dark fs-6 me-1">{{ plataforma.nomePlataforma }}<span *ngIf="!last">,</span></span>
+            <span
+              *ngFor="let plataforma of jogo.plataformas; let last = last"
+              class="badge bg-info-subtle text-dark fs-6 me-1"
+              >{{ plataforma.nomePlataforma }}<span *ngIf="!last">,</span></span
+            >
           </ng-container>
         </div>
       </div>
       <!-- Área exclusiva para sinopse -->
-      <div class="card shadow-sm p-3 mt-4 mb-2 w-100 bg-light border-0 rounded-4">
+      <div
+        class="card shadow-sm p-3 mt-4 mb-2 w-100 bg-light border-0 rounded-4"
+      >
         <h5 class="mb-2 text-primary">Sinopse</h5>
-        <p class="mb-0 text-secondary" style="min-height: 60px;">{{ jogo.sinopseJogo }}</p>
+        <p class="mb-0 text-secondary" style="min-height: 60px">
+          {{ jogo.sinopseJogo }}
+        </p>
       </div>
     </div>
     <div class="col-lg-8 col-md-7">
       <div class="card shadow-sm p-4 mb-4 bg-light border-0 rounded-4">
         <div class="row g-3">
           <div class="col-12 col-md-6">
-            <p class="mb-2"><strong>Desenvolvedora: </strong> <span class="text-secondary">{{ jogo.desenvolvedora?.nomeDesenvolvedora }}</span></p>
-            <p class="mb-2"><strong>Distribuidora: </strong> <span class="text-secondary">{{ jogo.distribuidora?.nomeDistribuidora }}</span></p>
+            <p class="mb-2">
+              <strong>Desenvolvedora: </strong>
+              <span class="text-secondary">{{
+                jogo.desenvolvedora?.nomeDesenvolvedora
+              }}</span>
+            </p>
+            <p class="mb-2">
+              <strong>Distribuidora: </strong>
+              <span class="text-secondary">{{
+                jogo.distribuidora?.nomeDistribuidora
+              }}</span>
+            </p>
+            <div>
+              <button
+                class="BtnAvaliar"
+                *ngIf="!avaliando"
+                (click)="mostrarAvaliacao()"
+              >
+                Avaliar
+              </button>
+              <ng-container *ngIf="avaliando">
+                <button
+                  class="BtnNotas BtnNotas{{ i + 1 }}"
+                  *ngFor="let n of [].constructor(10); let i = index"
+                  (click)="avaliarNota(i + 1)"
+                >
+                  {{ i + 1 }}
+                </button>
+              </ng-container>
+            </div>
           </div>
-          <div class="col-12 col-md-6 d-flex align-items-start justify-content-md-end">
-            <p class="mb-2"><strong>Data de Lançamento: </strong> <span class="text-secondary">{{ jogo.dataLancamentoJogo | date }}</span></p>
+          <div
+            class="col-12 col-md-6 d-flex align-items-start justify-content-md-end"
+          >
+            <p class="mb-2">
+              <strong>Data de Lançamento: </strong>
+              <span class="text-secondary">{{
+                jogo.dataLancamentoJogo | date
+              }}</span>
+            </p>
           </div>
         </div>
       </div>
@@ -38,8 +100,24 @@
       <div class="card shadow-sm p-3 mb-4 bg-white border-0 rounded-4">
         <h6 class="mb-3 text-primary">Imagens do Jogo</h6>
         <div class="d-flex flex-wrap gap-3 justify-content-start">
-          <img *ngFor="let img of jogo.imagens" [src]="img" alt="Imagem do jogo" class="rounded-3 border" style="max-width: 160px; max-height: 110px; object-fit: cover; background: #f3f6fa; border: 1.5px solid #e3e6ed;" />
-          <span *ngIf="!jogo.imagens || jogo.imagens.length === 0" class="text-muted">Nenhuma imagem extra disponível.</span>
+          <img
+            *ngFor="let img of jogo.imagens"
+            [src]="img"
+            alt="Imagem do jogo"
+            class="rounded-3 border"
+            style="
+              max-width: 160px;
+              max-height: 110px;
+              object-fit: cover;
+              background: #f3f6fa;
+              border: 1.5px solid #e3e6ed;
+            "
+          />
+          <span
+            *ngIf="!jogo.imagens || jogo.imagens.length === 0"
+            class="text-muted"
+            >Nenhuma imagem extra disponível.</span
+          >
         </div>
       </div>
     </div>

@@ -30,4 +30,16 @@ export class InfoGameComponent implements OnInit {
       }
     });
   }
+
+
+  avaliando = false; 
+  mostrarAvaliacao() {
+    this.avaliando = true;
+  }
+  avaliarNota(nota: number) {
+    // Aqui você pode enviar a nota para o backend ou fazer outra ação
+    console.log('Nota escolhida:', nota);
+    this.avaliando = false; // esconde os botões após avaliar, se quiser
+  }
 }
+
