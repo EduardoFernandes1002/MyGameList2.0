@@ -13,6 +13,8 @@
             class="form-control"
             placeholder="Digite seu email"
             required
+            [(ngModel)]="emailUsuario"
+            name="emailUsuario"
           />
         </div>
 
@@ -24,6 +26,8 @@
             class="form-control"
             placeholder="Digite seu nome de usuário"
             required
+            [(ngModel)]="nomeUsuario"
+            name="nomeUsuario"
           />
         </div>
 
@@ -34,6 +38,8 @@
             type="text"
             class="form-control"
             placeholder="Como quer ser chamado?"
+            [(ngModel)]="apelidoUsuario"
+            name="apelidoUsuario"
           />
           <div class="form-text font-italic">Máx. 15 caracteres</div>
         </div>
@@ -47,6 +53,8 @@
             maxlength="10"
             placeholder="Crie uma senha forte"
             required
+            [(ngModel)]="senhaUsuario"
+            name="senhaUsuario"
           />
         </div>
 
@@ -59,6 +67,8 @@
             maxlength="10"
             placeholder="Confirme a senha"
             required
+            [(ngModel)]="confirmarSenha"
+            name="confirmarSenha"
           />
         </div>
 
