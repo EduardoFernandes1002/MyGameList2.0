@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadTopFive();
-    this.loadHighestRatedGames();
   }
 
   loadTopFive(): void {
@@ -37,16 +36,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  loadHighestRatedGames(): void {
-    this.jogoService.getJogoMaisBemAvaliados().subscribe({
-      next: (data: any) => {
-        this.highestRatedGames = data.content || data;
-      },
-      error: (error: any) => {
-        console.error('Erro ao carregar mais bem avaliados:', error);
-      }
-    });
-  }
 
   public chunkArray(array: any[], chunkSize: number): any[] {
     const chunks = [];

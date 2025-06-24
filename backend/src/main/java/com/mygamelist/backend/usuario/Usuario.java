@@ -26,7 +26,7 @@ public class Usuario {
     @Column(name = "ds_email")
     private String emailUsuario;
 
-    @Column(name = "ds_senha")
+    @Column(name = "ds_senha", unique = false)
     private String senhaUsuario;
 
     @Column(name = "nr_telefone", nullable = true)

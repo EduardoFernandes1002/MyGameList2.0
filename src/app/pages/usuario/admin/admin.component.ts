@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TagService } from '../../../service/tag/tag.service'; 
 import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { JogoService } from '../../../service/jogo-service/jogo.service';
 
 @Component({
   selector: 'app-admin',
@@ -17,9 +18,11 @@ export class AdminComponent implements OnInit {
 
   // Formulário do jogo
   jogoForm: FormGroup;
-jogos: any;
+  jogos: any[] = [];
+  usuarios: any[] = [];
 
   constructor(
+    private jogoService: JogoService,
     private fb: FormBuilder
   ) {
     this.jogoForm = this.fb.group({
@@ -33,7 +36,22 @@ jogos: any;
     });
   }
   ngOnInit(): void {
+    this.loadAllJogos()
   }
+
+  loadAllJogos(): void {
+    this.jogoService.getJogos().subscribe({
+      next: (data: any) => {
+        this.jogos = data.content || data;
+        
+      },
+      error: (error: any) => {
+        console.error('Erro ao carregar top 5:', error);
+      }
+    });
+  }
+
+
 
 
   removeTag(tag: string): void {

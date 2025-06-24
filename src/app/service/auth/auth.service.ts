@@ -13,24 +13,35 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   // Consulta na api pelo nome ou email, verificando se a senha está correta.retornando o usuario co token logado
-  login(login: string, senhaUsuario: string){
-
-    const usuario = {
-    senhaUsuario,
-    emailUsuario: (login.includes('@') && login.includes('.')) ? login : undefined,
-    nomeUsuario: !login.includes('@') ? login : undefined,
-  };
-    return this.http.post(`${this.apiUrl}/login`, usuario) // enviar usuario porem retorna o token
+login(login: string, senhaUsuario: string) {
+  const usuario: any = { senhaUsuario };
+  if (login.includes('@') && login.includes('.')) {
+    usuario.emailUsuario = login;
+  } else {
+    usuario.nomeUsuario = login;
   }
+  return this.http.post(`${this.apiUrl}/login`, usuario);
+}
 
   register(emailUsuario: string, nomeUsuario: string,apelidoUsuario: string,  senhaUsuario: string){
-
-    const usuario = {
-      emailUsuario: (emailUsuario.includes('@') && emailUsuario.includes('.')) ? emailUsuario : undefined,
-      nomeUsuario: (nomeUsuario.length >= 4 && nomeUsuario.length <= 15) ? nomeUsuario : undefined,
-      apelidoUsuario: (apelidoUsuario.length >= 4 && apelidoUsuario.length <= 15) ? apelidoUsuario : undefined,
-      senhaUsuario, 
-    }
+  // Validação (opcional, mas recomendado)
+  if (
+    !emailUsuario.includes('@') ||
+    !emailUsuario.includes('.') ||
+    nomeUsuario.length < 4 ||
+    nomeUsuario.length > 15 ||
+    apelidoUsuario.length < 4 ||
+    apelidoUsuario.length > 15
+  ) {
+    throw new Error('Dados inválidos para registro');
+  }
+  
+  const usuario = {
+    emailUsuario,
+    nomeUsuario,
+    apelidoUsuario,
+    senhaUsuario,
+  };
 
     return this.http.post(`${this.apiUrl}/registrar`, usuario)
   }

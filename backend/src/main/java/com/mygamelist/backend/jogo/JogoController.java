@@ -13,10 +13,10 @@ public class JogoController {
     private JogoService jogoService;
 
     @GetMapping
-    public List<Jogo> getJogos() {
+    public List<?> getJogos() {
         return jogoService.getJogos();
     }
-
+    
     @GetMapping("/{slug}")
     public Jogo getJogoBySlug(@PathVariable("slug") String slug) {
         String nomeJogo = slug.replace("-", " ");
