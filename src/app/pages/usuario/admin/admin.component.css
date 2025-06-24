@@ -11,12 +11,9 @@
 
 /* Estilo base para o select */
 .Selecionar{
-    /* Reset de estilos padrão */
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    
-    /* Estilo personalizado */
     height: 3vw;
     width: 10vw;
     max-width: 300px;
@@ -30,32 +27,21 @@
     cursor: pointer;
     outline: none;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    
-    /* Seta personalizada */
+    box-shadow: 0 2px 5px rgba(252, 250, 250, 0.1);
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg'");
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 20px;
   }
   
-  /* Efeito hover */
   .Selecionar:hover {
     border-color: #aaa;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
   }
   
-  /* Efeito quando está em foco */
  .Selecionar:focus {
     border-color: #4a90e2;
     box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
-  }
-  
-  /* Estilo para as opções */
-  option {
-    padding: 10px;
-    background: #fff;
-    color: #000000;
   }
   
   /* Estilo quando o select está desabilitado */
@@ -87,7 +73,7 @@
 .Selecionar option {
     padding: 10px 15px;
     background: #fff;
-    color: #333;
+    color: #f8f3f3;
     font-size: 14px;
   }
   
@@ -197,7 +183,7 @@ select option{
 }
 
 select:disabled {
-  background-color: #000000;
+  background-color: #fdf6f6;
   border-color: #ccc;
   cursor: not-allowed;
 }
@@ -278,4 +264,9 @@ input{
 
 .suggestion-item:hover {
   background: #f5f5f5;
+}
+
+.Selecionar option{
+  background-color: white;
+  color: black;
 }
