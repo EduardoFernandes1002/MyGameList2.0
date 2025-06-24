@@ -1,6 +1,6 @@
 .category-container {
   max-width: 1200px;
-  margin: 32px auto;
+  margin: auto;
   padding: 16px;
 }
 
@@ -13,40 +13,46 @@
 
 .category-section {
   margin-bottom: 40px;
+  box-shadow:  0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  background-color: white;
+  border-radius: 1rem ;
+
 }
 
 .category-section h2 {
   font-size: 1.5rem;
   margin-bottom: 16px;
-  color: #444;
+  color: #000000;
 }
 
 .category-card-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
-  justify-content: center;
+  gap: 9px;
+  justify-items: center;
+  align-items: center;
 }
 
 .category-card {
-  background: #f8f9fa;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  padding: 18px 10px;
-  min-width: 140px;
-  max-width: 170px;
-  flex: 1 1 140px;
+  background:none;
+  border-radius: 17px;
+  padding:8px 8px;
+  width: 138px;
+  height: 70px;
   cursor: pointer;
   transition: box-shadow 0.2s, transform 0.2s;
-  border: 1px solid #e0e0e0;
+  border: 1px solid lightgray;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.2rem;
+  color: rgb(0, 0, 0);
 }
 
 .category-card:hover {
   box-shadow: 0 4px 16px rgba(0,0,0,0.18);
   transform: translateY(-4px) scale(1.03);
-  background: #e9ecef;
+  background: #e9ecef05;
 }

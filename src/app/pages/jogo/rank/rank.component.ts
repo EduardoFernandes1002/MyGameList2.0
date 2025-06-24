@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { GameCardComponent } from '../../../component/game-card/game-card.component';
 import { JogoService } from '../../../service/jogo-service/jogo.service';
 
 @Component({
   selector: 'app-rank',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule, GameCardComponent],
   templateUrl: './rank.component.html',
   styleUrls: ['./rank.component.css'],
 })
@@ -38,5 +40,13 @@ export class RankComponent implements OnInit {
       }
     });
   }
+
+    public toSlug = (nomeJogo: string): string => {
+    return nomeJogo ? nomeJogo.toLowerCase().replace(/\s+/g, '-') : '';
+  };
+
+  public trackBySlug = (index: number, jogo: any): string => {
+    return this.toSlug(jogo?.nomeJogo);
+  };
 
 }

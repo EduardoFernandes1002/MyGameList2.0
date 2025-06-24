@@ -6,3 +6,26 @@
   transform: translateY(-3px);
   cursor: pointer;
 }
+
+:host ::ng-deep .jogo-link {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+:host ::ng-deep  .card-game {
+  background: #212529; /* bg-dark */
+  color: #000000;         /* text-light */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* shadow-sm */
+  width: 225px;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: box-shadow 0.2s;
+  border: 1px solid #212529;
+}

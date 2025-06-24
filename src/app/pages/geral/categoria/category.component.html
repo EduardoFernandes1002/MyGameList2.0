@@ -1,30 +1,46 @@
 <div class="category-container">
   <h1 class="category-title">Categorias</h1>
 
-  <div class="category-section">
-    <h2>Gêneros</h2>
-    <div class="category-card-row">
-      <div class="category-card" *ngFor="let genero of generos" (click)="verJogosPorCategoria('generos',genero.nomeGenero)">
-        <h3>{{ genero.nomeGenero }}</h3>
+  <div class="category-sections-wrapper">
+    <div class="category-section">
+      <h2>Gêneros</h2>
+      <div class="category-card-row">
+        <div
+          class="category-card"
+          *ngFor="let genero of generos"
+          (click)="verJogosPorCategoria('generos', genero.nomeGenero)"
+        >
+          <span>{{ genero.nomeGenero }}</span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="category-section">
-    <h2>Modos de Jogo</h2>
-    <div class="category-card-row">
-      <div class="category-card" *ngFor="let modo of modos" (click)="verJogosPorCategoria('modos', modo.nomeModo)">
-        <h3>{{ modo.nomeModo }}</h3>
+    <div class="category-section">
+      <h2>Modos de Jogo</h2>
+      <div class="category-card-row">
+        <div
+          class="category-card"
+          *ngFor="let modo of modos"
+          (click)="verJogosPorCategoria('modos', modo.nomeModo)"
+        >
+          <span>{{ modo.nomeModo }}</span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="category-section">
-    <h2>Plataformas</h2>
-    <div class="category-card-row">
-      <div class="category-card" *ngFor="let plataforma of plataformas" (click)="verJogosPorCategoria('plataformas', plataforma.nomePlataforma)">
-        <h3>{{ plataforma.nomePlataforma }}</h3>
+    <div class="category-section">
+      <h2>Plataformas</h2>
+      <div class="category-card-row">
+        <div
+          class="category-card"
+          *ngFor="let plataforma of plataformas"
+          (click)="
+            verJogosPorCategoria('plataformas', plataforma.nomePlataforma)
+          "
+        >
+          <span>{{ plataforma.nomePlataforma }}</span>
+        </div>
       </div>
     </div>
   </div>
-</div>  
+</div>

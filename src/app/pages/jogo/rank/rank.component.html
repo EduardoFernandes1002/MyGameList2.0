@@ -4,36 +4,15 @@
       <h1 class="text-center mb-5">Ranking de Jogos</h1>
 
       <!-- Lista de Rankings -->
-      <div class="row g-3 justify-content-center">
-        <div  class="col-12">
-          <div class="card shadow-sm hover-effect">
-            <div class="row g-0 align-items-center" *ngFor="let jogo of jogos">
-              <div class="col-1 text-center">
-                <span class="badge bg-dark fs-5"> posicao </span>
-              </div>
-              <div class="col-2">
-                <img [src]="jogo.imagemJogo" 
-                    class="img-fluid rounded-start" 
-                    alt="Capa do jogo"
-                    style="height: 80px; object-fit: cover;">
-              </div>
-              <div class="col-7 ps-3">
-                <h5 class="card-title mb-1">{{ jogo.nomeJogo }}</h5>
-                <div class="d-flex gap-2">
-                  <span class="badge bg-success" *ngFor="let genero of jogo.generos; let last = last">
-                    {{ genero.nomeGenero }}
-                  </span>
-                  <span class="badge bg-info" *ngFor="let plataformas of jogo.plataformas; let last = last">
-                    {{ plataformas.nomePlataforma }}
-                  </span>
-                </div>
-              </div>
-              <div class="col-2 text-end pe-3">
-                <span class="text-dark fw-bold fs-5">{{ jogo.totalNotaJogo }}</span>
-              </div>
+      <div class="container-game-cards justify-content-center">
+
+            <div class="row g-0 align-items-center" *ngFor="let jogo of jogos; trackBy: trackBySlug">
+                 <app-game-card
+                  [jogo]="jogo"
+                  [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
+                  tipo="default"
+                ></app-game-card>
             </div>
-          </div>
-        </div>
       </div>
 
       <!-- Paginação -->
