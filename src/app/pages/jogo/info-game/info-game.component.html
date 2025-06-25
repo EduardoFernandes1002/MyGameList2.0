@@ -18,7 +18,7 @@
           "
         />
         <span class="nota-overlay" *ngIf="jogo.notaJogo">
-          {{ jogo.notaJogo}}
+          {{ jogo.notaJogo }}
         </span>
         <div class="w-100 text-center mt-2">
           <ng-container *ngIf="jogo.generos && jogo.generos.length > 0">
@@ -65,7 +65,7 @@
                 jogo.distribuidora?.nomeDistribuidora
               }}</span>
             </p>
-            <div>
+            <div class="avaliacao-btns-container">
               <button
                 class="BtnAvaliar"
                 *ngIf="!avaliando"
@@ -75,11 +75,22 @@
               </button>
               <ng-container *ngIf="avaliando">
                 <button
-                  class="BtnNotas BtnNotas{{ i + 1 }}"
                   *ngFor="let n of [].constructor(10); let i = index"
+                  class="BtnNotas"
                   (click)="avaliarNota(i + 1)"
                 >
-                  {{ i + 1 }}
+                  <span class="emoji-nota">
+                    {{
+                      i + 1 <= 3
+                        ? "😡"
+                        : i + 1 <= 6
+                        ? "😐"
+                        : i + 1 <= 9
+                        ? "😊"
+                        : "🌟"
+                    }}
+                  </span>
+                  <span class="numero-nota">{{ i + 1 }}</span>
                 </button>
               </ng-container>
             </div>

@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComentarioService } from  '../../service/comentario-service/comentario.service';
+import { AuthService } from '../../service/auth/auth.service';
 
 @Component({
   selector: 'app-comentario',
@@ -17,7 +18,7 @@ export class ComentarioComponent implements OnChanges {
   loading: boolean = false;
   hasMore: boolean = true;
 
-  constructor(private comentarioService: ComentarioService) {}
+  constructor(private comentarioService: ComentarioService, private authService: AuthService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['nomeJogo'] && this.nomeJogo) {
@@ -52,5 +53,9 @@ export class ComentarioComponent implements OnChanges {
   loadMore(): void {
     // Apenas desabilita o botão
     this.hasMore = false;
+  }
+
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 }
