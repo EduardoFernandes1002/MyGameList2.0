@@ -1,25 +1,60 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http'; 
+import { GameCardComponent } from '../../../component/game-card/game-card.component';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../service/auth/auth.service';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-perfil',
+  imports: [CommonModule, GameCardComponent, RouterModule, FormsModule],
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css',
-  standalone: false
+  standalone: true
 })
 export class PerfilComponent implements OnInit {
-  nomeUsuario: any;
-  idade: number | null = null;
+  jogos: any[] = [];
+  usuario: any[] = [];
+  lista: number = 1;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    const nomeUsuario = this.route.snapshot.paramMap.get('nomeUsuario');
-    if (nomeUsuario) {
-      this.http.get<any>(`http://localhost:8080/api/usuarios/username/${nomeUsuario}`).subscribe(usuario => {
-        this.nomeUsuario = usuario.nomeUsuario;
-      });
-    }
+    this.loadListaUsuario();
+    this.loadInfosUsuarioLogado();
   }
+
+  loadInfosUsuarioLogado() {
+    this.authService.getInfosUsuarioLogado().subscribe({
+      next: (data: any) => {
+        this.usuario = data.content || data;
+        
+      },
+      error: (error: any) => {
+        console.error('Erro ao carregar informações do usuario:', error);
+      }
+    });
+  }
+
+  loadListaUsuario() {
+    this.authService.getJogosListaUsuario(this.lista).subscribe({
+      next: (data: any) => {  
+        this.jogos = data.content || data;
+        
+      },
+      error: (error: any) => {
+        console.error('Erro ao carregar lista atual:', error);
+      }
+    });
+  }
+
+
+
+  public toSlug = (nomeJogo: string): string => {
+    return nomeJogo ? nomeJogo.toLowerCase().replace(/\s+/g, '-') : '';
+  };
+
+  public trackBySlug = (index: number, jogo: any): string => {
+    return this.toSlug(jogo?.nomeJogo);
+  };
 }

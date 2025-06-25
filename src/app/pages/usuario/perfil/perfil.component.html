@@ -33,29 +33,21 @@
         <span id="Span/"> / </span>
         <a href="http://localhost:4200/perfil"> Desejo</a>
       </h3>
-      <div class="card-container mb-4 d-flex row-cols-3 flex-wrap gap-2">
-        <div class="card d-inline-block">
-          <div class="card-body shadow-sm">
-            <h5 class="card-title">jogo.nome</h5>
-            <p class="card-text">Gêneros: jogo.generos.join(', ')</p>
-            <p class="card-text">Nota: jogo.nota</p>
-            <p class="card-text">Status: jogo.status</p>
-            <button class="btn btn-danger">Excluir</button>
-          </div>
+      <div class="perfil-row">
+        <div
+          class="perfil-card-container"
+          *ngFor="let jogo of jogos; trackBy: trackBySlug"
+        >
+          <app-game-card
+            [jogo]="jogo"
+            [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
+            tipo="default"
+          ></app-game-card>
         </div>
-        <div class="card d-inline-block flex-grow-1">
-            <div class="card-body">
-              <h5 class="card-title">jogo.nome</h5>
-              <p class="card-text">Gêneros: jogo.generos.join(', ')</p>
-              <p class="card-text">Nota: jogo.nota</p>
-              <p class="card-text">Status: jogo.status</p>
-              <button class="btn btn-danger">Excluir</button>
-            </div>
-          </div>
       </div>
 
       <!-- Próximos Lançamentos -->
-      <h3 class="section-title mb-4">Próximos Lançamentos</h3>
+      <h3 class="section-title mb-4">Favoritos</h3>
       <div class="row g-4">
         <div class="col-md-6 col-lg-4">
           <div class="game-card card h-100 shadow-sm">

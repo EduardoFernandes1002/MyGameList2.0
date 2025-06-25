@@ -23,50 +23,83 @@ body {
     background-color: #f8f9fa;
 }
 
-.game-card, .stat-card {
-    transition: all 0.3s ease;
-    border-left: 4px solid #6c757d;
+.perfil-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 5px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 20px 45px;
+  min-height: 220px;
+  border: 1px solid #e0e0e0;
 }
 
-.game-card:hover, .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+.perfil-card-container {
+  display: flex;
+  justify-content: start;
+  max-width: 320px;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.empty-info {
-    color: #adb5bd;
-    font-style: italic;
+:host ::ng-deep .jogo-link {
+  text-decoration: none;
+  color: white;
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
-.progress {
-    height: 6px;
+:host ::ng-deep  .card-game {
+  background: #212529; /* bg-dark */
+  color: #fff;         /* text-light */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* shadow-sm */
+  width: 250px;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s;
+  border: 1px solid #212529;
 }
 
-.progress-bar {
-    background: linear-gradient(90deg, #6c757d, #495057);
+:host ::ng-deep .card-game:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.22);
 }
 
-.section-title {
-    border-bottom: 2px solid #6c757d;
-    padding-bottom: 8px;
+:host ::ng-deep  .card-img {
+   width: 100%;
+  height: 180px; /* ou 200px, ajuste conforme preferir */
+  object-fit: cover;
+  border-radius: 20px 20px 0 0;
+  display: block;
+  margin: 0;
+  background: #222;
+  box-shadow: none;
 }
 
-@media (max-width: 768px) {
-    .profile-sidebar {
-        border-right: none;
-        border-bottom: 1px solid #dee2e6;
-    }
-    
-    .profile-picture {
-        width: 120px;
-        height: 120px;
-    }
+:host ::ng-deep  .card-body {
+  padding: 16px;
+  text-align: center;
+  width: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-a{
-    color: rgb(78, 78, 78);
-    text-decoration: none;
+:host ::ng-deep  .card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #fff;
 }
-a:hover{
-    color: #85b6ff
+
+:host ::ng-deep .card-text {
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: #fff;
 }

@@ -3,53 +3,58 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private apiUrl = 'http://localhost:8080/autenticar'; // URL da API de autenticação
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
+  nomeUsuario: any;
 
   constructor(private http: HttpClient) {}
 
   // Consulta na api pelo nome ou email, verificando se a senha está correta.retornando o usuario co token logado
-login(login: string, senhaUsuario: string) {
-  const usuario: any = { senhaUsuario };
-  if (login.includes('@') && login.includes('.')) {
-    usuario.emailUsuario = login;
-  } else {
-    usuario.nomeUsuario = login;
+  login(login: string, senhaUsuario: string) {
+    const usuario: any = { senhaUsuario };
+    if (login.includes('@') && login.includes('.')) {
+      usuario.emailUsuario = login;
+    } else {
+      usuario.nomeUsuario = login;
+    }
+    return this.http.post(`${this.apiUrl}/login`, usuario);
   }
-  return this.http.post(`${this.apiUrl}/login`, usuario);
-}
 
-  register(emailUsuario: string, nomeUsuario: string,apelidoUsuario: string,  senhaUsuario: string){
-  // Validação (opcional, mas recomendado)
-  if (
-    !emailUsuario.includes('@') ||
-    !emailUsuario.includes('.') ||
-    nomeUsuario.length < 4 ||
-    nomeUsuario.length > 15 ||
-    apelidoUsuario.length < 4 ||
-    apelidoUsuario.length > 15
+  register(
+    emailUsuario: string,
+    nomeUsuario: string,
+    apelidoUsuario: string,
+    senhaUsuario: string
   ) {
-    throw new Error('Dados inválidos para registro');
-  }
-  
-  const usuario = {
-    emailUsuario,
-    nomeUsuario,
-    apelidoUsuario,
-    senhaUsuario,
-  };
+    // Validação (opcional, mas recomendado)
+    if (
+      !emailUsuario.includes('@') ||
+      !emailUsuario.includes('.') ||
+      nomeUsuario.length < 4 ||
+      nomeUsuario.length > 15 ||
+      apelidoUsuario.length < 4 ||
+      apelidoUsuario.length > 15
+    ) {
+      throw new Error('Dados inválidos para registro');
+    }
 
-    return this.http.post(`${this.apiUrl}/registrar`, usuario)
+    const usuario = {
+      emailUsuario,
+      nomeUsuario,
+      apelidoUsuario,
+      senhaUsuario,
+    };
+
+    return this.http.post(`${this.apiUrl}/registrar`, usuario);
   }
 
   // verifica se está logado
   isLoggedIn(): Observable<boolean> {
     return this.isLoggedInSubject.asObservable();
-  } 
+  }
 
   // Verifica se o token ainda existe
   isAuthenticated(): boolean {
@@ -84,4 +89,18 @@ login(login: string, senhaUsuario: string) {
     this.isLoggedInSubject.next(false);
   }
 
+  // Funções do usuario para outras areas
+
+  getInfosUsuarioLogado(): Observable<any[]> {
+    const nomeUsuario = this.getNomeUsuarioFromToken();
+    return this.http
+      .get<any[]>(`http://localhost:8080/api/usuarios/username/${nomeUsuario}`)
+  }
+
+  getJogosListaUsuario(lista: number): Observable<any[]> {
+    const nomeUsuario = this.getNomeUsuarioFromToken();
+    return this.http
+      .get<any[]>(`http://localhost:8080/api/lista/${nomeUsuario}/${lista}/jogos`)
+  }
 }
+  
