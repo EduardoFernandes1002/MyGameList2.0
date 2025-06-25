@@ -46,7 +46,7 @@ public class ListaService {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("idJogo", jogo.getIdJogo());
             map.put("nomeJogo", jogo.getNomeJogo());
-            map.put("capaJogo", jogo.getImagemJogo());
+            map.put("imagemJogo", jogo.getImagemJogo());
             // Buscar a nota do usuário para esse jogo
             Avaliacao avaliacao = avaliacaoRepository.findByUsuario_IdUsuarioAndJogo_IdJogo(idUsuario, jogo.getIdJogo());
             map.put("notaUsuario", avaliacao != null ? avaliacao.getNotaUsuario() : null);
