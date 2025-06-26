@@ -11,6 +11,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 /**
  * Controller responsável pelos endpoints de avaliações de jogos.
@@ -55,4 +58,12 @@ public class AvaliacaoController {
         List<Map<String, Object>> comentarios = avaliacaoService.getTresComentariosMaisRecentes();
         return ResponseEntity.ok(comentarios);
     }
+
+    @PostMapping("/salvarNota")
+    public ResponseEntity<?> salvarNota(@RequestBody String entity) {
+        //TODO: process POST request
+        
+        return ResponseEntity.ok().build();
+    }
+    
 }

@@ -137,6 +137,25 @@
   <div class="row mt-5">
     <div class="col-12">
       <h3 class="text-center text-secondary">Comentários</h3>
+      <!-- Campo de comentário (aparece após escolher nota OU se já avaliou) -->
+      <div
+        *ngIf="jaAvaliou || notaSelecionada"
+        class="comentario-avaliacao-box"
+      >
+        <p *ngIf="notaSelecionada" class="comentario-nota-info">
+          Sua nota: <span class="comentario-nota">{{ notaSelecionada }}</span>
+        </p>
+        <textarea
+          [(ngModel)]="comentarioUsuario"
+          placeholder="Escreva seu comentário..."
+          rows="3"
+          class="comentario-textarea"
+        ></textarea>
+        <button (click)="enviarComentario()" class="BtnEnviarComentario">
+          Enviar comentário
+        </button>
+      </div>
+
       <app-comentario [nomeJogo]="jogo.nomeJogo"></app-comentario>
     </div>
   </div>

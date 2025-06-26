@@ -128,4 +128,13 @@ public class AvaliacaoService {
             return map;
         }).toList();
     }
+
+    public Avaliacao saveNota(Long idJogo, Long idUsuario, BigDecimal notaUsuario, LocalDate dataEnvioNota) {
+        Avaliacao avaliacao = new Avaliacao();
+        avaliacao.setJogo(jogoRepository.findById(idJogo).orElseThrow());
+        avaliacao.setUsuario(usuarioRepository.findById(idUsuario).orElseThrow());
+        avaliacao.setNotaUsuario(notaUsuario);
+        avaliacao.setDataEnvio(dataEnvioNota);
+        return avaliacaoRepository.save(avaliacao);
+    }
 }
