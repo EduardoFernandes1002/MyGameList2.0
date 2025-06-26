@@ -6,29 +6,6 @@
       <div
         class="img-container-info-game bg-white rounded-4 shadow p-3 w-100 d-flex flex-column align-items-center"
       >
-        <div class="add-lista-container" *ngIf="isUsuarioLogado()">
-          <select [(ngModel)]="listaSelecionada" class="select-lista">
-            <option [ngValue]="null" disabled selected>
-              Adicionar à lista...
-            </option>
-            <option
-              *ngFor="let lista of listasDisponiveis"
-              [ngValue]="lista.idLista"
-            >
-              {{ lista.nome }}
-            </option>
-          </select>
-          <button
-            class="btn-add-lista"
-            (click)="adicionarJogo(listaSelecionada ? listaSelecionada : 1)"
-            [disabled]="!listaSelecionada"
-          >
-            <i class="fa fa-plus"></i>
-          </button>
-          <button class="btn-favorito" (click)="adicionarFavorito()">
-            <i class="fa fa-star"></i>
-          </button>
-        </div>
         <img
           [src]="jogo.imagemJogo"
           class="img-fluid rounded-4 shadow mb-3"
@@ -40,8 +17,8 @@
             border: 1.5px solid #e3e6ed;
           "
         />
-        <span class="nota-overlay" *ngIf="jogo.notaJogo">
-          {{ jogo.notaJogo }}
+        <span class="nota-overlay" *ngIf="jogo.totalNotaJogo">
+          {{ jogo.totalNotaJogo }}
         </span>
         <div class="w-100 text-center mt-2">
           <ng-container *ngIf="jogo.generos && jogo.generos.length > 0">
@@ -88,6 +65,7 @@
                 jogo.distribuidora?.nomeDistribuidora
               }}</span>
             </p>
+
             <div class="avaliacao-btns-container">
               <button
                 class="BtnAvaliar"
@@ -147,8 +125,32 @@
               }}</span>
             </p>
           </div>
+          <div class="add-lista-bar" *ngIf="isUsuarioLogado()">
+            <button class="btn-favorito" (click)="adicionarFavorito()">
+              ⭐ <i class="fa fa-star"></i>
+            </button>
+            <select [(ngModel)]="listaSelecionada" class="select-lista">
+              <option [ngValue]="null" disabled selected>
+                📋 Adicionar à lista...
+              </option>
+              <option
+                *ngFor="let lista of listasDisponiveis"
+                [ngValue]="lista.idLista"
+              >
+                📁 {{ lista.nome }}
+              </option>
+            </select>
+            <button
+              class="btn-add-lista"
+              *ngIf="listaSelecionada"
+              (click)="adicionarJogo(listaSelecionada)"
+            >
+              ✅ <i class="fa fa-check"></i>
+            </button>
+          </div>
         </div>
       </div>
+
       <!-- Espaço reservado para imagens do jogo -->
       <div class="card shadow-sm p-3 mb-4 bg-white border-0 rounded-4">
         <h6 class="mb-3 text-primary">Imagens do Jogo</h6>
