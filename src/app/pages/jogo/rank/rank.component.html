@@ -1,37 +1,41 @@
 <div class="container-fluid p-0">
   <div class="row g-0 justify-content-center">
-    <div class="col-12 col-lg-8 p-4 mb-5">
-      <h1 class="text-center mb-5">Ranking de Jogos</h1>
-
-      <!-- Lista de Rankings -->
-      <div class="container-game-cards justify-content-center">
-
-            <div class="row g-0 align-items-center" *ngFor="let jogo of jogos; trackBy: trackBySlug">
-                 <app-game-card
-                  [jogo]="jogo"
-                  [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
-                  tipo="default"
-                ></app-game-card>
-            </div>
+    <h1 class="text-center mb-5">Ranking de Jogos</h1>
+    <div class="rank-container">
+      <h1>Rank de Jogos</h1>
+      <div class="rank-list">
+        <div
+          class="rank-item-container"
+          *ngFor="let jogo of jogos; let i = index; trackBy: trackBySlug"
+        >
+          <div class="rank-item">
+            <span class="rank-position">{{ i + 1 }}</span>
+            <app-game-card
+              [jogo]="jogo"
+              [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
+              tipo="default"
+            ></app-game-card>
+          </div>
+        </div>
       </div>
-
-      <!-- Paginação -->
-      <nav class="mt-4">
-        <ul class="pagination justify-content-center">
-          <li class="page-jogo">
-            <button class="page-link">&laquo;</button>
-          </li>
-          
-          <li class="page-jogo">
-            <button  class="page-link" ></button>
-            <span  class="page-link">...</span>
-          </li>
-      
-          <li class="page-jogo" >
-            <button class="page-link"></button>
-          </li>
-        </ul>
-      </nav>
     </div>
+
+    <!-- Paginação -->
+    <nav class="mt-4">
+      <ul class="pagination justify-content-center">
+        <li class="page-jogo">
+          <button class="page-link">&laquo;</button>
+        </li>
+
+        <li class="page-jogo">
+          <button class="page-link"></button>
+          <span class="page-link">...</span>
+        </li>
+
+        <li class="page-jogo">
+          <button class="page-link"></button>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>
