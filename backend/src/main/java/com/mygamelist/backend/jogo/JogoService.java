@@ -9,12 +9,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mygamelist.backend.genero.Genero;
 import com.mygamelist.backend.genero.GeneroRepository;
-import com.mygamelist.backend.modo.Modo;
 import com.mygamelist.backend.modo.ModoRepository;
-import com.mygamelist.backend.modo.ModoService;
-import com.mygamelist.backend.plataforma.Plataforma;
 import com.mygamelist.backend.plataforma.PlataformaRepository;
 
 @Service
@@ -88,17 +84,17 @@ public class JogoService {
         jogoRepository.save(jogo);
 
         for (String genero : generos) {
-            Genero g = generoRepository.findByNomeGenero(genero);
-            jogo.setGeneros().add(g);
+            jogo.setGeneros(generoRepository.findByNomeGenero(genero));
         }
-        
+
         for (String plataforma : plataformas) {
-            jogo.setGeneros(plataformaRepository.findByNomePlataforma(plataformas.get().getNomePlataforma()));
+            jogo.setPlataformas(plataformaRepository.findByNomePlataforma(plataforma));
         }
 
         for (String modo : modos) {
-            jogo.setModos(modoRepository.findByNomeModo(generos.get(i).getNomeModo()));
+            jogo.setModos(modoRepository.findByNomeModo(modo));
         }
+
 
         return jogo;
     }

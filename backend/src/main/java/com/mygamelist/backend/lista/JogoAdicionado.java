@@ -9,7 +9,8 @@ import jakarta.persistence.*;
 @Table(name = "jogo_adicionado")
 @IdClass(JogoAdicionadoId.class)
 public class JogoAdicionado {
-@Id
+    
+    @Id
     @ManyToOne
     @JoinColumn(name = "id_lista")
     private Lista listas;
