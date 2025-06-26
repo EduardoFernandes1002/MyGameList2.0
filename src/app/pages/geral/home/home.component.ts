@@ -4,24 +4,27 @@ import { FormsModule } from '@angular/forms';
 import { JogoService } from '../../../service/jogo-service/jogo.service';
 import { RouterModule } from '@angular/router';
 import { GameCardComponent } from '../../../component/game-card/game-card.component';
+import { ComentarioComponent } from "../../../component/comentario/comentario.component";
+import { ComentarioService } from '../../../service/comentario-service/comentario.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ CommonModule, FormsModule, RouterModule, GameCardComponent ],
+  imports: [CommonModule, FormsModule, RouterModule, GameCardComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 
 export class HomeComponent implements OnInit {
 
+  comentarios : any[] = [];
   jogos: any[] = [];
-  highestRatedGames: any[] = [];
 
-  constructor(private jogoService: JogoService) {}
+  constructor(private jogoService: JogoService, private comentarioService: ComentarioService) {}
 
   ngOnInit(): void {
     this.loadTopFive();
+    this.loadComentariosRecentes();
   }
 
   loadTopFive(): void {
@@ -34,6 +37,19 @@ export class HomeComponent implements OnInit {
         console.error('Erro ao carregar top 5:', error);
       }
     });
+  }
+
+
+  loadComentariosRecentes(): void {
+    this.comentarioService.getComentariosRecentes().subscribe({     
+      next: (data: any) => {
+        this.comentarios = data.content || data;
+        
+      },
+      error: (error: any) => {
+        console.error('Erro ao carregar comentarios:', error);
+      } 
+    })
   }
 
 

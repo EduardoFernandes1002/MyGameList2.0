@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import org.springframework.stereotype.Service;
@@ -59,7 +60,7 @@ public class AvaliacaoService {
         return avaliacoes.stream().map(avaliacao -> {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("idAvaliacao", avaliacao.getIdAvaliacao());
-            map.put("nomeUsuario", avaliacao.getUsuario().getNomeUsuario());
+            map.put("apelidoUsuario", avaliacao.getUsuario().getApelidoUsuario());
             map.put("comentarioUsuario", avaliacao.getComentarioUsuario());
             map.put("notaUsuario", avaliacao.getNotaUsuario());
             map.put("dataComentario", avaliacao.getDataComentario());
@@ -110,5 +111,21 @@ public class AvaliacaoService {
         avaliacao.setComentarioUsuario(comentarioUsuario);
         avaliacao.setDataComentario(dataEnvioComentario);
         return avaliacaoRepository.save(avaliacao);
+    }
+
+    public List<Map<String, Object>> getTresComentariosMaisRecentes() {
+        Pageable limit = PageRequest.of(0, 3);
+        List<Avaliacao> avaliacoes = avaliacaoRepository.findAllByOrderByDataComentarioDesc(limit);
+        return avaliacoes.stream().map(avaliacao -> {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("idAvaliacao", avaliacao.getIdAvaliacao());
+            map.put("nomeUsuario", avaliacao.getUsuario().getNomeUsuario());
+            map.put("apelidoUsuario", avaliacao.getUsuario().getApelidoUsuario());
+            map.put("nomeJogo", avaliacao.getJogo().getNomeJogo());
+            map.put("comentarioUsuario", avaliacao.getComentarioUsuario());
+            map.put("notaUsuario", avaliacao.getNotaUsuario());
+            map.put("dataEnvioComentario", avaliacao.getDataComentario());
+            return map;
+        }).toList();
     }
 }

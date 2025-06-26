@@ -53,7 +53,7 @@ public class Avaliacao {
      * Data em que o comentário foi enviado.
      */
     @Column(name = "dt_comentario", nullable = true)
-    private LocalDate dataEnvioComentario;
+    private LocalDate dataComentario;
 
     /**
      * Data em que a nota foi enviada.
@@ -103,11 +103,11 @@ public class Avaliacao {
     }
 
     public LocalDate getDataComentario() {
-        return dataEnvioComentario;
+        return dataComentario;
     }
 
     public void setDataComentario(LocalDate dataEnvioComentario) {
-        this.dataEnvioComentario = dataEnvioComentario;
+        this.dataComentario = dataEnvioComentario;
     }
 
     public LocalDate getDataEnvio() {

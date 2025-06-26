@@ -1,5 +1,36 @@
-<div class="container mt-4">
-  <h1 class="text-center text-dark mb-5">Bem-vindo ao MyGameList</h1>
+<div class="home-container mt-4">
+  <h1 class="home-title">Bem-vindo ao MyGameList</h1>
+
+  <section class="home-section">
+    <h2 class="comentario-title">Comentários mais Recentes</h2>
+    <div
+      *ngIf="comentarios.length > 0; else semComentarios"
+      class="comentario-row"
+    >
+      <div *ngFor="let comentario of comentarios" class="comentario-card">
+        <div class="comentario-jogo">
+          <span
+            >Jogo: <b>{{ comentario.nomeJogo }}</b></span
+          >
+        </div>
+        <div class="comentario-header">
+          <span class="comentario-user">{{ comentario.apelidoUsuario }}</span>
+          <span class="comentario-data">{{
+            comentario.dataEnvioComentario
+          }}</span>
+        </div>
+        <div class="comentario-texto">
+          {{ comentario.comentarioUsuario }}
+        </div>
+        <span class="comentario-nota"
+            >Nota: {{ comentario.notaUsuario }}</span
+          >
+      </div>
+    </div>
+    <ng-template #semComentarios>
+      <p class="text-center text-muted">Nenhum comentário recente.</p>
+    </ng-template>
+  </section>
 
   <!-- Ranking (Top 5) -->
   <section class="home-section">
@@ -16,48 +47,5 @@
         ></app-game-card>
       </div>
     </div>
-  </section>
-
-  <!-- Jogos Mais Bem Avaliados -->
-  <section class="mb-5">
-    <h2 class="text-dark text-center mb-4">Jogos Mais Bem Avaliados</h2>
-    <div
-      *ngIf="highestRatedGames.length > 0; else noMaisBemAvaliados"
-      class="row g-3 bg-light rounded-3 p-3 border m-1 justify-content-center"
-    >
-      <div
-        *ngFor="let jogo of highestRatedGames"
-        class="col-12 col-md-6 col-lg-3"
-      >
-        <div class="card bg-dark text-light shadow-sm position-relative">
-          <a [routerLink]="['/info', toSlug(jogo.nomeJogo)]">
-            <img
-              [src]="jogo.imagemJogo"
-              class="card-img-top"
-              alt="{{ jogo.nomeJogo }}"
-              style="object-fit: cover; height: 300px"
-            />
-            <div
-              class="card-img-overlay d-flex flex-column justify-content-end p-3"
-              style="
-                background-image: linear-gradient(
-                  transparent,
-                  rgba(22, 22, 22, 0.8) 70%
-                );
-              "
-            >
-              <h5 class="card-title text-center">{{ jogo.nomeJogo }}</h5>
-              <p class="card-text text-center">
-                Nota: {{ jogo.totalNotaJogo }}
-              </p>
-              <p class="card-text text-center">Gênero: {{ jogo.generos }}</p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-    <ng-template #noMaisBemAvaliados>
-      <p class="text-center text-muted">Nenhum jogo avaliado ainda.</p>
-    </ng-template>
   </section>
 </div>

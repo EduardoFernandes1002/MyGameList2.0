@@ -5,6 +5,7 @@ import com.mygamelist.backend.jogo.JogoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -47,5 +48,11 @@ public class AvaliacaoController {
         }
         // Buscar avaliações pelo id do jogo
         return avaliacaoService.getAvaliacoesByJogo(jogo.getIdJogo(), pageable);
+    }
+
+    @GetMapping("/recentes")
+    public ResponseEntity<List<Map<String, Object>>> getTresComentariosMaisRecentes() {
+        List<Map<String, Object>> comentarios = avaliacaoService.getTresComentariosMaisRecentes();
+        return ResponseEntity.ok(comentarios);
     }
 }
