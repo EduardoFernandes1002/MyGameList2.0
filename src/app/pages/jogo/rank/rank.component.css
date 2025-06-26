@@ -29,3 +29,41 @@
   transition: box-shadow 0.2s;
   border: 1px solid #212529;
 }
+
+.rank-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.rank-list {
+  list-style: none;
+  margin: 0;
+}
+
+.rank-item-container {
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.rank-item-container:last-child {
+  border-bottom: none;
+}
+
+.rank-item {
+  width: 50%;
+  display: inline-block;
+}
+
+.rank-position {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 10px;
+}
