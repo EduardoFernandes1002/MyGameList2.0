@@ -33,7 +33,8 @@ public class ListaService {
         return listaRepository.findById(idLista).orElse(null);
     }
 
-    public List<Map<String, Object>> findJogosPerfilUsuario(Long idLista, String nomeUsuario) {
+    public List<Map<String, Object>> findJogosPerfilUsuario(Long idLista,
+            String nomeUsuario) {
 
         Usuario usuario = usuarioRepository.findByNomeUsuario(nomeUsuario);
         if (usuario == null)
@@ -47,9 +48,14 @@ public class ListaService {
             map.put("idJogo", jogo.getIdJogo());
             map.put("nomeJogo", jogo.getNomeJogo());
             map.put("imagemJogo", jogo.getImagemJogo());
-            // Buscar a nota do usuário para esse jogo
-            Avaliacao avaliacao = avaliacaoRepository.findByUsuario_IdUsuarioAndJogo_IdJogo(idUsuario, jogo.getIdJogo());
-            map.put("notaUsuario", avaliacao != null ? avaliacao.getNotaUsuario() : null);
+
+            // Buscar a nota do usuário para esse jogo caso exista
+            Avaliacao avaliacao = avaliacaoRepository.findByUsuario_IdUsuarioAndJogo_IdJogo(
+                    idUsuario,
+                    jogo.getIdJogo());
+            map.put("notaUsuario", avaliacao != null
+                    ? avaliacao.getNotaUsuario()
+                    : null);
             return map;
         }).toList();
     }

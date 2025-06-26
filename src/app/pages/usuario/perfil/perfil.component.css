@@ -1,6 +1,10 @@
-body {
-    background-color: #f8f9fa;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.section-title a{
+    text-decoration: none;
+    color: rgba(112, 112, 112, 0.589);
+}
+
+.section-title a:hover {
+    cursor: auto;
 }
 
 .profile-container {

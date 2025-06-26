@@ -14,20 +14,31 @@ import { FormsModule } from '@angular/forms';
 })
 export class PerfilComponent implements OnInit {
   jogos: any[] = [];
-  usuario: any[] = [];
+  usuario: any = {};
   lista: number = 1;
+  jogosFavoritos: any[] = [];
+  listaNome: any;
+  isPerfilProprio: boolean = false;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadListaUsuario();
     this.loadInfosUsuarioLogado();
+    this.loadNomeLista();
   }
 
   loadInfosUsuarioLogado() {
     this.authService.getInfosUsuarioLogado().subscribe({
       next: (data: any) => {
         this.usuario = data.content || data;
+
+        // Obtenha o usuário logado (ajuste conforme seu AuthService)
+      // Pega o nome do usuário logado pelo token
+      const nomeUsuarioLogado = this.authService.getNomeUsuarioFromToken();
+
+      // Verifica se é o próprio perfil
+      this.isPerfilProprio = nomeUsuarioLogado && this.usuario.nomeUsuario && (nomeUsuarioLogado === this.usuario.nomeUsuario);
         
       },
       error: (error: any) => {
@@ -46,7 +57,27 @@ export class PerfilComponent implements OnInit {
         console.error('Erro ao carregar lista atual:', error);
       }
     });
+
+    this.authService.getJogosListaUsuario(7).subscribe({
+      next: (data: any) => {  
+        this.jogos = data.content || data;
+        
+      },
+      error: (error: any) => {
+        console.error('Erro ao carregar lista atual:', error);
+      }
+    });
   }
+
+  loadNomeLista() {
+  this.authService.getNomeLista(this.lista).subscribe({
+    next: (data: any) => {
+      this.listaNome = data.content || data;
+    },
+    error: (error: any) => {
+      console.error('Erro ao carregar nome da lista:', error);}
+  });
+}
 
 
 

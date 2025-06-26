@@ -102,5 +102,8 @@ export class AuthService {
     return this.http
       .get<any[]>(`http://localhost:8080/api/lista/${nomeUsuario}/${lista}/jogos`)
   }
+
+  getNomeLista(idLista: number): Observable<any> {
+  return this.http.get<any>(`http://localhost:8080/api/lista/${idLista}`);
 }
-  
+}

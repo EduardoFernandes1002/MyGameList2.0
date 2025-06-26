@@ -42,6 +42,7 @@ public class UsuarioService {
         
         permissao.setIdPermissao(1L);
         usuario.setPermissao(permissao);
+        usuario.getIdUsuario();
         usuario.setNomeUsuario(nomeUsuario);
         usuario.setApelidoUsuario(apelidoUsuario);
         usuario.setEmailUsuario(emailUsuario);

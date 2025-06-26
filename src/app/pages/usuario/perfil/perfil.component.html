@@ -8,13 +8,14 @@
           alt="Foto do usuário"
           class="profile-picture rounded-circle mb-3 shadow"
         />
-        <h2 class="mb-1">Carlos Gamer</h2>
+        <h2 class="mb-1">{{ usuario.apelidoUsuario }}</h2>
+        <span *ngIf="isPerfilProprio" class="text-muted"
+          >&commat;{{ usuario.nomeUsuario }}</span
+        >
       </div>
 
       <div class="mb-4">
         <div class="d-flex justify-content-between py-2 border-bottom">
-          <span class="fw-bold">Desde</span>
-          <span>2010</span>
         </div>
       </div>
     </div>
@@ -22,18 +23,18 @@
     <div class="col-lg-9 p-4">
       <!-- Biblioteca de Jogos -->
       <h3 class="section-title mb-4">
-        Biblioteca de Jogos<span id="Span/"> / </span
+        Biblioteca de Jogos<span id="Span"> / </span
         ><a href="http://localhost:4200/perfil">Jogando</a>
-        <span id="Span/"> / </span>
+        <span id="Span"> / </span>
         <a href="http://localhost:4200/perfil"> Completo </a>
-        <span id="Span/"> / </span>
+        <span id="Span"> / </span>
         <a href="http://localhost:4200/perfil"> Abandonado </a>
-        <span id="Span/"> / </span>
+        <span id="Span"> / </span>
         <a href="http://localhost:4200/perfil"> Pausado</a>
-        <span id="Span/"> / </span>
+        <span id="Span"> / </span>
         <a href="http://localhost:4200/perfil"> Desejo</a>
       </h3>
-      <div class="perfil-row">
+      <div class="perfil-row" *ngIf="jogos.length > 0; else semJogosLista">
         <div
           class="perfil-card-container"
           *ngFor="let jogo of jogos; trackBy: trackBySlug"
@@ -45,37 +46,36 @@
           ></app-game-card>
         </div>
       </div>
+      <ng-template #semJogosLista>
+        <p class="text-center text-muted">
+          Sem jogos adicionados à lista {{ listaNome.nomeLista }}
+        </p>
+      </ng-template>
+
+      <hr class="hr" />
 
       <!-- Próximos Lançamentos -->
       <h3 class="section-title mb-4">Favoritos</h3>
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4">
-          <div class="game-card card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Starfield</h5>
-              <p class="card-text text-muted mb-1">Plataforma: PC/Xbox</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-          <div class="game-card card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Spider-Man 2</h5>
-              <p class="card-text text-muted mb-1">Plataforma: PS5</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-          <div class="game-card card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Final Fantasy XVI</h5>
-              <p class="card-text text-muted mb-1">Plataforma: PS5</p>
-            </div>
-          </div>
+      <div
+        class="perfil-row"
+        *ngIf="jogosFavoritos.length > 0; else semFavoritos"
+      >
+        <div
+          class="perfil-card-container"
+          *ngFor="let jogo of jogosFavoritos; trackBy: trackBySlug"
+        >
+          <app-game-card
+            [jogo]="jogo"
+            [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
+            tipo="default"
+          ></app-game-card>
         </div>
       </div>
+      <ng-template #semFavoritos>
+        <p class="text-center text-muted">
+          Sem jogos adicionados à lista Favoritos
+        </p>
+      </ng-template>
     </div>
   </div>
 </div>
