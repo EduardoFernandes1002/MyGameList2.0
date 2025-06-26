@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.mygamelist.backend.avaliacao.Avaliacao;
 import com.mygamelist.backend.avaliacao.AvaliacaoRepository;
 import com.mygamelist.backend.jogo.Jogo;
+import com.mygamelist.backend.jogo.JogoRepository;
 import com.mygamelist.backend.usuario.Usuario;
 import com.mygamelist.backend.usuario.UsuarioRepository;
 
@@ -24,6 +25,16 @@ public class ListaService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private JogoRepository jogoRepository;
+
+    @Autowired
+    private JogoAdicionadoRepository jogoAdicionadoRepository;
+
+    ListaService(JogoAdicionadoRepository jogoAdicionadoRepository) {
+        this.jogoAdicionadoRepository = jogoAdicionadoRepository;
+    }
 
     public List<Lista> getListas() {
         return listaRepository.findAll();
@@ -58,5 +69,17 @@ public class ListaService {
                     : null);
             return map;
         }).toList();
+    }
+
+    public void adicionarJogoNaLista(Long idLista, Long idUsuario, Long idJogo) {
+        Lista lista = listaRepository.findById(idLista).orElseThrow();
+        Usuario usuario = usuarioRepository.findById(idUsuario).orElseThrow();
+        Jogo jogo = jogoRepository.findById(idJogo).orElseThrow();
+
+        JogoAdicionado ja = new JogoAdicionado();
+        ja.setListas(lista);
+        ja.setUsuario(usuario);
+        ja.setJogos(jogo);
+        jogoAdicionadoRepository.save(ja);
     }
 }

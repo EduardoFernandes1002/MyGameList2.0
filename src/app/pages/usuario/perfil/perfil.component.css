@@ -47,6 +47,60 @@
   box-sizing: border-box;
 }
 
+.listas-btns {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.listas-btns button {
+  background: #212529;
+  color: #fff;
+  border: 1.5px solid #212529;
+  border-radius: 8px;
+  padding: 6px 18px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.listas-btns button.selected,
+.listas-btns button:hover {
+  background: #fff;
+  color: #212529;
+  border: 1.5px solid #212529;
+}
+
+.listas-btns button i.fa-star {
+  color: gold;
+  font-size: 1.2em;
+  margin-left: 2px;
+}
+
+.listas-btns button.selected i.fa-star,
+.listas-btns button:hover i.fa-star {
+  color: #212529;
+}
+
+@media (max-width: 600px) {
+  .listas-btns {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .listas-btns button {
+    padding: 5px 10px;
+    font-size: 0.95rem;
+  }
+}
+
 :host ::ng-deep .jogo-link {
   text-decoration: none;
   color: white;

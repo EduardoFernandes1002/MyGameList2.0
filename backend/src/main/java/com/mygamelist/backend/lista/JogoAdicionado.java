@@ -7,31 +7,22 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "jogo_adicionado")
+@IdClass(JogoAdicionadoId.class)
 public class JogoAdicionado {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@Id
     @ManyToOne
     @JoinColumn(name = "id_lista")
     private Lista listas;
 
-    @ManyToOne
-    @JoinColumn(name = "id_jogo")
-    private Jogo jogos;
-
+    @Id
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "id_jogo")
+    private Jogo jogos;
 
     public Lista getListas() {
         return listas;
@@ -47,6 +38,14 @@ public class JogoAdicionado {
 
     public void setJogos(Jogo jogos) {
         this.jogos = jogos;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

@@ -20,6 +20,14 @@ export class InfoGameComponent implements OnInit {
   exibindoNotas = false;
   jaAvaliou = false;
   usuario: any = {};
+  listasDisponiveis = [
+    { idLista: 2, nome: 'Jogando' },
+    { idLista: 3, nome: 'Completo' },
+    { idLista: 4, nome: 'Abandonado' },
+    { idLista: 5, nome: 'Pausado' },
+    { idLista: 6, nome: 'Desejo' },
+  ];
+  listaSelecionada: number | null = null;
 
   constructor(
     private jogoService: JogoService,
@@ -138,11 +146,29 @@ export class InfoGameComponent implements OnInit {
       });
   }
 
-    podeAvaliar(): boolean {
+  podeAvaliar(): boolean {
     return this.isUsuarioLogado() && !this.usuario.notaUsuario;
   }
 
   isUsuarioLogado(): boolean {
     return this.authService.isAuthenticated();
+  }
+
+  adicionarJogo(idLista: number) {
+    this.authService
+      .adicionarJogoNaLista(this.usuario.idUsuario, idLista, this.jogo.idJogo)
+      .subscribe({
+        next: () => alert('Jogo adicionado à lista!'),
+        error: (err) => alert('Erro ao adicionar: ' + (err.error || '')),
+      });
+  }
+
+  adicionarFavorito() {
+    this.authService
+      .adicionarJogoNaLista(this.usuario.idUsuario, 7, this.jogo.idJogo)
+      .subscribe({
+        next: () => alert('Jogo adicionado à lista!'),
+        error: (err) => alert('Erro ao adicionar: ' + (err.error || '')),
+      });
   }
 }

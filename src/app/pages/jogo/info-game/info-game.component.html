@@ -6,6 +6,29 @@
       <div
         class="img-container-info-game bg-white rounded-4 shadow p-3 w-100 d-flex flex-column align-items-center"
       >
+        <div class="add-lista-container" *ngIf="isUsuarioLogado()">
+          <select [(ngModel)]="listaSelecionada" class="select-lista">
+            <option [ngValue]="null" disabled selected>
+              Adicionar à lista...
+            </option>
+            <option
+              *ngFor="let lista of listasDisponiveis"
+              [ngValue]="lista.idLista"
+            >
+              {{ lista.nome }}
+            </option>
+          </select>
+          <button
+            class="btn-add-lista"
+            (click)="adicionarJogo(listaSelecionada ? listaSelecionada : 1)"
+            [disabled]="!listaSelecionada"
+          >
+            <i class="fa fa-plus"></i>
+          </button>
+          <button class="btn-favorito" (click)="adicionarFavorito()">
+            <i class="fa fa-star"></i>
+          </button>
+        </div>
         <img
           [src]="jogo.imagemJogo"
           class="img-fluid rounded-4 shadow mb-3"

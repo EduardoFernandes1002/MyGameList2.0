@@ -10,15 +10,23 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, GameCardComponent, RouterModule, FormsModule],
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css',
-  standalone: true
+  standalone: true,
 })
 export class PerfilComponent implements OnInit {
   jogos: any[] = [];
   usuario: any = {};
-  lista: number = 1;
+  listaSelecionada: number = 1;
   jogosFavoritos: any[] = [];
   listaNome: any;
   isPerfilProprio: boolean = false;
+  listas = [
+    { id: 1, nome: 'Geral' },
+    { id: 2, nome: 'Jogando' },
+    { id: 3, nome: 'Completo' },
+    { id: 4, nome: 'Abandonado' },
+    { id: 5, nome: 'Pausado' },
+    { id: 6, nome: 'Desejo' },
+  ];
 
   constructor(private authService: AuthService) {}
 
@@ -34,52 +42,51 @@ export class PerfilComponent implements OnInit {
         this.usuario = data.content || data;
 
         // Obtenha o usuário logado (ajuste conforme seu AuthService)
-      // Pega o nome do usuário logado pelo token
-      const nomeUsuarioLogado = this.authService.getNomeUsuarioFromToken();
+        // Pega o nome do usuário logado pelo token
+        const nomeUsuarioLogado = this.authService.getNomeUsuarioFromToken();
 
-      // Verifica se é o próprio perfil
-      this.isPerfilProprio = nomeUsuarioLogado && this.usuario.nomeUsuario && (nomeUsuarioLogado === this.usuario.nomeUsuario);
-        
+        // Verifica se é o próprio perfil
+        this.isPerfilProprio =
+          nomeUsuarioLogado &&
+          this.usuario.nomeUsuario &&
+          nomeUsuarioLogado === this.usuario.nomeUsuario;
       },
       error: (error: any) => {
         console.error('Erro ao carregar informações do usuario:', error);
-      }
+      },
     });
   }
 
   loadListaUsuario() {
-    this.authService.getJogosListaUsuario(this.lista).subscribe({
-      next: (data: any) => {  
+    this.authService.getJogosListaUsuario(this.listaSelecionada).subscribe({
+      next: (data: any) => {
         this.jogos = data.content || data;
-        
       },
       error: (error: any) => {
         console.error('Erro ao carregar lista atual:', error);
-      }
+      },
     });
 
     this.authService.getJogosListaUsuario(7).subscribe({
-      next: (data: any) => {  
-        this.jogos = data.content || data;
-        
+      next: (data: any) => {
+        this.jogosFavoritos = data.content || data;
       },
       error: (error: any) => {
         console.error('Erro ao carregar lista atual:', error);
-      }
+      },
     });
   }
 
   loadNomeLista() {
-  this.authService.getNomeLista(this.lista).subscribe({
-    next: (data: any) => {
-      this.listaNome = data.content || data;
-    },
-    error: (error: any) => {
-      console.error('Erro ao carregar nome da lista:', error);}
-  });
-}
-
-
+    this.authService.getNomeLista(this.listaSelecionada).subscribe({
+      next: (data: any) => {
+        this.listaNome = data.content || data;
+      },
+      error: (error: any) => {
+        console.error('Erro ao carregar nome da lista:', error);
+      },
+    });
+  }
 
   public toSlug = (nomeJogo: string): string => {
     return nomeJogo ? nomeJogo.toLowerCase().replace(/\s+/g, '-') : '';
@@ -88,4 +95,11 @@ export class PerfilComponent implements OnInit {
   public trackBySlug = (index: number, jogo: any): string => {
     return this.toSlug(jogo?.nomeJogo);
   };
+
+  selecionarLista(id: number) {
+    console.log(id);
+    this.listaSelecionada = id;
+    this.loadListaUsuario();
+    this.loadNomeLista();
+  }
 }

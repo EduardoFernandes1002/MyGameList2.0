@@ -93,17 +93,26 @@ export class AuthService {
 
   getInfosUsuarioLogado(): Observable<any[]> {
     const nomeUsuario = this.getNomeUsuarioFromToken();
-    return this.http
-      .get<any[]>(`http://localhost:8080/api/usuarios/username/${nomeUsuario}`)
+    return this.http.get<any[]>(
+      `http://localhost:8080/api/usuarios/username/${nomeUsuario}`
+    );
   }
 
   getJogosListaUsuario(lista: number): Observable<any[]> {
     const nomeUsuario = this.getNomeUsuarioFromToken();
-    return this.http
-      .get<any[]>(`http://localhost:8080/api/lista/${nomeUsuario}/${lista}/jogos`)
+    return this.http.get<any[]>(
+      `http://localhost:8080/api/lista/${nomeUsuario}/${lista}/jogos`
+    );
   }
 
   getNomeLista(idLista: number): Observable<any> {
-  return this.http.get<any>(`http://localhost:8080/api/lista/${idLista}`);
-}
+    return this.http.get<any>(`http://localhost:8080/api/lista/${idLista}`);
+  }
+
+  adicionarJogoNaLista(idUsuario: number, idLista: number, idJogo: number) {
+    return this.http.post(
+      `http://localhost:8080/api/lista/${idUsuario}/${idLista}/${idJogo}/adicionar`,
+      {}
+    );
+  }
 }

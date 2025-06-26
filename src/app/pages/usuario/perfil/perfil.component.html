@@ -15,25 +15,23 @@
       </div>
 
       <div class="mb-4">
-        <div class="d-flex justify-content-between py-2 border-bottom">
-        </div>
+        <div class="d-flex justify-content-between py-2 border-bottom"></div>
       </div>
     </div>
 
     <div class="col-lg-9 p-4">
       <!-- Biblioteca de Jogos -->
-      <h3 class="section-title mb-4">
-        Biblioteca de Jogos<span id="Span"> / </span
-        ><a href="http://localhost:4200/perfil">Jogando</a>
-        <span id="Span"> / </span>
-        <a href="http://localhost:4200/perfil"> Completo </a>
-        <span id="Span"> / </span>
-        <a href="http://localhost:4200/perfil"> Abandonado </a>
-        <span id="Span"> / </span>
-        <a href="http://localhost:4200/perfil"> Pausado</a>
-        <span id="Span"> / </span>
-        <a href="http://localhost:4200/perfil"> Desejo</a>
-      </h3>
+      <div class="listas-btns">
+        <button
+          *ngFor="
+            let lista of listas
+          "
+          [class.selected]="lista.id === listaSelecionada"
+          (click)="selecionarLista(lista.id)"
+        >
+          {{ lista.nome }}
+        </button>
+      </div>
       <div class="perfil-row" *ngIf="jogos.length > 0; else semJogosLista">
         <div
           class="perfil-card-container"
