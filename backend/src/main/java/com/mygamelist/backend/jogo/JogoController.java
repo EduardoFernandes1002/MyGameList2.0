@@ -2,8 +2,8 @@ package com.mygamelist.backend.jogo;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/jogo")
@@ -16,7 +16,7 @@ public class JogoController {
     public List<?> getJogos() {
         return jogoService.getJogos();
     }
-    
+
     @GetMapping("/{slug}")
     public Jogo getJogoBySlug(@PathVariable("slug") String slug) {
         String nomeJogo = slug.replace("-", " ");
@@ -32,4 +32,14 @@ public class JogoController {
     public List<?> getRank() {
         return jogoService.findRankJogos();
     }
+
+    @PostMapping("/adicionar/jogo")
+    public ResponseEntity<?> adicionarJogo(@RequestBody Jogo jogo, @RequestBody List<String> generos,
+            @RequestBody List<String> plataformas, @RequestBody List<String> modos) {
+
+        jogoService.adicionarJogo(jogo, generos, plataformas, modos);
+
+        return ResponseEntity.ok("Jogo adicionado com sucesso!");
+    }
+
 }

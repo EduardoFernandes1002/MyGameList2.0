@@ -42,4 +42,14 @@ export class JogoService {
   getRankingJogos(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/rank`);
   }
+
+  deletarJogo(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
+
+  adicionarJogo(jogo: any, generos: any[], plataformas: any[], modos: any[]): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/adicionar/jogo`, {jogo, generos, plataformas, modos});
+  }
+
+
 }

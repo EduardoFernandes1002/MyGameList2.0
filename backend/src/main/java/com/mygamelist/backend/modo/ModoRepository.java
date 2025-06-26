@@ -15,4 +15,6 @@ public interface ModoRepository extends JpaRepository<Modo, Long> {
 
     @Query("SELECT j FROM Modo m INNER JOIN m.jogos j WHERE m.nomeModo = :nomeModo")
     List<Jogo> findJogosByModo(@Param("nomeModo") String nomeModo);
+
+    List<Modo> findByNomeModo(String nomeModo);
 }

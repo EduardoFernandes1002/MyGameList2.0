@@ -9,11 +9,28 @@ import org.springframework.data.domain.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mygamelist.backend.genero.Genero;
+import com.mygamelist.backend.genero.GeneroRepository;
+import com.mygamelist.backend.modo.Modo;
+import com.mygamelist.backend.modo.ModoRepository;
+import com.mygamelist.backend.modo.ModoService;
+import com.mygamelist.backend.plataforma.Plataforma;
+import com.mygamelist.backend.plataforma.PlataformaRepository;
+
 @Service
 public class JogoService {
 
     @Autowired
     private JogoRepository jogoRepository;
+
+    @Autowired
+    private GeneroRepository generoRepository;
+
+    @Autowired
+    private ModoRepository modoRepository;
+
+    @Autowired
+    private PlataformaRepository plataformaRepository;
 
     public List<Map<String, Object>> getJogos() {
         List<Jogo> jogos = jogoRepository.findAll(PageRequest.of(0, 10, Sort.by("totalNotaJogo").descending()))
@@ -65,5 +82,24 @@ public class JogoService {
             map.put("imagemJogo", jogo.getImagemJogo());
             return map;
         }).toList();
+    }
+
+    public Jogo adicionarJogo(Jogo jogo, List<String> generos, List<String> plataformas, List<String> modos) {
+        jogoRepository.save(jogo);
+
+        for (String genero : generos) {
+            Genero g = generoRepository.findByNomeGenero(genero);
+            jogo.setGeneros().add(g);
+        }
+        
+        for (String plataforma : plataformas) {
+            jogo.setGeneros(plataformaRepository.findByNomePlataforma(plataformas.get().getNomePlataforma()));
+        }
+
+        for (String modo : modos) {
+            jogo.setModos(modoRepository.findByNomeModo(generos.get(i).getNomeModo()));
+        }
+
+        return jogo;
     }
 }

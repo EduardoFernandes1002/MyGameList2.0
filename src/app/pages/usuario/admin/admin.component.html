@@ -5,9 +5,9 @@
     <div class="Legal">
       <select name="" class="Selecionar">
         <div class="Option">
-        <option value="">Gerenciar Usuários</option>
-        <option value="">Gerenciar Jogos</option>
-      </div>
+          <option value="">Gerenciar Usuários</option>
+          <option value="">Gerenciar Jogos</option>
+        </div>
       </select>
     </div>
 
@@ -45,10 +45,11 @@
         <td>{{ jogo.nomeJogo }}</td>
         <td>{{ jogo.sinopseJogo }}</td>
         <td>{{ jogo.dataLancamentoJogo | date }}</td>
-        <td> 
+        <td>
           <p>
             <span *ngFor="let modo of jogo.modos; let last = last">
-              {{ modo.nomeModo }}<span *ngIf="!last">, </span></span>
+              {{ modo.nomeModo }}<span *ngIf="!last">, </span></span
+            >
           </p>
         </td>
         <td>
@@ -70,75 +71,63 @@
     </tbody>
   </table>
 
-  <!-- Modal Adicionar Jogo -->
-  <div class="modal fade" id="modalAdicionar" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Adicionar Novo Jogo</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <form (ngSubmit)="submitForm()">
-            <div class="mb-3">
-              <label class="form-label">Distribuidora do Jogo</label>
-              <select class="DistribuidoraJogo">
-                <option value="">Selecione uma distribuidora</option>
-                <!-- Opções seriam carregadas dinamicamente -->
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Desenvolvedora do Jogo</label>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Nome do Jogo</label>
-              <input type="text" class="form-control" required />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Sinopse do Jogo</label>
-              <input type="text" class="form-control" required />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Data de Lançamento</label>
-              <input type="date" class="form-control" required />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Modo do Jogo</label>
-              <select class="DesenvolvedoraJogo">
-                <option value="">Selecione um modo</option>
-                <!-- Opções seriam carregadas dinamicamente -->
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Gênero do Jogo</label>
-              <div class="tag-autocomplete-container">
-                <div class="selected-tags">
-                  <span class="tag" *ngFor="let tag of selectedTags">
-                    {{ tag }}
-                    <span class="tag-remove" (click)="removeTag(tag)">×</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Cancelar
-          </button>
-          <button type="button" class="btn btn-primary" (click)="submitForm()">
-            Adicionar
-          </button>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="modalAdicionarJogo" tabindex="-1" aria-labelledby="modalAdicionarJogoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAdicionarJogoLabel">Adicionar Jogo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="adicionarJogo()">
+          <div class="form-group mb-2">
+            <label for="nome">Nome do Jogo:</label>
+            <input type="text" class="form-control" id="nome" [(ngModel)]="nomeJogo" name="nomeJogo">
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="sinopse">Sinopse:</label>
+            <input type="text" class="form-control" id="sinopse" [(ngModel)]="sinopseJogo" name="sinopseJogo">
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="imagem">URL da Imagem:</label>
+            <input type="text" class="form-control" id="imagem" [(ngModel)]="imagemJogo" name="imagemJogo">
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="data">Data de Lançamento:</label>
+            <input type="date" class="form-control" id="data" [(ngModel)]="dataLancamentoJogo" name="dataLancamentoJogo">
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="distribuidora">ID Distribuidora:</label>
+            <input type="number" class="form-control" id="distribuidora" [(ngModel)]="distribuidora" name="distribuidora">
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="desenvolvedora">ID Desenvolvedora:</label>
+            <input type="number" class="form-control" id="desenvolvedora" [(ngModel)]="desenvolvedora" name="desenvolvedora">
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="modos">Modos (separados por vírgula):</label>
+            <input type="text" class="form-control" id="modos" [(ngModel)]="modos" name="modosTexto">
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="plataformas">Plataformas (separadas por vírgula):</label>
+            <input type="text" class="form-control" id="plataformas" [(ngModel)]="plataformas" name="plataformasTexto">
+          </div>
+
+                    <div class="form-group mb-2">
+            <label for="generos">Gêneros (separados por vírgula):</label>
+            <input type="text" class="form-control" id="generos" [(ngModel)]="generos" name="generosTexto">
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 mt-3">Adicionar Jogo</button>
+        </form>
       </div>
     </div>
   </div>
