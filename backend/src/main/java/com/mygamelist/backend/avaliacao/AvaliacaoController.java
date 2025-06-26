@@ -9,11 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 /**
  * Controller responsável pelos endpoints de avaliações de jogos.
@@ -59,11 +58,45 @@ public class AvaliacaoController {
         return ResponseEntity.ok(comentarios);
     }
 
-    @PostMapping("/salvarNota")
-    public ResponseEntity<?> salvarNota(@RequestBody String entity) {
-        //TODO: process POST request
-        
-        return ResponseEntity.ok().build();
+    @PostMapping("/salvar-nota")
+    public ResponseEntity<?> salvarNota(@RequestBody Map<String, Object> payload) {
+        {
+            try {
+                Long idJogo = Long.valueOf(payload.get("idJogo").toString());
+                Long idUsuario = Long.valueOf(payload.get("idUsuario").toString());
+                BigDecimal notaUsuario = payload.get("notaUsuario") != null
+                        ? new BigDecimal(payload.get("notaUsuario").toString())
+                        : null;
+                String comentarioUsuario = (String) payload.getOrDefault("comentarioUsuario", null);
+
+                String dataEnvioNotaStr = (String) payload.get("dataEnvioNota");
+                LocalDate dataEnvioNota = dataEnvioNotaStr != null ? LocalDate.parse(dataEnvioNotaStr)
+                        : LocalDate.now();
+
+                if (notaUsuario == null) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nota é obrigatória.");
+                }
+                if (dataEnvioNota == null) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nota é obrigatória.");
+                }
+
+                Avaliacao avaliacao = avaliacaoService.salvarNotaOuComentario(idJogo, idUsuario, notaUsuario,
+                        comentarioUsuario, dataEnvioNota);
+                return ResponseEntity.ok(avaliacao);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Erro ao salvar avaliação: " + e.getMessage());
+            }
+        }
+
     }
-    
+
+    @GetMapping("/usuario/{idUsuario}/jogo/{idJogo}")
+    public ResponseEntity<?> getAvaliacaoUsuarioJogo(@PathVariable Long idUsuario, @PathVariable Long idJogo) {
+        Avaliacao avaliacao = avaliacaoService.getAvaliacaoUsuarioJogo(idUsuario, idJogo);
+        if (avaliacao == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(avaliacao);
+    }
 }

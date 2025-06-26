@@ -79,37 +79,21 @@ public class AvaliacaoService {
      * @param dataEnvioNota       data da nota
      * @return avaliação salva juntamente com a nota
      */
-    public Avaliacao saveComentarioSemNota(Long idJogo, Long idUsuario, String comentarioUsuario,
-            BigDecimal notaUsuario, LocalDate dataEnvioComentario, LocalDate dataEnvioNota) {
+    public Avaliacao salvarNotaOuComentario(Long idJogo, Long idUsuario, BigDecimal notaUsuario,
+            String comentarioUsuario, LocalDate dataEnvioNota) {
 
-        Avaliacao avaliacao = new Avaliacao();
-        avaliacao.setJogo(jogoRepository.findById(idJogo).orElseThrow());
-        avaliacao.setUsuario(usuarioRepository.findById(idUsuario).orElseThrow());
-        avaliacao.setComentarioUsuario(comentarioUsuario);
+        Avaliacao avaliacao = avaliacaoRepository.findByUsuario_IdUsuarioAndJogo_IdJogo(idUsuario, idJogo);
+        if (avaliacao == null) {
+            avaliacao = new Avaliacao();
+            avaliacao.setJogo(jogoRepository.findById(idJogo).orElseThrow());
+            avaliacao.setUsuario(usuarioRepository.findById(idUsuario).orElseThrow());
+        }
         avaliacao.setNotaUsuario(notaUsuario);
-        avaliacao.setDataComentario(dataEnvioComentario);
         avaliacao.setDataEnvio(dataEnvioNota);
-        return avaliacaoRepository.save(avaliacao);
-    }
-
-    /**
-     * Salva um comentário de avaliação com nota.
-     * 
-     * @param idJogo              id do jogo
-     * @param idUsuario           id do usuário
-     * @param comentarioUsuario   texto do comentário
-     * @param notaUsuario         nota atribuída
-     * @param dataEnvioComentario data do comentário
-     * @return avaliação salva
-     */
-    public Avaliacao saveComentarioComNota(Long idJogo, Long idUsuario, String comentarioUsuario,
-            BigDecimal notaUsuario, LocalDate dataEnvioComentario) {
-
-        Avaliacao avaliacao = new Avaliacao();
-        avaliacao.setJogo(jogoRepository.findById(idJogo).orElseThrow());
-        avaliacao.setUsuario(usuarioRepository.findById(idUsuario).orElseThrow());
-        avaliacao.setComentarioUsuario(comentarioUsuario);
-        avaliacao.setDataComentario(dataEnvioComentario);
+        avaliacao.setComentarioUsuario(comentarioUsuario); // pode ser nulo
+        if (comentarioUsuario != null && !comentarioUsuario.isEmpty()) {
+            avaliacao.setDataComentario(LocalDate.now());
+        }
         return avaliacaoRepository.save(avaliacao);
     }
 
@@ -129,12 +113,7 @@ public class AvaliacaoService {
         }).toList();
     }
 
-    public Avaliacao saveNota(Long idJogo, Long idUsuario, BigDecimal notaUsuario, LocalDate dataEnvioNota) {
-        Avaliacao avaliacao = new Avaliacao();
-        avaliacao.setJogo(jogoRepository.findById(idJogo).orElseThrow());
-        avaliacao.setUsuario(usuarioRepository.findById(idUsuario).orElseThrow());
-        avaliacao.setNotaUsuario(notaUsuario);
-        avaliacao.setDataEnvio(dataEnvioNota);
-        return avaliacaoRepository.save(avaliacao);
+    public Avaliacao getAvaliacaoUsuarioJogo(Long idUsuario, Long idJogo) {
+        return avaliacaoRepository.findByUsuario_IdUsuarioAndJogo_IdJogo(idUsuario, idJogo);
     }
 }

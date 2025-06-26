@@ -68,16 +68,35 @@
             <div class="avaliacao-btns-container">
               <button
                 class="BtnAvaliar"
-                *ngIf="!avaliando"
-                (click)="mostrarAvaliacao()"
+                *ngIf="podeAvaliar() && !exibindoNotas"
+                (click)="mostrarNotas()"
               >
                 Avaliar
               </button>
-              <ng-container *ngIf="avaliando">
+
+              <!-- Botão Editar nota -->
+              <div
+                *ngIf="
+                  usuario.notaUsuario && !exibindoNotas && isUsuarioLogado()
+                "
+                class="nota-destaque-container"
+              >
+                <span class="nota-destaque">{{ usuario.notaUsuario }}</span>
+                <button
+                  class="BtnAvaliar btn-editar-nota"
+                  (click)="mostrarNotas()"
+                >
+                  Editar nota
+                </button>
+              </div>
+
+              <!-- Bloco de seleção de nota -->
+              <ng-container *ngIf="exibindoNotas">
                 <button
                   *ngFor="let n of [].constructor(10); let i = index"
                   class="BtnNotas"
-                  (click)="avaliarNota(i + 1)"
+                  [class.selected]="usuario.notaUsuario === i + 1"
+                  (click)="selecionarNota(i + 1)"
                 >
                   <span class="emoji-nota">
                     {{
@@ -114,7 +133,7 @@
           <img
             *ngFor="let img of jogo.imagens"
             [src]="img"
-            alt="Imagem do jogo"
+            alt="Imagem-de-jogo"
             class="rounded-3 border"
             style="
               max-width: 160px;
@@ -127,7 +146,7 @@
           <span
             *ngIf="!jogo.imagens || jogo.imagens.length === 0"
             class="text-muted"
-            >Nenhuma imagem extra disponível.</span
+            >Nenhuma imagem disponível --> ainda em desenvolvimento!</span
           >
         </div>
       </div>
@@ -138,21 +157,21 @@
     <div class="col-12">
       <h3 class="text-center text-secondary">Comentários</h3>
       <!-- Campo de comentário (aparece após escolher nota OU se já avaliou) -->
-      <div
-        *ngIf="jaAvaliou || notaSelecionada"
-        class="comentario-avaliacao-box"
-      >
-        <p *ngIf="notaSelecionada" class="comentario-nota-info">
-          Sua nota: <span class="comentario-nota">{{ notaSelecionada }}</span>
-        </p>
+      <div *ngIf="usuario.notaUsuario" class="comentario-avaliacao-box">
+        <span *ngIf="usuario.notaUsuario" class="comentario-nota-info">
+          Sua nota: {{ usuario.notaUsuario }}
+        </span>
         <textarea
           [(ngModel)]="comentarioUsuario"
           placeholder="Escreva seu comentário..."
           rows="3"
           class="comentario-textarea"
         ></textarea>
-        <button (click)="enviarComentario()" class="BtnEnviarComentario">
-          Enviar comentário
+        <button
+          (click)="enviarComentario()"
+          [disabled]="!isUsuarioLogado() || !usuario.notaUsuario"
+        >
+          Enviar avaliação
         </button>
       </div>
 
