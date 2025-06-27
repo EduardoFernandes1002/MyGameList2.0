@@ -29,7 +29,7 @@ public class JogoService {
     private PlataformaRepository plataformaRepository;
 
     public List<Map<String, Object>> getJogos() {
-        List<Jogo> jogos = jogoRepository.findAll(PageRequest.of(0, 10, Sort.by("totalNotaJogo").descending()))
+        List<Jogo> jogos = jogoRepository.findAll(PageRequest.of(0, 12, Sort.by("totalNotaJogo").descending()))
                 .getContent();
         return jogos.stream().map(jogo -> {
             Map<String, Object> map = new LinkedHashMap<>();
