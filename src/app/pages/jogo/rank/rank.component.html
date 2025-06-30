@@ -2,14 +2,13 @@
   <div class="row g-0 justify-content-center">
     <h1 class="text-center mb-5">Ranking de Jogos</h1>
     <div class="rank-container">
-      <h1>Rank de Jogos</h1>
       <div class="rank-list">
         <div
           class="rank-item-container"
           *ngFor="let jogo of jogos; let i = index; trackBy: trackBySlug"
         >
           <div class="rank-item">
-            <span class="rank-position">{{ i + 1 }}</span>
+            <span class="rank-position">#{{ i + 1 }}</span>
             <app-game-card
               [jogo]="jogo"
               [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
