@@ -74,7 +74,6 @@ public class JogoService {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("nomeJogo", jogo.getNomeJogo());
             map.put("totalNotaJogo", jogo.getTotalNotaJogo());
-            map.put("generos", jogo.getGeneros());
             map.put("imagemJogo", jogo.getImagemJogo());
             return map;
         }).toList();
@@ -94,8 +93,6 @@ public class JogoService {
         for (String modo : modos) {
             jogo.setModos(modoRepository.findByNomeModo(modo));
         }
-
-
         return jogo;
     }
 }
