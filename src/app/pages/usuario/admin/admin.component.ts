@@ -44,14 +44,18 @@ export class AdminComponent implements OnInit {
 
   adicionarJogo(): void {
     this.generos = this.generos
-      .map((g) => g.split(',').map((s) => s.trim()))
-      .flat();
+    .map((g) => g.split(',')
+    .map((s) => s.trim())).flat();
+
     this.modos = this.modos
-      .map((m) => m.split(',').map((s) => s.trim()))
-      .flat();
+      .map((m) => m.split(',')
+      .map((s) => s.trim())).flat();
+
     this.plataformas = this.plataformas
-      .map((p) => p.split(',').map((s) => s.trim()))
-      .flat();
+      .map((p) => p.split(',')
+      .map((s) => s.trim())).flat();
+
+
     const jogo = {
       nomeJogo: this.nomeJogo,
       sinopseJogo: this.sinopseJogo,

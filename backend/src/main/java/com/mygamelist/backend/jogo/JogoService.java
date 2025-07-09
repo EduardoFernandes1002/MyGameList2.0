@@ -93,6 +93,7 @@ public class JogoService {
         for (String modo : modos) {
             jogo.setModos(modoRepository.findByNomeModo(modo));
         }
+        
         return jogo;
     }
 }
