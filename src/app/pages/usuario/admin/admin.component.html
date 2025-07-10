@@ -12,13 +12,10 @@
     </div>
 
     <div class="ButoesAd gap-4">
-      <button
-        class="AdicionarJogo"
-        data-bs-toggle="modal"
-        data-bs-target="#modalAdicionar"
-      >
+      <button class="btn btn-primary" (click)="abrirModal()">
         Adicionar Jogo
       </button>
+
       <button
         class="DeletarJogo"
         data-bs-toggle="modal"
@@ -74,124 +71,141 @@
   <!-- Modal -->
   <div
     class="modal fade"
-    id="modalAdicionar"
+    [class.show]="mostrarModal"
+    [style.display]="mostrarModal ? 'block' : 'none'"
     tabindex="-1"
-    aria-labelledby="modalAdicionar"
-    aria-hidden="true"
+    role="dialog"
+    aria-labelledby="modalAdicionarLabel"
+    aria-modal="true"
+    [attr.aria-hidden]="!mostrarModal"
   >
-    <div class="modal-dialog">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalAdicionar">
-            Adicionar Jogo
-          </h5>
+          <h5 class="modal-title" id="modalAdicionarLabel">Adicionar Jogo</h5>
           <button
             type="button"
             class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
+            (click)="fecharModal()"
+            aria-label="Fechar"
           ></button>
         </div>
+
         <div class="modal-body">
-          <form (ngSubmit)="adicionarJogo()">
-            <div class="form-group mb-2">
-              <label for="nome">Nome do Jogo:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="nome"
-                [(ngModel)]="nomeJogo"
-                name="nomeJogo"
-              />
+          <form [formGroup]="form" (ngSubmit)="adicionarJogo()">
+            <!-- Campos básicos -->
+            <div class="mb-2">
+              <label>Nome do Jogo</label>
+              <input class="form-control" formControlName="nomeJogo" />
             </div>
 
-            <div class="form-group mb-2">
-              <label for="sinopse">Sinopse:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="sinopse"
-                [(ngModel)]="sinopseJogo"
-                name="sinopseJogo"
-              />
+            <div class="mb-2">
+              <label>Sinopse</label>
+              <input class="form-control" formControlName="sinopseJogo" />
             </div>
 
-            <div class="form-group mb-2">
-              <label for="imagem">URL da Imagem:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="imagem"
-                [(ngModel)]="imagemJogo"
-                name="imagemJogo"
-              />
+            <div class="mb-2">
+              <label>Imagem (URL)</label>
+              <input class="form-control" formControlName="imagemJogo" />
             </div>
 
-            <div class="form-group mb-2">
-              <label for="data">Data de Lançamento:</label>
+            <div class="mb-2">
+              <label>Data de Lançamento</label>
               <input
                 type="date"
                 class="form-control"
-                id="data"
-                [(ngModel)]="dataLancamentoJogo"
-                name="dataLancamentoJogo"
+                formControlName="dataLancamentoJogo"
               />
             </div>
 
-            <div class="form-group mb-2">
-              <label for="distribuidora">ID Distribuidora:</label>
+            <div class="mb-2">
+              <label>Distribuidora</label>
+              <input class="form-control" formControlName="nomeDistribuidora" />
+            </div>
+
+            <div class="mb-2">
+              <label>Desenvolvedora</label>
               <input
-                type="number"
                 class="form-control"
-                id="distribuidora"
-                [(ngModel)]="distribuidora"
-                name="distribuidora"
+                formControlName="nomeDesenvolvedora"
               />
             </div>
 
-            <div class="form-group mb-2">
-              <label for="desenvolvedora">ID Desenvolvedora:</label>
-              <input
-                type="number"
-                class="form-control"
-                id="desenvolvedora"
-                [(ngModel)]="desenvolvedora"
-                name="desenvolvedora"
-              />
-            </div>
-
-            <div class="form-group mb-2">
-              <label for="modos">Modos (separados por vírgula):</label>
-              <input
-                type="text"
-                class="form-control"
-                id="modos"
-                [(ngModel)]="modos"
-                name="modosTexto"
-              />
-            </div>
-
-            <div class="form-group mb-2">
-              <label for="plataformas"
-                >Plataformas (separadas por vírgula):</label
-              >
+            <!-- Chips Gêneros -->
+            <div class="mb-2">
+              <label>Gêneros</label>
+              <div class="d-flex flex-wrap gap-2 mb-1">
+                <span
+                  *ngFor="let genero of generos"
+                  class="badge bg-primary d-flex align-items-center"
+                >
+                  {{ genero }}
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white ms-2"
+                    aria-label="Remover"
+                    (click)="removeGenero(genero)"
+                  ></button>
+                </span>
+              </div>
               <input
                 type="text"
                 class="form-control"
-                id="plataformas"
-                [(ngModel)]="plataformas"
-                name="plataformasTexto"
+                placeholder="Digite e pressione vírgula."
+                (keydown)="addGenero($event)"
+                #inputGenero
               />
             </div>
 
-            <div class="form-group mb-2">
-              <label for="generos">Gêneros (separados por vírgula):</label>
+            <!-- Chips Modos -->
+            <div class="mb-2">
+              <label>Modos</label>
+              <div class="d-flex flex-wrap gap-2 mb-1">
+                <span
+                  *ngFor="let modo of modos"
+                  class="badge bg-success d-flex align-items-center"
+                >
+                  {{ modo }}
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white ms-2"
+                    aria-label="Remover"
+                    (click)="removeModo(modo)"
+                  ></button>
+                </span>
+              </div>
               <input
                 type="text"
                 class="form-control"
-                id="generos"
-                [(ngModel)]="generos"
-                name="generosTexto"
+                placeholder="Digite e pressione vírgula."
+                (keydown)="addModo($event)"
+                #inputModo
+              />
+            </div>
+
+            <!-- Chips Plataformas -->
+            <div class="mb-2">
+              <label>Plataformas</label>
+              <div class="d-flex flex-wrap gap-2 mb-1">
+                <span
+                  *ngFor="let plataforma of plataformas"
+                  class="badge bg-info text-dark d-flex align-items-center"
+                >
+                  {{ plataforma }}
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white ms-2"
+                    aria-label="Remover"
+                    (click)="removePlataforma(plataforma)"
+                  ></button>
+                </span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Digite e pressione vírgula."
+                (keydown)="addPlataforma($event)"
+                #inputPlataforma
               />
             </div>
 
@@ -203,4 +217,5 @@
       </div>
     </div>
   </div>
+  <div class="modal-backdrop fade show" *ngIf="mostrarModal"></div>
 </div>

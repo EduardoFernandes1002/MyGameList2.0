@@ -270,3 +270,7 @@ input{
   background-color: white;
   color: black;
 }
+
+modal-backdrop {
+  z-index: -1040;
+}

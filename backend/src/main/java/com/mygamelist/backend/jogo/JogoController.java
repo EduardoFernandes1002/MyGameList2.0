@@ -34,11 +34,8 @@ public class JogoController {
     }
 
     @PostMapping("/adicionar/jogo")
-    public ResponseEntity<?> adicionarJogo(@RequestBody Jogo jogo, @RequestBody List<String> generos,
-            @RequestBody List<String> plataformas, @RequestBody List<String> modos) {
-
-        jogoService.adicionarJogo(jogo, generos, plataformas, modos);
-
+    public ResponseEntity<?> adicionarJogo(@RequestBody JogoRequestDTO dto) {
+        jogoService.adicionarJogo(dto);
         return ResponseEntity.ok("Jogo adicionado com sucesso!");
     }
 
