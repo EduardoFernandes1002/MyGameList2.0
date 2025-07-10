@@ -17,6 +17,6 @@ public interface PlataformaRepository extends JpaRepository<Plataforma, Long> {
 
     List<Plataforma> findByNomePlataforma(String nomePlataforma);
 
-    List<Plataforma> findByNomePlataformaIn(List<String> nomes);
+    List<Plataforma> findByNomePlataformaIn(List<String> nomePlataforma);
 
 }
