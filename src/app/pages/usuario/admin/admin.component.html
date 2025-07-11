@@ -29,7 +29,6 @@
   <table class="table mt-4 table-striped table-bordered">
     <thead>
       <tr>
-        <th class="col-md-1">Editar Jogo</th>
         <th class="col-md-1">Nome</th>
         <th class="col-md-2">Sinopse</th>
         <th class="col-md-1">Data</th>
@@ -40,12 +39,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let jogo of jogos">
-        <td>
-          <button
-            class="btn btn-dark btn-sm"
-            (click)="abrirModalEditar(jogo)">
-          </button>
-        </td>
         <td>{{ jogo.nomeJogo }}</td>
         <td>{{ jogo.sinopseJogo }}</td>
         <td>{{ jogo.dataLancamentoJogo | date }}</td>
@@ -138,6 +131,84 @@
               />
             </div>
 
+            <!-- Chips Gêneros -->
+            <div class="mb-2">
+              <label>Gêneros</label>
+              <div class="d-flex flex-wrap gap-2 mb-1">
+                <span
+                  *ngFor="let genero of generos"
+                  class="badge bg-primary d-flex align-items-center"
+                >
+                  {{ genero }}
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white ms-2"
+                    aria-label="Remover"
+                    (click)="removeGenero(genero)"
+                  ></button>
+                </span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Digite e pressione vírgula."
+                (keydown)="addGenero($event)"
+                #inputGenero
+              />
+            </div>
+
+            <!-- Chips Modos -->
+            <div class="mb-2">
+              <label>Modos</label>
+              <div class="d-flex flex-wrap gap-2 mb-1">
+                <span
+                  *ngFor="let modo of modos"
+                  class="badge bg-success d-flex align-items-center"
+                >
+                  {{ modo }}
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white ms-2"
+                    aria-label="Remover"
+                    (click)="removeModo(modo)"
+                  ></button>
+                </span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Digite e pressione vírgula."
+                (keydown)="addModo($event)"
+                #inputModo
+              />
+            </div>
+
+            <!-- Chips Plataformas -->
+            <div class="mb-2">
+              <label>Plataformas</label>
+              <div class="d-flex flex-wrap gap-2 mb-1">
+                <span
+                  *ngFor="let plataforma of plataformas"
+                  class="badge bg-info text-dark d-flex align-items-center"
+                >
+                  {{ plataforma }}
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white ms-2"
+                    aria-label="Remover"
+                    (click)="removePlataforma(plataforma)"
+                  ></button>
+                </span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Digite e pressione vírgula."
+                (keydown)="addPlataforma($event)"
+                #inputPlataforma
+              />
+            </div>
+
             <button type="submit" class="btn btn-primary w-100 mt-3">
               Adicionar Jogo
             </button>
@@ -146,33 +217,5 @@
       </div>
     </div>
   </div>
-  <div
-    class="modal-backdrop fade show"
-    *ngIf="mostrarModal || mostrarModalEditar"
-  ></div>
-
-  <div
-    class="modal fade"
-    [class.show]="mostrarModalEditar"
-    [style.display]="mostrarModalEditar ? 'block' : 'none'"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="modalEditarLabel"
-    aria-modal="true"
-    [attr.aria-hidden]="!mostrarModalEditar"
-  >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalEditarLabel">Infos/Edição Jogo</h5>
-          <button
-            type="button"
-            class="btn-close"
-            (click)="fecharModalEditar()"
-            aria-label="Fechar"
-          ></button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="modal-backdrop fade show" *ngIf="mostrarModal"></div>
 </div>

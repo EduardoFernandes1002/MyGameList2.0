@@ -55,7 +55,7 @@ public class Jogo {
     private List<Modo> modos;
 
     @ManyToMany
-    @JoinTable(name = "plataforma_de_jogo", joinColumns = @JoinColumn(name = "id_plataforma"), inverseJoinColumns = @JoinColumn(name = "id_jogo"))
+    @JoinTable(name = "plataforma_de_jogo", joinColumns = @JoinColumn(name = "id_jogo"), inverseJoinColumns = @JoinColumn(name = "id_plataforma"))
     private List<Plataforma> plataformas;
 
     // Getters e Setters:

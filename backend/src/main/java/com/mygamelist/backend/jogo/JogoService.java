@@ -108,10 +108,27 @@ public class JogoService {
                 .orElseThrow(() -> new RuntimeException("Distribuidora não encontrada"));
         jogo.setDistribuidora(distribuidora);
 
-
-
         // Pode deixar null se não quiser calcular agora
         jogo.setTotalNotaJogo(null);
+
+        jogoRepository.save(jogo);
+
+        List<Genero> generos = generoRepository.findByNomeGeneroIn(dto.generos);
+        System.out.println("Genero jogo: " + dto.generos);
+
+        System.out.println("Modo jogo: " + dto.modos);
+        List<Modo> modos = modoRepository.findByNomeModoIn(dto.modos);
+
+        System.out.println("Plataforma jogo: " + dto.plataformas);
+        List<Plataforma> plataformas = plataformaRepository.findByNomePlataformaIn(dto.plataformas);
+
+        System.out.println("Generos encontrados: " + generos);
+        System.out.println("Modos encontrados: " + modos);
+        System.out.println("Plataformas encontrados: " + plataformas);
+
+        jogo.setGeneros(generos);
+        jogo.setModos(modos);
+        jogo.setPlataformas(plataformas);
 
         jogoRepository.save(jogo);
     }

@@ -12,5 +12,9 @@ public class JogoRequestDTO {
 
     public String nomeDistribuidora;
     public String nomeDesenvolvedora;
+
+    public List<String> generos;
+    public List<String> modos;
+    public List<String> plataformas;
 }
 
