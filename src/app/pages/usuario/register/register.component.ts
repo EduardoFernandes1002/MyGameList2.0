@@ -19,6 +19,8 @@ export class RegisterComponent {
   senhaUsuario: string = '';
   confirmarSenha: string = '';
 
+  maxlength : number = 15;
+
   constructor(private authService: AuthService, private router: Router) {}
 
   OnSubmit(): void {
