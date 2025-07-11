@@ -13,4 +13,8 @@ public interface JogoRepository extends JpaRepository<Jogo, Long> {
     Jogo findByNomeJogo(String nomeJogo);
 
     List<Jogo> findByIdJogo(Long idJogo);
+
+
+
+
 }

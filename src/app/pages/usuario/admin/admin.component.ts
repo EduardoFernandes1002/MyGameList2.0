@@ -25,6 +25,7 @@ export class AdminComponent implements OnInit {
   modos: string[] = [];
   plataformas: string[] = [];
   mostrarModal: boolean = false;
+  mostrarModalEditar: boolean = false;
 
   constructor(private jogoService: JogoService, private fb: FormBuilder) {}
   ngOnInit(): void {
@@ -56,9 +57,20 @@ export class AdminComponent implements OnInit {
     this.mostrarModal = true;
   }
 
-  fecharModal() {
+    fecharModal() {
     this.mostrarModal = false;
   }
+
+  abrirModalEditar(jogo: any) {
+    this.mostrarModalEditar = true;
+    var nmJogo = jogo.nomeJogo;
+    
+  }
+
+  fecharModalEditar() {
+    this.mostrarModalEditar = false;
+  }
+
 
 addGenero(event: KeyboardEvent): void {
   if (event.key === ',') {
@@ -117,10 +129,12 @@ addPlataforma(event: KeyboardEvent): void {
 
   adicionarJogo(): void {
   const jogo = {
-    ...this.form.value,
-    generos: this.generos,
-    modos: this.modos,
-    plataformas: this.plataformas,
+    nomeJogo: this.form.value.nomeJogo,
+    sinopseJogo: this.form.value.sinopseJogo,
+    imagemJogo: this.form.value.imagemJogo,
+    dataLancamentoJogo: this.form.value.dataLancamentoJogo,
+    nomeDistribuidora: this.form.value.nomeDistribuidora,
+    nomeDesenvolvedora: this.form.value.nomeDesenvolvedora,
   };
 
   console.log('Jogo a ser adicionado:', jogo);
