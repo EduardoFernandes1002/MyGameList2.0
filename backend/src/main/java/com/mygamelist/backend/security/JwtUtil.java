@@ -15,8 +15,9 @@ public class JwtUtil {
     @Value("${jwt.expiration}")
     private long expirationTime;
 
-    public String generateToken(String usuario) {
+    public String generateToken(String usuario, String permissao) {
         return Jwts.builder()
+                .claim("permissao", permissao)
                 .setSubject(usuario)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
@@ -45,6 +46,15 @@ public class JwtUtil {
         } catch (JwtException e) {
             return false;
         }
+    }
+
+    public String getPermissao(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes()))
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("permissao", String.class);
     }
 
 }

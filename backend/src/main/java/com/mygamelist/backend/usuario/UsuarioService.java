@@ -18,23 +18,28 @@ public class UsuarioService {
     @Autowired
     private JwtUtil jwtUtil;
 
+    // Retorna todos os usuários cadastrados no banco de dados.
     public List<Usuario> getUsuarios() {
         return usuarioRepository.findAll();
     }
 
+    // Busca e retorna um usuário pelo ID. Lança exceção se não for encontrado.
     public Usuario getUsuarioById(Long idUsuario) {
         return usuarioRepository.findById(idUsuario).orElseThrow();
     }
 
+    // Retorna usuários que possuem a permissão especificada pelo nome.
     public List<Map<String, Usuario>> getPermissaoByNome(String nomePermissao) {
         return usuarioRepository.findUsuarioByPermissao(nomePermissao);
     }
 
+    // Retorna todos os usuários junto com o nome da permissão associada a cada um.
     public List<Map<String, Usuario>> getAllUsuariosByPermissao() {
         return usuarioRepository.findAllUsuariosByPermissao();
     }
 
-    // Registra o usuario adicionando todas suas informações obrigatorias ao banco de dados
+    // Cria um novo objeto Usuario, atribui a permissão com ID 1 e define os dados recebidos como parâmetros.
+    // Em seguida, salva o novo usuário no banco.
     public Usuario registrarUsuario(String emailUsuario, String nomeUsuario, String apelidoUsuario,String senhaUsuario) {
 
         Usuario usuario = new Usuario();
@@ -50,8 +55,8 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    // Método para autenticar o usuário
-    // Verifica se o usuário existe e se a senha está correta
+    // Verifica se o usuário existe (por nome ou e-mail) e se a senha informada corresponde.
+    // Se válido, gera um token JWT contendo o nome de usuário e sua permissão.
     public String autenticar(Usuario usuario) {
         Usuario user;
         if (usuario.getEmailUsuario() != null) {
@@ -60,11 +65,12 @@ public class UsuarioService {
             user = usuarioRepository.findByNomeUsuario(usuario.getNomeUsuario());
         }
         if (user != null && user.getSenhaUsuario().equals(usuario.getSenhaUsuario())) {
-            return jwtUtil.generateToken(user.getNomeUsuario());
+            return jwtUtil.generateToken(user.getNomeUsuario(), user.getNomePermissao());
         }
         return null;
     }
 
+    // Busca um usuário pelo nome de usuário. Se não encontrado, lança uma exceção.
     public Usuario getUsuarioByNomeUsuario(String nomeUsuario) {
         Usuario usuario = usuarioRepository.findByNomeUsuario(nomeUsuario);
         if (usuario == null) {

@@ -11,6 +11,7 @@ import { ConfigComponent } from './pages/usuario/config/config.component';
 import { LoginComponent } from './pages/usuario/login/login.component';
 import { RegisterComponent } from './pages/usuario/register/register.component';
 import { authGuard } from './guard/auth/auth.guard';
+import { adminGuard } from './guard/admin/admin.guard';
 import { TestComponentsComponent } from './test/test-components/test-components.component';
 import { AdminComponent } from './pages/usuario/admin/admin.component';
 
@@ -29,5 +30,5 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'registro', component: RegisterComponent, title: 'Registro' },
   { path: 't3st3s', component: TestComponentsComponent, title: 'Testes'},
-  { path: 'admin', component: AdminComponent, title: 'Administração'},
+  { path: 'admin', component: AdminComponent, title: 'Administração', canActivate: [adminGuard] },
 ];

@@ -6,7 +6,15 @@ import java.util.List;
 import com.mygamelist.backend.lista.JogoAdicionado;
 import com.mygamelist.backend.permissao.Permissao;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuario")
@@ -35,11 +43,11 @@ public class Usuario {
     @Column(name = "dt_nascimento", nullable = true)
     private LocalDate dataNascimentoUsuario;
 
-    @ManyToOne
+    @ManyToOne // Define o relacionamento de muitos-para-um entre usuários e permissões. Cada usuário possui uma única permissão.
     @JoinColumn(name = "id_permissao", referencedColumnName = "id_permissao", nullable = false)
     private Permissao permissao;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario") // Lista de jogos associados ao usuário. Relacionamento um-para-muitos.
     private List<JogoAdicionado> jogosAdicionados;
 
     public Long getIdUsuario() {
@@ -97,5 +105,10 @@ public class Usuario {
     public void setPermissao(Permissao permissao) {
         this.permissao = permissao;
     }
+
+    // Retorna o nome da permissão associada ao usuário. Retorna null se a permissão for nula.
+   public String getNomePermissao() { 
+    return permissao != null ? permissao.getNomePermissao() : null;
+} 
 
 }

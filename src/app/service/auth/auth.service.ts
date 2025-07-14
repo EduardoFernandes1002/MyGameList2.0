@@ -78,6 +78,19 @@ export class AuthService {
     }
   }
 
+  // epga a 
+  getUserRoleFromToken(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.permissao; // 'ROLE_ADMIN' ou outro
+    } catch (e) {
+      return null;
+    }
+  }
+
   // Verifica se existe o token
   private hasToken(): boolean {
     return !!localStorage.getItem('token');
@@ -90,7 +103,6 @@ export class AuthService {
   }
 
   // Funções do usuario para outras areas
-
   getInfosUsuarioLogado(): Observable<any[]> {
     const nomeUsuario = this.getNomeUsuarioFromToken();
     return this.http.get<any[]>(
