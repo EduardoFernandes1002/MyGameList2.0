@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mygamelist.backend.avaliacao.Avaliacao;
 import com.mygamelist.backend.avaliacao.AvaliacaoRepository;
@@ -98,27 +98,29 @@ public class ListaService {
         if (usuario == null)
             throw new RuntimeException("Usuário não encontrado");
 
-        // Caso a lista seja '7' (favoritos), remove só dos favoritos
-        if (idLista == 7L) {
-            jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(
-                    usuario.getIdUsuario(), idLista, idJogo);
+        Long userId = usuario.getIdUsuario();
+
+        // Se for favoritos, remove só dos favoritos
+        if (idLista.equals(7L)) {
+            jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(userId, 7L, idJogo);
             return;
         }
 
-        // Remove da lista específica
-        jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(
-                usuario.getIdUsuario(), idLista, idJogo);
+        // Remove da lista informada
+        jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(userId, idLista, idJogo);
 
-        // Remove também da lista 'Geral' (id 1), se for diferente
-        if (!idLista.equals(1L)) {
-            jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(
-                    usuario.getIdUsuario(), 1L, idJogo);
-        }
+        // Sempre remove dos favoritos (exceto se já for a lista 7, que já saiu acima)
+        jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(userId, 7L, idJogo);
 
-        // Remove também dos favoritos (lista 7), se não for ele próprio
-        if (!idLista.equals(7L)) {
-            jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(
-                    usuario.getIdUsuario(), 7L, idJogo);
+        if (idLista.equals(1L)) {
+            // Se for Geral, remove de todas as listas 2~6
+            for (long i = 2; i <= 6; i++) {
+                jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(userId, i, idJogo);
+            }
+        } else {
+            // Se for qualquer outra lista, também remove de Geral
+            jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(userId, 1L, idJogo);
         }
     }
+
 }
