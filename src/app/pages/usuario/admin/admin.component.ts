@@ -5,6 +5,7 @@ import { JogoService } from '../../../service/jogo-service/jogo.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -140,24 +141,7 @@ export class AdminComponent implements OnInit {
         setTimeout(() => (this.mensagem = ''), 3000); // limpa mensagem após 3s
       },
       error: (err) => {
-        this.tipoMensagem = 'erro';
-
-        let mensagemErro = 'Erro desconhecido';
-
-        if (err.error) {
-          if (typeof err.error === 'string') {
-            mensagemErro = err.error; // já é texto simples
-          } else if (typeof err.error === 'object') {
-            // tenta extrair mensagem, se existir
-            mensagemErro = err.error.message || JSON.stringify(err.error);
-          }
-        } else if (err.message) {
-          mensagemErro = err.message;
-        }
-
-        this.mensagem = 'Erro ao adicionar jogo: ' + mensagemErro;
-
-        setTimeout(() => (this.mensagem = ''), 5000);
+        alert('Erro ao adicionar: ' + err.message);
       },
     });
   }
