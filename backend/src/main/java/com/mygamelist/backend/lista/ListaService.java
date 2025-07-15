@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.
 
 import com.mygamelist.backend.avaliacao.Avaliacao;
 import com.mygamelist.backend.avaliacao.AvaliacaoRepository;
@@ -87,6 +88,7 @@ public class ListaService {
         jogoAdicionadoRepository.save(ja);
     }
 
+    @Transactional
     public void removerJogoDaLista(Long idLista, Long idJogo, String token) {
         // Extrai nome de usuário do token
         String nomeUsuario = jwtUtil.getSubject(token.replace("Bearer ", ""));
@@ -98,24 +100,24 @@ public class ListaService {
 
         // Caso a lista seja '7' (favoritos), remove só dos favoritos
         if (idLista == 7L) {
-            jogoAdicionadoRepository.deleteByUsuarioIdAndListaIdAndJogoId(
+            jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(
                     usuario.getIdUsuario(), idLista, idJogo);
             return;
         }
 
         // Remove da lista específica
-        jogoAdicionadoRepository.deleteByUsuarioIdAndListaIdAndJogoId(
+        jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(
                 usuario.getIdUsuario(), idLista, idJogo);
 
         // Remove também da lista 'Geral' (id 1), se for diferente
         if (!idLista.equals(1L)) {
-            jogoAdicionadoRepository.deleteByUsuarioIdAndListaIdAndJogoId(
+            jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(
                     usuario.getIdUsuario(), 1L, idJogo);
         }
 
         // Remove também dos favoritos (lista 7), se não for ele próprio
         if (!idLista.equals(7L)) {
-            jogoAdicionadoRepository.deleteByUsuarioIdAndListaIdAndJogoId(
+            jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(
                     usuario.getIdUsuario(), 7L, idJogo);
         }
     }

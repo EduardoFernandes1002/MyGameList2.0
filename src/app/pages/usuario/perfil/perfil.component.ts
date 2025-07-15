@@ -19,6 +19,7 @@ export class PerfilComponent implements OnInit {
   jogosFavoritos: any[] = [];
   listaNome: any;
   isPerfilProprio: boolean = false;
+  mostrarMaisFavoritos: boolean = false;
   listas = [
     { id: 1, nome: 'Geral' },
     { id: 2, nome: 'Jogando' },
@@ -103,20 +104,33 @@ export class PerfilComponent implements OnInit {
     this.loadNomeLista();
   }
 
-  removerJogo(idJogo: number): void {
+  removerJogo(idJogo: number, listaId?: number): void {
+    const idLista = listaId ?? this.listaSelecionada;
+    console.log('Removendo da lista:', idLista); // 👈🏽
+
     if (!confirm('Deseja remover esse jogo da lista?')) return;
 
-    this.authService
-      .removerJogoDaLista(idJogo, this.listaSelecionada)
-      .subscribe({
-        next: () => {
+    this.authService.removerJogoDaLista(idJogo, idLista).subscribe({
+      next: () => {
+        if (idLista === 7) {
+          this.jogosFavoritos = this.jogosFavoritos.filter(
+            (j) => j.idJogo !== idJogo
+          );
+        } else {
           this.jogos = this.jogos.filter((j) => j.idJogo !== idJogo);
-          alert('Jogo removido com sucesso!');
-        },
-        error: (err) => {
-          console.error('Erro ao remover jogo:', err);
-          alert('Falha ao remover jogo.');
-        },
-      });
+        }
+        alert('Jogo removido com sucesso!');
+      },
+      error: (err) => {
+        console.error('Erro ao remover jogo:', err);
+        alert('Falha ao remover jogo.');
+      },
+    });
+  }
+
+  get favoritosVisiveis() {
+    return this.mostrarMaisFavoritos
+      ? this.jogosFavoritos
+      : this.jogosFavoritos.slice(0, 4);
   }
 }

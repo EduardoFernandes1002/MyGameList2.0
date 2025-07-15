@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface JogoAdicionadoRepository extends JpaRepository<JogoAdicionado, JogoAdicionadoId> {
 
-    void deleteByUsuarioIdAndListaIdAndJogoId(Long idUsuario, Long idLista, Long idJogo);
+    void deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(Long idUsuario, Long idLista, Long idJogo);
 
 }

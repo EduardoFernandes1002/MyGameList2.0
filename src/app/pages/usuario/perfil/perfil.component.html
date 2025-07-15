@@ -40,6 +40,14 @@
             [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
             tipo="default"
           ></app-game-card>
+
+          <button
+            *ngIf="isPerfilProprio"
+            (click)="removerJogo(jogo.idJogo)"
+            class="btn-remover-x"
+          >
+            &times;
+          </button>
         </div>
       </div>
       <ng-template #semJogosLista>
@@ -51,14 +59,15 @@
       <hr class="hr" />
 
       <!-- Próximos Lançamentos -->
+      <!-- Favoritos -->
       <h3 class="section-title mb-4">Favoritos</h3>
       <div
         class="perfil-row"
-        *ngIf="jogosFavoritos.length > 0; else semFavoritos"
+        *ngIf="favoritosVisiveis.length > 0; else semFavoritos"
       >
         <div
           class="perfil-card-container"
-          *ngFor="let jogo of jogosFavoritos; trackBy: trackBySlug"
+          *ngFor="let jogo of favoritosVisiveis; trackBy: trackBySlug"
         >
           <app-game-card
             [jogo]="jogo"
@@ -66,26 +75,25 @@
             tipo="default"
           ></app-game-card>
 
-          <div
-            class="perfil-card-container"
-            *ngFor="let jogo of jogos; trackBy: trackBySlug"
+          <button
+            *ngIf="isPerfilProprio"
+            (click)="removerJogo(jogo.idJogo, 7)"
+            class="btn-remover-x"
           >
-            <app-game-card
-              [jogo]="jogo"
-              [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
-              tipo="default"
-            ></app-game-card>
+            &times;
+          </button>
+        </div>
 
-            <button
-              *ngIf="isPerfilProprio"
-              (click)="removerJogo(jogo.idJogo)"
-              class="btn btn-danger btn-sm mt-2"
-            >
-              Remover
-            </button>
-          </div>
+        <div class="text-center w-100" *ngIf="jogosFavoritos.length > 6">
+          <button
+            class="mostrar-mais-btn"
+            (click)="mostrarMaisFavoritos = !mostrarMaisFavoritos"
+          >
+            {{ mostrarMaisFavoritos ? "Mostrar menos" : "Mostrar mais" }}
+          </button>
         </div>
       </div>
+
       <ng-template #semFavoritos>
         <p class="text-center text-muted">
           Sem jogos adicionados à lista Favoritos
