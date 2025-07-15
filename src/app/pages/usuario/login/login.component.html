@@ -1,7 +1,10 @@
 <div class="d-flex flex-column" style="min-height: 100vh">
   <div
-    class="container flex-grow-1 d-flex justify-content-center align-items-center"
+    class="container flex-column flex-grow-1 d-flex justify-content-center align-items-center"
   >
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
     <div class="card p-4" style="width: 100%; max-width: 400px">
       <h2 class="text-center mb-4">LOGIN</h2>
 
@@ -13,7 +16,7 @@
             class="form-control"
             placeholder="Digite seu usuário ou email"
             name="login"
-            [(ngModel)] = "login"
+            [(ngModel)]="login"
             required="true"
           />
         </div>
@@ -25,7 +28,7 @@
             maxlength="10"
             placeholder="Digite sua senha"
             name="senhaUsuario"
-            [(ngModel)] = "senhaUsuario"
+            [(ngModel)]="senhaUsuario"
             required="true"
           />
         </div>

@@ -5,12 +5,14 @@
       <h5 class="card-title">{{ jogo.nomeJogo }}</h5>
       <p
         class="card-text"
-        *ngIf="
-          jogo.totalNotaJogo !== undefined
-          else notaUsuario
-        "
+        *ngIf="jogo.totalNotaJogo !== undefined; else notaUsuario"
       >
-        Nota: {{ jogo.totalNotaJogo }}
+        Nota:
+        {{ 
+          jogo.totalNotaJogo !== undefined && jogo.totalNotaJogo !== null
+          ? jogo.totalNotaJogo
+          : "N/A" 
+        }}
       </p>
       <ng-template #notaUsuario>
         <p class="card-text">

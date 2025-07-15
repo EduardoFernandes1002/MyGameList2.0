@@ -15,25 +15,26 @@ export class LoginComponent {
   login: string = '';
   senhaUsuario: string = '';
 
+  errorMessage: string | null = null;  // Mensagem de erro
+
   constructor(private authService: AuthService, private router: Router) {}
 
-
   onSubmit(): void {
+    this.errorMessage = null; // Limpa mensagem antes do submit
     this.authService.login(this.login, this.senhaUsuario).subscribe({
-    next: (response: any) => {
-      // Supondo que o token seja retornado no campo "token" da resposta
-      const token = response.token;
-      if (token) {
-        localStorage.setItem('token', token);
-        this.authService['isLoggedInSubject'].next(true); // <-- Notifica o AuthService
-        this.router.navigate(['/']); // Ajuste a rota conforme necessário
-      } else {
-        console.error('Token não encontrado na resposta.');
-      }
-    },
-    error: (error) => {
-      console.error('Erro ao fazer login:', error);
-    },
-  });
+      next: (response: any) => {
+        const token = response.token;
+        if (token) {
+          localStorage.setItem('token', token);
+          this.authService['isLoggedInSubject'].next(true);
+          this.router.navigate(['/']);
+        } else {
+          this.errorMessage = 'Token não encontrado na resposta. Por favor, tente novamente.';
+        }
+      },
+      error: (error) => {
+        this.errorMessage = 'Erro ao fazer login. Verifique suas credenciais e tente novamente.';
+      },
+    });
   }
 }

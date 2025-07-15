@@ -31,8 +31,7 @@ public class AutenticarController {
                 usuario.getEmailUsuario(),
                 usuario.getNomeUsuario(),
                 usuario.getApelidoUsuario(),
-                usuario.getSenhaUsuario()); // 1L é o ID da
-                                            // permissão padrão
+                usuario.getSenhaUsuario());
         return ResponseEntity.ok(Map.of("message", "Usuário registrado com sucesso!"));
     }
 }

@@ -4,9 +4,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mygamelist.backend.desenvolvedora.Desenvolvedora;
@@ -92,7 +92,7 @@ public class JogoService {
         }).toList();
     }
 
-    public void adicionarJogo(JogoRequestDTO dto) {
+    public Jogo adicionarJogo(JogoRequestDTO dto, StringBuilder msgFaltantes) {
 
         Jogo jogo = new Jogo();
         jogo.setNomeJogo(dto.nomeJogo);
@@ -111,25 +111,58 @@ public class JogoService {
         // Pode deixar null se não quiser calcular agora
         jogo.setTotalNotaJogo(null);
 
-        jogoRepository.save(jogo);
+        List<Plataforma> plataformasEncontradas = plataformaRepository.findByNomePlataformaIn(dto.plataformas);
 
-        List<Genero> generos = generoRepository.findByNomeGeneroIn(dto.generos);
-        System.out.println("Genero jogo: " + dto.generos);
+        // Extrai os nomes encontrados para uma lista simples
+        List<String> nomesPlataformasEncontradas = plataformasEncontradas.stream()
+                .map(Plataforma::getNomePlataforma)
+                .toList();
 
-        System.out.println("Modo jogo: " + dto.modos);
-        List<Modo> modos = modoRepository.findByNomeModoIn(dto.modos);
+        // Agora pega os nomes que vieram no DTO que **não estão** na lista de
+        // encontrados
+        List<String> plataformasFaltantes = dto.plataformas.stream()
+                .filter(nome -> !nomesPlataformasEncontradas.contains(nome))
+                .toList();
 
-        System.out.println("Plataforma jogo: " + dto.plataformas);
-        List<Plataforma> plataformas = plataformaRepository.findByNomePlataformaIn(dto.plataformas);
+        List<Genero> generosEncontrados = generoRepository.findByNomeGeneroIn(dto.generos);
 
-        System.out.println("Generos encontrados: " + generos);
-        System.out.println("Modos encontrados: " + modos);
-        System.out.println("Plataformas encontrados: " + plataformas);
+        List<String> nomesGenerosEncontrados = generosEncontrados.stream()
+                .map(Genero::getNomeGenero)
+                .toList();
 
-        jogo.setGeneros(generos);
-        jogo.setModos(modos);
-        jogo.setPlataformas(plataformas);
+        List<String> generosFaltantes = dto.generos.stream()
+                .filter(nome -> !nomesGenerosEncontrados.contains(nome))
+                .toList();
 
-        jogoRepository.save(jogo);
+        List<Modo> modosEncontrados = modoRepository.findByNomeModoIn(dto.modos);
+
+        List<String> nomesModosEncontrados = modosEncontrados.stream()
+                .map(Modo::getNomeModo)
+                .toList();
+
+        List<String> modosFaltantes = dto.modos.stream()
+                .filter(nome -> !nomesModosEncontrados.contains(nome))
+                .toList();
+
+        System.out.println("Generos encontrados: " + generosEncontrados);
+        System.out.println("Modos encontrados: " + modosEncontrados);
+        System.out.println("Plataformas encontrados: " + plataformasEncontradas);
+
+        jogo.setGeneros(generosEncontrados);
+        jogo.setModos(modosEncontrados);
+        jogo.setPlataformas(plataformasEncontradas);
+
+        if (!generosFaltantes.isEmpty()) {
+            msgFaltantes.append("Gêneros não adicionados: ").append(String.join(", ", generosFaltantes)).append(". ");
+        }
+        if (!modosFaltantes.isEmpty()) {
+            msgFaltantes.append("Modos não adicionados: ").append(String.join(", ", modosFaltantes)).append(". ");
+        }
+        if (!plataformasFaltantes.isEmpty()) {
+            msgFaltantes.append("Plataformas não adicionadas: ").append(String.join(", ", plataformasFaltantes))
+                    .append(". ");
+        }
+
+        return jogoRepository.save(jogo);
     }
 }

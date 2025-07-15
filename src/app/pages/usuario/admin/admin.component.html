@@ -212,6 +212,16 @@
             <button type="submit" class="btn btn-primary w-100 mt-3">
               Adicionar Jogo
             </button>
+            <div
+              *ngIf="mensagem"
+              [ngClass]="{
+                'mensagem-sucesso': tipoMensagem === 'sucesso',
+                'mensagem-erro': tipoMensagem === 'erro'
+              }"
+              class="mensagem"
+            >
+              {{ mensagem }}
+            </div>
           </form>
         </div>
       </div>
