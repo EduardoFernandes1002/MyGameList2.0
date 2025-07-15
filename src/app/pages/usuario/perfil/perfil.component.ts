@@ -102,4 +102,21 @@ export class PerfilComponent implements OnInit {
     this.loadListaUsuario();
     this.loadNomeLista();
   }
+
+  removerJogo(idJogo: number): void {
+    if (!confirm('Deseja remover esse jogo da lista?')) return;
+
+    this.authService
+      .removerJogoDaLista(idJogo, this.listaSelecionada)
+      .subscribe({
+        next: () => {
+          this.jogos = this.jogos.filter((j) => j.idJogo !== idJogo);
+          alert('Jogo removido com sucesso!');
+        },
+        error: (err) => {
+          console.error('Erro ao remover jogo:', err);
+          alert('Falha ao remover jogo.');
+        },
+      });
+  }
 }

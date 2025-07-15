@@ -78,7 +78,7 @@ export class AuthService {
     }
   }
 
-  // epga a 
+  // epga a
   getUserRoleFromToken(): string | null {
     const token = this.getToken();
     if (!token) return null;
@@ -128,5 +128,10 @@ export class AuthService {
     );
   }
 
-  
+  removerJogoDaLista(idJogo: number, idLista: number) {
+    return this.http.delete(
+      `http://localhost:8080/api/lista/${idLista}/jogo/${idJogo}`,
+      { headers: { Authorization: `Bearer ${this.getToken()}` } }
+    );
+  }
 }
