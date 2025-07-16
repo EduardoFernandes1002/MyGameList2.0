@@ -77,15 +77,44 @@ public class ListaService {
     }
 
     public void adicionarJogoNaLista(Long idLista, Long idUsuario, Long idJogo) {
-        Lista lista = listaRepository.findById(idLista).orElseThrow();
+        Lista listaAlvo = listaRepository.findById(idLista).orElseThrow();
         Usuario usuario = usuarioRepository.findById(idUsuario).orElseThrow();
         Jogo jogo = jogoRepository.findById(idJogo).orElseThrow();
 
-        JogoAdicionado ja = new JogoAdicionado();
-        ja.setListas(lista);
-        ja.setUsuario(usuario);
-        ja.setJogos(jogo);
-        jogoAdicionadoRepository.save(ja);
+        // Garante que o jogo esteja na lista "Geral" (ID = 1)
+        if (!jogoAdicionadoRepository.existsByUsuario_IdUsuarioAndJogos_IdJogoAndListas_IdLista(idUsuario, idJogo,
+                1L)) {
+            Lista listaGeral = listaRepository.findById(1L).orElseThrow();
+            JogoAdicionado geral = new JogoAdicionado();
+            geral.setListas(listaGeral);
+            geral.setUsuario(usuario);
+            geral.setJogos(jogo);
+            jogoAdicionadoRepository.save(geral);
+        }
+
+        // Se a lista for 1 (Geral) ou 7 (Favoritos), não precisa remover de outras
+        if (idLista != 1L && idLista != 7L) {
+            // Remove o jogo de qualquer outra lista do usuário (exceto Geral e Favoritos)
+            List<JogoAdicionado> existentes = jogoAdicionadoRepository.findByUsuario_IdUsuarioAndJogos_IdJogo(idUsuario,
+                    idJogo);
+            for (JogoAdicionado existente : existentes) {
+                Long idExistente = existente.getListas().getIdLista();
+                if (idExistente != 1L && idExistente != 7L) {
+                    jogoAdicionadoRepository.delete(existente);
+                }
+            }
+        }
+
+        // Adiciona o jogo na nova lista, se ainda não estiver
+        boolean jaExiste = jogoAdicionadoRepository.existsByUsuario_IdUsuarioAndJogos_IdJogoAndListas_IdLista(idUsuario,
+                idJogo, idLista);
+        if (!jaExiste) {
+            JogoAdicionado novo = new JogoAdicionado();
+            novo.setListas(listaAlvo);
+            novo.setUsuario(usuario);
+            novo.setJogos(jogo);
+            jogoAdicionadoRepository.save(novo);
+        }
     }
 
     @Transactional

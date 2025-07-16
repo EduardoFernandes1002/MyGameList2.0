@@ -18,6 +18,4 @@ public interface ListaRepository extends JpaRepository<Lista, Long> {
 
     @Query("SELECT j FROM JogoAdicionado ja JOIN ja.jogos j WHERE ja.listas.idLista = :idLista AND ja.usuario.idUsuario = :idUsuario ORDER BY j.nomeJogo")
     List<Jogo> findJogosAdicionados(@Param("idLista") Long idLista, @Param("idUsuario") Long idUsuario);
-
-    void save(JogoAdicionado ja);
 }
