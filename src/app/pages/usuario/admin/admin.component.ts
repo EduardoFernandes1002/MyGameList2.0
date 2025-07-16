@@ -47,6 +47,7 @@ export class AdminComponent implements OnInit {
     this.jogoService.getJogos().subscribe({
       next: (data: any) => {
         this.jogos = data.content || data;
+        console.log('Jogos carregados:', this.jogos[1]);
       },
       error: (error: any) => {
         console.error('Erro ao carregar top 5:', error);
@@ -61,10 +62,13 @@ export class AdminComponent implements OnInit {
   }
 
   fecharModal() {
-  this.mostrarModal = false;
-  this.jogoSelecionado = null;
-}
-
+    this.mostrarModal = false;
+    this.jogoSelecionado = null;
+    this.form.reset();
+    this.generos = [];
+    this.modos = [];
+    this.plataformas = [];
+  }
 
   addGenero(event: KeyboardEvent): void {
     if (event.key === ',') {
@@ -157,38 +161,44 @@ export class AdminComponent implements OnInit {
       sinopseJogo: jogo.sinopseJogo,
       imagemJogo: jogo.imagemJogo,
       dataLancamentoJogo: jogo.dataLancamentoJogo,
-      nomeDistribuidora: jogo.nomeDistribuidora,
-      nomeDesenvolvedora: jogo.nomeDesenvolvedora,
+      nomeDistribuidora: jogo.distribuidora?.nomeDistribuidora || '',
+      nomeDesenvolvedora: jogo.desenvolvedora?.nomeDesenvolvedora || '',
     });
 
-    this.generos = jogo.generos.map((g: any) => g.nomeGenero || g);
+    console.log('link imagem:', jogo.imagemJogo),
+      (this.generos = jogo.generos.map((g: any) => g.nomeGenero || g));
     this.modos = jogo.modos.map((m: any) => m.nomeModo || m);
     this.plataformas = jogo.plataformas.map((p: any) => p.nomePlataforma || p);
   }
 
   editarJogo(): void {
-  if (!this.jogoSelecionado) return;
+    if (!this.jogoSelecionado) return;
 
-  const jogoAtualizado = {
-    ...this.form.value,
-    generos: this.generos,
-    modos: this.modos,
-    plataformas: this.plataformas,
+    const jogoAtualizado = {
+      ...this.form.value,
+      generos: this.generos,
+      modos: this.modos,
+      plataformas: this.plataformas,
+    };
+
+    this.jogoService
+      .editarJogo(this.toSlug(this.jogoSelecionado.nomeJogo), jogoAtualizado)
+      .subscribe({
+        next: () => {
+          this.tipoMensagem = 'sucesso';
+          this.mensagem = 'Jogo editado com sucesso!';
+          this.fecharModal();
+          this.loadAllJogos();
+          this.jogoSelecionado = null;
+          setTimeout(() => (this.mensagem = ''), 3000);
+        },
+        error: (err) => {
+          alert('Erro ao editar: ' + err.message);
+        },
+      });
+  }
+
+  public toSlug = (nomeJogo: string): string => {
+    return nomeJogo ? nomeJogo.toLowerCase().replace(/\s+/g, '-') : '';
   };
-
-  this.jogoService.editarJogo(this.jogoSelecionado.idJogo, jogoAtualizado).subscribe({
-    next: () => {
-      this.tipoMensagem = 'sucesso';
-      this.mensagem = 'Jogo editado com sucesso!';
-      this.fecharModal();
-      this.loadAllJogos();
-      this.jogoSelecionado = null;
-      setTimeout(() => (this.mensagem = ''), 3000);
-    },
-    error: (err) => {
-      alert('Erro ao editar: ' + err.message);
-    },
-  });
-}
-
 }

@@ -48,7 +48,7 @@ export class JogoService {
     return this.http.post(`${this.apiUrl}/adicionar/jogo`, jogo);
   }
 
-  editarJogo(idJogo: number, jogo: any) {
-    return this.http.put(`/api/jogos/${idJogo}`, jogo);
+  editarJogo(nomeJogo: string, jogoAtualizado: any): Observable<any> {
+    return this.http.put(`/api/jogos/editar/${nomeJogo}`, jogoAtualizado);
   }
 }

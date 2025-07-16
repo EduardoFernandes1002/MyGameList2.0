@@ -3,12 +3,15 @@ package com.mygamelist.backend.jogo;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.mygamelist.backend.avaliacao.AvaliacaoRepository;
 import com.mygamelist.backend.desenvolvedora.Desenvolvedora;
@@ -58,6 +61,9 @@ public class JogoService {
             map.put("nomeJogo", jogo.getNomeJogo());
             map.put("dataLancamentoJogo", jogo.getDataLancamentoJogo());
             map.put("sinopseJogo", jogo.getSinopseJogo());
+            map.put("imagemJogo", jogo.getImagemJogo());
+            map.put("distribuidora", jogo.getDistribuidora());
+            map.put("desenvolvedora", jogo.getDesenvolvedora());
             map.put("generos", jogo.getGeneros());
             map.put("plataformas", jogo.getPlataformas());
             map.put("modos", jogo.getModos());
@@ -176,9 +182,10 @@ public class JogoService {
     }
 
     @Transactional
-    public Jogo editarJogo(Long idJogo, JogoRequestDTO dto) {
-        Jogo jogo = jogoRepository.findById(idJogo)
-                .orElseThrow(() -> new RuntimeException("Jogo não encontrado"));
+    public Jogo editarJogo(String nomeJogo, JogoRequestDTO dto) {
+        Jogo jogo = Optional.ofNullable(jogoRepository.findByNomeJogo(nomeJogo))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Jogo não encontrado com o nome: " + nomeJogo));
 
         jogo.setNomeJogo(dto.nomeJogo);
         jogo.setSinopseJogo(dto.sinopseJogo);
@@ -218,15 +225,14 @@ public class JogoService {
     }
 
     @Transactional
-    public void deletarJogo(Long idJogo) {
-        Jogo jogo = jogoRepository.findById(idJogo)
-                .orElseThrow(() -> new RuntimeException("Jogo não encontrado"));
+    public void deletarJogo(String nomeJogo) {
+        Jogo jogo = jogoRepository.findByNomeJogo(nomeJogo);
 
         // Remove da tabela de avaliações
-        avaliacaoRepository.deleteByJogo_IdJogo(idJogo);
+        avaliacaoRepository.deleteByJogo_IdJogo(jogo.getIdJogo());
 
         // Remove de listas do usuário (M:N com Lista)
-        jogoAdicionadoRepository.deleteByJogos_IdJogo(idJogo);
+        jogoAdicionadoRepository.deleteByJogos_IdJogo(jogo.getIdJogo());
 
         // Limpa relações M:N
         jogo.getGeneros().clear();
