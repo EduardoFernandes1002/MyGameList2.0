@@ -4,6 +4,7 @@ import com.mygamelist.backend.jogo.JogoRepository;
 import com.mygamelist.backend.usuario.UsuarioRepository;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Serviço responsável pelas regras de negócio relacionadas às avaliações de
@@ -79,6 +81,7 @@ public class AvaliacaoService {
      * @param dataEnvioNota       data da nota
      * @return avaliação salva juntamente com a nota
      */
+    @Transactional
     public Avaliacao salvarNotaOuComentario(Long idJogo, Long idUsuario, BigDecimal notaUsuario,
             String comentarioUsuario, LocalDate dataEnvioNota) {
 
@@ -94,7 +97,29 @@ public class AvaliacaoService {
         if (comentarioUsuario != null && !comentarioUsuario.isEmpty()) {
             avaliacao.setDataComentario(LocalDate.now());
         }
-        return avaliacaoRepository.save(avaliacao);
+        Avaliacao avalSalva = avaliacaoRepository.save(avaliacao);
+
+        atualizarNotaMediaDoJogo(idJogo);
+
+        return avalSalva;
+    }
+
+    private void atualizarNotaMediaDoJogo(Long idJogo) {
+        List<BigDecimal> notas = avaliacaoRepository.findNotasByJogo_IdJogo(idJogo);
+
+        if (notas.isEmpty()) {
+            jogoRepository.updateNotaJogo(idJogo, null);
+            return;
+        }
+
+        BigDecimal soma = BigDecimal.ZERO;
+        for (BigDecimal nota : notas) {
+            soma = soma.add(nota);
+        }
+
+        BigDecimal media = soma.divide(BigDecimal.valueOf(notas.size()), 2, RoundingMode.HALF_UP);
+
+        jogoRepository.updateNotaJogo(idJogo, media);
     }
 
     public List<Map<String, Object>> getTresComentariosMaisRecentes() {
