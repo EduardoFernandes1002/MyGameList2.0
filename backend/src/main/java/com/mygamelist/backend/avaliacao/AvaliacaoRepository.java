@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Repositório de acesso a dados para avaliações.
@@ -28,8 +29,12 @@ public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long> {
 
     List<Avaliacao> findAllByOrderByDataComentarioDesc(Pageable pageable);
 
-
     @Query("SELECT a.notaUsuario FROM Avaliacao a WHERE a.jogo.idJogo = :idJogo AND a.notaUsuario IS NOT NULL")
     List<BigDecimal> findNotasByJogo_IdJogo(Long idJogo);
+
+    // No AvaliacaoRepository, você precisa de um método customizado para deletar
+    // avaliações por jogo:
+    @Transactional
+    void deleteByJogo_IdJogo(Long idJogo);
 
 }

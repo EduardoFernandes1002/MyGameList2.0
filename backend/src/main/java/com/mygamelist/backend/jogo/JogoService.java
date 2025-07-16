@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.mygamelist.backend.avaliacao.AvaliacaoRepository;
 import com.mygamelist.backend.desenvolvedora.Desenvolvedora;
 import com.mygamelist.backend.desenvolvedora.DesenvolvedoraRepository;
 import com.mygamelist.backend.distribuidora.Distribuidora;
 import com.mygamelist.backend.distribuidora.DistribuidoraRepository;
 import com.mygamelist.backend.genero.Genero;
 import com.mygamelist.backend.genero.GeneroRepository;
+import com.mygamelist.backend.lista.JogoAdicionadoRepository;
 import com.mygamelist.backend.modo.Modo;
 import com.mygamelist.backend.modo.ModoRepository;
 import com.mygamelist.backend.plataforma.Plataforma;
@@ -25,6 +28,12 @@ public class JogoService {
 
     @Autowired
     private JogoRepository jogoRepository;
+
+    @Autowired
+    private AvaliacaoRepository avaliacaoRepository;
+
+    @Autowired
+    private JogoAdicionadoRepository jogoAdicionadoRepository;
 
     @Autowired
     private GeneroRepository generoRepository;
@@ -165,4 +174,68 @@ public class JogoService {
 
         return jogoRepository.save(jogo);
     }
+
+    @Transactional
+    public Jogo editarJogo(Long idJogo, JogoRequestDTO dto) {
+        Jogo jogo = jogoRepository.findById(idJogo)
+                .orElseThrow(() -> new RuntimeException("Jogo não encontrado"));
+
+        jogo.setNomeJogo(dto.nomeJogo);
+        jogo.setSinopseJogo(dto.sinopseJogo);
+        jogo.setImagemJogo(dto.imagemJogo);
+        jogo.setDataLancamentoJogo(dto.dataLancamentoJogo);
+
+        Desenvolvedora desenvolvedora = desenvolvedoraRepository.findByNomeDesenvolvedora(dto.nomeDesenvolvedora)
+                .orElseThrow(() -> new RuntimeException("Desenvolvedora não encontrada"));
+        jogo.setDesenvolvedora(desenvolvedora);
+
+        Distribuidora distribuidora = distribuidoraRepository.findByNomeDistribuidora(dto.nomeDistribuidora)
+                .orElseThrow(() -> new RuntimeException("Distribuidora não encontrada"));
+        jogo.setDistribuidora(distribuidora);
+
+        // Atualizar gêneros
+        jogo.getGeneros().clear();
+        if (dto.generos != null && !dto.generos.isEmpty()) {
+            List<Genero> generosEncontrados = generoRepository.findByNomeGeneroIn(dto.generos);
+            jogo.getGeneros().addAll(generosEncontrados);
+        }
+
+        // Atualizar modos
+        jogo.getModos().clear();
+        if (dto.modos != null && !dto.modos.isEmpty()) {
+            List<Modo> modosEncontrados = modoRepository.findByNomeModoIn(dto.modos);
+            jogo.getModos().addAll(modosEncontrados);
+        }
+
+        // Atualizar plataformas
+        jogo.getPlataformas().clear();
+        if (dto.plataformas != null && !dto.plataformas.isEmpty()) {
+            List<Plataforma> plataformasEncontradas = plataformaRepository.findByNomePlataformaIn(dto.plataformas);
+            jogo.getPlataformas().addAll(plataformasEncontradas);
+        }
+
+        return jogoRepository.save(jogo);
+    }
+
+    @Transactional
+    public void deletarJogo(Long idJogo) {
+        Jogo jogo = jogoRepository.findById(idJogo)
+                .orElseThrow(() -> new RuntimeException("Jogo não encontrado"));
+
+        // Remove da tabela de avaliações
+        avaliacaoRepository.deleteByJogo_IdJogo(idJogo);
+
+        // Remove de listas do usuário (M:N com Lista)
+        jogoAdicionadoRepository.deleteByJogos_IdJogo(idJogo);
+
+        // Limpa relações M:N
+        jogo.getGeneros().clear();
+        jogo.getModos().clear();
+        jogo.getPlataformas().clear();
+
+        jogoRepository.save(jogo); // força atualizar antes de deletar
+
+        jogoRepository.delete(jogo);
+    }
+
 }

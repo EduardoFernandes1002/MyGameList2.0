@@ -15,6 +15,7 @@ import { timeout } from 'rxjs';
   standalone: true,
 })
 export class AdminComponent implements OnInit {
+  jogoSelecionado: any = null;
   separatorKeysCodes = [ENTER, COMMA] as const;
   form!: FormGroup;
   mensagem: string = '';
@@ -60,8 +61,10 @@ export class AdminComponent implements OnInit {
   }
 
   fecharModal() {
-    this.mostrarModal = false;
-  }
+  this.mostrarModal = false;
+  this.jogoSelecionado = null;
+}
+
 
   addGenero(event: KeyboardEvent): void {
     if (event.key === ',') {
@@ -145,4 +148,47 @@ export class AdminComponent implements OnInit {
       },
     });
   }
+
+  abrirModalEdicao(jogo: any) {
+    this.jogoSelecionado = jogo;
+    this.mostrarModal = true;
+    this.form.patchValue({
+      nomeJogo: jogo.nomeJogo,
+      sinopseJogo: jogo.sinopseJogo,
+      imagemJogo: jogo.imagemJogo,
+      dataLancamentoJogo: jogo.dataLancamentoJogo,
+      nomeDistribuidora: jogo.nomeDistribuidora,
+      nomeDesenvolvedora: jogo.nomeDesenvolvedora,
+    });
+
+    this.generos = jogo.generos.map((g: any) => g.nomeGenero || g);
+    this.modos = jogo.modos.map((m: any) => m.nomeModo || m);
+    this.plataformas = jogo.plataformas.map((p: any) => p.nomePlataforma || p);
+  }
+
+  editarJogo(): void {
+  if (!this.jogoSelecionado) return;
+
+  const jogoAtualizado = {
+    ...this.form.value,
+    generos: this.generos,
+    modos: this.modos,
+    plataformas: this.plataformas,
+  };
+
+  this.jogoService.editarJogo(this.jogoSelecionado.idJogo, jogoAtualizado).subscribe({
+    next: () => {
+      this.tipoMensagem = 'sucesso';
+      this.mensagem = 'Jogo editado com sucesso!';
+      this.fecharModal();
+      this.loadAllJogos();
+      this.jogoSelecionado = null;
+      setTimeout(() => (this.mensagem = ''), 3000);
+    },
+    error: (err) => {
+      alert('Erro ao editar: ' + err.message);
+    },
+  });
+}
+
 }

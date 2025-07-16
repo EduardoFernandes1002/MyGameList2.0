@@ -29,40 +29,44 @@
   <table class="table mt-4 table-striped table-bordered">
     <thead>
       <tr>
+        <th class="col-md-1">Ações</th>
+        <!-- Nova coluna -->
         <th class="col-md-1">Nome</th>
         <th class="col-md-2">Sinopse</th>
         <th class="col-md-1">Data</th>
         <th class="col-md-2">Modos</th>
-        <th class="col-md-2">Generos</th>
+        <th class="col-md-2">Gêneros</th>
         <th class="col-md-1">Plataformas</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let jogo of jogos">
+        <td>
+          <button
+            class="btn btn-sm btn-warning"
+            (click)="abrirModalEdicao(jogo)"
+          >
+            Editar
+          </button>
+        </td>
         <td>{{ jogo.nomeJogo }}</td>
         <td>{{ jogo.sinopseJogo }}</td>
         <td>{{ jogo.dataLancamentoJogo | date }}</td>
         <td>
-          <p>
-            <span *ngFor="let modo of jogo.modos; let last = last">
-              {{ modo.nomeModo }}<span *ngIf="!last">, </span></span
-            >
-          </p>
+          <span *ngFor="let modo of jogo.modos; let last = last">
+            {{ modo.nomeModo }}<span *ngIf="!last">, </span>
+          </span>
         </td>
         <td>
-          <p class="card-text">
-            <span *ngFor="let genero of jogo.generos; let last = last">
-              {{ genero.nomeGenero || genero }}<span *ngIf="!last">, </span>
-            </span>
-          </p>
+          <span *ngFor="let genero of jogo.generos; let last = last">
+            {{ genero.nomeGenero || genero }}<span *ngIf="!last">, </span>
+          </span>
         </td>
         <td>
-          <p class="card-text">
-            <span *ngFor="let plataforma of jogo.plataformas; let last = last">
-              {{ plataforma.nomePlataforma || plataforma
-              }}<span *ngIf="!last">, </span>
-            </span>
-          </p>
+          <span *ngFor="let plataforma of jogo.plataformas; let last = last">
+            {{ plataforma.nomePlataforma || plataforma
+            }}<span *ngIf="!last">, </span>
+          </span>
         </td>
       </tr>
     </tbody>
@@ -82,7 +86,9 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalAdicionarLabel">Adicionar Jogo</h5>
+          <h5 class="modal-title" id="modalAdicionarLabel">
+            {{ jogoSelecionado ? "Editar Jogo" : "Adicionar Jogo" }}
+          </h5>
           <button
             type="button"
             class="btn-close"
@@ -209,10 +215,22 @@
               />
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 mt-3">
+            <button
+              *ngIf="!jogoSelecionado"
+              type="submit"
+              class="btn btn-primary w-100 mt-3"
+            >
               Adicionar Jogo
             </button>
 
+            <button
+              *ngIf="jogoSelecionado"
+              type="button"
+              class="btn btn-warning w-100 mt-3"
+              (click)="editarJogo()"
+            >
+              Salvar Edição
+            </button>
           </form>
         </div>
       </div>

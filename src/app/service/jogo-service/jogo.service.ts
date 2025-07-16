@@ -3,11 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class JogoService {
-
-  
   private apiUrl = 'http://localhost:8080/api/jogo';
 
   constructor(private http: HttpClient) {}
@@ -22,10 +20,9 @@ export class JogoService {
     return this.http.get<any>(`${this.apiUrl}/${nome}`);
   }
 
-
   // serviço para busca de jogos no a Home
-  getJogoResumidoByTopCinco(): Observable<any[]>{
-    return this.http.get<any[]>(`${this.apiUrl}/rank/cinco`)
+  getJogoResumidoByTopCinco(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/rank/cinco`);
   }
 
   // Jogos recomendados para o usuário (endpoint a ser implementado no backend)
@@ -51,5 +48,7 @@ export class JogoService {
     return this.http.post(`${this.apiUrl}/adicionar/jogo`, jogo);
   }
 
-
+  editarJogo(idJogo: number, jogo: any) {
+    return this.http.put(`/api/jogos/${idJogo}`, jogo);
+  }
 }
