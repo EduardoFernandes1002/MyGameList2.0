@@ -91,7 +91,7 @@ public class ListaService {
             geral.setJogos(jogo);
             jogoAdicionadoRepository.save(geral);
         }
-
+// abobora
         // Se a lista for 1 (Geral) ou 7 (Favoritos), não precisa remover de outras
         if (idLista != 1L && idLista != 7L) {
             // Remove o jogo de qualquer outra lista do usuário (exceto Geral e Favoritos)
