@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: gamelist
 -- ------------------------------------------------------
@@ -35,7 +35,7 @@ CREATE TABLE `avaliacao` (
   KEY `t_avaliacao_ibfk_4` (`id_jogo`),
   CONSTRAINT `t_avaliacao_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
   CONSTRAINT `t_avaliacao_ibfk_4` FOREIGN KEY (`id_jogo`) REFERENCES `jogo` (`id_jogo`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,7 @@ CREATE TABLE `avaliacao` (
 
 LOCK TABLES `avaliacao` WRITE;
 /*!40000 ALTER TABLE `avaliacao` DISABLE KEYS */;
+INSERT INTO `avaliacao` VALUES (16,2,1,'Jogo muito bom um amigo me recomenda toda hora!',6.0,'2025-07-17','2025-07-17');
 /*!40000 ALTER TABLE `avaliacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +60,7 @@ CREATE TABLE `desenvolvedora` (
   `nm_desenvolvedora` varchar(100) NOT NULL,
   PRIMARY KEY (`id_desenvolvedora`),
   UNIQUE KEY `nm_desenvolvedora_UNIQUE` (`nm_desenvolvedora`)
-) ENGINE=InnoDB AUTO_INCREMENT=427 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=429 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +69,7 @@ CREATE TABLE `desenvolvedora` (
 
 LOCK TABLES `desenvolvedora` WRITE;
 /*!40000 ALTER TABLE `desenvolvedora` DISABLE KEYS */;
-INSERT INTO `desenvolvedora` VALUES (32,' Konami'),(23,' Krafton'),(87,'11 bit studios'),(31,'2K Sports'),(2,'Afterthought LLC'),(68,'Amanita Design'),(54,'Arc System Works'),(90,'Arkane Studios'),(94,'Asmodee Digital'),(59,'Avalanche Studios'),(42,'Behaviour Interactive'),(16,'BioWare'),(25,'Blizzard Entertainment'),(43,'Bloober Team'),(75,'Brogue Devs'),(37,'Bungie'),(34,'Campo Santo'),(40,'Capcom'),(7,'CD Projekt Red'),(78,'Cellar Door Games'),(60,'Chucklefish'),(89,'CI Games'),(88,'Deck13 Interactive'),(48,'Devolver Digital'),(26,'Dire Wolf Digital'),(21,'Dontnod Entertainment'),(72,'DotEmu'),(8,'EA Vancouver'),(74,'Edmund McMillen'),(86,'Endnight Games'),(5,'Epic Games'),(79,'Facepunch Studios'),(30,'Filimundus'),(93,'Frictional Games'),(4,'FromSoftware'),(84,'Frontier Developments'),(65,'Gears for Breakfast'),(83,'Giants Software'),(102,'Haemimont Games'),(35,'Hello Games'),(98,'Hidden Path Entertainment'),(76,'Hopoo Games'),(52,'Humongous Entertainment'),(45,'Hyper Hippo Games'),(36,'id Software'),(38,'Infinity Ward'),(11,'InnerSloth'),(64,'Insomniac Games'),(62,'Inti Creates'),(92,'IO Interactive'),(24,'Iron Galaxy Studios'),(96,'Ironhide Game Studio'),(80,'Keen Software House'),(85,'Klei Entertainment'),(91,'Kojima Productions'),(17,'Larian Studios'),(28,'LeapFrog'),(66,'LucasArts'),(82,'Maxis'),(101,'MicroProse'),(6,'Mojang Studios'),(73,'Motion Twin'),(14,'Naughty Dog'),(53,'NetherRealm Studios'),(97,'Ninja Kiwi'),(39,'Ninja Theory'),(3,'Nintendo EPD'),(95,'Nomad Games'),(18,'Obsidian Entertainment\n\n'),(46,'Orteil'),(29,'Osmo'),(51,'Outright Games'),(15,'PlatinumGames'),(63,'Playdead'),(27,'PlayFusion\n\n'),(44,'Playsaurus'),(77,'Poncle'),(69,'PopCap Games'),(22,'PUBG Corporation'),(20,'Quantic Dream'),(81,'Re-Logic'),(41,'Red Barrels'),(99,'Remedy Entertainment'),(12,'Respawn Entertainment'),(13,'Rockstar Games'),(9,'Santa Monica Studio'),(55,'SNK Corporation'),(56,'Square Enix'),(10,'Supergiant Games'),(47,'Team Cherry'),(33,'Team Ninja'),(19,'Telltale Games'),(1,'TesteDesenvolvedora'),(71,'Thekla Inc'),(100,'Third Wire'),(50,'Toca Boca'),(61,'Tribute Games'),(58,'Ubisoft'),(67,'Wadjet Eye Games'),(49,'Yacht Club Games'),(70,'Zachtronics'),(57,'ZeniMax Online Studios');
+INSERT INTO `desenvolvedora` VALUES (32,' Konami'),(23,' Krafton'),(87,'11 bit studios'),(31,'2K Sports'),(2,'Afterthought LLC'),(68,'Amanita Design'),(54,'Arc System Works'),(90,'Arkane Studios'),(94,'Asmodee Digital'),(59,'Avalanche Studios'),(42,'Behaviour Interactive'),(16,'BioWare'),(25,'Blizzard Entertainment'),(43,'Bloober Team'),(75,'Brogue Devs'),(37,'Bungie'),(34,'Campo Santo'),(40,'Capcom'),(7,'CD Projekt Red'),(78,'Cellar Door Games'),(60,'Chucklefish'),(89,'CI Games'),(88,'Deck13 Interactive'),(48,'Devolver Digital'),(26,'Dire Wolf Digital'),(21,'Dontnod Entertainment'),(72,'DotEmu'),(8,'EA Vancouver'),(74,'Edmund McMillen'),(86,'Endnight Games'),(5,'Epic Games'),(79,'Facepunch Studios'),(30,'Filimundus'),(93,'Frictional Games'),(4,'FromSoftware'),(84,'Frontier Developments'),(65,'Gears for Breakfast'),(83,'Giants Software'),(102,'Haemimont Games'),(35,'Hello Games'),(98,'Hidden Path Entertainment'),(76,'Hopoo Games'),(52,'Humongous Entertainment'),(45,'Hyper Hippo Games'),(36,'id Software'),(38,'Infinity Ward'),(11,'InnerSloth'),(64,'Insomniac Games'),(62,'Inti Creates'),(92,'IO Interactive'),(24,'Iron Galaxy Studios'),(96,'Ironhide Game Studio'),(80,'Keen Software House'),(85,'Klei Entertainment'),(91,'Kojima Productions'),(17,'Larian Studios'),(28,'LeapFrog'),(66,'LucasArts'),(82,'Maxis'),(101,'MicroProse'),(6,'Mojang Studios'),(73,'Motion Twin'),(14,'Naughty Dog'),(53,'NetherRealm Studios'),(97,'Ninja Kiwi'),(39,'Ninja Theory'),(3,'Nintendo EPD'),(95,'Nomad Games'),(18,'Obsidian Entertainment\n\n'),(46,'Orteil'),(29,'Osmo'),(51,'Outright Games'),(15,'PlatinumGames'),(63,'Playdead'),(27,'PlayFusion\n\n'),(44,'Playsaurus'),(77,'Poncle'),(69,'PopCap Games'),(22,'PUBG Corporation'),(20,'Quantic Dream'),(81,'Re-Logic'),(41,'Red Barrels'),(99,'Remedy Entertainment'),(12,'Respawn Entertainment'),(13,'Rockstar Games'),(428,'Rockstar North'),(427,'Rockstar Studios'),(9,'Santa Monica Studio'),(55,'SNK Corporation'),(56,'Square Enix'),(10,'Supergiant Games'),(47,'Team Cherry'),(33,'Team Ninja'),(19,'Telltale Games'),(1,'TesteDesenvolvedora'),(71,'Thekla Inc'),(100,'Third Wire'),(50,'Toca Boca'),(61,'Tribute Games'),(58,'Ubisoft'),(67,'Wadjet Eye Games'),(49,'Yacht Club Games'),(70,'Zachtronics'),(57,'ZeniMax Online Studios');
 /*!40000 ALTER TABLE `desenvolvedora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +85,7 @@ CREATE TABLE `distribuidora` (
   `nm_distribuidora` varchar(100) NOT NULL,
   PRIMARY KEY (`id_distribuidora`),
   UNIQUE KEY `nm_distribuidora_UNIQUE` (`nm_distribuidora`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +94,7 @@ CREATE TABLE `distribuidora` (
 
 LOCK TABLES `distribuidora` WRITE;
 /*!40000 ALTER TABLE `distribuidora` DISABLE KEYS */;
-INSERT INTO `distribuidora` VALUES (72,'2K Games'),(41,'505 Games'),(47,'Activision'),(2,'Afterthought LLC'),(80,'Asmodee Digital'),(4,'Bandai Namco Entertainment'),(79,'BANDAI NAMCO Entertainment America'),(33,'Bandai Namco Entertainment Europe'),(46,'Bethesda Softworks'),(51,'Capcom'),(7,'CD Projekt'),(55,'CD Projekt Red'),(77,'Codemasters'),(78,'Curve Digital'),(37,'Deep Silver'),(38,'Devolver Digital'),(8,'Electronic Arts'),(63,'Electronic Arts Inc.'),(5,'Epic Games'),(56,'Focus Entertainment'),(39,'Focus Home Interactive'),(43,'Gearbox Publishing'),(11,'InnerSloth'),(73,'Kalypso Media'),(42,'Koch Media'),(45,'Konami Digital Entertainment'),(58,'Larian Studios'),(66,'Marvelous'),(60,'Microsoft Studios'),(52,'Nexon'),(64,'Nicalis'),(3,'Nintendo'),(67,'NIS America'),(40,'Paradox Interactive'),(59,'Piranha Bytes'),(68,'Playdigious'),(65,'PQube'),(74,'Private Division'),(69,'Raw Fury'),(53,'Riot Games'),(44,'SEGA'),(57,'Sega Europe'),(61,'Sony Computer Entertainment'),(9,'Sony Interactive Entertainment'),(49,'Square Enix'),(10,'Supergiant Games'),(36,'Take-Two Interactive'),(71,'Team17'),(54,'Tencent Games'),(1,'TesteDistribuidora'),(35,'THQ Nordic'),(75,'Tripwire Interactive'),(50,'Ubisoft'),(62,'Valve'),(34,'Valve Corporation'),(76,'Warhorse Studios'),(48,'Warner Bros. Interactive Entertainment'),(6,'Xbox Game Studios'),(70,'Yooreka Studio');
+INSERT INTO `distribuidora` VALUES (72,'2K Games'),(41,'505 Games'),(47,'Activision'),(2,'Afterthought LLC'),(80,'Asmodee Digital'),(4,'Bandai Namco Entertainment'),(79,'BANDAI NAMCO Entertainment America'),(33,'Bandai Namco Entertainment Europe'),(46,'Bethesda Softworks'),(51,'Capcom'),(7,'CD Projekt'),(55,'CD Projekt Red'),(77,'Codemasters'),(78,'Curve Digital'),(37,'Deep Silver'),(38,'Devolver Digital'),(8,'Electronic Arts'),(63,'Electronic Arts Inc.'),(5,'Epic Games'),(56,'Focus Entertainment'),(39,'Focus Home Interactive'),(43,'Gearbox Publishing'),(11,'InnerSloth'),(73,'Kalypso Media'),(42,'Koch Media'),(45,'Konami Digital Entertainment'),(58,'Larian Studios'),(66,'Marvelous'),(60,'Microsoft Studios'),(52,'Nexon'),(64,'Nicalis'),(3,'Nintendo'),(67,'NIS America'),(40,'Paradox Interactive'),(59,'Piranha Bytes'),(68,'Playdigious'),(65,'PQube'),(74,'Private Division'),(69,'Raw Fury'),(53,'Riot Games'),(81,'Rockstar Games'),(82,'Rockstar North'),(44,'SEGA'),(57,'Sega Europe'),(61,'Sony Computer Entertainment'),(9,'Sony Interactive Entertainment'),(49,'Square Enix'),(10,'Supergiant Games'),(36,'Take-Two Interactive'),(71,'Team17'),(54,'Tencent Games'),(1,'TesteDistribuidora'),(35,'THQ Nordic'),(75,'Tripwire Interactive'),(50,'Ubisoft'),(62,'Valve'),(34,'Valve Corporation'),(76,'Warhorse Studios'),(48,'Warner Bros. Interactive Entertainment'),(6,'Xbox Game Studios'),(70,'Yooreka Studio');
 /*!40000 ALTER TABLE `distribuidora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +147,7 @@ CREATE TABLE `genero_do_jogo` (
 
 LOCK TABLES `genero_do_jogo` WRITE;
 /*!40000 ALTER TABLE `genero_do_jogo` DISABLE KEYS */;
-INSERT INTO `genero_do_jogo` VALUES (2,2),(2,3),(2,19),(3,1),(3,3),(4,5),(4,12),(5,4),(5,9),(6,2),(6,14),(7,1),(7,12),(8,7),(8,8),(9,1),(9,5),(9,13),(10,1),(10,5),(11,1),(11,9),(12,4),(12,9);
+INSERT INTO `genero_do_jogo` VALUES (2,2),(2,3),(2,19),(3,1),(3,3),(4,5),(4,12),(5,4),(5,9),(6,2),(6,14),(7,1),(7,12),(8,7),(8,8),(9,1),(9,5),(9,13),(10,1),(10,5),(11,1),(11,9),(12,4),(12,9),(25,1),(25,3),(26,1),(26,3);
 /*!40000 ALTER TABLE `genero_do_jogo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +174,7 @@ CREATE TABLE `jogo` (
   KEY `fk_T_JOGO_T_DESENVOLVEDORA1_idx` (`id_desenvolvedora`),
   CONSTRAINT `fk_T_JOGO_T_DESENVOLVEDORA1` FOREIGN KEY (`id_desenvolvedora`) REFERENCES `desenvolvedora` (`id_desenvolvedora`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_T_JOGO_T_DISTRIBUIDORA1` FOREIGN KEY (`id_distribuidora`) REFERENCES `distribuidora` (`id_distribuidora`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,7 +183,7 @@ CREATE TABLE `jogo` (
 
 LOCK TABLES `jogo` WRITE;
 /*!40000 ALTER TABLE `jogo` DISABLE KEYS */;
-INSERT INTO `jogo` VALUES (2,2,2,'The Isle','The Isle é um jogo de sobrevivência em mundo aberto e horror.','2015-11-01','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/376210/capsule_616x353.jpg?t=1653237914',NULL),(3,3,3,'The Legend of Zelda: Breath of the Wild','Em um reino devastado, Link deve explorar Hyrule para derrotar Calamity Ganon.','2017-03-03','https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_656/b_white/f_auto/q_auto/ncom/software/switch/70010000000025/7137262b5a64d921e193653f8aa0b722925abc5680380ca0e18a5cfd91697f58',NULL),(4,4,4,'Elden Ring','Um RPG de ação em um mundo aberto criado por Hidetaka Miyazaki e George R.R. Martin.','2022-02-25','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5Nou4oHurJxom1LW1QZvXbvtsRRzpNTD28g&s',NULL),(5,5,5,'Fortnite','Um jogo de battle royale onde 100 jogadores lutam até restar um vencedor.','2017-07-25','https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/cm9wwjg2r2n9e08n4hrfeouns',NULL),(6,6,6,'Minecraft','Construa, explore e sobreviva em um mundo gerado proceduralmente.','2011-11-18','https://image.api.playstation.com/vulcan/img/cfn/11307uYG0CXzRuA9aryByTHYrQLFz-HVQ3VVl7aAysxK15HMpqjkAIcC_R5vdfZt52hAXQNHoYhSuoSq_46_MT_tDBcLu49I.png',NULL),(7,7,7,'Cyberpunk 2077','Em Night City, um mercenário busca um implante único que concede a imortalidade.','2020-12-10','https://www.cyberpunk.net/build/images/social-thumbnail-en-ddcf4d23.jpg',NULL),(8,8,8,'FIFA 23','O FIFA 23 é o último jogo da franquia FIFA desenvolvido pela Electronic Arts, antes da mudança para a EA Sports FC.','2022-09-30','https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000047794/40f9e2f6d344d2607d4be72c6c4ebd3c18717ff87a56d6bbc303c42e58dd570d',NULL),(9,9,9,'God of War: Ragnarök','God of War Ragnarök dá continuidade à história de Kratos e Atreus, ambientada após os eventos do jogo anterior.','2022-11-09','https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XB3bi888QTLZYdl7Oi0s.png',NULL),(10,10,10,'Hades','Um roguelike onde Zagreus tenta escapar do Submundo grego.','2020-09-17','https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDmuxS38ekrs51ij4WHn9A1mYq1lfonwn52hLcCDtq3O5qqjLkUPd5dBa7g3Gxc-rnhaAmLcHMl1LaVbCgt4TaHPr36C1JdCYKX49oEHLBzIjcwX3SK37hZAX1pSlPoFVct28Yj9JKepY/w1200-h630-p-k-no-nu/H2x1_NSwitchDS_Hades.png',NULL),(11,11,11,'Among Us','Um jogo de dedução social onde tripulantes precisam encontrar o impostor.','2018-06-15','https://upload.wikimedia.org/wikipedia/pt/7/72/AmongUs_CoverArt.jpg',NULL),(12,8,12,'Apex Legends','Um battle royale futurista com personagens únicos e habilidades especiais.','2019-02-04','https://image.api.playstation.com/vulcan/ap/rnd/202206/0720/eEczyEMDd2B8PfNAh4hBgl67.png',NULL);
+INSERT INTO `jogo` VALUES (2,2,2,'The Isle','The Isle é um jogo de sobrevivência em mundo aberto e horror.','2015-11-01','https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/376210/capsule_616x353.jpg?t=1653237914',6.0),(3,3,3,'The Legend of Zelda: Breath of the Wild','Em um reino devastado, Link deve explorar Hyrule para derrotar Calamity Ganon.','2017-03-03','https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_656/b_white/f_auto/q_auto/ncom/software/switch/70010000000025/7137262b5a64d921e193653f8aa0b722925abc5680380ca0e18a5cfd91697f58',NULL),(4,4,4,'Elden Ring','Um RPG de ação em um mundo aberto criado por Hidetaka Miyazaki e George R.R. Martin.','2022-02-25','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5Nou4oHurJxom1LW1QZvXbvtsRRzpNTD28g&s',NULL),(5,5,5,'Fortnite','Um jogo de battle royale onde 100 jogadores lutam até restar um vencedor.','2017-07-25','https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/cm9wwjg2r2n9e08n4hrfeouns',NULL),(6,6,6,'Minecraft','Construa, explore e sobreviva em um mundo gerado proceduralmente.','2011-11-18','https://image.api.playstation.com/vulcan/img/cfn/11307uYG0CXzRuA9aryByTHYrQLFz-HVQ3VVl7aAysxK15HMpqjkAIcC_R5vdfZt52hAXQNHoYhSuoSq_46_MT_tDBcLu49I.png',NULL),(7,7,7,'Cyberpunk 2077','Em Night City, um mercenário busca um implante único que concede a imortalidade.','2020-12-10','https://www.cyberpunk.net/build/images/social-thumbnail-en-ddcf4d23.jpg',NULL),(8,8,8,'FIFA 23','O FIFA 23 é o último jogo da franquia FIFA desenvolvido pela Electronic Arts, antes da mudança para a EA Sports FC.','2022-09-30','https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000047794/40f9e2f6d344d2607d4be72c6c4ebd3c18717ff87a56d6bbc303c42e58dd570d',NULL),(9,9,9,'God of War: Ragnarök','God of War Ragnarök dá continuidade à história de Kratos e Atreus, ambientada após os eventos do jogo anterior.','2022-11-09','https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XB3bi888QTLZYdl7Oi0s.png',NULL),(10,10,10,'Hades','Um roguelike onde Zagreus tenta escapar do Submundo grego.','2020-09-17','https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDmuxS38ekrs51ij4WHn9A1mYq1lfonwn52hLcCDtq3O5qqjLkUPd5dBa7g3Gxc-rnhaAmLcHMl1LaVbCgt4TaHPr36C1JdCYKX49oEHLBzIjcwX3SK37hZAX1pSlPoFVct28Yj9JKepY/w1200-h630-p-k-no-nu/H2x1_NSwitchDS_Hades.png',NULL),(11,11,11,'Among Us','Um jogo de dedução social onde tripulantes precisam encontrar o impostor.','2018-06-15','https://upload.wikimedia.org/wikipedia/pt/7/72/AmongUs_CoverArt.jpg',NULL),(12,8,12,'Apex Legends','Um battle royale futurista com personagens únicos e habilidades especiais.','2019-02-04','https://image.api.playstation.com/vulcan/ap/rnd/202206/0720/eEczyEMDd2B8PfNAh4hBgl67.png',NULL),(25,81,13,'Red Dead Redemption 2','Em 1899, o fora da lei Arthur Morgan enfrenta o declínio do Velho Oeste e perseguições governamentais.','0018-10-26','https://cdn.dlcompare.com/game_tetiere/upload/gameimage/file/25273.jpeg.webp',NULL),(26,81,428,'Grand Theft Auto V','Três criminosos realizam assaltos em San Andreas sob pressão governamental, explorando um vasto mundo aberto.','2013-02-17','https://assetsio.gnwcdn.com/eurogamer-zjp1vx.jpg?width=1600&height=900&fit=crop&quality=100&format=png&enable=upscale&auto=webp',NULL);
 /*!40000 ALTER TABLE `jogo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +213,7 @@ CREATE TABLE `jogo_adicionado` (
 
 LOCK TABLES `jogo_adicionado` WRITE;
 /*!40000 ALTER TABLE `jogo_adicionado` DISABLE KEYS */;
-INSERT INTO `jogo_adicionado` VALUES (1,1,5),(1,1,8),(1,1,10),(1,1,2),(2,1,2),(4,1,5),(5,1,6),(7,1,6),(3,1,10),(7,1,10),(7,1,8);
+INSERT INTO `jogo_adicionado` VALUES (1,1,5),(1,1,8),(1,1,10),(1,1,2),(2,1,2),(4,1,5),(5,1,6),(7,1,6),(3,1,10),(7,1,10);
 /*!40000 ALTER TABLE `jogo_adicionado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,7 +290,7 @@ CREATE TABLE `modo_de_jogo` (
 
 LOCK TABLES `modo_de_jogo` WRITE;
 /*!40000 ALTER TABLE `modo_de_jogo` DISABLE KEYS */;
-INSERT INTO `modo_de_jogo` VALUES (2,2),(2,3),(2,4),(2,5),(8,4),(9,1);
+INSERT INTO `modo_de_jogo` VALUES (2,2),(2,3),(2,4),(2,5),(3,1),(8,4),(9,1),(25,1),(25,3),(26,1),(26,3);
 /*!40000 ALTER TABLE `modo_de_jogo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,7 +331,7 @@ CREATE TABLE `plataforma` (
   `nm_plataforma` varchar(100) NOT NULL,
   PRIMARY KEY (`id_plataforma`),
   UNIQUE KEY `nm_plataforma_UNIQUE` (`nm_plataforma`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -339,7 +340,7 @@ CREATE TABLE `plataforma` (
 
 LOCK TABLES `plataforma` WRITE;
 /*!40000 ALTER TABLE `plataforma` DISABLE KEYS */;
-INSERT INTO `plataforma` VALUES (2,'Console'),(1,'PC');
+INSERT INTO `plataforma` VALUES (16,'Google Stadia'),(12,'Nintendo Switch'),(1,'PC'),(19,'PlayStation'),(18,'PlayStation 2'),(17,'PlayStation 3'),(14,'PlayStation 4'),(20,'PlayStation 5'),(13,'Wii U'),(21,'Xbox 360'),(15,'Xbox One');
 /*!40000 ALTER TABLE `plataforma` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,7 +368,7 @@ CREATE TABLE `plataforma_de_jogo` (
 
 LOCK TABLES `plataforma_de_jogo` WRITE;
 /*!40000 ALTER TABLE `plataforma_de_jogo` DISABLE KEYS */;
-INSERT INTO `plataforma_de_jogo` VALUES (1,2),(1,8),(1,9);
+INSERT INTO `plataforma_de_jogo` VALUES (1,2),(1,8),(1,9),(1,25),(1,26),(12,3),(14,26),(16,25),(21,26);
 /*!40000 ALTER TABLE `plataforma_de_jogo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -394,7 +395,7 @@ CREATE TABLE `usuario` (
   UNIQUE KEY `nr_telefone_UNIQUE` (`nr_telefone`),
   KEY `fk_T_USUARIO_T_PERMISSAO1_idx` (`id_permissao`),
   CONSTRAINT `fk_T_USUARIO_T_PERMISSAO1` FOREIGN KEY (`id_permissao`) REFERENCES `permissao` (`id_permissao`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -403,7 +404,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,2,'AokiFernandes','Aoki','duduzebas@gmail.com','123456789',NULL,NULL),(2,2,'ThiagoDosSantos','Sr_Xurineio','ThiagoDosSantos','987654321',NULL,NULL),(4,1,'Marcos Pedro','Marquin','MarcosPedro12@gmail.com','MarcosPedro12',NULL,NULL),(5,1,'Guilherme Laurindo','Abobora12','LaurindoG@gmail.com','Guilherme12',NULL,NULL),(18,1,'UsuarioTestado','ApelidoRuim','teste@gmaillegal.com','123abc456',NULL,NULL),(19,1,'Registrofake','registrofake','registrofake@fake.fake','registrofa',NULL,NULL),(20,1,'GuitesteAguero','Aguero','teste@fml.com','123abc123',NULL,NULL);
+INSERT INTO `usuario` VALUES (1,2,'AokiFernandes','Aoki','duduzebas@gmail.com','AokiFer',NULL,NULL),(2,2,'ThiagoDosSantos','Sr_Xurineio','ThiagoDosSantos','SantosThiago',NULL,NULL),(5,1,'Guilherme Laurindo','Abobora12','LaurindoG@gmail.com','Guilherme12',NULL,NULL),(20,1,'GuitesteAguero','Aguero','teste@fml.com','123abc123',NULL,NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -416,4 +417,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-16 21:51:14
+-- Dump completed on 2025-07-17 16:01:21
