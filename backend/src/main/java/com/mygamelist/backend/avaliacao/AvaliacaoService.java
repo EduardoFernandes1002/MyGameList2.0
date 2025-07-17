@@ -1,8 +1,5 @@
 package com.mygamelist.backend.avaliacao;
 
-import com.mygamelist.backend.jogo.JogoRepository;
-import com.mygamelist.backend.usuario.UsuarioRepository;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
@@ -13,9 +10,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.mygamelist.backend.jogo.JogoRepository;
+import com.mygamelist.backend.usuario.UsuarioRepository;
 
 /**
  * Serviço responsável pelas regras de negócio relacionadas às avaliações de
@@ -57,17 +56,20 @@ public class AvaliacaoService {
      *         nota, data do comentário)
      */
     public List<Map<String, Object>> getAvaliacoesByJogo(Long idJogo, Pageable pageable) {
-        List<Avaliacao> avaliacoes = avaliacaoRepository.findByJogo_IdJogo(
-                idJogo, pageable);
-        return avaliacoes.stream().map(avaliacao -> {
-            Map<String, Object> map = new LinkedHashMap<>();
-            map.put("idAvaliacao", avaliacao.getIdAvaliacao());
-            map.put("apelidoUsuario", avaliacao.getUsuario().getApelidoUsuario());
-            map.put("comentarioUsuario", avaliacao.getComentarioUsuario());
-            map.put("notaUsuario", avaliacao.getNotaUsuario());
-            map.put("dataComentario", avaliacao.getDataComentario());
-            return map;
-        }).toList();
+        List<Avaliacao> avaliacoes = avaliacaoRepository.findByJogo_IdJogo(idJogo, pageable);
+        return avaliacoes.stream()
+                .filter(avaliacao -> avaliacao.getComentarioUsuario() != null
+                        && !avaliacao.getComentarioUsuario().isBlank())
+                .map(avaliacao -> {
+                    Map<String, Object> map = new LinkedHashMap<>();
+                    map.put("idAvaliacao", avaliacao.getIdAvaliacao());
+                    map.put("apelidoUsuario", avaliacao.getUsuario().getApelidoUsuario());
+                    map.put("comentarioUsuario", avaliacao.getComentarioUsuario());
+                    map.put("notaUsuario", avaliacao.getNotaUsuario());
+                    map.put("dataComentario", avaliacao.getDataComentario());
+                    return map;
+                })
+                .toList();
     }
 
     /**
@@ -125,17 +127,22 @@ public class AvaliacaoService {
     public List<Map<String, Object>> getTresComentariosMaisRecentes() {
         Pageable limit = PageRequest.of(0, 3);
         List<Avaliacao> avaliacoes = avaliacaoRepository.findAllByOrderByDataComentarioDesc(limit);
-        return avaliacoes.stream().map(avaliacao -> {
-            Map<String, Object> map = new LinkedHashMap<>();
-            map.put("idAvaliacao", avaliacao.getIdAvaliacao());
-            map.put("nomeUsuario", avaliacao.getUsuario().getNomeUsuario());
-            map.put("apelidoUsuario", avaliacao.getUsuario().getApelidoUsuario());
-            map.put("nomeJogo", avaliacao.getJogo().getNomeJogo());
-            map.put("comentarioUsuario", avaliacao.getComentarioUsuario());
-            map.put("notaUsuario", avaliacao.getNotaUsuario());
-            map.put("dataEnvioComentario", avaliacao.getDataComentario());
-            return map;
-        }).toList();
+        return avaliacoes.stream()
+                .filter(avaliacao -> avaliacao.getComentarioUsuario() != null
+                        && !avaliacao.getComentarioUsuario().isBlank())
+                .map(avaliacao -> {
+                    Map<String, Object> map = new LinkedHashMap<>();
+                    map.put("idAvaliacao", avaliacao.getIdAvaliacao());
+                    map.put("nomeUsuario", avaliacao.getUsuario().getNomeUsuario());
+                    map.put("apelidoUsuario", avaliacao.getUsuario().getApelidoUsuario());
+                    map.put("nomeJogo", avaliacao.getJogo().getNomeJogo());
+                    map.put("comentarioUsuario", avaliacao.getComentarioUsuario());
+                    map.put("notaUsuario", avaliacao.getNotaUsuario());
+                    map.put("dataEnvioComentario", avaliacao.getDataComentario());
+                    return map;
+                })
+                .limit(3) // garante que pegue só 3 depois do filtro
+                .toList();
     }
 
     public Avaliacao getAvaliacaoUsuarioJogo(Long idUsuario, Long idJogo) {
