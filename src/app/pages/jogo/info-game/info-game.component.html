@@ -34,7 +34,16 @@
             <span
               *ngFor="let plataforma of jogo.plataformas; let last = last"
               class="badge bg-info-subtle text-dark fs-6 me-1"
-              >{{ plataforma.nomePlataforma }}<span *ngIf="!last">,</span></span
+              >{{ plataforma.nomePlataforma }}<span *ngIf="!last"></span></span
+            >
+          </ng-container>
+        </div>
+        <div class="w-100 text-center mt-2">
+          <ng-container *ngIf="jogo.modos && jogo.modos.length > 0">
+            <span
+              *ngFor="let modo of jogo.modos; let last = last"
+              class="badge bg-info-subtle text-dark fs-6 me-1"
+              >{{ modo.nomeModo }}<span *ngIf="!last"></span></span
             >
           </ng-container>
         </div>

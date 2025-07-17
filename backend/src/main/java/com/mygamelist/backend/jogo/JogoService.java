@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -54,8 +55,8 @@ public class JogoService {
     private DistribuidoraRepository distribuidoraRepository;
 
     public List<Map<String, Object>> getJogos() {
-        List<Jogo> jogos = jogoRepository.findAll(PageRequest.of(0, 12, Sort.by("totalNotaJogo").descending()))
-                .getContent();
+        List<Jogo> jogos = jogoRepository.findAll();
+        
         return jogos.stream().map(jogo -> {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("nomeJogo", jogo.getNomeJogo());
@@ -93,18 +94,17 @@ public class JogoService {
     }
 
     // Coleta uma lista com todos os jogos rankeados com paginação
-    public List<Map<String, Object>> findRankJogos() {
-        List<Jogo> jogos = jogoRepository.findAll(PageRequest.of(0, 10, Sort.by("totalNotaJogo").descending()))
-                .getContent();
+    public Page<Map<String, Object>> findRankJogos(int page) {
+        Page<Jogo> jogosPage = jogoRepository.findAll(
+                PageRequest.of(page, 12, Sort.by("totalNotaJogo").descending()));
 
-        // Monta um map para cada jogo com nome, nota, generos e a sua imagem
-        return jogos.stream().map(jogo -> {
+        return jogosPage.map(jogo -> {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("nomeJogo", jogo.getNomeJogo());
             map.put("totalNotaJogo", jogo.getTotalNotaJogo());
             map.put("imagemJogo", jogo.getImagemJogo());
             return map;
-        }).toList();
+        });
     }
 
     public Jogo adicionarJogo(JogoRequestDTO dto, StringBuilder msgFaltantes) {

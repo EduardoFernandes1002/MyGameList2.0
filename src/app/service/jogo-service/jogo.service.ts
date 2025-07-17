@@ -36,8 +36,8 @@ export class JogoService {
   }
 
   // Busca jogos do ranking
-  getRankingJogos(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/rank`);
+  getRankingJogos(page: number = 0): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/rank?page=${page}`);
   }
 
   deletarJogo(id: number): Observable<any> {

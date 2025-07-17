@@ -8,7 +8,7 @@
           *ngFor="let jogo of jogos; let i = index; trackBy: trackBySlug"
         >
           <div class="rank-item">
-            <span class="rank-position">#{{ i + 1 }}</span>
+            <span class="rank-position">#{{ paginaAtual * 12 + i + 1 }}</span>
             <app-game-card
               [jogo]="jogo"
               [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
@@ -22,17 +22,40 @@
     <!-- Paginação -->
     <nav class="mt-4">
       <ul class="pagination justify-content-center">
-        <li class="page-jogo">
-          <button class="page-link">&laquo;</button>
+        <!-- Botão voltar -->
+        <li class="page-jogo" [class.disabled]="paginaAtual === 0">
+          <button
+            class="page-link"
+            (click)="carregarRank(paginaAtual - 1)"
+            [disabled]="paginaAtual === 0"
+          >
+            &laquo;
+          </button>
         </li>
 
-        <li class="page-jogo">
-          <button class="page-link"></button>
-          <span class="page-link">...</span>
+        <!-- Botões de páginas dinâmicos -->
+        <li
+          class="page-jogo"
+          *ngFor="let pagina of paginas"
+          [class.active]="pagina === paginaAtual"
+        >
+          <button class="page-link" (click)="carregarRank(pagina)">
+            {{ pagina + 1 }}
+          </button>
         </li>
 
-        <li class="page-jogo">
-          <button class="page-link"></button>
+        <!-- Botão próximo -->
+        <li
+          class="page-jogo"
+          [class.disabled]="paginaAtual >= totalPaginas - 1"
+        >
+          <button
+            class="page-link"
+            (click)="carregarRank(paginaAtual + 1)"
+            [disabled]="paginaAtual >= totalPaginas - 1"
+          >
+            &raquo;
+          </button>
         </li>
       </ul>
     </nav>
