@@ -1,17 +1,11 @@
-:host ::ng-deep .jogo-link {
+:host ::ng-deep .card-game {
+  margin-top: 20px;
   text-decoration: none;
-  color: white;
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-
-:host ::ng-deep  .card-game {
   background: #212529; /* bg-dark */
-  color: #fff;         /* text-light */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* shadow-sm */
-  width: 250px;
-  height: 100%;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  width: 250px;       /* largura fixa */
+  height: 320px;      /* altura fixa para alinhar todos */
   border-radius: 20px;
   overflow: hidden;
   display: flex;
@@ -25,9 +19,9 @@
   box-shadow: 0 4px 16px rgba(0,0,0,0.22);
 }
 
-:host ::ng-deep  .card-img {
-   width: 100%;
-  height: 180px; /* ou 200px, ajuste conforme preferir */
+:host ::ng-deep .card-img {
+  width: 100%;
+  height: 180px;
   object-fit: cover;
   border-radius: 20px 20px 0 0;
   display: block;
@@ -36,8 +30,8 @@
   box-shadow: none;
 }
 
-:host ::ng-deep  .card-body {
-  padding: 16px;
+:host ::ng-deep .card-body {
+  padding: 12px 0px;
   text-align: center;
   width: 100%;
   flex: 1 1 auto;
@@ -47,30 +41,74 @@
 }
 
 :host ::ng-deep .card-title {
-  font-size: clamp(0.6rem, 1.5rem, 1.15rem); /* diminui se necessário */
+  font-size: clamp(0.9rem, 1.4vw, 1.2rem);
   font-weight: 600;
   margin-bottom: 8px;
   color: #fff;
   max-width: 90%;
-  display: block;
   margin-left: auto;
   margin-right: auto;
   word-break: break-word;
   white-space: normal;
   text-align: center;
+
+  /* Limita o título a no máximo 2 linhas */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
 }
 
 :host ::ng-deep .card-text {
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin-bottom: 6px;
   color: #fff;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:host ::ng-deep .jogo-link {
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
 }
 
 .games {
   margin: 0 0 auto;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 16px;
   justify-content: center;
   align-items: flex-start;
+}
+
+.header-busca {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centraliza horizontalmente */
+  gap: 20px; /* espaço entre o título e o input */
+  margin-bottom: 24px;
+  flex-wrap: wrap; /* para quebrar linha se necessário em telas menores */
+}
+
+.header-busca h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #222;
+}
+
+.input-busca {
+  flex-shrink: 0;
+  width: 300px;
+  max-width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-busca:focus {
+  border-color: #212529;
 }

@@ -7,12 +7,19 @@
       <div class="category-card-row">
         <div
           class="category-card"
-          *ngFor="let genero of generos"
+          *ngFor="let genero of generos | slice : 0 : generosVisiveis"
           (click)="verJogosPorCategoria('generos', genero.nomeGenero)"
         >
           <span>{{ genero.nomeGenero }}</span>
         </div>
       </div>
+      <button
+        *ngIf="generos.length > generosVisiveis"
+        (click)="carregarMaisGeneros()"
+        class="btn-carregar-mais"
+      >
+        Carregar mais
+      </button>
     </div>
 
     <div class="category-section">
@@ -20,12 +27,19 @@
       <div class="category-card-row">
         <div
           class="category-card"
-          *ngFor="let modo of modos"
+          *ngFor="let modo of modos | slice : 0 : modosVisiveis"
           (click)="verJogosPorCategoria('modos', modo.nomeModo)"
         >
           <span>{{ modo.nomeModo }}</span>
         </div>
       </div>
+      <button
+        *ngIf="modos.length > modosVisiveis"
+        (click)="carregarMaisModos()"
+        class="btn-carregar-mais"
+      >
+        Carregar mais
+      </button>
     </div>
 
     <div class="category-section">
@@ -33,7 +47,9 @@
       <div class="category-card-row">
         <div
           class="category-card"
-          *ngFor="let plataforma of plataformas"
+          *ngFor="
+            let plataforma of plataformas | slice : 0 : plataformasVisiveis
+          "
           (click)="
             verJogosPorCategoria('plataformas', plataforma.nomePlataforma)
           "
@@ -41,6 +57,13 @@
           <span>{{ plataforma.nomePlataforma }}</span>
         </div>
       </div>
+      <button
+        *ngIf="plataformas.length > plataformasVisiveis"
+        (click)="carregarMaisPlataformas()"
+        class="btn-carregar-mais"
+      >
+        Carregar mais
+      </button>
     </div>
   </div>
 </div>

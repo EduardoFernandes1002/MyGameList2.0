@@ -14,6 +14,10 @@ export class CategoryComponent {
   modos: any[] = [];
   plataformas: any[] = [];
 
+   generosVisiveis = 14;
+  modosVisiveis = 14;
+  plataformasVisiveis = 14;
+
   constructor(private categoriaService: CategoriaService, private router: Router) {}
 
   ngOnInit() {
@@ -22,6 +26,15 @@ export class CategoryComponent {
     this.categoriaService.getPlataformas().subscribe(data => this.plataformas = data);
   }
 
+    carregarMaisGeneros() {
+    this.generosVisiveis += 14;
+  }
+  carregarMaisModos() {
+    this.modosVisiveis += 14;
+  }
+  carregarMaisPlataformas() {
+    this.plataformasVisiveis += 14;
+  }
 
 
   verJogosPorCategoria(tipo: string, nome: string) {

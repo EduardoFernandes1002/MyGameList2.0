@@ -148,7 +148,7 @@ export class AdminComponent implements OnInit {
         setTimeout(() => (this.mensagem = ''), 3000); // limpa mensagem após 3s
       },
       error: (err) => {
-        alert('Erro ao adicionar: ' + err.message);
+        console.error('Erro ao adicionar jogo:', err);
       },
     });
   }
@@ -193,7 +193,7 @@ export class AdminComponent implements OnInit {
           setTimeout(() => (this.mensagem = ''), 3000);
         },
         error: (err) => {
-          alert('Erro ao editar: ' + err.message);
+          console.log('Erro ao editar jogo:', err);
         },
       });
   }

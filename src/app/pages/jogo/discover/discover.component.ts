@@ -3,16 +3,20 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DescobertaService } from '../../../service/descoberta-service/descoberta.service';
 import { GameCardComponent } from '../../../component/game-card/game-card.component';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-discover',
   standalone: true,
-  imports: [CommonModule, GameCardComponent],
+  imports: [CommonModule, GameCardComponent, FormsModule],
   templateUrl: './discover.component.html',
   styleUrl: './discover.component.css',
 })
 export class DiscoverComponent implements OnInit {
   jogos: any[] = [];
+  jogosFiltrados: any[] = [];
+  filtroBusca: string = '';
   tipo: string = '';
   nomeCategoria: string = '';
   carregando = false;
@@ -50,6 +54,7 @@ export class DiscoverComponent implements OnInit {
       metodo(slugCategoria).subscribe({
         next: (data: any[]) => {
           this.jogos = data;
+          this.jogosFiltrados = data; // inicializa com todos
           this.carregando = false;
         },
         error: (err: any) => {
@@ -60,8 +65,20 @@ export class DiscoverComponent implements OnInit {
       });
     } else {
       this.jogos = [];
+      this.jogosFiltrados = [];
       this.carregando = false;
       this.erro = 'Categoria não encontrada.';
+    }
+  }
+
+  filtrarJogos() {
+    const busca = this.filtroBusca.trim().toLowerCase();
+    if (!busca) {
+      this.jogosFiltrados = [...this.jogos];
+    } else {
+      this.jogosFiltrados = this.jogos.filter(j =>
+        j.nomeJogo.toLowerCase().includes(busca)
+      );
     }
   }
 
@@ -72,4 +89,6 @@ export class DiscoverComponent implements OnInit {
   public trackBySlug = (index: number, jogo: any): string => {
     return this.toSlug(jogo?.nomeJogo);
   };
+
+  
 }
