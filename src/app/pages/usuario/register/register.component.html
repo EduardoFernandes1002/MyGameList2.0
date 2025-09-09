@@ -1,0 +1,157 @@
+<div class="d-flex flex-column" style="min-height: 100vh">
+  <div
+    class="container flex-grow-1 d-flex justify-content-center align-items-center"
+  >
+    <div class="card p-4" style="width: 100%; max-width: 400px">
+      <h2 class="text-center mb-4">REGISTRAR</h2>
+      <form (ngSubmit)="OnSubmit()" #form="ngForm" novalidate>
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label">Email*</label>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Digite seu email"
+            required
+            [(ngModel)]="emailUsuario"
+            name="emailUsuario"
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+            #emailRef="ngModel"
+          />
+          <div class="text-danger" *ngIf="emailRef.invalid && emailRef.touched">
+            <small *ngIf="emailRef.errors?.['required']"
+              >Email é obrigatório.</small
+            >
+            <small *ngIf="emailRef.errors?.['pattern']"
+              >Formato de email inválido.</small
+            >
+          </div>
+        </div>
+
+        <!-- Usuário -->
+        <div class="mb-3">
+          <label class="form-label">Usuário*</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Digite seu nome de usuário"
+            required
+            minlength="4"
+            maxlength="15"
+            [(ngModel)]="nomeUsuario"
+            name="nomeUsuario"
+            #usuarioRef="ngModel"
+          />
+          <div
+            class="text-danger"
+            *ngIf="usuarioRef.invalid && usuarioRef.touched"
+          >
+            <small *ngIf="usuarioRef.errors?.['required']"
+              >Usuário é obrigatório.</small
+            >
+            <small *ngIf="usuarioRef.errors?.['minlength']"
+              >Mínimo 4 caracteres.</small
+            >
+            <small *ngIf="usuarioRef.errors?.['maxlength']"
+              >Máximo 15 caracteres.</small
+            >
+          </div>
+        </div>
+
+        <!-- Apelido -->
+        <div class="mb-3">
+          <label class="form-label">Apelido*</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Como quer ser chamado?"
+            required
+            minlength="4"
+            maxlength="15"
+            [(ngModel)]="apelidoUsuario"
+            name="apelidoUsuario"
+            #apelidoRef="ngModel"
+          />
+          <div class="form-text font-italic">Mín. 4 e máx. 15 caracteres</div>
+          <div
+            class="text-danger"
+            *ngIf="apelidoRef.invalid && apelidoRef.touched"
+          >
+            <small *ngIf="apelidoRef.errors?.['required']"
+              >Apelido é obrigatório.</small
+            >
+            <small *ngIf="apelidoRef.errors?.['minlength']"
+              >Mínimo 4 caracteres.</small
+            >
+            <small *ngIf="apelidoRef.errors?.['maxlength']"
+              >Máximo 15 caracteres.</small
+            >
+          </div>
+        </div>
+
+        <!-- Senha -->
+        <div class="mb-3">
+          <label class="form-label">Senha*</label>
+          <input
+            type="password"
+            class="form-control"
+            maxlength="10"
+            placeholder="Crie uma senha forte"
+            required
+            [(ngModel)]="senhaUsuario"
+            name="senhaUsuario"
+            #senhaRef="ngModel"
+          />
+          <div class="text-danger" *ngIf="senhaRef.invalid && senhaRef.touched">
+            <small *ngIf="senhaRef.errors?.['required']"
+              >Senha obrigatória.</small
+            >
+          </div>
+        </div>
+
+        <!-- Confirmar senha -->
+        <div class="mb-3">
+          <label class="form-label">Confirmar Senha*</label>
+          <input
+            type="password"
+            class="form-control"
+            maxlength="10"
+            placeholder="Confirme a senha"
+            required
+            [(ngModel)]="confirmarSenha"
+            name="confirmarSenha"
+            #confirmarSenhaRef="ngModel"
+          />
+          <div
+            class="text-danger"
+            *ngIf="confirmarSenhaRef.invalid && confirmarSenhaRef.touched"
+          >
+            <small *ngIf="confirmarSenhaRef.errors?.['required']"
+              >Confirmação obrigatória.</small
+            >
+          </div>
+
+          <div
+            class="text-danger"
+            *ngIf="
+              senhaUsuario && confirmarSenha && senhaUsuario !== confirmarSenha
+            "
+          >
+            <small>As senhas não coincidem.</small>
+          </div>
+        </div>
+
+        <!-- Botão -->
+        <div class="d-grid gap-2 mt-2">
+          <button
+            type="submit"
+            class="btn btn-primary py-2"
+            [disabled]="form.invalid"
+          >
+            Registrar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

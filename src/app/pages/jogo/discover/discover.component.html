@@ -1,0 +1,27 @@
+<div class="discover">
+  <div class="header-busca">
+    <h1>Descubra Jogo:</h1>
+    <input
+      type="text"
+      placeholder="Buscar jogos..."
+      [(ngModel)]="filtroBusca"
+      (input)="filtrarJogos()"
+      class="input-busca"
+    />
+  </div>
+
+  <div *ngIf="carregando">Carregando...</div>
+  <div *ngIf="erro">{{ erro }}</div>
+
+  <div class="games" *ngIf="!carregando && !erro && jogosFiltrados.length > 0">
+    <app-game-card
+      *ngFor="let jogo of jogosFiltrados; trackBy: trackBySlug"
+      [jogo]="jogo"
+      [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
+    ></app-game-card>
+  </div>
+
+  <div *ngIf="!carregando && jogosFiltrados.length === 0 && !erro">
+    Nenhum jogo encontrado para esta categoria.
+  </div>
+</div>

@@ -1,24 +1,34 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { PerfilComponent } from './pages/perfil/perfil.component';
-import { InfoGameComponent } from './pages/info-game/info-game.component';
-import { RankComponent } from './pages/rank/rank.component';
-import { AdminComponent } from './pages/admin/admin.component';
-import { RecomendedComponent } from './pages/recomended/recomended.component';
-import { CategoryComponent } from './pages/category/category.component';
-import { HelpComponent } from './pages/help/help.component';
-import { DiscoverComponent } from './pages/discover/discover.component';
-import { ConfigProfileComponent } from './pages/config-profile/config-profile.component';
+import { HomeComponent } from './pages/geral/home/home.component';
+import { PerfilComponent } from './pages/usuario/perfil/perfil.component';
+import { InfoGameComponent } from './pages/jogo/info-game/info-game.component';
+import { RankComponent } from './pages/jogo/rank/rank.component';
+import { RecomendadoComponent } from './pages/jogo/recomended/recomendado.component';
+import { CategoryComponent } from './pages/geral/categoria/category.component';
+import { AjudaComponent } from './pages/geral/ajuda/ajuda.component';
+import { DiscoverComponent } from './pages/jogo/discover/discover.component';
+import { ConfigComponent } from './pages/usuario/config/config.component';
+import { LoginComponent } from './pages/usuario/login/login.component';
+import { RegisterComponent } from './pages/usuario/register/register.component';
+import { authGuard, notAuthGuard } from './guard/auth/auth.guard';
+import { adminGuard } from './guard/admin/admin.guard';
+import { TestComponentsComponent } from './test/test-components/test-components.component';
+import { AdminComponent } from './pages/usuario/admin/admin.component';
+
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, title:'Home' },
-  { path: 'info', component: InfoGameComponent, title:'Informações' },
-  { path: 'rank', component: RankComponent, title:'Ranking' },
-  { path: 'perfil', component: PerfilComponent, title:'Perfil' },
-  { path: 'admin', component: AdminComponent, title:'Administração' },
-  { path: 'ajuda', component: HelpComponent, title:'Ajuda/FAQ' },
-  { path: 'categoria', component: CategoryComponent, title:'Categoria' },
-  { path: 'recomendado', component: RecomendedComponent, title:'Recomendação' },
-  { path: 'descoberta', component: DiscoverComponent, title:'Descoberta'},
-  { path: 'configuracao-perfil', component: ConfigProfileComponent, title:'ConfiguraçãoPerfil'}
+  { path: '', component: HomeComponent, title: 'Home' },
+  { path: 'perfil/:nomeUsuario', component: PerfilComponent, title: 'Perfil', canActivate: [authGuard] },
+  { path: 'info/:nomeJogo', component: InfoGameComponent, title: 'Informações' },
+  { path: 'rank', component: RankComponent, title: 'Ranking' },
+  { path: 'recomendado', component: RecomendadoComponent, title: 'Recomendação', canActivate: [adminGuard] },
+  { path: 'categoria', component: CategoryComponent, title: 'Categoria' },
+  { path: 'ajuda', component: AjudaComponent, title: 'Ajuda/FAQ' },
+  { path: 'descoberta/:nomeJogo', component: DiscoverComponent, title: 'Descoberta' },
+  { path: 'descoberta/:tipo/:nomeCategoria', component: DiscoverComponent, title: 'Descoberta' },
+  { path: 'config/:nomeUsuario', component: ConfigComponent, title: 'Configurações', canActivate: [adminGuard] },
+  { path: 'login', component: LoginComponent, title: 'Login', canActivate: [notAuthGuard] },
+  { path: 'registro', component: RegisterComponent, title: 'Registro', canActivate: [notAuthGuard] },
+  { path: 't3st3s', component: TestComponentsComponent, title: 'Testes', canActivate: [adminGuard]},
+  { path: 'admin', component: AdminComponent, title: 'Administração', canActivate: [adminGuard] },
 ];

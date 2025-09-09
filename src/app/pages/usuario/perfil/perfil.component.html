@@ -1,0 +1,104 @@
+<div class="container-fluid mt-4">
+  <div class="row g-0">
+    <!-- Sidebar -->
+    <div class="col-lg-3 p-4">
+      <div class="d-flex flex-column align-items-center text-center">
+        <img
+          src="https://img.favpng.com/1/15/9/scalable-vector-graphics-computer-icons-user-profile-portable-network-graphics-png-favpng-n05BjRqcBz9Ub9NtAbz8GXEaN.jpg"
+          alt="Foto do usuário"
+          class="profile-picture rounded-circle mb-3 shadow"
+        />
+        <h2 class="mb-1">{{ usuario.apelidoUsuario }}</h2>
+        <span *ngIf="isPerfilProprio" class="text-muted"
+          >&commat;{{ usuario.nomeUsuario }}</span
+        >
+      </div>
+
+      <div class="mb-4">
+        <div class="d-flex justify-content-between py-2 border-bottom"></div>
+      </div>
+    </div>
+
+    <div class="col-lg-9 p-4">
+      <!-- Biblioteca de Jogos -->
+      <div class="listas-btns">
+        <button
+          *ngFor="let lista of listas"
+          [class.selected]="lista.id === listaSelecionada"
+          (click)="selecionarLista(lista.id)"
+        >
+          {{ lista.nome }}
+        </button>
+      </div>
+      <div class="perfil-row" *ngIf="jogos.length > 0; else semJogosLista">
+        <div
+          class="perfil-card-container"
+          *ngFor="let jogo of jogos; trackBy: trackBySlug"
+        >
+          <app-game-card
+            [jogo]="jogo"
+            [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
+            tipo="default"
+          ></app-game-card>
+
+          <button
+            *ngIf="isPerfilProprio"
+            (click)="removerJogo(jogo.idJogo)"
+            class="btn-remover-x"
+          >
+            &times;
+          </button>
+        </div>
+      </div>
+      <ng-template #semJogosLista>
+        <p class="text-center text-muted">
+          Sem jogos adicionados à lista {{ listaNome.nomeLista }}
+        </p>
+      </ng-template>
+
+      <hr class="hr" />
+
+      <!-- Próximos Lançamentos -->
+      <!-- Favoritos -->
+      <h3 class="section-title mb-4">Favoritos</h3>
+      <div
+        class="perfil-row"
+        *ngIf="favoritosVisiveis.length > 0; else semFavoritos"
+      >
+        <div
+          class="perfil-card-container"
+          *ngFor="let jogo of favoritosVisiveis; trackBy: trackBySlug"
+        >
+          <app-game-card
+            [jogo]="jogo"
+            [routerLink]="['/info', toSlug(jogo.nomeJogo)]"
+            tipo="default"
+          ></app-game-card>
+
+          <button
+            *ngIf="isPerfilProprio"
+            (click)="removerJogo(jogo.idJogo, 7)"
+            class="btn-remover-x"
+          >
+            &times;
+          </button>
+        </div>
+
+        <div class="text-center w-100" *ngIf="jogosFavoritos.length > 6">
+          <button
+            class="mostrar-mais-btn"
+            (click)="mostrarMaisFavoritos = !mostrarMaisFavoritos"
+          >
+            {{ mostrarMaisFavoritos ? "Mostrar menos" : "Mostrar mais" }}
+          </button>
+        </div>
+      </div>
+
+      <ng-template #semFavoritos>
+        <p class="text-center text-muted">
+          Sem jogos adicionados à lista Favoritos
+        </p>
+      </ng-template>
+    </div>
+  </div>
+</div>

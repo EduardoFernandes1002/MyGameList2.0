@@ -1,0 +1,215 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-5">{{ jogo.nomeJogo }}</h1>
+
+  <div class="row g-4 align-items-start justify-content-center">
+    <div class="col-lg-4 col-md-5 d-flex flex-column align-items-center">
+      <div
+        class="img-container-info-game bg-white rounded-4 shadow p-3 w-100 d-flex flex-column align-items-center"
+      >
+        <img
+          [src]="jogo.imagemJogo"
+          class="img-fluid rounded-4 shadow mb-3"
+          alt="{{ jogo.nomeJogo }}"
+          style="
+            max-height: 320px;
+            object-fit: cover;
+            background: #f3f6fa;
+            border: 1.5px solid #e3e6ed;
+          "
+        />
+        <span class="nota-overlay" *ngIf="jogo.totalNotaJogo">
+          {{ jogo.totalNotaJogo }}
+        </span>
+        <div class="w-100 text-center mt-2">
+          <ng-container *ngIf="jogo.generos && jogo.generos.length > 0">
+            <span
+              *ngFor="let genero of jogo.generos; let last = last"
+              class="badge bg-primary-subtle text-dark fs-6 me-1"
+              >{{ genero.nomeGenero }}<span *ngIf="!last">,</span></span
+            >
+          </ng-container>
+        </div>
+        <div class="w-100 text-center mt-2">
+          <ng-container *ngIf="jogo.plataformas && jogo.plataformas.length > 0">
+            <span
+              *ngFor="let plataforma of jogo.plataformas; let last = last"
+              class="badge bg-info-subtle text-dark fs-6 me-1"
+              >{{ plataforma.nomePlataforma }}<span *ngIf="!last"></span></span
+            >
+          </ng-container>
+        </div>
+        <div class="w-100 text-center mt-2">
+          <ng-container *ngIf="jogo.modos && jogo.modos.length > 0">
+            <span
+              *ngFor="let modo of jogo.modos; let last = last"
+              class="badge bg-info-subtle text-dark fs-6 me-1"
+              >{{ modo.nomeModo }}<span *ngIf="!last"></span></span
+            >
+          </ng-container>
+        </div>
+      </div>
+      <!-- Área exclusiva para sinopse -->
+      <div
+        class="card shadow-sm p-3 mt-4 mb-2 w-100 bg-light border-0 rounded-4"
+      >
+        <h5 class="mb-2 text-primary">Sinopse</h5>
+        <p class="mb-0 text-secondary" style="min-height: 60px">
+          {{ jogo.sinopseJogo }}
+        </p>
+      </div>
+    </div>
+    <div class="col-lg-8 col-md-7">
+      <div class="card shadow-sm p-4 mb-4 bg-light border-0 rounded-4">
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <p class="mb-2">
+              <strong>Desenvolvedora: </strong>
+              <span class="text-secondary">{{
+                jogo.desenvolvedora?.nomeDesenvolvedora
+              }}</span>
+            </p>
+            <p class="mb-2">
+              <strong>Distribuidora: </strong>
+              <span class="text-secondary">{{
+                jogo.distribuidora?.nomeDistribuidora
+              }}</span>
+            </p>
+
+            <div class="avaliacao-btns-container">
+              <button
+                class="BtnAvaliar"
+                *ngIf="podeAvaliar() && !exibindoNotas"
+                (click)="mostrarNotas()"
+              >
+                Avaliar
+              </button>
+
+              <!-- Botão Editar nota -->
+              <div
+                *ngIf="
+                  usuario.notaUsuario && !exibindoNotas && isUsuarioLogado()
+                "
+                class="nota-destaque-container"
+              >
+                <span class="nota-destaque">{{ usuario.notaUsuario }}</span>
+                <button
+                  class="BtnAvaliar btn-editar-nota"
+                  (click)="mostrarNotas()"
+                >
+                  Editar nota
+                </button>
+              </div>
+
+              <!-- Bloco de seleção de nota -->
+              <ng-container *ngIf="exibindoNotas">
+                <button
+                  *ngFor="let n of [].constructor(10); let i = index"
+                  class="BtnNotas"
+                  [class.selected]="usuario.notaUsuario === i + 1"
+                  (click)="selecionarNota(i + 1)"
+                >
+                  <span class="emoji-nota">
+                    {{
+                      i + 1 <= 3
+                        ? "😡"
+                        : i + 1 <= 6
+                        ? "😐"
+                        : i + 1 <= 9
+                        ? "😊"
+                        : "🌟"
+                    }}
+                  </span>
+                  <span class="numero-nota">{{ i + 1 }}</span>
+                </button>
+              </ng-container>
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-6 d-flex align-items-start justify-content-md-end"
+          >
+            <p class="mb-2">
+              <strong>Data de Lançamento: </strong>
+              <span class="text-secondary">{{
+                jogo.dataLancamentoJogo | date
+              }}</span>
+            </p>
+          </div>
+          <div class="add-lista-bar" *ngIf="isUsuarioLogado()">
+            <button class="btn-favorito" (click)="adicionarFavorito()">
+              ⭐ <i class="fa fa-star"></i>
+            </button>
+            <select [(ngModel)]="listaSelecionada" class="select-lista">
+              <option [ngValue]="null" disabled selected>
+                📋 Adicionar à lista...
+              </option>
+              <option
+                *ngFor="let lista of listasDisponiveis"
+                [ngValue]="lista.idLista"
+              >
+                📁 {{ lista.nome }}
+              </option>
+            </select>
+            <button
+              class="btn-add-lista"
+              *ngIf="listaSelecionada"
+              (click)="adicionarJogo(listaSelecionada)"
+            >
+              ✅ <i class="fa fa-check"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Espaço reservado para imagens do jogo -->
+      <div class="card shadow-sm p-3 mb-4 bg-white border-0 rounded-4">
+        <h6 class="mb-3 text-primary">Imagens do Jogo</h6>
+        <div class="d-flex flex-wrap gap-3 justify-content-start">
+          <img
+            *ngFor="let img of jogo.imagens"
+            [src]="img"
+            alt="Imagem-de-jogo"
+            class="rounded-3 border"
+            style="
+              max-width: 160px;
+              max-height: 110px;
+              object-fit: cover;
+              background: #f3f6fa;
+              border: 1.5px solid #e3e6ed;
+            "
+          />
+          <span
+            *ngIf="!jogo.imagens || jogo.imagens.length === 0"
+            class="text-muted"
+            >Nenhuma imagem disponível --> ainda em desenvolvimento!</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <h3 class="text-center text-secondary">Comentários</h3>
+      <!-- Campo de comentário (aparece após escolher nota OU se já avaliou) -->
+      <div *ngIf="usuario.notaUsuario" class="comentario-avaliacao-box">
+        <span *ngIf="usuario.notaUsuario" class="comentario-nota-info">
+          Sua nota: {{ usuario.notaUsuario }}
+        </span>
+        <textarea
+          [(ngModel)]="comentarioUsuario"
+          placeholder="Escreva seu comentário..."
+          rows="3"
+          class="comentario-textarea"
+        ></textarea>
+        <button
+          (click)="enviarComentario()"
+          [disabled]="!isUsuarioLogado() || !usuario.notaUsuario"
+        >
+          Enviar avaliação
+        </button>
+      </div>
+
+      <app-comentario [nomeJogo]="jogo.nomeJogo"></app-comentario>
+    </div>
+  </div>
+</div>

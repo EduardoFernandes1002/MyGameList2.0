@@ -1,0 +1,26 @@
+/* Estilo para área de informações do usuário do comentário */
+.comment-user-info {
+  background: #e2e4e7;
+  color: #222;
+  font-size: 0.97rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Estilo para área do texto do comentário */
+.comment-text {
+  background: #ebeef0;
+  color: #222;
+  font-size: 1.05rem;
+  min-height: 2.5rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
+.list-group-item {
+  border-radius: 0.75rem !important;
+  border: 2px solid #e3e6ed !important;
+}
+
+/* Ajuste para sombra mais suave */
+.shadow-sm {
+  box-shadow: 0 2px 8px 0 rgba(60, 60, 60, 0.07) !important;
+}
