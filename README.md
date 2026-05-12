@@ -354,17 +354,6 @@ Este projeto está sob a licença **MIT**. Veja o arquivo LICENSE para mais deta
 
 ---
 
-## ✨ Próximos Passos Recomendados
-
-- [ ] Configurar variáveis de ambiente em produção
-- [ ] Implementar refresh token para maior segurança
-- [ ] Adicionar HTTPS em produção
-- [ ] Fazer backup regular do banco de dados
-- [ ] Implementar rate limiting na API
-- [ ] Adicionar testes e2e automatizados
-- [ ] Implementar logging estruturado
-- [ ] Configurar CI/CD (GitHub Actions, Jenkins, etc)
-
 ---
 
 **Última atualização**: 12 de maio de 2026  
