@@ -20,13 +20,108 @@ Antes de começar, certifique-se de que você possui os seguintes softwares inst
 - **Maven** (geralmente incluído no JDK)
   - [Baixar Maven](https://maven.apache.org/download.cgi)
   - Verificar instalação: `mvn --version`
-- **MySQL Server 8.0+**
-  - [Baixar MySQL](https://dev.mysql.com/downloads/mysql/)
-  - Recomendado: Use [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) como GUI
+- **Banco de Dados** (Escolha uma opção):
+  - **MySQL Server 8.0+** - [Baixar MySQL](https://dev.mysql.com/downloads/mysql/)
+  - **SQL Server 2019+** - [Baixar SQL Server](https://www.microsoft.com/sql-server/sql-server-downloads)
 
 ### Desenvolvedor (Opcional)
 - **IDE para Frontend**: [Visual Studio Code](https://code.visualstudio.com/) ou similares
 - **IDE para Backend**: [IntelliJ IDEA](https://www.jetbrains.com/idea/) (Community é gratuita)
+
+---
+
+## 🛠️ Extensões VSCode Recomendadas
+
+Para melhor produtividade no desenvolvimento, instale as seguintes extensões no Visual Studio Code:
+
+### Frontend (Angular)
+1. **Angular Language Service** (Angular)
+   - ID: Angular.ng-template
+   - Suporte a templates Angular com autocompletar
+
+2. **Angular Schematics** (Angular)
+   - ID: cyrilletuzi.angular-schematics
+   - Gera componentes, services, guards via interface visual
+
+3. **TypeScript Vue Plugin (Volar)** (Vue author)
+   - ID: Vue.vscode-typescript-vue-plugin
+   - Melhor suporte a TypeScript
+
+4. **ESLint** (Microsoft)
+   - ID: dbaeumer.vscode-eslint
+   - Identifica erros e padrões de código
+
+5. **Prettier - Code formatter** (Prettier)
+   - ID: esbenp.prettier-vscode
+   - Formatação automática de código
+
+6. **Bootstrap 5 Quick Snippets** (Abhishek Kumar)
+   - ID: anmolmaheshwari.abhishek-vscode-bootstrap5-snippets
+   - Snippets do Bootstrap 5
+
+### Backend (Java/Spring Boot)
+1. **Extension Pack for Java** (Microsoft)
+   - ID: vscjava.vscode-java-pack
+   - Inclui: Language Support for Java, Debugger for Java, Test Runner for Java, Maven for Java, Project Manager for Java, Visual Studio IntelliCode
+
+2. **Spring Boot Extension Pack** (Microsoft)
+   - ID: vmware.vscode-boot-dev-pack
+   - Suporte a Spring Boot, Spring Cloud, Cloud Foundry, Kubernetes
+
+3. **Spring Boot Dashboard** (vscode-spring-boot)
+   - ID: vscjava.vscode-spring-boot-dashboard
+   - Painel para gerenciar aplicações Spring Boot
+
+4. **Lombok Annotations Support for VS Code** (GabrielBB)
+   - ID: GabrielBB.little-fought-macro-intellisense
+   - Se usar Lombok no projeto
+
+### Banco de Dados
+1. **SQL Server (mssql)** (Microsoft) - *Para SQL Server*
+   - ID: ms-mssql.mssql
+   - Gerenciador de SQL Server com IntelliSense
+
+2. **MySQL** (cweijan)
+   - ID: cweijan.vscode-mysql-client2
+   - Gerenciador de MySQL com execução de queries
+
+3. **Database Client** (cweijan)
+   - ID: cweijan.vscode-database-client
+   - Cliente universal para múltiplos bancos (MySQL, SQL Server, PostgreSQL)
+
+### Utilitários
+1. **REST Client** (Huachao Mao)
+   - ID: humao.rest-client
+   - Teste endpoints da API diretamente no VSCode
+
+2. **Thunder Client** (Ranga Vadhineni)
+   - ID: rangav.vscode-thunder-client
+   - Alternativa ao Postman/Insomnia integrada no VSCode
+
+3. **Git Graph** (mhutchie)
+   - ID: mhutchie.git-graph
+   - Visualização gráfica do Git
+
+4. **GitLens** (Eric Amodio)
+   - ID: eamodio.gitlens
+   - Informações de blame, histórico de commits
+
+5. **Markdown Preview Enhanced** (Yiyi Wang)
+   - ID: shd101wyy.markdown-preview-enhanced
+   - Preview melhorado de Markdown
+
+### Instalação Rápida de Extensões
+Cole este comando no VSCode (Ctrl+P) para cada ID:
+```
+ext install Angular.ng-template
+ext install dbaeumer.vscode-eslint
+ext install esbenp.prettier-vscode
+ext install vscjava.vscode-java-pack
+ext install ms-mssql.mssql
+ext install cweijan.vscode-mysql-client2
+ext install humao.rest-client
+ext install mhutchie.git-graph
+```
 
 ---
 
@@ -39,31 +134,124 @@ git clone https://github.com/EduardoFernandes1002/MyGameList2.0.git
 cd MyGameList2.0
 ```
 
-### 2️⃣ Configurar o Banco de Dados MySQL
+### 2️⃣ Configurar o Banco de Dados
 
-#### Via MySQL Workbench ou MySQL CLI:
+Escolha uma das opções abaixo:
+
+#### ✅ Opção A: MySQL 8.0+ (Recomendado para Iniciantes)
+
+**Instalação:**
+1. [Baixar MySQL Community Server](https://dev.mysql.com/downloads/mysql/)
+2. Instalar com senha para root
+3. [Baixar MySQL Workbench](https://dev.mysql.com/downloads/workbench/) (GUI recomendada)
+
+**Criar banco de dados via MySQL Workbench ou CLI:**
 
 ```sql
 -- Criar o banco de dados
-CREATE DATABASE gamelist;
+CREATE DATABASE gamelist CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Acessar o banco
 USE gamelist;
 
--- Agora você pode executar os scripts SQL do projeto (se houver em backend/src/main/resources/sql/)
--- ou deixar o Hibernate criar as tabelas
+-- Verificar criação
+SHOW DATABASES;
 ```
 
 **Configuração no arquivo `backend/src/main/resources/application.properties`:**
 
 ```properties
-# Editar credenciais conforme seu MySQL local
-spring.datasource.url=jdbc:mysql://localhost:3306/gamelist
+# MySQL Configuration
+spring.datasource.url=jdbc:mysql://localhost:3306/gamelist?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
 spring.datasource.username=root
-spring.datasource.password=sua_senha_aqui
+spring.datasource.password=sua_senha_mysql
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# JPA/Hibernate
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.hibernate.ddl-auto=update
 ```
 
-> **Nota**: Se você não configurou senha para o usuário root do MySQL, deixe em branco.
+---
+
+#### ✅ Opção B: SQL Server 2019+ (Recomendado para Produção)
+
+**Instalação:**
+
+1. **Baixar SQL Server:**
+   - [SQL Server 2022 Express](https://www.microsoft.com/sql-server/sql-server-downloads) (Grátis, até 10GB)
+   - [SQL Server 2019 Developer](https://www.microsoft.com/sql-server/sql-server-downloads) (Grátis para desenvolvimento)
+
+2. **Instalar SQL Server Management Studio (SSMS):**
+   - [Baixar SSMS](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
+
+3. **Verificar instalação:**
+   ```bash
+   sqlcmd -S localhost\SQLEXPRESS -U sa -P sua_senha
+   ```
+
+**Criar banco de dados via SSMS ou T-SQL:**
+
+```sql
+-- Conectar ao servidor
+USE master;
+
+-- Criar banco de dados
+CREATE DATABASE gamelist;
+
+-- Usar o banco
+USE gamelist;
+
+-- Verificar criação
+SELECT name FROM sys.databases WHERE name = 'gamelist';
+```
+
+**Configuração no arquivo `backend/src/main/resources/application.properties`:**
+
+```properties
+# SQL Server Configuration
+spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=gamelist;encrypt=true;trustServerCertificate=true
+spring.datasource.username=sa
+spring.datasource.password=sua_senha_sqlserver
+spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+# JPA/Hibernate
+spring.jpa.database-platform=org.hibernate.dialect.SQLServer2012Dialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect
+```
+
+**Adicionar dependência no `pom.xml`:**
+
+```xml
+<!-- Remova o driver MySQL se estiver usando SQL Server -->
+<!-- Adicione: -->
+<dependency>
+    <groupId>com.microsoft.sqlserver</groupId>
+    <artifactId>mssql-jdbc</artifactId>
+    <version>12.4.1.jre11</version>
+</dependency>
+```
+
+**Troubleshooting SQL Server:**
+
+| Erro | Solução |
+|------|---------|
+| `Cannot open server 'localhost'` | Verificar se SQL Server Browser está iniciado (services.msc) |
+| `Login failed for user 'sa'` | Confirmara senha ou resetar: `ALTER LOGIN sa ENABLE;` |
+| `Connection refused on port 1433` | SQL Server pode estar desativado; iniciar via SSMS |
+| `Named Pipes Provider: No such host` | Usar `localhost\SQLEXPRESS` ou `127.0.0.1` |
+
+**Comparativo MySQL vs SQL Server:**
+
+| Aspecto | MySQL | SQL Server |
+|--------|-------|-----------|
+| **Curva Aprendizado** | Fácil | Médio |
+| **GUI Manager** | MySQL Workbench | SSMS (mais completo) |
+| **Performance** | Muito bom | Excelente |
+| **Relatórios** | Limitados | Reporting Services |
+| **Custo** | Gratuito | Gratuito (Express/Developer) |
+| **Produção** | ✅ Excelente | ✅✅ Muito melhor |
 
 ---
 
@@ -83,8 +271,8 @@ mvn spring-boot:run
 **Resultado esperado:**
 ```
 ...
-2025-05-12 10:30:00.000  INFO 1234 --- [           main] c.m.backend.BackendApplication        : Started BackendApplication in 5.234 seconds
-2025-05-12 10:30:00.000  INFO 1234 --- [           main] o.s.b.w.e.tomcat.TomcatWebServer     : Tomcat started on port(s): 8080
+2025-05-18 10:30:00.000  INFO 1234 --- [           main] c.m.backend.BackendApplication        : Started BackendApplication in 5.234 seconds
+2025-05-18 10:30:00.000  INFO 1234 --- [           main] o.s.b.w.e.tomcat.TomcatWebServer     : Tomcat started on port(s): 8080
 ```
 
 O backend estará disponível em: **http://localhost:8080**
@@ -260,15 +448,26 @@ rm -rf node_modules package-lock.json
 npm install
 ```
 
-### Erro: "MySQL connection refused"
+### Erro: "Connection refused" (MySQL/SQL Server)
+
+**MySQL:**
 ```bash
-# Verificar se MySQL está rodando
 # Windows: services.msc -> MySQL80 (ou similar)
 # Linux: sudo systemctl start mysql
 # macOS: brew services start mysql-server
 
 # Testar conexão
 mysql -u root -p
+```
+
+**SQL Server:**
+```bash
+# Windows: services.msc -> SQL Server (SQLEXPRESS) e SQL Server Browser
+# Linux: sudo systemctl start mssql-server
+# macOS: docker start sqlserver (se usar container)
+
+# Testar conexão
+sqlcmd -S localhost\SQLEXPRESS -U sa -P sua_senha
 ```
 
 ### Erro: "Cannot access 'localhost:8080'"
@@ -287,6 +486,14 @@ mvn clean install
 localStorage.clear()
 ```
 
+### Erro ao conectar com SQL Server: "Named Pipes Provider"
+```bash
+# Verificar se SQL Server Browser está rodando
+# Windows: services.msc -> SQL Server Browser (SQLEXPRESS) -> Iniciar
+# Tentar com IP: jdbc:sqlserver://127.0.0.1:1433
+# Verificar porta (padrão: 1433): netstat -an | find "1433"
+```
+
 ---
 
 ## 📦 Dependências Principais
@@ -302,20 +509,34 @@ localStorage.clear()
 ### Backend (Spring Boot 3.5.3)
 - **spring-boot-starter-web** - API REST
 - **spring-boot-starter-data-jpa** - ORM
-- **mysql-connector-java** - Driver MySQL
+- **mysql-connector-java** ou **mssql-jdbc** - Driver banco de dados
 - **jjwt** - Geração e validação de JWT
 
 ---
 
 ## 📝 Configurações Importantes
 
-### `application.properties` (Backend)
+### `application.properties` (Backend - MySQL)
 ```properties
 spring.application.name=backend
-spring.datasource.url=jdbc:mysql://localhost:3306/gamelist
+spring.datasource.url=jdbc:mysql://localhost:3306/gamelist?useSSL=false&serverTimezone=UTC
 spring.datasource.username=root
-spring.datasource.password=
-spring.jpa.hibernate.ddl-auto=none        # update, create, none
+spring.datasource.password=sua_senha
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+server.error.include-stacktrace=never
+jwt.secret=MinhaChaveSecretaMuitoLonga1234567890
+jwt.expiration=604800000
+```
+
+### `application.properties` (Backend - SQL Server)
+```properties
+spring.application.name=backend
+spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=gamelist;encrypt=true;trustServerCertificate=true
+spring.datasource.username=sa
+spring.datasource.password=sua_senha
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.database-platform=org.hibernate.dialect.SQLServer2012Dialect
 server.error.include-stacktrace=never
 jwt.secret=MinhaChaveSecretaMuitoLonga1234567890
 jwt.expiration=604800000
@@ -330,7 +551,7 @@ jwt.expiration=604800000
 
 ## 🔄 Fluxo Típico de Desenvolvimento
 
-1. **Inicie o MySQL** - Certifique-se que está rodando
+1. **Inicie o Banco de Dados** - MySQL ou SQL Server deve estar rodando
 2. **Execute o Backend** - `cd backend && mvn spring-boot:run`
 3. **Execute o Frontend** - Em novo terminal: `npm start`
 4. **Abra o navegador** - http://localhost:4200
@@ -342,7 +563,7 @@ jwt.expiration=604800000
 
 Se encontrar problemas:
 1. Verifique os logs (browser DevTools F12 e console do Spring Boot)
-2. Confirme que todas as portas estão disponíveis (4200, 8080, 3306)
+2. Confirme que todas as portas estão disponíveis (4200, 8080, 3306/1433)
 3. Limpe cache/node_modules e reinstale
 4. Abra uma issue no repositório
 
@@ -356,6 +577,6 @@ Este projeto está sob a licença **MIT**. Veja o arquivo LICENSE para mais deta
 
 ---
 
-**Última atualização**: 12 de maio de 2026  
-**Versão**: 1.0  
+**Última atualização**: 18 de maio de 2026  
+**Versão**: 1.1  
 **Maintainer**: [EduardoFernandes1002](https://github.com/EduardoFernandes1002)
