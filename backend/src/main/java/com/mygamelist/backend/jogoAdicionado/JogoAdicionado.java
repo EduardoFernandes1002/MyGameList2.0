@@ -1,6 +1,7 @@
-package com.mygamelist.backend.lista;
+package com.mygamelist.backend.jogoAdicionado;
 
 import com.mygamelist.backend.jogo.Jogo;
+import com.mygamelist.backend.lista.Lista;
 import com.mygamelist.backend.usuario.Usuario;
 
 import jakarta.persistence.*;
@@ -9,7 +10,7 @@ import jakarta.persistence.*;
 @Table(name = "jogo_adicionado")
 @IdClass(JogoAdicionadoId.class)
 public class JogoAdicionado {
-    
+
     @Id
     @ManyToOne
     @JoinColumn(name = "id_lista")

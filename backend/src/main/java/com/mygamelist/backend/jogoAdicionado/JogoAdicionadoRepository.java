@@ -1,4 +1,4 @@
-package com.mygamelist.backend.lista;
+package com.mygamelist.backend.jogoAdicionado;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

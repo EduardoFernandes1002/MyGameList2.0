@@ -3,7 +3,7 @@ package com.mygamelist.backend.usuario;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.mygamelist.backend.lista.JogoAdicionado;
+import com.mygamelist.backend.jogoAdicionado.JogoAdicionado;
 import com.mygamelist.backend.permissao.Permissao;
 
 import jakarta.persistence.Column;
@@ -15,7 +15,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -49,66 +53,5 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario") // Lista de jogos associados ao usuário. Relacionamento um-para-muitos.
     private List<JogoAdicionado> jogosAdicionados;
-
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
-    }
-
-    public String getApelidoUsuario() {
-        return apelidoUsuario;
-    }
-
-    public void setApelidoUsuario(String apelidoUsuario) {
-        this.apelidoUsuario = apelidoUsuario;
-    }
-
-    public String getEmailUsuario() {
-        return emailUsuario;
-    }
-
-    public void setEmailUsuario(String emailUsuario) {
-        this.emailUsuario = emailUsuario;
-    }
-
-    public String getSenhaUsuario() {
-        return senhaUsuario;
-    }
-
-    public void setSenhaUsuario(String senhaUsuario) {
-        this.senhaUsuario = senhaUsuario;
-    }
-
-    public String getTelefoneUsuario() {
-        return telefoneUsuario;
-    }
-
-    public void setTelefoneUsuario(String telefoneUsuario) {
-        this.telefoneUsuario = telefoneUsuario;
-    }
-
-    public LocalDate getDataNascimentoUsuario() {
-        return dataNascimentoUsuario;
-    }
-
-    public void setDataNascimentoUsuario(LocalDate dataNascimentoUsuario) {
-        this.dataNascimentoUsuario = dataNascimentoUsuario;
-    }
-
-    public void setPermissao(Permissao permissao) {
-        this.permissao = permissao;
-    }
-
-    // Retorna o nome da permissão associada ao usuário. Retorna null se a permissão for nula.
-   public String getNomePermissao() { 
-    return permissao != null ? permissao.getNomePermissao() : null;
-} 
 
 }

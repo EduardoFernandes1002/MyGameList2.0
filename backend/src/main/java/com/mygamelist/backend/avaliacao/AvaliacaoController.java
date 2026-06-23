@@ -19,7 +19,7 @@ import java.util.Map;
  * Permite buscar avaliações por jogo (via slug) e outras operações futuras.
  */
 @RestController
-@RequestMapping("/api/avaliacao")
+@RequestMapping("/avaliacao")
 public class AvaliacaoController {
     /**
      * Serviço de avaliações.
@@ -35,7 +35,7 @@ public class AvaliacaoController {
 
     /**
      * Busca avaliações de um jogo a partir do slug (nome formatado).
-     * 
+     *
      * @param slug     slug do nome do jogo
      * @param pageable informações de paginação
      * @return lista de avaliações do jogo

@@ -7,12 +7,16 @@ import java.util.List;
 import com.mygamelist.backend.desenvolvedora.Desenvolvedora;
 import com.mygamelist.backend.distribuidora.Distribuidora;
 import com.mygamelist.backend.genero.Genero;
-import com.mygamelist.backend.lista.JogoAdicionado;
+import com.mygamelist.backend.jogoAdicionado.JogoAdicionado;
 import com.mygamelist.backend.modo.Modo;
 import com.mygamelist.backend.plataforma.Plataforma;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "jogo")
 public class Jogo {
@@ -57,95 +61,5 @@ public class Jogo {
     @ManyToMany
     @JoinTable(name = "plataforma_de_jogo", joinColumns = @JoinColumn(name = "id_jogo"), inverseJoinColumns = @JoinColumn(name = "id_plataforma"))
     private List<Plataforma> plataformas;
-
-    // Getters e Setters:
-
-    public Long getIdJogo() {
-        return idJogo;
-    }
-
-    public void setIdJogo(Long idJogo) {
-        this.idJogo = idJogo;
-    }
-
-    public String getNomeJogo() {
-        return nomeJogo;
-    }
-
-    public void setNomeJogo(String nomeJogo) {
-        this.nomeJogo = nomeJogo;
-    }
-
-    public String getSinopseJogo() {
-        return sinopseJogo;
-    }
-
-    public void setSinopseJogo(String sinopseJogo) {
-        this.sinopseJogo = sinopseJogo;
-    }
-
-    public String getImagemJogo() {
-        return imagemJogo;
-    }
-
-    public void setImagemJogo(String imagemJogo) {
-        this.imagemJogo = imagemJogo;
-    }
-
-    public LocalDate getDataLancamentoJogo() {
-        return dataLancamentoJogo;
-    }
-
-    public void setDataLancamentoJogo(LocalDate dataLancamentoJogo) {
-        this.dataLancamentoJogo = dataLancamentoJogo;
-    }
-
-    public Desenvolvedora getDesenvolvedora() {
-        return desenvolvedora;
-    }
-
-    public void setDesenvolvedora(Desenvolvedora desenvolvedora) {
-        this.desenvolvedora = desenvolvedora;
-    }
-
-    public Distribuidora getDistribuidora() {
-        return distribuidora;
-    }
-
-    public void setDistribuidora(Distribuidora distribuidora) {
-        this.distribuidora = distribuidora;
-    }
-
-    public List<Genero> getGeneros() {
-        return generos;
-    }
-
-    public void setGeneros(List<Genero> generos) {
-        this.generos = generos;
-    }
-
-    public List<Modo> getModos() {
-        return modos;
-    }
-
-    public void setModos(List<Modo> modos) {
-        this.modos = modos;
-    }
-
-    public List<Plataforma> getPlataformas() {
-        return plataformas;
-    }
-
-    public void setPlataformas(List<Plataforma> plataformas) {
-        this.plataformas = plataformas;
-    }
-
-    public BigDecimal getTotalNotaJogo() {
-        return totalNotaJogo;
-    }
-
-    public void setTotalNotaJogo(BigDecimal totalNotaJogo) {
-        this.totalNotaJogo = totalNotaJogo;
-    }
 
 }

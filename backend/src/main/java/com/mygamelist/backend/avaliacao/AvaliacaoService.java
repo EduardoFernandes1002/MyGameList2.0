@@ -49,7 +49,7 @@ public class AvaliacaoService {
 
     /**
      * Busca todas as avaliações de um jogo específico, com suporte a paginação.
-     * 
+     *
      * @param idJogo   id do jogo
      * @param pageable informações de paginação
      * @return lista de avaliações em formato de mapa (id, usuário, comentário,
@@ -74,7 +74,7 @@ public class AvaliacaoService {
 
     /**
      * Salva um comentário de avaliação sem nota.
-     * 
+     *
      * @param idJogo              id do jogo
      * @param idUsuario           id do usuário
      * @param comentarioUsuario   texto do comentário
@@ -94,7 +94,7 @@ public class AvaliacaoService {
             avaliacao.setUsuario(usuarioRepository.findById(idUsuario).orElseThrow());
         }
         avaliacao.setNotaUsuario(notaUsuario);
-        avaliacao.setDataEnvio(dataEnvioNota);
+        avaliacao.setDataEnvioNota(dataEnvioNota);
         avaliacao.setComentarioUsuario(comentarioUsuario); // pode ser nulo
         if (comentarioUsuario != null && !comentarioUsuario.isEmpty()) {
             avaliacao.setDataComentario(LocalDate.now());

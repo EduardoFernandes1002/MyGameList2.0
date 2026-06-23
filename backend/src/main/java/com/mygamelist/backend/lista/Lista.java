@@ -2,8 +2,13 @@ package com.mygamelist.backend.lista;
 
 import java.util.List;
 
+import com.mygamelist.backend.jogoAdicionado.JogoAdicionado;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "lista")
 public class Lista {
@@ -19,19 +24,4 @@ public class Lista {
     @OneToMany(mappedBy = "listas")
     private List<JogoAdicionado> jogosAdicionados;
 
-    public Long getIdLista() {
-        return idLista;
-    }
-
-    public void setIdLista(Long idLista) {
-        this.idLista = idLista;
-    }
-
-    public String getNomeLista() {
-        return nomeLista;
-    }
-
-    public void setNomeLista(String nomeLista) {
-        this.nomeLista = nomeLista;
-    }
 }

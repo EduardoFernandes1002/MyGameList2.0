@@ -5,7 +5,11 @@ import java.util.List;
 import com.mygamelist.backend.jogo.Jogo;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "modo")
 public class Modo {
@@ -22,21 +26,5 @@ public class Modo {
     // Muitos:
     @ManyToMany(mappedBy = "modos")
     private List<Jogo> jogos;
-
-    public Long getIdModo() {
-        return idModo;
-    }
-
-    public void setIdModo(Long idModo) {
-        this.idModo = idModo;
-    }
-
-    public String getNomeModo() {
-        return nomeModo;
-    }
-
-    public void setNomeModo(String nomeModo) {
-        this.nomeModo = nomeModo;
-    }
 
 }

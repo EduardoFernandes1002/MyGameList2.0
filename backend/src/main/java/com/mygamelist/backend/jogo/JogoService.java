@@ -21,7 +21,7 @@ import com.mygamelist.backend.distribuidora.Distribuidora;
 import com.mygamelist.backend.distribuidora.DistribuidoraRepository;
 import com.mygamelist.backend.genero.Genero;
 import com.mygamelist.backend.genero.GeneroRepository;
-import com.mygamelist.backend.lista.JogoAdicionadoRepository;
+import com.mygamelist.backend.jogoAdicionado.JogoAdicionadoRepository;
 import com.mygamelist.backend.modo.Modo;
 import com.mygamelist.backend.modo.ModoRepository;
 import com.mygamelist.backend.plataforma.Plataforma;
@@ -56,7 +56,7 @@ public class JogoService {
 
     public List<Map<String, Object>> getJogos() {
         List<Jogo> jogos = jogoRepository.findAll();
-        
+
         return jogos.stream().map(jogo -> {
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("nomeJogo", jogo.getNomeJogo());
