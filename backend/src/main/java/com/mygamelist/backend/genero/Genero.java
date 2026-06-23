@@ -5,7 +5,11 @@ import java.util.List;
 import com.mygamelist.backend.jogo.Jogo;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "genero")
 public class Genero {
@@ -23,21 +27,5 @@ public class Genero {
     // Muitos:
     @ManyToMany(mappedBy = "generos")
     private List<Jogo> jogos;
-
-    public Long getIdGenero() {
-        return idGenero;
-    }
-
-    public void setIdGenero(Long idGenero) {
-        this.idGenero = idGenero;
-    }
-
-    public String getNomeGenero() {
-        return nomeGenero;
-    }
-
-    public void setNomeGenero(String nomeGenero) {
-        this.nomeGenero = nomeGenero;
-    }
 
 }

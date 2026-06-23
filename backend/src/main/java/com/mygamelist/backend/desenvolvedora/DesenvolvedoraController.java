@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/desenvolvedoras")
+@RequestMapping("/desenvolvedoras")
 public class DesenvolvedoraController {
-    
+
     @Autowired
     private DesenvolvedoraService desenvolvedoraService;
-    
+
     @GetMapping
     public List<Desenvolvedora> getDesenvolvedoras() {
          return desenvolvedoraService.getDesenvolvedoras();

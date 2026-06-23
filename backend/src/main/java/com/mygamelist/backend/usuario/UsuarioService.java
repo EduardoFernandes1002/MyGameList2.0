@@ -44,7 +44,7 @@ public class UsuarioService {
 
         Usuario usuario = new Usuario();
         Permissao permissao = new Permissao();
-        
+
         permissao.setIdPermissao(1L);
         usuario.setPermissao(permissao);
         usuario.getIdUsuario();
@@ -65,7 +65,7 @@ public class UsuarioService {
             user = usuarioRepository.findByNomeUsuario(usuario.getNomeUsuario());
         }
         if (user != null && user.getSenhaUsuario().equals(usuario.getSenhaUsuario())) {
-            return jwtUtil.generateToken(user.getNomeUsuario(), user.getNomePermissao());
+            return jwtUtil.generateToken(user.getNomeUsuario(), user.getPermissao().getNomePermissao());
         }
         return null;
     }

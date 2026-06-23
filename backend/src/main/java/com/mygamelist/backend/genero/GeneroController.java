@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
-@RequestMapping("/api/generos")
+@RequestMapping("/generos")
 public class GeneroController {
 
     @Autowired
@@ -29,6 +29,6 @@ public class GeneroController {
         String nomeGenero = slugGemero.replace("-", " ");
         return generoService.findJogosByGenero(nomeGenero);
     }
-    
+
 
 }

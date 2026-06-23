@@ -1,14 +1,15 @@
-package com.mygamelist.backend.lista;
+package com.mygamelist.backend.jogoAdicionado;
+
+import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@RequiredArgsConstructor
 public class JogoAdicionadoId implements Serializable {
     private Long listas;
     private Long usuario;
     private Long jogos;
-
-    public JogoAdicionadoId() {}
 
     public JogoAdicionadoId(Long listas, Long usuario, Long jogos) {
         this.listas = listas;

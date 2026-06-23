@@ -5,7 +5,11 @@ import java.util.List;
 import com.mygamelist.backend.jogo.Jogo;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "plataforma")
 public class Plataforma {
@@ -22,21 +26,5 @@ public class Plataforma {
     // Muitos:
     @ManyToMany(mappedBy = "plataformas")
     private List<Jogo> jogos;
-
-    public Long getIdPlataforma() {
-        return idPlataforma;
-    }
-
-    public void setIdPlataforma(Long idPlataforma) {
-        this.idPlataforma = idPlataforma;
-    }
-
-    public String getNomePlataforma() {
-        return nomePlataforma;
-    }
-
-    public void setNomePlataforma(String nomePlataforma) {
-        this.nomePlataforma = nomePlataforma;
-    }
 
 }

@@ -1,7 +1,11 @@
 package com.mygamelist.backend.desenvolvedora;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "desenvolvedora")
 public class Desenvolvedora {
@@ -14,19 +18,4 @@ public class Desenvolvedora {
     @Column(name = "nm_desenvolvedora")
     private String nomeDesenvolvedora;
 
-    public Long getIdDesenvolvedora() {
-        return idDesenvolvedora;
-    }
-
-    public void setIdDesenvolvedora(Long idDesenvolvedora) {
-        this.idDesenvolvedora = idDesenvolvedora;
-    }
-
-    public String getNomeDesenvolvedora() {
-        return nomeDesenvolvedora;
-    }
-
-    public void setNomeDesenvolvedora(String nomeDesenvolvedora) {
-        this.nomeDesenvolvedora = nomeDesenvolvedora;
-    }
 }

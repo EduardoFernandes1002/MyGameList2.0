@@ -7,12 +7,17 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Entidade que representa uma avaliação de um jogo feita por um usuário.
  * Cada avaliação pode conter nota, comentário, data de envio e está associada a
  * um jogo e um usuário.
  */
+
+@Getter
+@Setter
 @Entity
 @Table(name = "avaliacao")
 public class Avaliacao {
@@ -60,61 +65,4 @@ public class Avaliacao {
      */
     @Column(name = "dt_envio", nullable = false)
     private LocalDate dataEnvioNota;
-
-    // Getters e Setters
-    public Long getIdAvaliacao() {
-        return idAvaliacao;
-    }
-
-    public void setIdAvaliacao(Long idAvaliacao) {
-        this.idAvaliacao = idAvaliacao;
-    }
-
-    public Jogo getJogo() {
-        return jogo;
-    }
-
-    public void setJogo(Jogo jogo) {
-        this.jogo = jogo;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getComentarioUsuario() {
-        return comentarioUsuario;
-    }
-
-    public void setComentarioUsuario(String comentarioUsuario) {
-        this.comentarioUsuario = comentarioUsuario;
-    }
-
-    public BigDecimal getNotaUsuario() {
-        return notaUsuario;
-    }
-
-    public void setNotaUsuario(BigDecimal notaUsuario) {
-        this.notaUsuario = notaUsuario;
-    }
-
-    public LocalDate getDataComentario() {
-        return dataComentario;
-    }
-
-    public void setDataComentario(LocalDate dataEnvioComentario) {
-        this.dataComentario = dataEnvioComentario;
-    }
-
-    public LocalDate getDataEnvio() {
-        return dataEnvioNota;
-    }
-
-    public void setDataEnvio(LocalDate dataEnvioNota) {
-        this.dataEnvioNota = dataEnvioNota;
-    }
 }

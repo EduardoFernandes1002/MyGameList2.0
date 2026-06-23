@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/lista")
-public class ListaControler {
+@RequestMapping("/lista")
+public class ListaController {
 
     @Autowired
     private ListaService listaService;
