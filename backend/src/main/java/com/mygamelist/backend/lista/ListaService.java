@@ -1,5 +1,6 @@
 package com.mygamelist.backend.lista;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,11 @@ import com.mygamelist.backend.usuario.UsuarioRepository;
 
 @Service
 public class ListaService {
+
+    private static final Long LISTA_GERAL = 1L;
+    private static final Long LISTA_FAVORITOS = 7L;
+    private static final long PRIMEIRA_LISTA_PROGRESSO = 2L;
+    private static final long ULTIMA_LISTA_PROGRESSO = 6L;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -129,27 +135,36 @@ public class ListaService {
 
         Long userId = usuario.getIdUsuario();
 
-        // Se for favoritos, remove só dos favoritos
-        if (idLista.equals(7L)) {
-            jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(userId, 7L, idJogo);
-            return;
-        }
-
-        // Remove da lista informada
-        jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(userId, idLista, idJogo);
-
-        // Sempre remove dos favoritos (exceto se já for a lista 7, que já saiu acima)
-        jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(userId, 7L, idJogo);
-
-        if (idLista.equals(1L)) {
-            // Se for Geral, remove de todas as listas 2~6
-            for (long i = 2; i <= 6; i++) {
-                jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(userId, i, idJogo);
-            }
-        } else {
-            // Se for qualquer outra lista, também remove de Geral
-            jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(userId, 1L, idJogo);
-        }
+        // Monta as listas afetadas e remove todas em uma única operação no banco
+        List<Long> listasParaRemover = listasParaRemover(idLista);
+        jogoAdicionadoRepository.deleteByUsuario_IdUsuarioAndJogos_IdJogoAndListas_IdListaIn(userId, idJogo, listasParaRemover);
     }
 
+    /**
+     * Define de quais listas o jogo deve ser removido, conforme a lista de origem:
+     *
+     *  Favoritos (7): apenas dos favoritos;
+     *  Geral (1): da Geral, dos favoritos e de todas as listas de progresso (2 a 6);
+     *  Demais listas: da própria lista, dos favoritos e da Geral.
+     *
+     */
+    private List<Long> listasParaRemover(Long idLista) {
+        if (idLista.equals(LISTA_FAVORITOS)) {
+            return List.of(LISTA_FAVORITOS);
+        }
+
+        List<Long> listas = new ArrayList<>();
+        listas.add(idLista);
+        listas.add(LISTA_FAVORITOS);
+
+        if (idLista.equals(LISTA_GERAL)) {
+            for (long i = PRIMEIRA_LISTA_PROGRESSO; i <= ULTIMA_LISTA_PROGRESSO; i++) {
+                listas.add(i);
+            }
+        } else {
+            listas.add(LISTA_GERAL);
+        }
+
+        return listas;
+    }
 }
