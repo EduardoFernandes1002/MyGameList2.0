@@ -12,6 +12,9 @@ public interface JogoAdicionadoRepository extends JpaRepository<JogoAdicionado, 
 
     void deleteByUsuario_IdUsuarioAndListas_IdListaAndJogos_IdJogo(Long idUsuario, Long idLista, Long idJogo);
 
+    void deleteByUsuario_IdUsuarioAndJogos_IdJogoAndListas_IdListaIn(Long idUsuario, Long idJogo,
+            List<Long> idListas);
+
     List<JogoAdicionado> findByUsuario_IdUsuarioAndJogos_IdJogo(Long idUsuario, Long idJogo);
 
     boolean existsByUsuario_IdUsuarioAndJogos_IdJogoAndListas_IdLista(Long idUsuario, Long idJogo, Long idLista);
